@@ -1780,6 +1780,53 @@
         padding: 8px 6px;
         font-size: 10.5px;
       }
+      .proc-name-cell {
+        max-width: 95px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        display: inline-block !important; /* switch to inline-block so ellipsis works properly */
+        vertical-align: middle !important;
+      }
+      .proc-icon {
+        display: inline-flex !important;
+        vertical-align: middle !important;
+        margin-right: 4px !important;
+      }
+      .proc-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        align-items: flex-end !important;
+      }
+      .proc-btn-action {
+        padding: 3px 6px !important;
+        font-size: 9px !important;
+        width: max-content !important;
+      }
+
+      /* Whitelist panel mobile collapse */
+      .exc-columns {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+      }
+      .exc-col {
+        height: auto !important;
+        max-height: 150px !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      .exc-grid {
+        overflow-y: auto !important;
+        max-height: 120px !important;
+      }
+      .exc-card span {
+        max-width: 100px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        display: inline-block !important;
+      }
 
       /* Mockup dashboard tab mobile layout (iOS style telemetry list) */
       .dash-widgets {
@@ -1815,9 +1862,18 @@
         font-size: 12.5px;
       }
 
-      /* Results chart card padding */
+      /* Results chart card padding & labels */
       .results-chart {
         padding: 16px;
+      }
+      .chart-bar-name {
+        font-size: 11.5px !important;
+      }
+      .chart-bar-val {
+        font-size: 15px !important;
+      }
+      .vs-container table {
+        min-width: 580px !important;
       }
     }
 
@@ -1825,9 +1881,18 @@
       .wrap {
         padding: 0 16px !important;
       }
+      .hide-mobile {
+        display: none !important;
+      }
       .band-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+      }
+      .band-card .num {
+        font-size: 24px !important;
+      }
+      .band-card .lbl {
+        font-size: 11px !important;
       }
       h1 {
         font-size: 26px !important;
@@ -1853,6 +1918,16 @@
       .dl-buttons .btn, .hero-cta .btn {
         width: 100% !important;
       }
+
+      /* FAQ summaries fonts */
+      summary {
+        padding: 12px 14px !important;
+        font-size: 13.5px !important;
+      }
+      details .answer {
+        padding: 0 14px 12px !important;
+        font-size: 12.5px !important;
+      }
     }
   </style>
 </head>
@@ -1876,7 +1951,7 @@
         <a href="#safety">Безопасность</a>
         <a href="#faq">FAQ</a>
       </div>
-      <a class="btn btn-primary btn-sm" href="#download">Скачать бесплатно</a>
+      <a class="btn btn-primary btn-sm" href="#download">Скачать <span class="hide-mobile">бесплатно</span></a>
     </div>
   </nav>
 
@@ -2523,6 +2598,12 @@
   <!-- ============ JAVASCRIPT ============ -->
   <script>
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 640;
+    
+    // Add is-mobile class to body dynamically if mobile
+    if (isMobileDevice) {
+      document.body.classList.add('is-mobile');
+    }
 
     /* ---------- HERO CANVAS BACKGROUND (SUBTLE ECG WAVE + PARTICLES) ---------- */
     (function() {
@@ -2540,7 +2621,7 @@
       window.addEventListener('resize', resize);
 
       const particles = [];
-      const particleCount = 40;
+      const particleCount = isMobileDevice ? 12 : 40;
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random(),
