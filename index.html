@@ -1711,9 +1711,85 @@
       }
     }
 
+    /* Webkit scrollbar for comparison table horizontal scroll */
+    .vs-container::-webkit-scrollbar {
+      height: 5px;
+    }
+    .vs-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .vs-container::-webkit-scrollbar-thumb {
+      background: var(--border-hover);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 50px 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      /* Mockup processes table mobile optimization */
+      .proc-table th:nth-child(2),
+      .proc-table td:nth-child(2) {
+        display: none; /* Hide PID */
+      }
+      .proc-table th, .proc-table td {
+        padding: 8px 6px;
+        font-size: 10px;
+      }
+
+      /* Mockup dashboard tab mobile layout (iOS style telemetry list) */
+      .dash-widgets {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .gauge-widget {
+        flex-direction: row;
+        gap: 16px;
+        padding: 8px 16px;
+        justify-content: flex-start;
+      }
+      .gauge-circle {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+      }
+      .gauge-label {
+        margin-top: 0;
+      }
+      .dash-telemetry {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+      .dt-card {
+        padding: 8px 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .dt-card .v {
+        margin-top: 0;
+        font-size: 12.5px;
+      }
+    }
+
     @media (max-width: 480px) {
       .band-grid {
         grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 26px !important;
+        letter-spacing: -0.5px !important;
+        line-height: 1.2 !important;
+      }
+      .hero p.sub {
+        font-size: 14.5px !important;
+        margin-bottom: 24px !important;
+      }
+      .hero {
+        padding: 100px 0 50px !important;
       }
     }
   </style>
@@ -1746,17 +1822,7 @@
   <header class="hero" id="top">
     <canvas id="heroCanvas"></canvas>
     <div class="wrap hero-in">
-      <div class="badge-row">
-        <span class="badge"><i class="dot"></i>ОПТИМИЗАЦИЯ WINDOWS ДЛЯ ИГР</span>
-        <span class="badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink: 0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          ТОЧКА ВОССТАНОВЛЕНИЯ
-        </span>
-        <span class="badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink: 0;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          191 ТВК
-        </span>
-      </div>
+
       <h1><span>Pulse — стабильный фреймтайм и прирост FPS</span></h1>
       <p class="sub">Портативная утилита, которая устраняет задержки системы, оптимизирует распределение ресурсов процессора и очищает оперативную память. Ничего лишнего — только чистая игровая производительность.</p>
       <div class="hero-cta">
