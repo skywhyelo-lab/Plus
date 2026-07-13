@@ -1898,7 +1898,7 @@
         </a>
         <a class="btn btn-ghost" href="#demo">Смотреть в действии</a>
       </div>
-      <div class="hero-note">Версия 1.2.4 · Windows 10 / 11 · Портативная (без установки)</div>
+      <div class="hero-note" id="heroNote">Версия 1.2.4 · Windows 10 / 11 · Портативная (без установки)</div>
 
       <!-- Games Marquee -->
       <div class="games-row">
@@ -2486,7 +2486,7 @@
           <h3>Характеристики сборки</h3>
           <ul class="req-list">
             <li><span class="lbl">ОС</span><span class="val">Windows 10 / 11 64-bit</span></li>
-            <li><span class="lbl">Размер</span><span class="val">14.8 МБ</span></li>
+            <li><span class="lbl">Размер</span><span class="val" id="specsSize">1.8 МБ</span></li>
             <li><span class="lbl">Инсталлятор</span><span class="val">Не требуется (Portable)</span></li>
             <li><span class="lbl">Лицензия</span><span class="val">Бесплатная (Freeware)</span></li>
           </ul>
@@ -2999,6 +2999,62 @@
         setTimeout(runStep, 400);
       });
     }
+
+    /* ---------- GITHUB API UPDATE CHECKER FOR PULSE.EXE ---------- */
+    async function checkPulseUpdates() {
+      try {
+        // 1. Fetch file size dynamically from contents API
+        const contentsRes = await fetch('https://api.github.com/repos/skywhyelo-lab/Plus/contents/Pulse.exe');
+        if (contentsRes.ok) {
+          const fileInfo = await contentsRes.json();
+          if (fileInfo && fileInfo.size) {
+            const sizeMB = (fileInfo.size / (1024 * 1024)).toFixed(2);
+            const specsSize = document.getElementById('specsSize');
+            if (specsSize) {
+              specsSize.textContent = `${sizeMB} МБ`;
+            }
+          }
+        }
+
+        // 2. Fetch latest commit metadata for Pulse.exe
+        const commitsRes = await fetch('https://api.github.com/repos/skywhyelo-lab/Plus/commits?path=Pulse.exe&per_page=1');
+        if (commitsRes.ok) {
+          const commits = await commitsRes.json();
+          if (commits && commits.length > 0) {
+            const lastCommit = commits[0];
+            const commitDate = new Date(lastCommit.commit.committer.date);
+            
+            // Format date: DD.MM.YYYY
+            const day = String(commitDate.getDate()).padStart(2, '0');
+            const month = String(commitDate.getMonth() + 1).padStart(2, '0');
+            const year = commitDate.getFullYear();
+            const hours = String(commitDate.getHours()).padStart(2, '0');
+            const minutes = String(commitDate.getMinutes()).padStart(2, '0');
+            const formattedDate = `${day}.${month}.${year} в ${hours}:${minutes}`;
+
+            // Update Hero note element
+            const heroNote = document.getElementById('heroNote');
+            if (heroNote) {
+              heroNote.innerHTML = `Обновлено: <span style="color:var(--accent); font-weight:600;">${formattedDate}</span> · Windows 10 / 11 · Портативная`;
+            }
+
+            // Append dynamic last update row in the specification table
+            const reqList = document.querySelector('.req-list');
+            if (reqList && !document.getElementById('lastUpdateRow')) {
+              const li = document.createElement('li');
+              li.id = 'lastUpdateRow';
+              li.innerHTML = `<span class="lbl">Обновлено</span><span class="val" style="color:var(--accent); font-weight: 500;">${day}.${month}.${year}</span>`;
+              reqList.appendChild(li);
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Ошибка при получении обновлений с GitHub:", e);
+      }
+    }
+
+    // Run checker once DOM is fully loaded
+    window.addEventListener('DOMContentLoaded', checkPulseUpdates);
 
   </script>
 </body>
