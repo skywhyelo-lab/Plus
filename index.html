@@ -639,12 +639,17 @@
     }
 
     .gauge-circle svg {
+      display: block;
       transform: rotate(-90deg);
     }
 
     .gauge-val {
       position: absolute;
-      inset: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1727,9 +1732,8 @@
       .feat-card, .safe-card, .rev-card, .dl-main, .dl-side {
         padding: 20px;
       }
-    }
 
-    @media (max-width: 600px) {
+      /* ============ MOCKUP MOBILE OVERHAUL FOR PORTABLE SCREENS ============ */
       /* Transform desktop app simulator layout into a native mobile app bottom tab layout */
       .mock-body {
         flex-direction: column-reverse; /* Sidebar becomes bottom tab bar */
@@ -1756,7 +1760,7 @@
         background: rgba(59, 130, 246, 0.08) !important;
       }
       .mock-menu-item span {
-        display: none; /* Hide tab text on very small screens, show only SVGs */
+        display: none !important; /* Force hide tab text on mobile/tablet screens, show only SVGs */
       }
       .mock-menu-item svg {
         width: 18px !important;
