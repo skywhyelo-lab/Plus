@@ -1982,6 +1982,70 @@
         font-size: 12.5px !important;
       }
     }
+
+    /* ============ DYNAMIC INTERACTIVE ANIMATIONS (ALIVE EFFECTS) ============ */
+    /* Pause marquee on hover */
+    .games-marquee:hover .games-track {
+      animation-play-state: paused;
+    }
+
+    /* Cards smooth transition & translate hover elevation */
+    .feat-card, .safe-card, .rev-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, background 0.3s, box-shadow 0.4s;
+    }
+    
+    .feat-card:hover, .safe-card:hover, .rev-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(59, 130, 246, 0.35) !important;
+      box-shadow: 0 16px 40px rgba(59, 130, 246, 0.06);
+    }
+
+    /* Ambient spotlight glow following user cursor */
+    .feat-card::before, .safe-card::before, .rev-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.05), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .feat-card:hover::before, .safe-card:hover::before, .rev-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Render text above the spotlight glow bg */
+    .feat-card > *, .safe-card > *, .rev-card > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Reveal scroll entrance animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.reveal-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered entrance animations for grids */
+    .feat-card:nth-child(1) { transition-delay: 0s; }
+    .feat-card:nth-child(2) { transition-delay: 0.1s; }
+    .feat-card:nth-child(3) { transition-delay: 0.2s; }
+
+    .safe-card:nth-child(1) { transition-delay: 0s; }
+    .safe-card:nth-child(2) { transition-delay: 0.1s; }
+    .safe-card:nth-child(3) { transition-delay: 0.2s; }
+
+    .rev-card:nth-child(1) { transition-delay: 0s; }
+    .rev-card:nth-child(2) { transition-delay: 0.15s; }
   </style>
 </head>
 <body>
@@ -2067,7 +2131,7 @@
         <div class="telemetry-compact">
           <div class="tel-card">
             <div class="k">DPC Latency</div>
-            <div class="v green" id="telLatency">42 μs</div>
+            <div class="v green" id="telLatency">42 мкс</div>
           </div>
           <div class="tel-card">
             <div class="k">Освобождено RAM</div>
@@ -2263,7 +2327,7 @@
       </div>
 
       <div class="feat-grid">
-        <div class="feat-card">
+        <div class="feat-card reveal">
           <div class="feat-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/>
@@ -2273,7 +2337,7 @@
           <p>В отличие от софта, «сбрасывающего» ОЗУ в файл подкачки, Pulse приостанавливает циклы неактивных фоновых приложений (браузеры, лаунчеры, службы обновлений) через WinAPI. Это освобождает до 3 ГБ реальной памяти без побочного роста дисковой активности.</p>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card reveal">
           <div class="feat-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -2283,7 +2347,7 @@
           <p>Автоматическое отключение систем телеметрии (DiagTrack, WPP, Event Logs) и планировщика архивации. Утилита выгружает ресурсоемкие службы отчетов об ошибках Windows, освобождая процессорные потоки во время игр.</p>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card reveal">
           <div class="feat-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -2293,7 +2357,7 @@
           <p>Pulse вносит изменения в конфигурацию сетевых драйверов в реестре, отключая алгоритм Нагла (TCP Nodelay) и Network Throttling. Это устраняет принудительное накопление пакетов в буфере и снижает микро-скачки пинга.</p>
         </div>
 
-        <div class="feat-card">
+        <div class="feat-card reveal">
           <div class="feat-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
@@ -2310,20 +2374,20 @@
   <div class="band">
     <div class="wrap band-grid">
       <div class="band-card">
-        <div class="num">191</div>
+        <div class="num"><span class="count" data-target="191">0</span></div>
         <div class="lbl">Твик операционной системы</div>
       </div>
       <div class="band-card">
-        <div class="num">30+</div>
+        <div class="num"><span class="count" data-target="30">0</span>+</div>
         <div class="lbl">Системных процессов под защитой</div>
       </div>
       <div class="band-card">
-        <div class="num">0%</div>
+        <div class="num"><span class="count" data-target="0">0</span>%</div>
         <div class="lbl">Нагрузки: утилита закрывается полностью</div>
       </div>
       <div class="band-card">
-        <div class="num">&lt; 15 МБ</div>
-        <div class="lbl">Вес исполняемого файла</div>
+        <div class="num"><span class="count" data-target="1.8" data-decimals="1">0</span> МБ</div>
+        <div class="lbl">Размер исполняемого файла</div>
       </div>
     </div>
   </div>
@@ -2331,7 +2395,7 @@
   <!-- ============ RESULTS SECTION ============ -->
   <section class="results" id="results">
     <div class="wrap results-in">
-      <div class="results-chart" id="barsBlock">
+      <div class="results-chart reveal" id="barsBlock">
         <div class="chart-bar-row">
           <div class="chart-bar-head">
             <span class="chart-bar-name">Средний FPS в CS2 (Без Pulse)</span>
@@ -2373,7 +2437,7 @@
         </div>
       </div>
 
-      <div class="results-text">
+      <div class="results-text reveal">
         <div class="eyebrow">Замеры производительности</div>
         <h3>Реальное влияние на стабильность кадра</h3>
         <p>Игроки часто смотрят только на средний FPS, но комфорт игры определяют просадки в экшн-сценах (показатель 1% low). За счет отключения системных прерываний, DPC latency снижается со 150 до 45 микросекунд. Как результат — пропадают микрофризы и дергания при перестрелках.</p>
@@ -2392,7 +2456,7 @@
         <h2>Отличия Pulse от стандартного софта</h2>
       </div>
 
-      <div class="vs-container">
+      <div class="vs-container reveal">
         <table>
           <thead>
             <tr>
@@ -2404,7 +2468,7 @@
           </thead>
           <tbody>
             <tr>
-              <td>Устранение DPC-задержек иHPET</td>
+              <td>Устранение DPC-задержек и HPET</td>
               <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
               <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
               <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Частично</td>
@@ -2461,7 +2525,7 @@
       </div>
 
       <div class="safety-grid">
-        <div class="safe-card">
+        <div class="safe-card reveal">
           <div class="safe-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -2471,7 +2535,7 @@
           <p>В коде жестко зафиксирован список из 32 процессов Windows (таких как dwm.exe, explorer.exe, lsass.exe), которые утилита не имеет права останавливать или изменять.</p>
         </div>
 
-        <div class="safe-card">
+        <div class="safe-card reveal">
           <div class="safe-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <polyline points="1 4 1 10 7 10"></polyline>
@@ -2482,7 +2546,7 @@
           <p>Перед каждым изменением системного реестра Pulse принудительно инициирует создание системной точки восстановления (System Restore Point). Любые изменения можно отменить в один клик.</p>
         </div>
 
-        <div class="safe-card">
+        <div class="safe-card reveal">
           <div class="safe-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
@@ -2504,7 +2568,7 @@
       </div>
 
       <div class="reviews-grid">
-        <div class="rev-card">
+        <div class="rev-card reveal">
           <div class="rev-stars">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -2522,7 +2586,7 @@
           </div>
         </div>
 
-        <div class="rev-card">
+        <div class="rev-card reveal">
           <div class="rev-stars">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -2540,7 +2604,7 @@
           </div>
         </div>
 
-        <div class="rev-card">
+        <div class="rev-card reveal">
           <div class="rev-stars">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -2666,22 +2730,30 @@
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       let width, height;
 
-      function resize() {
-        width = canvas.width = canvas.offsetWidth * dpr;
-        height = canvas.height = canvas.offsetHeight * dpr;
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
+      // 1. Declare and initialize data arrays first (avoids TDZ reference errors on initial resize)
       const particles = [];
-      const particleCount = isMobileDevice ? 12 : 40;
+      const particleCount = isMobileDevice ? 15 : 65; 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random(),
           y: Math.random(),
-          r: Math.random() * 1.2 + 0.4,
+          r: Math.random() * 1.6 + 0.5, 
           speedY: Math.random() * 0.0003 + 0.0001,
-          alpha: Math.random() * 0.2 + 0.05
+          alpha: Math.random() * 0.32 + 0.06 
+        });
+      }
+
+      // Track mouse position
+      let mouse = { x: -1000, y: -1000, active: false };
+      if (!isMobileDevice) {
+        window.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouse.x = (e.clientX - rect.left) * dpr;
+          mouse.y = (e.clientY - rect.top) * dpr;
+          mouse.active = true;
+        });
+        window.addEventListener('mouseleave', () => {
+          mouse.active = false;
         });
       }
 
@@ -2702,14 +2774,61 @@
         return (Math.random() - 0.5) * 1.5;
       }
 
+      // 2. Define sizing functions
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        width = canvas.width = (rect.width || canvas.offsetWidth) * dpr;
+        height = canvas.height = (rect.height || canvas.offsetHeight) * dpr;
+        if (reducedMotion && width > 0 && height > 0) {
+          draw(); 
+        }
+      }
+
+      // 3. Define rendering loop
       function draw() {
+        if (!width || !height) {
+          resize();
+          if (!width || !height) {
+            if (!reducedMotion) requestAnimationFrame(draw);
+            return;
+          }
+        }
         ctx.clearRect(0, 0, width, height);
 
-        // 1. Draw particles
+        // Ambient cursor glow trail under particles
+        if (mouse.active && !reducedMotion) {
+          const rad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 110 * dpr);
+          rad.addColorStop(0, 'rgba(59, 130, 246, 0.06)');
+          rad.addColorStop(1, 'rgba(59, 130, 246, 0)');
+          ctx.fillStyle = rad;
+          ctx.beginPath();
+          ctx.arc(mouse.x, mouse.y, 110 * dpr, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Draw particles
         for (const p of particles) {
           p.y -= p.speedY;
-          if (p.y < -0.01) p.y = 1.01;
+          if (p.y < -0.01) {
+            p.y = 1.01;
+            p.x = Math.random();
+          }
           
+          let px = p.x * width;
+          let py = p.y * height;
+
+          // Gentle mouse repulsion force
+          if (mouse.active && !reducedMotion) {
+            const dx = px - mouse.x;
+            const dy = py - mouse.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 90 * dpr) {
+              const force = (90 * dpr - dist) / (90 * dpr);
+              p.x += (dx / dist) * force * 0.006;
+              p.x = Math.max(0.001, Math.min(0.999, p.x));
+            }
+          }
+
           ctx.globalAlpha = p.alpha;
           ctx.fillStyle = '#3b82f6';
           ctx.beginPath();
@@ -2717,7 +2836,27 @@
           ctx.fill();
         }
 
-        // 2. Draw subtle latency wave (ECG)
+        // Draw dynamic constellation connection lines between close particles
+        if (!reducedMotion) {
+          ctx.strokeStyle = 'rgba(59, 130, 246, 0.32)'; 
+          ctx.lineWidth = 0.75 * dpr; 
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const dx = (particles[i].x - particles[j].x) * width;
+              const dy = (particles[i].y - particles[j].y) * height;
+              const dist = Math.hypot(dx, dy);
+              if (dist < 105 * dpr) { 
+                ctx.globalAlpha = (1 - dist / (105 * dpr)) * 0.45; 
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x * width, particles[i].y * height);
+                ctx.lineTo(particles[j].x * width, particles[j].y * height);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+
+        // Draw subtle latency wave (ECG)
         ctx.globalAlpha = 1;
         const step = 4 * dpr;
         const maxPoints = Math.ceil(width / step) + 2;
@@ -2744,6 +2883,11 @@
 
         if (!reducedMotion) requestAnimationFrame(draw);
       }
+
+      // 4. Initialize size, bind events, and start rendering loop only after full scope setup
+      resize();
+      window.addEventListener('resize', resize);
+      window.addEventListener('load', resize); 
       draw();
     })();
 
@@ -3004,7 +3148,7 @@
           // Update latency telemetry if RAM is freed (simulating system cleanup)
           const newLatency = Math.max(38, 42 - Math.round(mockupState.freedRamTotal / 120));
           if (telLatency) {
-            telLatency.textContent = `${newLatency} μs`;
+            telLatency.textContent = `${newLatency} мкс`;
             triggerPulse(telLatency);
           }
 
@@ -3124,7 +3268,7 @@
 
             // Change telemetry values in mockup
             if (telLatency) {
-              telLatency.textContent = '38 μs';
+              telLatency.textContent = '38 мкс';
               triggerPulse(telLatency);
             }
           }
@@ -3146,6 +3290,13 @@
             const specsSize = document.getElementById('specsSize');
             if (specsSize) {
               specsSize.textContent = `${sizeMB} МБ`;
+            }
+            const bandCountFile = document.querySelector('.band-card .count[data-target="1.8"]');
+            if (bandCountFile) {
+              bandCountFile.dataset.target = sizeMB;
+              if (bandCountFile.textContent !== '0') {
+                bandCountFile.textContent = sizeMB;
+              }
             }
           }
         }
@@ -3186,6 +3337,67 @@
         console.error("Ошибка при получении обновлений с GitHub:", e);
       }
     }
+
+    /* ---------- SPOTLIGHT HOVER EFFECT ---------- */
+    if (!isMobileDevice) {
+      document.querySelectorAll('.feat-card, .safe-card, .rev-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    }
+
+    /* ---------- REVEAL ON SCROLL ---------- */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    /* ---------- DYNAMIC NUMBER COUNTERS ON SCROLL ---------- */
+    const countersObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseFloat(counter.dataset.target);
+          const decimals = parseInt(counter.dataset.decimals || '0');
+          const duration = 1200; // ms
+          const startTime = performance.now();
+
+          function update(currentTime) {
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+            // Ease out quad
+            const easeProgress = progress * (2 - progress);
+            const value = easeProgress * target;
+            
+            counter.textContent = value.toFixed(decimals);
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              counter.textContent = target.toFixed(decimals);
+            }
+          }
+          requestAnimationFrame(update);
+          countersObserver.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.band-card .count').forEach(counter => {
+      countersObserver.observe(counter);
+    });
 
     // Run checker once DOM is fully loaded
     window.addEventListener('DOMContentLoaded', checkPulseUpdates);
