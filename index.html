@@ -1659,6 +1659,18 @@
     }
 
     /* ============ RESPONSIVE LAYOUTS ============ */
+    /* Webkit scrollbar for comparison table horizontal scroll */
+    .vs-container::-webkit-scrollbar {
+      height: 5px;
+    }
+    .vs-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .vs-container::-webkit-scrollbar-thumb {
+      background: var(--border-hover);
+      border-radius: 10px;
+    }
+
     @media (max-width: 1024px) {
       .demo-in {
         grid-template-columns: 1fr;
@@ -1674,62 +1686,91 @@
     }
 
     @media (max-width: 768px) {
+      section {
+        padding: 50px 0;
+      }
       .games-row {
+        margin-top: 30px;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+      }
+      .games-marquee {
+        width: 100%;
       }
       .feat-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
       }
       .band-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 16px;
       }
       .safety-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
       }
       .reviews-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
       }
       .dl-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
       }
       .nav-links {
         display: none;
       }
-      .mock-side {
-        width: 50px;
-        overflow: hidden;
-      }
-      .mock-menu-item span {
-        display: none;
-      }
-      .mock-menu-item {
-        justify-content: center;
-        padding: 8px;
-      }
-    }
-
-    /* Webkit scrollbar for comparison table horizontal scroll */
-    .vs-container::-webkit-scrollbar {
-      height: 5px;
-    }
-    .vs-container::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.01);
-    }
-    .vs-container::-webkit-scrollbar-thumb {
-      background: var(--border-hover);
-      border-radius: 10px;
-    }
-
-    @media (max-width: 768px) {
-      section {
-        padding: 50px 0;
+      
+      /* Shrink padding inside cards on tablet/mobile to save space */
+      .feat-card, .safe-card, .rev-card, .dl-main, .dl-side {
+        padding: 20px;
       }
     }
 
     @media (max-width: 600px) {
+      /* Transform desktop app simulator layout into a native mobile app bottom tab layout */
+      .mock-body {
+        flex-direction: column-reverse; /* Sidebar becomes bottom tab bar */
+      }
+      .mock-side {
+        width: 100% !important;
+        height: 52px !important;
+        flex-direction: row !important;
+        border-right: none !important;
+        border-top: 1px solid var(--border) !important;
+        padding: 4px 8px !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        background: #06090f !important;
+      }
+      .mock-menu-item {
+        flex: 1 !important;
+        justify-content: center !important;
+        padding: 8px 4px !important;
+        font-size: 11px !important;
+        border: none !important;
+      }
+      .mock-menu-item.active {
+        background: rgba(59, 130, 246, 0.08) !important;
+      }
+      .mock-menu-item span {
+        display: none; /* Hide tab text on very small screens, show only SVGs */
+      }
+      .mock-menu-item svg {
+        width: 18px !important;
+        height: 18px !important;
+      }
+      .mock-main {
+        padding: 14px !important;
+        flex: 1 !important;
+        min-height: 0 !important;
+      }
+      .mock {
+        height: 440px !important;
+      }
+
       /* Mockup processes table mobile optimization */
       .proc-table th:nth-child(2),
       .proc-table td:nth-child(2) {
@@ -1737,7 +1778,7 @@
       }
       .proc-table th, .proc-table td {
         padding: 8px 6px;
-        font-size: 10px;
+        font-size: 10.5px;
       }
 
       /* Mockup dashboard tab mobile layout (iOS style telemetry list) */
@@ -1773,23 +1814,44 @@
         margin-top: 0;
         font-size: 12.5px;
       }
+
+      /* Results chart card padding */
+      .results-chart {
+        padding: 16px;
+      }
     }
 
     @media (max-width: 480px) {
+      .wrap {
+        padding: 0 16px !important;
+      }
       .band-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
       }
       h1 {
         font-size: 26px !important;
         letter-spacing: -0.5px !important;
-        line-height: 1.2 !important;
+        line-height: 1.25 !important;
       }
       .hero p.sub {
         font-size: 14.5px !important;
         margin-bottom: 24px !important;
       }
       .hero {
-        padding: 100px 0 50px !important;
+        padding: 100px 0 40px !important;
+      }
+      th, td {
+        padding: 8px 10px !important;
+        font-size: 11.5px !important;
+      }
+      .vs-container {
+        border-radius: 8px !important;
+      }
+      
+      /* Make download/cta buttons full width on small phones */
+      .dl-buttons .btn, .hero-cta .btn {
+        width: 100% !important;
       }
     }
   </style>
