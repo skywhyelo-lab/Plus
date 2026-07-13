@@ -641,13 +641,13 @@
     .gauge-circle svg {
       display: block;
       transform: rotate(-90deg);
+      overflow: visible; /* Prevent stroke clipping */
     }
 
     .gauge-val {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       display: flex;
@@ -655,8 +655,12 @@
       justify-content: center;
       font-size: 13px;
       font-weight: 700;
-      font-family: var(--font-mono);
+      font-family: var(--font-sans); /* Prevents monospace line-height centering shift */
       color: #fff;
+    }
+    
+    #dashGaugeArc {
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .gauge-label {
@@ -1734,9 +1738,22 @@
       }
 
       /* ============ MOCKUP MOBILE OVERHAUL FOR PORTABLE SCREENS ============ */
+      .demo-shell {
+        min-width: 0 !important;
+        width: 100% !important;
+        overflow: hidden !important;
+      }
+      .mock {
+        height: 440px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
       /* Transform desktop app simulator layout into a native mobile app bottom tab layout */
       .mock-body {
         flex-direction: column-reverse; /* Sidebar becomes bottom tab bar */
+        min-width: 0 !important;
+        width: 100% !important;
       }
       .mock-side {
         width: 100% !important;
@@ -1770,22 +1787,43 @@
         padding: 14px !important;
         flex: 1 !important;
         min-height: 0 !important;
-      }
-      .mock {
-        height: 440px !important;
+        min-width: 0 !important;
+        width: 100% !important;
       }
 
       /* Mockup processes table mobile optimization */
       .proc-table th:nth-child(2),
       .proc-table td:nth-child(2) {
-        display: none; /* Hide PID */
+        display: none !important; /* Hide PID */
+      }
+      .proc-table {
+        table-layout: fixed !important;
+        width: 100% !important;
       }
       .proc-table th, .proc-table td {
-        padding: 8px 6px;
-        font-size: 10.5px;
+        padding: 6px 4px !important; /* Reduced padding on mobile cells to maximize space */
+        font-size: 10.5px !important;
+      }
+      /* Explicit column width percentages to prevent overflow */
+      .proc-table th:nth-child(1),
+      .proc-table td:nth-child(1) {
+        width: 45% !important;
+      }
+      .proc-table th:nth-child(3),
+      .proc-table td:nth-child(3) {
+        width: 22% !important;
+      }
+      .proc-table th:nth-child(4),
+      .proc-table td:nth-child(4) {
+        width: 33% !important;
+      }
+      .proc-list-container {
+        overflow-x: hidden !important; /* Prevent horizontal scroll bar */
+        width: 100% !important;
+        min-width: 0 !important;
       }
       .proc-name-cell {
-        max-width: 95px !important;
+        max-width: 90px !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
@@ -1813,16 +1851,21 @@
       .exc-columns {
         grid-template-columns: 1fr !important;
         gap: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
       }
       .exc-col {
         height: auto !important;
         max-height: 150px !important;
         display: flex !important;
         flex-direction: column !important;
+        width: 100% !important;
+        min-width: 0 !important;
       }
       .exc-grid {
         overflow-y: auto !important;
         max-height: 120px !important;
+        width: 100% !important;
       }
       .exc-card span {
         max-width: 100px !important;
@@ -1834,36 +1877,42 @@
 
       /* Mockup dashboard tab mobile layout (iOS style telemetry list) */
       .dash-widgets {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
       }
       .gauge-widget {
-        flex-direction: row;
-        gap: 16px;
-        padding: 8px 16px;
-        justify-content: flex-start;
+        flex-direction: row !important;
+        gap: 16px !important;
+        padding: 8px 16px !important;
+        justify-content: flex-start !important;
+        align-items: center !important; /* Center the circle and status label vertically */
       }
       .gauge-circle {
-        width: 44px;
-        height: 44px;
-        flex-shrink: 0;
+        width: 44px !important;
+        height: 44px !important;
+        flex-shrink: 0 !important;
+      }
+      .gauge-circle svg {
+        width: 44px !important;
+        height: 44px !important;
       }
       .gauge-label {
-        margin-top: 0;
+        margin: 0 !important; /* Reset top margin to align next to circle */
+        font-size: 11px !important;
       }
       .dash-telemetry {
-        grid-template-columns: 1fr;
-        gap: 6px;
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
       }
       .dt-card {
-        padding: 8px 12px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        padding: 8px 12px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
       }
       .dt-card .v {
-        margin-top: 0;
-        font-size: 12.5px;
+        margin-top: 0 !important;
+        font-size: 12.5px !important;
       }
 
       /* Results chart card padding & labels */
