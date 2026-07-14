@@ -1,0 +1,3602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse — Настройка Windows для игр. Стабильный фреймтайм и низкий пинг</title>
+  <meta name="description" content="Pulse — утилита для снижения задержек, очистки оперативной памяти и оптимизации Windows под игровые задачи. Точка восстановления перед изменениями, белый список процессов, открытый лог твиков. Лицензия по ключу.">
+  <link rel="canonical" href="https://pulse-utility.example/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%233b82f6'/%3E%3Cpath d='M2 12h4l3-8 4 16 3-8h6' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pulse">
+  <meta property="og:title" content="Pulse — стабильный фреймтайм и прирост FPS в Windows">
+  <meta property="og:description" content="Утилита для снижения задержек, очистки ОЗУ и твика Windows под игры. Активация по ключу, выдаётся вручную через Telegram/Discord.">
+  <meta property="og:image" content="https://pulse-utility.example/og-image.png">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pulse — стабильный фреймтайм и прирост FPS в Windows">
+  <meta name="twitter:description" content="Утилита для снижения задержек, очистки ОЗУ и твика Windows под игры. Активация по ключу.">
+  <meta name="twitter:image" content="https://pulse-utility.example/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Pulse",
+    "operatingSystem": "Windows 10, Windows 11",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "description": "Лицензионный ключ выдаётся вручную через Telegram/Discord"
+    },
+    "softwareVersion": "1.2.4"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Profile-driven accent (mirrors the real Pulse app: Standard=blue, Gaming=violet default, Maximum=red).
+         The whole site retints when --accent-rgb is swapped by the profile switcher. */
+      --accent-rgb: 139, 92, 246;          /* Gaming / violet — app default */
+      --accent-deep-rgb: 109, 60, 220;     /* darker shade for gradients */
+      --accent-light-rgb: 183, 148, 255;   /* lighter shade for text gradients */
+
+      --bg: #08080c;
+      --bg-2: #0b0b12;
+      --bg-panel: #101019;
+      --bg-panel-hover: #16161f;
+      --border: rgba(255, 255, 255, 0.055);
+      --border-hover: rgba(255, 255, 255, 0.14);
+      --accent: rgb(var(--accent-rgb));
+      --accent-deep: rgb(var(--accent-deep-rgb));
+      --accent-light: rgb(var(--accent-light-rgb));
+      --accent-muted: rgba(var(--accent-rgb), 0.15);
+      --accent-glow: rgba(var(--accent-rgb), 0.30);
+      --green: #22c55e;
+      --green-muted: rgba(34, 197, 94, 0.15);
+      --amber: #f59e0b;
+      --amber-muted: rgba(245, 158, 11, 0.15);
+      --red: #ef4444;
+      --red-muted: rgba(239, 68, 68, 0.15);
+      --text: #f8fafc;
+      --text-muted: #9fa3b8;
+      --text-dark: #6b7089;
+      --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Manrope', system-ui, sans-serif;
+      --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Signature asymmetric shadow — grows down + sideways, never up (mirrors app card shadow) */
+      --shadow-card: 10px 22px 44px -18px rgba(0, 0, 0, 0.72);
+      --shadow-accent: 8px 20px 44px -14px rgba(var(--accent-rgb), 0.28);
+    }
+
+    :root[data-profile="standard"] {
+      --accent-rgb: 37, 145, 225;
+      --accent-deep-rgb: 22, 108, 178;
+      --accent-light-rgb: 129, 194, 255;
+    }
+    :root[data-profile="maximum"] {
+      --accent-rgb: 239, 68, 68;
+      --accent-deep-rgb: 190, 40, 40;
+      --accent-light-rgb: 252, 165, 165;
+    }
+
+    @keyframes tel-pulse {
+      0% { transform: scale(1); filter: brightness(1); }
+      50% { transform: scale(1.06); filter: brightness(1.25); color: var(--accent); }
+      100% { transform: scale(1); filter: brightness(1); }
+    }
+    .pulse-effect {
+      animation: tel-pulse 0.4s ease-out;
+      display: inline-block;
+    }
+
+    @keyframes hero-shine {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+    }
+
+    /* Brand "heartbeat" — a literal double-beat, period 1.6s, echoing the Pulse logo/ECG */
+    @keyframes heartbeat {
+      0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(var(--dot-rgb, var(--accent-rgb)), 0.55); }
+      12%  { transform: scale(1.5);  box-shadow: 0 0 10px 2px rgba(var(--dot-rgb, var(--accent-rgb)), 0.55); }
+      24%  { transform: scale(1);    box-shadow: 0 0 0 0 rgba(var(--dot-rgb, var(--accent-rgb)), 0.0); }
+      36%  { transform: scale(1.32); box-shadow: 0 0 8px 1px rgba(var(--dot-rgb, var(--accent-rgb)), 0.4); }
+      48%  { transform: scale(1);    box-shadow: 0 0 0 6px rgba(var(--dot-rgb, var(--accent-rgb)), 0); }
+      100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(var(--dot-rgb, var(--accent-rgb)), 0); }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    svg {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    nav, .hero-in, section, .band, footer { position: relative; z-index: 2; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero::after, .badge .dot, h1 span, .games-track {
+        animation: none !important;
+      }
+      * { scroll-behavior: auto !important; }
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============ NAV ============ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(8, 8, 12, 0.62);
+      backdrop-filter: blur(22px) saturate(150%);
+      -webkit-backdrop-filter: blur(22px) saturate(150%);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px -20px rgba(0, 0, 0, 0.9);
+      transition: var(--transition);
+    }
+    
+    .nav-in {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .logo-mark svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      color: #fff;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.28), 0 1px 0 rgba(255,255,255,0.15) inset;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(var(--accent-rgb), 0.42), 0 1px 0 rgba(255,255,255,0.18) inset;
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--border-hover);
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 13.5px;
+      border-radius: 6px;
+    }
+
+    /* ============ HERO ============ */
+    .hero {
+      position: relative;
+      padding: 158px 0 84px;
+      overflow: hidden;
+      background:
+        radial-gradient(900px 460px at 50% -12%, rgba(var(--accent-rgb), 0.16), transparent 66%),
+        radial-gradient(700px 400px at 12% 8%, rgba(var(--accent-deep-rgb), 0.12), transparent 60%),
+        radial-gradient(760px 420px at 90% 20%, rgba(var(--accent-rgb), 0.07), transparent 62%),
+        var(--bg);
+      transition: background 0.5s ease;
+    }
+
+    /* Aurora sweep behind the hero content for motion + depth */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 50%;
+      width: 130%;
+      height: 120%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+      background: conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(var(--accent-rgb), 0.10) 90deg, transparent 200deg, rgba(var(--accent-light-rgb), 0.08) 300deg, transparent 360deg);
+      filter: blur(60px);
+      opacity: 0.7;
+      animation: aurora-spin 32s linear infinite;
+    }
+
+    @keyframes aurora-spin {
+      to { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    /* Soft top-fade so nav glass blends into the hero */
+    .hero > .wrap { z-index: 2; }
+
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.85;
+    }
+
+    .hero-in {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--accent);
+      border: 1px solid var(--accent-muted);
+      border-radius: 100px;
+      padding: 5px 12px;
+      background: rgba(var(--accent-rgb), 0.04);
+      font-weight: 500;
+    }
+
+    .badge .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      --dot-rgb: 34, 197, 94;
+      animation: heartbeat 1.6s ease-out infinite;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5.8vw, 58px);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    h1 span {
+      background: linear-gradient(115deg, #ffffff 20%, var(--accent-light) 62%, var(--accent) 100%);
+      background-size: 200% auto;
+      animation: hero-shine 7s ease-in-out infinite;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p.sub {
+      font-size: 17.5px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin-bottom: 36px;
+      line-height: 1.5;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-note {
+      font-size: 12.5px;
+      color: var(--text-dark);
+      font-family: var(--font-mono);
+    }
+
+    /* ===== Profile switcher — retints the entire site live, exactly like the real app ===== */
+    .profile-switch {
+      margin-top: 30px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-switch-label {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-dark);
+    }
+
+    .profile-pills {
+      display: inline-flex;
+      gap: 4px;
+      padding: 5px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(8px);
+    }
+
+    .profile-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-family: var(--font-sans);
+      transition: var(--transition);
+    }
+
+    .profile-pill .pp-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .profile-pill[data-profile="standard"] .pp-dot { background: #2591E1; }
+    .profile-pill[data-profile="gaming"] .pp-dot   { background: #8B5CF6; }
+    .profile-pill[data-profile="maximum"] .pp-dot  { background: #EF4444; }
+
+    .profile-pill:hover { color: var(--text); }
+
+    .profile-pill.active {
+      color: #fff;
+      background: rgba(var(--accent-rgb), 0.16);
+      box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.4) inset, 0 4px 16px rgba(var(--accent-rgb), 0.25);
+    }
+
+    .profile-pill.active .pp-dot {
+      box-shadow: 0 0 10px 1px currentColor;
+    }
+
+    /* Games Marquee */
+    .games-row {
+      margin-top: 70px;
+      width: 100%;
+      max-width: 1120px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .games-label {
+      flex: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .games-marquee {
+      flex: 1;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+    }
+
+    .games-track {
+      display: flex;
+      gap: 40px;
+      width: max-content;
+      animation: marquee 25s linear infinite;
+      align-items: center;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .gchip {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gchip::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--border-hover);
+      border-radius: 50%;
+    }
+
+    /* ============ SECTION HEADER ============ */
+    section {
+      padding: 90px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sec-head {
+      max-width: 640px;
+      margin-bottom: 50px;
+    }
+
+    .sec-head.center {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(27px, 3.6vw, 38px);
+      font-weight: 700;
+      line-height: 1.18;
+      color: #fff;
+      letter-spacing: -1.1px;
+      margin-bottom: 16px;
+    }
+
+    .sec-head p {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    /* ============ DEMO SECTION (INTERACTIVE MOCKUP) ============ */
+    .demo {
+      background: linear-gradient(180deg, var(--bg), #080b12);
+    }
+
+    .demo-in {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .demo-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .demo-info h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .demo-info p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .telemetry-compact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .tel-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+
+    .tel-card .k {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tel-card .v {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .tel-card .v.green { color: var(--green); }
+    .tel-card .v.blue { color: var(--accent); }
+    .tel-card .v.amber { color: var(--amber); }
+
+    /* Mockup window */
+    .mock {
+      background: #090d16;
+      border: 1px solid var(--border-hover);
+      border-radius: 12px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+    }
+
+    .mock-header {
+      background: rgba(255, 255, 255, 0.01);
+      border-bottom: 1px solid var(--border);
+      height: 38px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .mock-title {
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mock-title-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mock-title-dot svg {
+      width: 9px;
+      height: 9px;
+    }
+
+    .mock-win-controls {
+      display: flex;
+      gap: 7px;
+    }
+
+    .mock-win-controls span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .mock-win-controls span.close {
+      background: var(--red);
+      opacity: 0.7;
+    }
+
+    .mock-body {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Mockup Sidebar */
+    .mock-side {
+      width: 170px;
+      border-right: 1px solid var(--border);
+      padding: 16px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .mock-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .mock-menu-item svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2.2;
+    }
+
+    .mock-menu-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+      color: #fff;
+    }
+
+    .mock-menu-item.active {
+      background: var(--accent-muted);
+      color: #fff;
+      border: 1px solid rgba(var(--accent-rgb), 0.2);
+    }
+
+    /* Mockup Main Panel */
+    .mock-main {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      background: #090d16;
+      overflow-y: auto;
+    }
+
+    .mock-section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .mock-section-desc {
+      font-size: 11px;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .mock-panel {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .mock-panel.active {
+      display: flex;
+    }
+
+    /* Dashboard Tab Content */
+    .dash-widgets {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .gauge-widget {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      position: relative;
+    }
+
+    .gauge-circle {
+      position: relative;
+      width: 60px;
+      height: 60px;
+    }
+
+    .gauge-circle svg {
+      display: block;
+      transform: rotate(-90deg);
+      overflow: visible; /* Prevent stroke clipping */
+    }
+
+    .gauge-val {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-sans); /* Prevents monospace line-height centering shift */
+      color: #fff;
+    }
+    
+    #dashGaugeArc {
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gauge-label {
+      font-size: 9px;
+      color: var(--green);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    .dash-telemetry {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .dt-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    .dt-card .k {
+      font-size: 8.5px;
+      font-family: var(--font-mono);
+      color: var(--text-dark);
+      text-transform: uppercase;
+    }
+
+    .dt-card .v {
+      font-size: 13.5px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #fff;
+      margin-top: 2px;
+    }
+
+    .chart-container {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 180px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .chart-legends {
+      display: flex;
+      gap: 12px;
+    }
+
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chart-legend i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .mock-chart-svg {
+      width: 100%;
+      height: 100%;
+      flex: 1;
+    }
+
+    /* Processes Tab Content */
+    .proc-toolbar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .proc-search-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: #fff;
+      font-size: 11px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .proc-search-input:focus {
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .proc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .proc-thead {
+      border-bottom: 1px solid var(--border);
+      color: var(--text-dark);
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.5px;
+    }
+
+    .proc-thead th {
+      padding: 6px 8px;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    .proc-list-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .proc-tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      transition: var(--transition);
+    }
+
+    .proc-tr:hover {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .proc-tr td {
+      padding: 8px;
+      vertical-align: middle;
+    }
+
+    .proc-name-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .proc-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .proc-actions {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .proc-btn-action {
+      font-size: 9.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: var(--transition);
+    }
+
+    .proc-btn-action.btn-kill {
+      background: var(--red-muted);
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.15);
+    }
+
+    .proc-btn-action.btn-kill:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+
+    .proc-btn-action.btn-list {
+      background: var(--amber-muted);
+      color: #fde047;
+      border-color: rgba(245, 158, 11, 0.15);
+    }
+
+    .proc-btn-action.btn-list:hover {
+      background: rgba(245, 158, 11, 0.25);
+    }
+
+    .proc-status-shield {
+      color: var(--green);
+      font-weight: 600;
+      font-size: 9.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .proc-status-shield svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .proc-summary-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      font-family: var(--font-mono);
+      color: var(--green);
+    }
+
+    /* Exceptions Tab Content */
+    .exc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .exc-column {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exc-header {
+      font-size: 11px;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .exc-header span.count {
+      font-family: var(--font-mono);
+      color: var(--text-dark);
+    }
+
+    .exc-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .exc-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      border-radius: 5px;
+      padding: 6px 10px;
+      font-size: 10.5px;
+    }
+
+    .exc-item-name {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    .exc-item-name svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .exc-remove-btn {
+      color: var(--red);
+      font-size: 9px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--red-muted);
+      background: rgba(239, 68, 68, 0.05);
+      padding: 1px 6px;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .exc-remove-btn:hover {
+      background: var(--red-muted);
+    }
+
+    .exc-add-form {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .exc-add-form input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: #fff;
+      font-size: 11px;
+      outline: none;
+    }
+
+    .exc-add-form input:focus {
+      border-color: var(--accent);
+    }
+
+    .exc-add-form button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0 14px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-sans);
+    }
+
+    /* Optimization Tab Content */
+    .opt-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .opt-circle-btn {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #1e3a8a, #0f172a);
+      border: 1px solid rgba(var(--accent-rgb), 0.4);
+      box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .opt-circle-btn:hover {
+      transform: scale(1.03);
+      border-color: var(--accent);
+      box-shadow: 0 0 35px var(--accent-glow);
+    }
+
+    .opt-circle-btn svg {
+      width: 32px;
+      height: 32px;
+      color: #fff;
+      transition: var(--transition);
+    }
+
+    .opt-circle-btn.running {
+      animation: pulse-opt-btn 1.5s ease-in-out infinite alternate;
+      cursor: not-allowed;
+    }
+
+    @keyframes pulse-opt-btn {
+      from { box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.2); border-color: rgba(var(--accent-rgb), 0.3); }
+      to { box-shadow: 0 0 35px rgba(var(--accent-rgb), 0.5); border-color: rgba(var(--accent-rgb), 0.8); }
+    }
+
+    .opt-btn-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .opt-btn-sub {
+      font-size: 10px;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .opt-progress-track {
+      width: 260px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .opt-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+
+    .opt-terminal {
+      width: 100%;
+      max-width: 420px;
+      background: #04060b;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: var(--text-muted);
+      height: 100px;
+      overflow-y: auto;
+      text-align: left;
+    }
+
+    .opt-terminal-line {
+      margin-bottom: 3px;
+      line-height: 1.4;
+    }
+
+    .opt-terminal-line.green { color: var(--green); }
+    .opt-terminal-line.blue { color: var(--accent); }
+
+    /* ============ FEATURES (HOW IT WORKS UNDER THE HOOD) ============ */
+    .features {
+      background: var(--bg);
+    }
+
+    .feat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .feat-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 90px), var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+
+    .feat-card:hover {
+      border-color: rgba(var(--accent-rgb), 0.35) !important;
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-accent);
+    }
+
+    .feat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--accent-muted);
+      border: 1px solid rgba(var(--accent-rgb), 0.15);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .feat-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.2;
+    }
+
+    .feat-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .feat-card p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ============ STATS / NUMBERS BAND ============ */
+    .band {
+      background: #080b12;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 50px 0;
+    }
+
+    .band-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .band-card .num {
+      font-size: clamp(28px, 3.4vw, 40px);
+      font-weight: 700;
+      font-family: var(--font-display);
+      letter-spacing: -1.5px;
+      background: linear-gradient(160deg, #ffffff, var(--accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .band-card .lbl {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* ============ RESULTS ============ */
+    .results {
+      background: linear-gradient(180deg, #080b12, var(--bg));
+    }
+
+    .results-in {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .results-chart {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .chart-bar-row {
+      margin-bottom: 24px;
+    }
+
+    .chart-bar-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .chart-bar-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .chart-bar-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .chart-bar-val {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #fff;
+    }
+
+    .chart-bar-val span.unit {
+      font-size: 12px;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .chart-bar-track {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .chart-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      width: 0%;
+      transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .chart-bar-fill.before {
+      background: linear-gradient(90deg, #334155, #475569);
+    }
+
+    .chart-bar-fill.after {
+      background: linear-gradient(90deg, var(--accent-deep), var(--accent-light));
+      box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.35);
+    }
+
+    .results-text h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .results-text p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .results-text .system-specs {
+      font-size: 12.5px;
+      color: var(--text-dark);
+      font-family: var(--font-mono);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    /* ============ VS TABLE ============ */
+    .vs {
+      background: var(--bg);
+    }
+
+    .vs-container {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-panel);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+
+    th, td {
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 14.5px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 600;
+      color: #fff;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    td:first-child, th:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-muted);
+      width: 40%;
+    }
+
+    .col-target {
+      background: rgba(var(--accent-rgb), 0.03);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .icon-check { color: var(--green); font-weight: 700; }
+    .icon-cross { color: var(--text-dark); }
+    .icon-partial { color: var(--amber); }
+
+    /* ============ SAFETY PRINCIPLES ============ */
+    .safety {
+      background: #080b12;
+    }
+
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .safe-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 90px), var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+
+    .safe-card:hover {
+      border-color: rgba(34, 197, 94, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 8px 20px 44px -14px rgba(34, 197, 94, 0.22);
+    }
+
+    .safe-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: var(--green-muted);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .safe-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.2;
+    }
+
+    .safe-card h3 {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .safe-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* ============ REVIEWS ============ */
+    .reviews {
+      background: var(--bg);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .rev-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 90px), var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+
+    .rev-card:hover {
+      border-color: rgba(var(--accent-rgb), 0.3);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-accent);
+    }
+
+    .rev-stars {
+      display: flex;
+      gap: 3px;
+      color: var(--amber);
+      font-size: 13px;
+    }
+
+    .rev-text {
+      font-size: 14px;
+      color: #e2e8f0;
+      line-height: 1.5;
+    }
+
+    .rev-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .rev-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-muted);
+      border: 1px solid rgba(var(--accent-rgb), 0.15);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .rev-meta .name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .rev-meta .specs {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text-dark);
+    }
+
+    /* ============ FAQ ============ */
+    .faq {
+      background: #080b12;
+    }
+
+    .faq-container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    details {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    details[open] {
+      border-color: var(--border-hover);
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 16px 20px;
+      font-weight: 600;
+      font-size: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      color: #fff;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: transform 0.25s ease;
+      flex: none;
+    }
+
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    details .answer {
+      padding: 0 20px 16px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* ============ DOWNLOAD ============ */
+    .download {
+      background: linear-gradient(180deg, #080b12, var(--bg));
+      position: relative;
+    }
+
+    .dl-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .dl-main {
+      background: radial-gradient(circle at 100% 0%, rgba(var(--accent-rgb), 0.08), transparent 50%), var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    .dl-main h2 {
+      margin-bottom: 12px;
+    }
+
+    .dl-main p {
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 30px;
+      font-size: 15px;
+    }
+
+    .key-contact {
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .key-contact-lbl {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .key-contact-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .dl-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .dl-side {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .dl-side h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .req-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .req-list li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      padding-bottom: 8px;
+    }
+
+    .req-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .req-list .lbl {
+      color: var(--text-dark);
+    }
+
+    .req-list .val {
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      font-size: 12.5px;
+    }
+
+    .hash-info {
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .hash-info .hash-lbl {
+      font-size: 10px;
+      color: var(--text-dark);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+    }
+
+    .hash-info .hash-val {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      word-break: break-all;
+      margin-top: 2px;
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      background: #05070a;
+    }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .foot .copyright {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dark);
+    }
+
+    .foot-links {
+      display: flex;
+      gap: 24px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .foot-links a:hover {
+      color: var(--text);
+    }
+
+    /* ============ RESPONSIVE LAYOUTS ============ */
+    /* Webkit scrollbar for comparison table horizontal scroll */
+    .vs-container::-webkit-scrollbar {
+      height: 5px;
+    }
+    .vs-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .vs-container::-webkit-scrollbar-thumb {
+      background: var(--border-hover);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 1024px) {
+      .demo-in {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .demo-info {
+        max-width: 600px;
+      }
+      .results-in {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 50px 0;
+      }
+      .games-row {
+        margin-top: 30px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+      }
+      .games-marquee {
+        width: 100%;
+      }
+      .feat-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .band-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .safety-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .dl-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      
+      /* Shrink padding inside cards on tablet/mobile to save space */
+      .feat-card, .safe-card, .rev-card, .dl-main, .dl-side {
+        padding: 20px;
+      }
+
+      /* ============ MOCKUP MOBILE OVERHAUL FOR PORTABLE SCREENS ============ */
+      .demo-shell {
+        min-width: 0 !important;
+        width: 100% !important;
+        overflow: hidden !important;
+      }
+      .mock {
+        height: 440px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
+      /* Transform desktop app simulator layout into a native mobile app bottom tab layout */
+      .mock-body {
+        flex-direction: column-reverse; /* Sidebar becomes bottom tab bar */
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+      .mock-side {
+        width: 100% !important;
+        height: 52px !important;
+        flex-direction: row !important;
+        border-right: none !important;
+        border-top: 1px solid var(--border) !important;
+        padding: 4px 8px !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        background: #06090f !important;
+      }
+      .mock-menu-item {
+        flex: 1 !important;
+        justify-content: center !important;
+        padding: 8px 4px !important;
+        font-size: 11px !important;
+        border: none !important;
+      }
+      .mock-menu-item.active {
+        background: rgba(var(--accent-rgb), 0.08) !important;
+      }
+      .mock-menu-item span {
+        display: none !important; /* Force hide tab text on mobile/tablet screens, show only SVGs */
+      }
+      .mock-menu-item svg {
+        width: 18px !important;
+        height: 18px !important;
+      }
+      .mock-main {
+        padding: 14px !important;
+        flex: 1 !important;
+        min-height: 0 !important;
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+
+      /* Mockup processes table mobile optimization */
+      .proc-table th:nth-child(2),
+      .proc-table td:nth-child(2) {
+        display: none !important; /* Hide PID */
+      }
+      .proc-table {
+        table-layout: fixed !important;
+        width: 100% !important;
+      }
+      .proc-table th, .proc-table td {
+        padding: 6px 4px !important; /* Reduced padding on mobile cells to maximize space */
+        font-size: 10.5px !important;
+      }
+      /* Explicit column width percentages to prevent overflow */
+      .proc-table th:nth-child(1),
+      .proc-table td:nth-child(1) {
+        width: 45% !important;
+      }
+      .proc-table th:nth-child(3),
+      .proc-table td:nth-child(3) {
+        width: 22% !important;
+      }
+      .proc-table th:nth-child(4),
+      .proc-table td:nth-child(4) {
+        width: 33% !important;
+      }
+      .proc-list-container {
+        overflow-x: hidden !important; /* Prevent horizontal scroll bar */
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+      .proc-name-cell {
+        max-width: 90px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        display: inline-block !important; /* switch to inline-block so ellipsis works properly */
+        vertical-align: middle !important;
+      }
+      .proc-icon {
+        display: inline-flex !important;
+        vertical-align: middle !important;
+        margin-right: 4px !important;
+      }
+      .proc-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        align-items: flex-end !important;
+      }
+      .proc-btn-action {
+        padding: 3px 6px !important;
+        font-size: 9px !important;
+        width: max-content !important;
+      }
+
+      /* Whitelist panel mobile collapse */
+      .exc-columns {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+      .exc-col {
+        height: auto !important;
+        max-height: 150px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+      .exc-grid {
+        overflow-y: auto !important;
+        max-height: 120px !important;
+        width: 100% !important;
+      }
+      .exc-card span {
+        max-width: 100px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        display: inline-block !important;
+      }
+
+      /* Mockup dashboard tab mobile layout (iOS style telemetry list) */
+      .dash-widgets {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+      .gauge-widget {
+        flex-direction: row !important;
+        gap: 16px !important;
+        padding: 8px 16px !important;
+        justify-content: flex-start !important;
+        align-items: center !important; /* Center the circle and status label vertically */
+      }
+      .gauge-circle {
+        width: 44px !important;
+        height: 44px !important;
+        flex-shrink: 0 !important;
+      }
+      .gauge-circle svg {
+        width: 44px !important;
+        height: 44px !important;
+      }
+      .gauge-label {
+        margin: 0 !important; /* Reset top margin to align next to circle */
+        font-size: 11px !important;
+      }
+      .dash-telemetry {
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+      }
+      .dt-card {
+        padding: 8px 12px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+      .dt-card .v {
+        margin-top: 0 !important;
+        font-size: 12.5px !important;
+      }
+
+      /* Results chart card padding & labels */
+      .results-chart {
+        padding: 16px;
+      }
+      .chart-bar-name {
+        font-size: 11.5px !important;
+      }
+      .chart-bar-val {
+        font-size: 15px !important;
+      }
+      .vs-container table {
+        min-width: 580px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wrap {
+        padding: 0 16px !important;
+      }
+      .hide-mobile {
+        display: none !important;
+      }
+      .band-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+      }
+      .band-card .num {
+        font-size: 24px !important;
+      }
+      .band-card .lbl {
+        font-size: 11px !important;
+      }
+      h1 {
+        font-size: 26px !important;
+        letter-spacing: -0.5px !important;
+        line-height: 1.25 !important;
+      }
+      .hero p.sub {
+        font-size: 14.5px !important;
+        margin-bottom: 24px !important;
+      }
+      .hero {
+        padding: 100px 0 40px !important;
+      }
+      th, td {
+        padding: 8px 10px !important;
+        font-size: 11.5px !important;
+      }
+      .vs-container {
+        border-radius: 8px !important;
+      }
+      
+      /* Make download/cta buttons full width on small phones */
+      .dl-buttons .btn, .hero-cta .btn {
+        width: 100% !important;
+      }
+
+      /* FAQ summaries fonts */
+      summary {
+        padding: 12px 14px !important;
+        font-size: 13.5px !important;
+      }
+      details .answer {
+        padding: 0 14px 12px !important;
+        font-size: 12.5px !important;
+      }
+    }
+
+    /* ============ DYNAMIC INTERACTIVE ANIMATIONS (ALIVE EFFECTS) ============ */
+    /* Pause marquee on hover */
+    .games-marquee:hover .games-track {
+      animation-play-state: paused;
+    }
+
+    /* Cards smooth transition & translate hover elevation */
+    .feat-card, .safe-card, .rev-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, background 0.3s, box-shadow 0.4s;
+    }
+    
+    .feat-card:hover, .safe-card:hover, .rev-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(var(--accent-rgb), 0.35) !important;
+      box-shadow: 0 16px 40px rgba(var(--accent-rgb), 0.06);
+    }
+
+    /* Ambient spotlight glow following user cursor */
+    .feat-card::before, .safe-card::before, .rev-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--accent-rgb), 0.05), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .feat-card:hover::before, .safe-card:hover::before, .rev-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Render text above the spotlight glow bg */
+    .feat-card > *, .safe-card > *, .rev-card > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Reveal scroll entrance animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.reveal-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered entrance animations for grids */
+    .feat-card:nth-child(1) { transition-delay: 0s; }
+    .feat-card:nth-child(2) { transition-delay: 0.1s; }
+    .feat-card:nth-child(3) { transition-delay: 0.2s; }
+
+    .safe-card:nth-child(1) { transition-delay: 0s; }
+    .safe-card:nth-child(2) { transition-delay: 0.1s; }
+    .safe-card:nth-child(3) { transition-delay: 0.2s; }
+
+    .rev-card:nth-child(1) { transition-delay: 0s; }
+    .rev-card:nth-child(2) { transition-delay: 0.15s; }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav>
+    <div class="wrap nav-in">
+      <a class="logo" href="#top">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12h4l3-8 4 16 3-8h6"/>
+          </svg>
+        </span>
+        Pulse
+      </a>
+      <div class="nav-links">
+        <a href="#features">Как это работает</a>
+        <a href="#results">Результаты</a>
+        <a href="#vs">Сравнение</a>
+        <a href="#safety">Безопасность</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a class="btn btn-primary btn-sm" href="#download">Получить <span class="hide-mobile">ключ</span></a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO SECTION ============ -->
+  <header class="hero" id="top">
+    <canvas id="heroCanvas"></canvas>
+    <div class="wrap hero-in">
+
+      <h1><span>Pulse — стабильный фреймтайм и прирост FPS</span></h1>
+      <p class="sub">Портативная утилита, которая устраняет задержки системы, оптимизирует распределение ресурсов процессора и очищает оперативную память. Ничего лишнего — только чистая игровая производительность.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#download">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Скачать Pulse
+        </a>
+        <a class="btn btn-ghost" href="#demo">Смотреть в действии</a>
+      </div>
+      <div class="hero-note" id="heroNote">Версия 1.2.4 · Windows 10 / 11 · Платная лицензия · Ключ выдаётся вручную</div>
+
+      <!-- Profile switcher — retints the whole page live -->
+      <div class="profile-switch">
+        <div class="profile-switch-label">Профиль оптимизации — попробуйте переключить</div>
+        <div class="profile-pills" role="tablist" aria-label="Профиль оптимизации">
+          <button class="profile-pill" data-profile="standard" role="tab"><span class="pp-dot"></span>Стандарт</button>
+          <button class="profile-pill active" data-profile="gaming" role="tab" aria-selected="true"><span class="pp-dot"></span>Игровой</button>
+          <button class="profile-pill" data-profile="maximum" role="tab"><span class="pp-dot"></span>Максимум</button>
+        </div>
+      </div>
+
+      <!-- Games Marquee -->
+      <div class="games-row">
+        <div class="games-label">Тестировалось в играх:</div>
+        <div class="games-marquee">
+          <div class="games-track">
+            <span class="gchip">CS2</span>
+            <span class="gchip">VALORANT</span>
+            <span class="gchip">PUBG</span>
+            <span class="gchip">RUST</span>
+            <span class="gchip">DOTA 2</span>
+            <span class="gchip">APEX LEGENDS</span>
+            <span class="gchip">WARZONE</span>
+            <span class="gchip">FORTNITE</span>
+            <!-- Дублирование для бесконечного скролла -->
+            <span class="gchip">CS2</span>
+            <span class="gchip">VALORANT</span>
+            <span class="gchip">PUBG</span>
+            <span class="gchip">RUST</span>
+            <span class="gchip">DOTA 2</span>
+            <span class="gchip">APEX LEGENDS</span>
+            <span class="gchip">WARZONE</span>
+            <span class="gchip">FORTNITE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ INTERACTIVE DEMO (THE APP MOCKUP) ============ -->
+  <section class="demo" id="demo">
+    <div class="wrap demo-in">
+      <div class="demo-info">
+        <div class="eyebrow">Панель управления</div>
+        <h3>Интерактивный макет Pulse</h3>
+        <p>Изучите интерфейс утилиты прямо в браузере. Переключайте вкладки, ищите и завершайте фоновые процессы или запустите симуляцию оптимизации, чтобы увидеть лог выполняемых команд.</p>
+        
+        <div class="telemetry-compact">
+          <div class="tel-card">
+            <div class="k">DPC Latency</div>
+            <div class="v green" id="telLatency">42 мкс</div>
+          </div>
+          <div class="tel-card">
+            <div class="k">Освобождено RAM</div>
+            <div class="v blue" id="telFreed">0 МБ</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-shell">
+        <div class="mock">
+          <!-- Mock Header -->
+          <div class="mock-header">
+            <div class="mock-title">
+              <span class="mock-title-dot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 12h4l3-8 4 16 3-8h6"/>
+                </svg>
+              </span>
+              Pulse
+            </div>
+            <div class="mock-win-controls">
+              <span></span>
+              <span></span>
+              <span class="close"></span>
+            </div>
+          </div>
+          
+          <div class="mock-body">
+            <!-- Mock Sidebar -->
+            <div class="mock-side">
+              <div class="mock-menu-item active" data-target="dash">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                <span>Обзор</span>
+              </div>
+              <div class="mock-menu-item" data-target="proc">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/></svg>
+                <span>Процессы</span>
+              </div>
+              <div class="mock-menu-item" data-target="excs">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>Исключения</span>
+              </div>
+              <div class="mock-menu-item" data-target="opti">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"/></svg>
+                <span>Оптимизация</span>
+              </div>
+            </div>
+
+            <!-- Mock Main Area -->
+            <div class="mock-main">
+              
+              <!-- PANEL: DASHBOARD -->
+              <div class="mock-panel active" id="panel-dash">
+                <div class="mock-section-title">Системная телеметрия</div>
+                <div class="mock-section-desc">Мониторинг ресурсов вашего компьютера в реальном времени</div>
+                
+                <div class="dash-widgets">
+                  <div class="gauge-widget">
+                    <div class="gauge-circle">
+                      <svg width="60" height="60" viewBox="0 0 60 60">
+                        <circle cx="30" cy="30" r="26" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="4.5"/>
+                        <circle id="dashGaugeArc" cx="30" cy="30" r="26" fill="none" stroke="var(--green)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="163.3" stroke-dashoffset="65"/>
+                      </svg>
+                      <div class="gauge-val" id="dashGaugeVal">60%</div>
+                    </div>
+                    <span class="gauge-label" id="dashGaugeState">В норме</span>
+                  </div>
+                  
+                  <div class="dash-telemetry">
+                    <div class="dt-card"><div class="k">CPU Load</div><div class="v" id="telCpu">12%</div></div>
+                    <div class="dt-card"><div class="k">RAM Used</div><div class="v" id="telRam">5.4 GB</div></div>
+                    <div class="dt-card"><div class="k">Disk Active</div><div class="v" id="telDisk">1%</div></div>
+                  </div>
+                </div>
+
+                <div class="chart-container">
+                  <div class="chart-header">
+                    <span>График загрузки ресурсов</span>
+                    <div class="chart-legends">
+                      <span class="chart-legend"><i style="background:var(--accent)"></i>CPU</span>
+                      <span class="chart-legend"><i style="background:var(--green)"></i>RAM</span>
+                    </div>
+                  </div>
+                  <svg class="mock-chart-svg" id="dashChart" viewBox="0 0 400 120" preserveAspectRatio="none">
+                    <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,.02)"/>
+                    <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,.02)"/>
+                    <line x1="0" y1="90" x2="400" y2="90" stroke="rgba(255,255,255,.02)"/>
+                    <path id="pathChartRam" fill="none" stroke="var(--green)" stroke-width="1.8" opacity="0.8"/>
+                    <path id="pathChartCpu" fill="none" stroke="var(--accent)" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- PANEL: PROCESSES -->
+              <div class="mock-panel" id="panel-proc">
+                <div class="mock-section-title">Диспетчер фоновых задач</div>
+                <div class="mock-section-desc">Завершайте прожорливый софт во избежание фризов и статтеров в играх</div>
+                
+                <div class="proc-toolbar">
+                  <input type="text" class="proc-search-input" id="procSearch" placeholder="Поиск по имени процесса...">
+                </div>
+
+                <div class="proc-list-container">
+                  <table class="proc-table">
+                    <thead class="proc-thead">
+                      <tr>
+                        <th>Имя задачи</th>
+                        <th>PID</th>
+                        <th>ОЗУ</th>
+                        <th style="text-align:right">Действия</th>
+                      </tr>
+                    </thead>
+                    <tbody id="procTableBody">
+                      <!-- Добавляется динамически через JS -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="proc-summary-bar">
+                  <span>Доступно для высвобождения: <strong id="procTotalTerminable">0 МБ</strong></span>
+                  <span style="color:var(--text-dark)" id="procFreedStatus">Всего закрыто: 0 МБ</span>
+                </div>
+              </div>
+
+              <!-- PANEL: EXCEPTIONS -->
+              <div class="mock-panel" id="panel-excs">
+                <div class="mock-section-title">Белый список (Исключения)</div>
+                <div class="mock-section-desc">Процессы из этого списка никогда не будут остановлены оптимизатором</div>
+
+                <div class="exc-add-form">
+                  <input type="text" id="excInput" placeholder="Имя процесса (например, streamlabs.exe)">
+                  <button id="excAddBtn">Добавить</button>
+                </div>
+
+                <div class="exc-grid">
+                  <div class="exc-column">
+                    <div class="exc-header">Системные (ядро) <span class="count" id="sysExcCount">4</span></div>
+                    <div class="exc-list" id="sysExcList">
+                      <!-- Системные защищенные по умолчанию -->
+                    </div>
+                  </div>
+                  <div class="exc-column">
+                    <div class="exc-header">Пользовательские <span class="count" id="userExcCount">0</span></div>
+                    <div class="exc-list" id="userExcList">
+                      <!-- Пользовательские исключения -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANEL: OPTIMIZATION -->
+              <div class="mock-panel" id="panel-opti">
+                <div class="mock-section-title">Твики операционной системы</div>
+                <div class="mock-section-desc">Примените оптимизацию системы в один клик</div>
+                
+                <div class="opt-container">
+                  <div class="opt-circle-btn" id="optStartBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+                      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+                      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                    </svg>
+                  </div>
+                  <div class="opt-btn-label" id="optStateLabel">Запуск оптимизации</div>
+                  <div class="opt-btn-sub" id="optStateSub">Все настройки будут применены автоматически</div>
+                  
+                  <div class="opt-progress-track">
+                    <div class="opt-progress-bar" id="optProgressBar"></div>
+                  </div>
+
+                  <div class="opt-terminal" id="optTerminal">
+                    <div class="opt-terminal-line">Pulse готов к оптимизации Windows.</div>
+                    <div class="opt-terminal-line" style="color:var(--text-dark)">Нажмите на ракету выше для старта.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES SECTION ============ -->
+  <section class="features" id="features">
+    <div class="wrap">
+      <div class="sec-head center">
+        <div class="eyebrow">Архитектура утилиты</div>
+        <h2>Как Pulse оптимизирует систему</h2>
+        <p>Каждое изменение спроектировано для снижения латентности ввода и устранения фонового вмешательства Windows.</p>
+      </div>
+
+      <div class="feat-grid">
+        <div class="feat-card reveal">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/>
+            </svg>
+          </div>
+          <h3>Освобождение ОЗУ</h3>
+          <p>В отличие от софта, «сбрасывающего» ОЗУ в файл подкачки, Pulse приостанавливает циклы неактивных фоновых приложений (браузеры, лаунчеры, службы обновлений) через WinAPI. На системе с 16 ГБ ОЗУ после оптимизации в простое остаётся занятым всего около 1.5 ГБ — без побочного роста дисковой активности.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>Конфигурация WinAPI и служб</h3>
+          <p>Автоматическое отключение систем телеметрии (DiagTrack, WPP, Event Logs) и планировщика архивации. Утилита выгружает ресурсоемкие службы отчетов об ошибках Windows, освобождая процессорные потоки во время игр.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+          <h3>Снижение сетевых задержек</h3>
+          <p>Pulse вносит изменения в конфигурацию сетевых драйверов в реестре, отключая алгоритм Нагла (TCP Nodelay) и Network Throttling. Это устраняет принудительное накопление пакетов в буфере и снижает микро-скачки пинга.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <h3>Тюнинг I/O и таймера Windows</h3>
+          <p>Принудительно переключает системный таймер высокого разрешения (HPET) в оптимальное состояние для игр, снижая DPC latency (задержки вызовов драйверов). Приоритизирует I/O дисковые запросы запущенной игры.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BAND ============ -->
+  <div class="band">
+    <div class="wrap band-grid">
+      <div class="band-card">
+        <div class="num"><span class="count" data-target="191">0</span></div>
+        <div class="lbl">Твик операционной системы</div>
+      </div>
+      <div class="band-card">
+        <div class="num"><span class="count" data-target="30">0</span>+</div>
+        <div class="lbl">Системных процессов под защитой</div>
+      </div>
+      <div class="band-card">
+        <div class="num"><span class="count" data-target="0">0</span>%</div>
+        <div class="lbl">Нагрузки: утилита закрывается полностью</div>
+      </div>
+      <div class="band-card">
+        <div class="num"><span class="count" data-target="99.3" data-decimals="1">0</span> МБ</div>
+        <div class="lbl">Размер исполняемого файла</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ RESULTS SECTION ============ -->
+  <section class="results" id="results">
+    <div class="wrap results-in">
+      <div class="results-chart reveal" id="barsBlock">
+        <div class="chart-bar-row">
+          <div class="chart-bar-head">
+            <span class="chart-bar-name">Средний FPS в CS2 (Без Pulse)</span>
+            <span class="chart-bar-val">312 <span class="unit">FPS</span></span>
+          </div>
+          <div class="chart-bar-track">
+            <div class="chart-bar-fill before" data-w="55%"></div>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <div class="chart-bar-head">
+            <span class="chart-bar-name">Средний FPS в CS2 (С примененным Pulse)</span>
+            <span class="chart-bar-val" style="color:var(--accent)">450 <span class="unit" style="color:var(--accent)">FPS</span></span>
+          </div>
+          <div class="chart-bar-track">
+            <div class="chart-bar-fill after" data-w="80%"></div>
+          </div>
+        </div>
+
+        <div class="chart-bar-row" style="margin-top: 36px;">
+          <div class="chart-bar-head">
+            <span class="chart-bar-name">Показатель 1% Low — Редкие события (Без Pulse)</span>
+            <span class="chart-bar-val">138 <span class="unit">FPS</span></span>
+          </div>
+          <div class="chart-bar-track">
+            <div class="chart-bar-fill before" data-w="28%"></div>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <div class="chart-bar-head">
+            <span class="chart-bar-name">Показатель 1% Low — Стабильность (С примененным Pulse)</span>
+            <span class="chart-bar-val" style="color:var(--accent)">200 <span class="unit" style="color:var(--accent)">FPS</span></span>
+          </div>
+          <div class="chart-bar-track">
+            <div class="chart-bar-fill after" data-w="44%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-text reveal">
+        <div class="eyebrow">Замеры производительности</div>
+        <h3>Реальное влияние на стабильность кадра</h3>
+        <p>Игроки часто смотрят только на средний FPS, но комфорт игры определяют просадки в экшн-сценах (показатель 1% low). За счет отключения системных прерываний, DPC latency снижается со 150 до 45 микросекунд. Как результат — пропадают микрофризы и дергания при перестрелках.</p>
+        <p style="margin-top:-8px;"><strong style="color:#fff;">450 FPS avg / 200 FPS 1% low — потолок результата</strong>, достижимый только при грамотной ручной настройке системы поверх Pulse (проверено автором лично). Из коробки прирост более умеренный и зависит от вашего железа и фона.</p>
+        <div class="system-specs">
+          Конфигурация тестового стенда: AMD Ryzen 5 5600 · GeForce GTX 1660 · 16 GB DDR4 RAM · Чистая Windows 10 (22H2).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VS TABLE SECTION ============ -->
+  <section class="vs" id="vs">
+    <div class="wrap">
+      <div class="sec-head center">
+        <div class="eyebrow">Сравнение решений</div>
+        <h2>Отличия Pulse от стандартного софта</h2>
+      </div>
+
+      <div class="vs-container reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>Функционал</th>
+              <th class="col-target">Pulse</th>
+              <th>Очистители диска</th>
+              <th>Платные бустеры</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Устранение DPC-задержек и HPET</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Частично</td>
+            </tr>
+            <tr>
+              <td>Принудительная остановка фоновых задач</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
+            </tr>
+            <tr>
+              <td>Белый список критических процессов ОС</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (30+)</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+            </tr>
+            <tr>
+              <td>Автоматический бэкап реестра</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Иногда</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Редко</td>
+            </tr>
+            <tr>
+              <td>Прозрачный лог изменений</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (лог)</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+            </tr>
+            <tr>
+              <td>Отсутствие фонового процесса в трее</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (0% ОЗУ)</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+            </tr>
+            <tr>
+              <td>Модель оплаты</td>
+              <td class="col-target" style="color:var(--green); font-weight:700;">Разовый ключ, без подписки</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Бесплатно, с рекламой</td>
+              <td>Подписка от $12/мес</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SAFETY PRINCIPLES SECTION ============ -->
+  <section class="safety" id="safety">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Безопасность системы</div>
+        <h2>Принципы защиты от системных сбоев</h2>
+        <p>Многие твикеры ломают службы Windows и приводят к «синему экрану». Pulse спроектирован с упором на отказоустойчивость.</p>
+      </div>
+
+      <div class="safety-grid">
+        <div class="safe-card reveal">
+          <div class="safe-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>Аппаратное ядро под защитой</h3>
+          <p>В коде жестко зафиксирован список из 32 процессов Windows (таких как dwm.exe, explorer.exe, lsass.exe), которые утилита не имеет права останавливать или изменять.</p>
+        </div>
+
+        <div class="safe-card reveal">
+          <div class="safe-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+          </div>
+          <h3>Создание резервной копии</h3>
+          <p>Перед каждым изменением системного реестра Pulse принудительно инициирует создание системной точки восстановления (System Restore Point). Любые изменения можно отменить в один клик.</p>
+        </div>
+
+        <div class="safe-card reveal">
+          <div class="safe-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
+          <h3>Техническая прозрачность</h3>
+          <p>Pulse не использует скрытые бинарные скрипты. Все твики применяются через стандартные ветки реестра. В конце работы утилита сохраняет читаемый текстовый лог всех измененных ключей.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS SECTION ============ -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="sec-head center">
+        <div class="eyebrow">Обратная связь</div>
+        <h2>Отзывы с профильных ресурсов</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="rev-card reveal">
+          <div class="rev-stars">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <p class="rev-text">«Играю в кс почти каждый день, 4-5 часов минимум. Раньше периодически дёргало прямо в раунде — вроде и пекарня не топовая, но и не должно так троить. Погонял с Pulse недели две — дёргания пропали, мышка ведёт себя предсказуемо даже в дыму. Не супергерой, но раздражитель убрал полностью, для меня этого хватило.»</p>
+          <div class="rev-user">
+            <div class="rev-avatar">A</div>
+            <div class="rev-meta">
+              <div class="name">AimLab</div>
+              <div class="specs">Ryzen 5 5600 / GTX 1660 / CS2</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card reveal">
+          <div class="rev-stars">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <p class="rev-text">«Один твикер в прошлом году убил мне драйвер звука, с тех пор к такому софту отношусь с подозрением. Тут перед стартом сам сделал точку восстановления — я вообще ничего руками не трогал, это подкупило. После чистки автозагрузки хром с стимом перестали жрать всё в фоне, комп стал отзывчивее в целом, не только в игре.»</p>
+          <div class="rev-user">
+            <div class="rev-avatar">E</div>
+            <div class="rev-meta">
+              <div class="name">Enrique!</div>
+              <div class="specs">i5-12400F / GTX 1660 Ti / CS2</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rev-card reveal">
+          <div class="rev-stars">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <p class="rev-text">«RX 580 и Ryzen 5 3600 — железо не самое новое, апгрейд не в этом году точно, так что трясусь над каждым кадром. Раньше в перестрелках тайминг рвался, списывал на возраст видеокарты. Оказалось часть проблемы была в фоновых службах — после Pulse стало ровнее, хотя чуда никакого не жду с таким железом. Свои деньги отбило, буду брать ключ и на следующий комп.»</p>
+          <div class="rev-user">
+            <div class="rev-avatar">A</div>
+            <div class="rev-meta">
+              <div class="name">Anxiety</div>
+              <div class="specs">Ryzen 5 3600 / RX 580 / CS2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ SECTION ============ -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="sec-head center">
+        <div class="eyebrow">FAQ</div>
+        <h2>Ответы на частые вопросы</h2>
+      </div>
+
+      <div class="faq-container">
+        <details>
+          <summary>Требуются ли права администратора?</summary>
+          <div class="answer">Да. Изменение сетевых параметров, приоритизация ввода-вывода и управление службами Windows происходят на системном уровне через реестр и требуют прав локального администратора.</div>
+        </details>
+        <details>
+          <summary>Могут ли забанить в играх (VAC, Faceit Anti-Cheat)?</summary>
+          <div class="answer">Нет. Pulse работает исключительно с конфигурацией операционной системы и стандартным API Windows. Утилита не внедряется в память запущенных процессов, не изменяет файлы игр и не нарушает правила античитов.</div>
+        </details>
+        <details>
+          <summary>Как вернуть стандартные настройки системы?</summary>
+          <div class="answer">При первом запуске Pulse делает полную резервную копию изменяемых веток реестра. Для возврата к исходному состоянию достаточно открыть Pulse и нажать кнопку «Восстановить настройки» во вкладке резервных копий.</div>
+        </details>
+        <details>
+          <summary>Влияет ли утилита на работу систем безопасности Windows?</summary>
+          <div class="answer">Да. В рамках оптимизации Pulse отключает встроенный защитник (Windows Defender), так как его фоновое сканирование заметно нагружает диск и процессор во время игры. Перед отключением создаётся точка восстановления, чтобы при необходимости можно было откатить изменение.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOWNLOAD SECTION ============ -->
+  <section class="download" id="download">
+    <div class="wrap dl-grid">
+      <div class="dl-main">
+        <div class="eyebrow">Дистрибутив</div>
+        <h2>Скачать Pulse</h2>
+        <p>Повысьте стабильность фреймтайма и освободите оперативную память в один клик. Портативная сборка, готовая к запуску — активация по лицензионному ключу.</p>
+        <div class="dl-buttons">
+          <a class="btn btn-primary" href="https://github.com/skywhyelo-lab/Plus/releases/download/Pulse/Pulse.exe" download="Pulse.exe">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Скачать Pulse (.EXE)
+          </a>
+        </div>
+
+        <div class="key-contact">
+          <div class="key-contact-lbl">Ключ активации выдаётся вручную — напишите нам:</div>
+          <div class="key-contact-buttons">
+            <a class="btn btn-ghost btn-sm" href="https://t.me/qu5aa" target="_blank" rel="noopener">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              Telegram · @qu5aa
+            </a>
+            <a class="btn btn-ghost btn-sm" href="#" onclick="navigator.clipboard && navigator.clipboard.writeText('qusa.z'); return false;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="12" rx="2"/><circle cx="12" cy="15" r="2"/><path d="M17 9V7A5 5 0 0 0 7 7v2"/></svg>
+              Discord · qusa.z
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dl-side">
+        <div>
+          <h3>Характеристики сборки</h3>
+          <ul class="req-list">
+            <li><span class="lbl">ОС</span><span class="val">Windows 10 / 11 64-bit</span></li>
+            <li><span class="lbl">Размер</span><span class="val" id="specsSize">99.3 МБ</span></li>
+            <li><span class="lbl">Инсталлятор</span><span class="val">Не требуется (Portable)</span></li>
+            <li><span class="lbl">Лицензия</span><span class="val">Платная, по ключу</span></li>
+            <li><span class="lbl">Активация</span><span class="val">Telegram / Discord</span></li>
+          </ul>
+        </div>
+        <div class="hash-info">
+          <div class="hash-lbl">SHA-256 Контрольная сумма</div>
+          <div class="hash-val">d6c85f4533146dc58e01b7e4b2efeacb5970d25dc578243596ebdebdefdfe3b2</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap foot">
+      <a class="logo" href="#top" style="font-size: 16px;">
+        <span class="logo-mark" style="width: 24px; height: 24px; border-radius: 6px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" style="width: 13px; height: 13px;">
+            <path d="M2 12h4l3-8 4 16 3-8h6"/>
+          </svg>
+        </span>
+        Pulse
+      </a>
+      <div class="foot-links">
+        <a href="#features">Оптимизация</a>
+        <a href="#results">Результаты</a>
+        <a href="#safety">Безопасность</a>
+        <a href="#download">Скачать</a>
+        <a href="privacy.html">Конфиденциальность</a>
+        <a href="eula.html">Лицензионное соглашение</a>
+      </div>
+      <div class="copyright">© 2026 Pulse Utility. Лицензия выдаётся вручную через Telegram/Discord, только для личного использования.</div>
+    </div>
+  </footer>
+
+  <!-- ============ JAVASCRIPT ============ -->
+  <script>
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 640;
+    
+    // Add is-mobile class to body dynamically if mobile
+    if (isMobileDevice) {
+      document.body.classList.add('is-mobile');
+    }
+
+    /* ---------- PROFILE SWITCHER (retints the whole site + canvas, like the real app) ---------- */
+    window.pulseAccentRGB = '139, 92, 246'; // gaming default — read by the hero canvas
+    (function() {
+      const profileRGB = {
+        standard: '37, 145, 225',
+        gaming:   '139, 92, 246',
+        maximum:  '239, 68, 68'
+      };
+      const pills = document.querySelectorAll('.profile-pill');
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          const profile = pill.dataset.profile;
+          // 'gaming' is the :root default (no attribute); standard/maximum override via [data-profile]
+          if (profile === 'gaming') {
+            document.documentElement.removeAttribute('data-profile');
+          } else {
+            document.documentElement.setAttribute('data-profile', profile);
+          }
+          window.pulseAccentRGB = profileRGB[profile] || profileRGB.gaming;
+          pills.forEach(p => { p.classList.remove('active'); p.removeAttribute('aria-selected'); });
+          pill.classList.add('active');
+          pill.setAttribute('aria-selected', 'true');
+        });
+      });
+    })();
+
+    /* ---------- HERO CANVAS BACKGROUND (SUBTLE ECG WAVE + PARTICLES) ---------- */
+    (function() {
+      const canvas = document.getElementById('heroCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let width, height;
+
+      // 1. Declare and initialize data arrays first (avoids TDZ reference errors on initial resize)
+      const particles = [];
+      const particleCount = isMobileDevice ? 15 : 65; 
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random(),
+          y: Math.random(),
+          r: Math.random() * 1.6 + 0.5, 
+          speedY: Math.random() * 0.0003 + 0.0001,
+          alpha: Math.random() * 0.32 + 0.06 
+        });
+      }
+
+      // Track mouse position
+      let mouse = { x: -1000, y: -1000, active: false };
+      if (!isMobileDevice) {
+        window.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouse.x = (e.clientX - rect.left) * dpr;
+          mouse.y = (e.clientY - rect.top) * dpr;
+          mouse.active = true;
+        });
+        window.addEventListener('mouseleave', () => {
+          mouse.active = false;
+        });
+      }
+
+      // Latency wave coordinates
+      const wavePoints = [];
+      let beatCountdown = 0;
+      const beatPattern = [0, -3, 10, -25, 8, -2, 0];
+      
+      function getNextWaveHeight() {
+        if (beatCountdown > 0) {
+          const val = beatPattern[beatPattern.length - beatCountdown];
+          beatCountdown--;
+          return val;
+        }
+        if (Math.random() < 0.012) {
+          beatCountdown = beatPattern.length - 1;
+        }
+        return (Math.random() - 0.5) * 1.5;
+      }
+
+      // 2. Define sizing functions
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        width = canvas.width = (rect.width || canvas.offsetWidth) * dpr;
+        height = canvas.height = (rect.height || canvas.offsetHeight) * dpr;
+        if (reducedMotion && width > 0 && height > 0) {
+          draw(); 
+        }
+      }
+
+      // 3. Define rendering loop
+      function draw() {
+        if (!width || !height) {
+          resize();
+          if (!width || !height) {
+            if (!reducedMotion) requestAnimationFrame(draw);
+            return;
+          }
+        }
+        ctx.clearRect(0, 0, width, height);
+
+        // Ambient cursor glow trail under particles
+        if (mouse.active && !reducedMotion) {
+          const AC = window.pulseAccentRGB || '139, 92, 246';
+          const rad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 110 * dpr);
+          rad.addColorStop(0, 'rgba(' + AC + ', 0.08)');
+          rad.addColorStop(1, 'rgba(' + AC + ', 0)');
+          ctx.fillStyle = rad;
+          ctx.beginPath();
+          ctx.arc(mouse.x, mouse.y, 110 * dpr, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Draw particles
+        for (const p of particles) {
+          p.y -= p.speedY;
+          if (p.y < -0.01) {
+            p.y = 1.01;
+            p.x = Math.random();
+          }
+          
+          let px = p.x * width;
+          let py = p.y * height;
+
+          // Gentle mouse repulsion force
+          if (mouse.active && !reducedMotion) {
+            const dx = px - mouse.x;
+            const dy = py - mouse.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 90 * dpr) {
+              const force = (90 * dpr - dist) / (90 * dpr);
+              p.x += (dx / dist) * force * 0.006;
+              p.x = Math.max(0.001, Math.min(0.999, p.x));
+            }
+          }
+
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = 'rgb(' + (window.pulseAccentRGB || '139, 92, 246') + ')';
+          ctx.beginPath();
+          ctx.arc(p.x * width, p.y * height, p.r * dpr, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Draw dynamic constellation connection lines between close particles
+        if (!reducedMotion) {
+          ctx.strokeStyle = 'rgba(' + (window.pulseAccentRGB || '139, 92, 246') + ', 0.32)';
+          ctx.lineWidth = 0.75 * dpr;
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const dx = (particles[i].x - particles[j].x) * width;
+              const dy = (particles[i].y - particles[j].y) * height;
+              const dist = Math.hypot(dx, dy);
+              if (dist < 105 * dpr) { 
+                ctx.globalAlpha = (1 - dist / (105 * dpr)) * 0.45; 
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x * width, particles[i].y * height);
+                ctx.lineTo(particles[j].x * width, particles[j].y * height);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+
+        // Draw subtle latency wave (ECG)
+        ctx.globalAlpha = 1;
+        const step = 4 * dpr;
+        const maxPoints = Math.ceil(width / step) + 2;
+
+        wavePoints.push(getNextWaveHeight());
+        while (wavePoints.length > maxPoints) {
+          wavePoints.shift();
+        }
+
+        const baseline = height * 0.55;
+        ctx.strokeStyle = 'rgba(' + (window.pulseAccentRGB || '139, 92, 246') + ', 0.16)';
+        ctx.lineWidth = 1.5 * dpr;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+
+        for (let i = 0; i < wavePoints.length; i++) {
+          const x = i * step;
+          const y = baseline + wavePoints[i] * dpr * 1.8;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        if (!reducedMotion) requestAnimationFrame(draw);
+      }
+
+      // 4. Initialize size, bind events, and start rendering loop only after full scope setup
+      resize();
+      window.addEventListener('resize', resize);
+      window.addEventListener('load', resize); 
+      draw();
+    })();
+
+    /* ---------- RESULTS PROGRESS BARS ANIMATION ---------- */
+    const resultsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.chart-bar-fill').forEach(fill => {
+            fill.style.width = fill.dataset.w;
+          });
+          resultsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const barsBlock = document.getElementById('barsBlock');
+    if (barsBlock) resultsObserver.observe(barsBlock);
+
+
+    /* =========================================================
+       MOCKUP CONTROLLER (INTERACTIVE WINDOW)
+       ========================================================= */
+    const mockupState = {
+      activeTab: 'dash',
+      freedRamTotal: 0,
+      customExceptions: ['cs2.exe', 'Discord.exe'],
+      systemExceptions: ['dwm.exe', 'explorer.exe', 'svchost.exe', 'csrss.exe'],
+      
+      // Processes initially available for termination
+      processes: [
+        { name: 'chrome.exe', pid: 9992, ram: 452, color: '#ef4444', terminable: true },
+        { name: 'chrome.exe', pid: 8744, ram: 371, color: '#ef4444', terminable: true },
+        { name: 'Spotify.exe', pid: 5104, ram: 188, color: '#10b981', terminable: true },
+        { name: 'steamwebhelper.exe', pid: 7212, ram: 389, color: '#3b82f6', terminable: true },
+        { name: 'Discord.exe', pid: 6604, ram: 512, color: '#6366f1', terminable: true },
+        { name: 'nvcontainer.exe', pid: 4320, ram: 42, color: '#10b981', terminable: false, badge: 'Protected' },
+        { name: 'cs2.exe', pid: 14201, ram: 1834, color: '#f59e0b', terminable: false, badge: 'Game' },
+        { name: 'explorer.exe', pid: 2110, ram: 85, color: '#64748b', terminable: false, badge: 'System' }
+      ],
+
+      // Optimization status
+      optRunning: false,
+      optProgress: 0,
+      optSteps: [
+        { text: 'Инициализация оптимизации...', w: 10, type: 'info' },
+        { text: 'Создание точки восстановления реестра... ОК', w: 25, type: 'success' },
+        { text: 'Отключение фоновой телеметрии (DiagTrack)... ОК', w: 45, type: 'success' },
+        { text: 'Настройка сетевых задержек (TCP Nodelay)... ОК', w: 65, type: 'success' },
+        { text: 'Очистка системного кэша файловой системы... ОК', w: 80, type: 'success' },
+        { text: 'Сжатие страниц неактивного ОЗУ... ОК', w: 95, type: 'success' },
+        { text: 'Pulse: Оптимизация системы завершена успешно! [191 твик]', w: 100, type: 'done' }
+      ]
+    };
+
+    // DOM Elements
+    const mockupMenuElements = document.querySelectorAll('.mock-menu-item');
+    const mockupPanels = document.querySelectorAll('.mock-panel');
+    const procTableBody = document.getElementById('procTableBody');
+    const procSearch = document.getElementById('procSearch');
+    const sysExcList = document.getElementById('sysExcList');
+    const userExcList = document.getElementById('userExcList');
+    const excInput = document.getElementById('excInput');
+    const excAddBtn = document.getElementById('excAddBtn');
+    const userExcCount = document.getElementById('userExcCount');
+    const sysExcCount = document.getElementById('sysExcCount');
+    
+    const telCpu = document.getElementById('telCpu');
+    const telRam = document.getElementById('telRam');
+    const telDisk = document.getElementById('telDisk');
+    const telLatency = document.getElementById('telLatency');
+    const telFreed = document.getElementById('telFreed');
+    const dashGaugeArc = document.getElementById('dashGaugeArc');
+    const dashGaugeVal = document.getElementById('dashGaugeVal');
+    const dashGaugeState = document.getElementById('dashGaugeState');
+
+    const optStartBtn = document.getElementById('optStartBtn');
+    const optProgressBar = document.getElementById('optProgressBar');
+    const optTerminal = document.getElementById('optTerminal');
+    const optStateLabel = document.getElementById('optStateLabel');
+    const optStateSub = document.getElementById('optStateSub');
+    const procTotalTerminable = document.getElementById('procTotalTerminable');
+    const procFreedStatus = document.getElementById('procFreedStatus');
+
+    /* --- Tab Switcher --- */
+    mockupMenuElements.forEach(item => {
+      item.addEventListener('click', () => {
+        const target = item.dataset.target;
+        
+        // Update Sidebar UI
+        mockupMenuElements.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+
+        // Update Panel Visibility
+        mockupPanels.forEach(p => p.classList.remove('active'));
+        const activePanel = document.getElementById(`panel-${target}`);
+        if (activePanel) activePanel.classList.add('active');
+
+        mockupState.activeTab = target;
+      });
+    });
+
+    /* --- Dashboard Timeline Loop --- */
+    const N = 40;
+    const chartCpuData = Array.from({length: N}, () => 10 + Math.random() * 8);
+    const chartRamData = Array.from({length: N}, () => 40 + Math.random() * 2);
+    
+    function updateChart() {
+      // 1. Generate new values
+      let cpuVal = 8 + Math.random() * 6;
+      let ramVal = 38 + Math.random() * 2;
+      
+      // Spikes
+      if (Math.random() < 0.05) cpuVal += 20 + Math.random() * 15;
+
+      chartCpuData.push(cpuVal);
+      chartCpuData.shift();
+      chartRamData.push(ramVal);
+      chartRamData.shift();
+
+      // 2. Render CPU & RAM paths
+      const step = 400 / (N - 1);
+      
+      let dCpu = `M 0,${120 - chartCpuData[0] * 1.1}`;
+      let dRam = `M 0,${120 - chartRamData[0] * 1.1}`;
+      
+      for (let i = 1; i < N; i++) {
+        dCpu += ` L ${i * step},${120 - chartCpuData[i] * 1.1}`;
+        dRam += ` L ${i * step},${120 - chartRamData[i] * 1.1}`;
+      }
+
+      const pathCpu = document.getElementById('pathChartCpu');
+      const pathRam = document.getElementById('pathChartRam');
+      
+      if (pathCpu) pathCpu.setAttribute('d', dCpu);
+      if (pathRam) pathRam.setAttribute('d', dRam);
+
+      // 3. Update Dashboard Stats text
+      const currentCpu = Math.round(chartCpuData[N-1]);
+      const currentRam = (8.2 * (chartRamData[N-1] / 100)).toFixed(1);
+      
+      if (telCpu) telCpu.textContent = `${currentCpu}%`;
+      if (telRam) telRam.textContent = `${currentRam} GB`;
+      if (telDisk) telDisk.textContent = `${Math.random() < 0.2 ? Math.round(Math.random() * 3) : 0}%`;
+
+      // 4. Update Gauge
+      const totalSystemLoad = Math.min(100, Math.round(currentCpu + 25));
+      if (dashGaugeVal) dashGaugeVal.textContent = `${totalSystemLoad}%`;
+      if (dashGaugeArc) {
+        const C = 163.3; // 2 * PI * r (r=26)
+        dashGaugeArc.style.strokeDashoffset = C - (C * totalSystemLoad) / 100;
+      }
+    }
+
+    if (!reducedMotion) {
+      setInterval(updateChart, 1000);
+    }
+    updateChart();
+
+    /* --- Processes Manager Operations --- */
+    function renderProcesses() {
+      if (!procTableBody) return;
+      
+      const searchVal = procSearch.value.trim().toLowerCase();
+      const filtered = mockupState.processes.filter(p => p.name.toLowerCase().includes(searchVal));
+
+      if (filtered.length === 0) {
+        procTableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--text-dark);padding:24px;">Задачи не найдены</td></tr>`;
+        return;
+      }
+
+      procTableBody.innerHTML = filtered.map((p, idx) => {
+        // Check if the process name is in the user exceptions list
+        const isCustomExcluded = mockupState.customExceptions.includes(p.name);
+        const isSystemExcluded = mockupState.systemExceptions.includes(p.name);
+        
+        let actionsHtml = '';
+        if (isSystemExcluded || isCustomExcluded) {
+          actionsHtml = `<span class="proc-status-shield">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Защищён
+          </span>`;
+        } else {
+          actionsHtml = `
+            <div class="proc-actions">
+              <button class="proc-btn-action btn-list" onclick="addProcessToExceptions('${p.name}')">В список</button>
+              <button class="proc-btn-action btn-kill" onclick="killProcess(${p.pid})">Закрыть</button>
+            </div>
+          `;
+        }
+
+        return `
+          <tr class="proc-tr" id="proc-pid-${p.pid}">
+            <td>
+              <div class="proc-name-cell">
+                <span class="proc-icon" style="background:${p.color}15;color:${p.color};border:1px solid ${p.color}35">
+                  ${p.name[0].toUpperCase()}
+                </span>
+                ${p.name}
+              </div>
+            </td>
+            <td style="font-family:var(--font-mono);color:var(--text-dark)">${p.pid}</td>
+            <td style="font-family:var(--font-mono);font-weight:600">${p.ram} МБ</td>
+            <td style="text-align:right">${actionsHtml}</td>
+          </tr>
+        `;
+      }).join('');
+
+      // Calculate totals
+      let totalTerminable = 0;
+      mockupState.processes.forEach(p => {
+        const isExcluded = mockupState.customExceptions.includes(p.name) || mockupState.systemExceptions.includes(p.name);
+        if (!isExcluded && p.terminable) {
+          totalTerminable += p.ram;
+        }
+      });
+
+      if (procTotalTerminable) {
+        procTotalTerminable.textContent = `${totalTerminable} МБ`;
+      }
+    }
+
+    if (procSearch) {
+      procSearch.addEventListener('input', renderProcesses);
+    }
+
+    function triggerPulse(element) {
+      if (!element) return;
+      element.classList.remove('pulse-effect');
+      void element.offsetWidth; // trigger reflow
+      element.classList.add('pulse-effect');
+      setTimeout(() => element.classList.remove('pulse-effect'), 400);
+    }
+
+    window.killProcess = function(pid) {
+      const idx = mockupState.processes.findIndex(p => p.pid === pid);
+      if (idx === -1) return;
+
+      const p = mockupState.processes[idx];
+      const row = document.getElementById(`proc-pid-${pid}`);
+      if (row) {
+        row.style.background = 'rgba(239, 68, 68, 0.08)';
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(20px)';
+        row.style.transition = 'all 0.4s ease';
+        
+        setTimeout(() => {
+          // Free resources
+          mockupState.freedRamTotal += p.ram;
+          if (telFreed) {
+            telFreed.textContent = `${mockupState.freedRamTotal} МБ`;
+            triggerPulse(telFreed);
+          }
+          if (procFreedStatus) procFreedStatus.textContent = `Всего закрыто: ${mockupState.freedRamTotal} МБ`;
+          
+          // Remove from list
+          mockupState.processes.splice(idx, 1);
+          
+          // Update latency telemetry if RAM is freed (simulating system cleanup)
+          const newLatency = Math.max(38, 42 - Math.round(mockupState.freedRamTotal / 120));
+          if (telLatency) {
+            telLatency.textContent = `${newLatency} мкс`;
+            triggerPulse(telLatency);
+          }
+
+          renderProcesses();
+        }, 400);
+      }
+    };
+
+    window.addProcessToExceptions = function(name) {
+      if (!mockupState.customExceptions.includes(name)) {
+        mockupState.customExceptions.push(name);
+        renderProcesses();
+        renderExceptions();
+      }
+    };
+
+    /* --- Exceptions Manager --- */
+    function renderExceptions() {
+      if (!sysExcList || !userExcList) return;
+
+      // Sys List (Read-only)
+      sysExcList.innerHTML = mockupState.systemExceptions.map(name => `
+        <div class="exc-item">
+          <span class="exc-item-name">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            ${name}
+          </span>
+        </div>
+      `).join('');
+      sysExcCount.textContent = mockupState.systemExceptions.length;
+
+      // User List
+      userExcList.innerHTML = mockupState.customExceptions.map(name => `
+        <div class="exc-item">
+          <span class="exc-item-name">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            ${name}
+          </span>
+          <span class="exc-remove-btn" onclick="removeException('${name}')">Убрать</span>
+        </div>
+      `).join('');
+      userExcCount.textContent = mockupState.customExceptions.length;
+    }
+
+    window.removeException = function(name) {
+      const idx = mockupState.customExceptions.indexOf(name);
+      if (idx !== -1) {
+        mockupState.customExceptions.splice(idx, 1);
+        renderExceptions();
+        renderProcesses();
+      }
+    };
+
+    if (excAddBtn && excInput) {
+      excAddBtn.addEventListener('click', () => {
+        const val = excInput.value.trim().toLowerCase();
+        if (val && !val.includes(' ') && val.endsWith('.exe')) {
+          if (!mockupState.customExceptions.includes(val) && !mockupState.systemExceptions.includes(val)) {
+            mockupState.customExceptions.push(val);
+            excInput.value = '';
+            renderExceptions();
+            renderProcesses();
+          }
+        } else {
+          alert('Введите имя исполняемого файла с расширением .exe (например, game.exe)');
+        }
+      });
+    }
+
+    // Initial render
+    renderProcesses();
+    renderExceptions();
+
+    /* --- Optimization Simulation Logic --- */
+    if (optStartBtn) {
+      optStartBtn.addEventListener('click', () => {
+        if (mockupState.optRunning) return;
+        
+        mockupState.optRunning = true;
+        optStartBtn.classList.add('running');
+        optStateLabel.textContent = 'Оптимизация...';
+        optStateSub.textContent = 'Внесение изменений в реестр Windows';
+
+        optTerminal.innerHTML = '<div class="opt-terminal-line blue">&gt; Запуск оптимизации Pulse...</div>';
+        optProgressBar.style.width = '0%';
+        
+        let stepIdx = 0;
+        function runStep() {
+          if (stepIdx < mockupState.optSteps.length) {
+            const step = mockupState.optSteps[stepIdx];
+            
+            // Add terminal log line
+            const line = document.createElement('div');
+            line.className = 'opt-terminal-line';
+            if (step.type === 'success') line.classList.add('green');
+            if (step.type === 'done') line.classList.add('blue');
+            line.innerHTML = `[${stepIdx + 1}/7] ${step.text}`;
+            optTerminal.appendChild(line);
+            optTerminal.scrollTop = optTerminal.scrollHeight;
+
+            // Progress bar
+            optProgressBar.style.width = `${step.w}%`;
+            
+            stepIdx++;
+            setTimeout(runStep, 800 + Math.random() * 600);
+          } else {
+            // Done
+            mockupState.optRunning = false;
+            optStartBtn.classList.remove('running');
+            optStateLabel.textContent = 'Готово';
+            optStateSub.textContent = 'Система полностью оптимизирована';
+            
+            // Trigger animation on landing page FPS metrics to show before/after
+            document.querySelectorAll('.chart-bar-fill').forEach(fill => {
+              fill.style.width = fill.dataset.w;
+            });
+
+            // Change telemetry values in mockup
+            if (telLatency) {
+              telLatency.textContent = '38 мкс';
+              triggerPulse(telLatency);
+            }
+          }
+        }
+
+        setTimeout(runStep, 400);
+      });
+    }
+
+    /* ---------- SPOTLIGHT HOVER EFFECT ---------- */
+    if (!isMobileDevice) {
+      document.querySelectorAll('.feat-card, .safe-card, .rev-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    }
+
+    /* ---------- REVEAL ON SCROLL ---------- */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    /* ---------- DYNAMIC NUMBER COUNTERS ON SCROLL ---------- */
+    const countersObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseFloat(counter.dataset.target);
+          const decimals = parseInt(counter.dataset.decimals || '0');
+          const duration = 1200; // ms
+          const startTime = performance.now();
+
+          function update(currentTime) {
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+            // Ease out quad
+            const easeProgress = progress * (2 - progress);
+            const value = easeProgress * target;
+            
+            counter.textContent = value.toFixed(decimals);
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              counter.textContent = target.toFixed(decimals);
+            }
+          }
+          requestAnimationFrame(update);
+          countersObserver.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.band-card .count').forEach(counter => {
+      countersObserver.observe(counter);
+    });
+
+  </script>
+</body>
+</html>

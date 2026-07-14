@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse — Политика конфиденциальности</title>
+  <meta name="robots" content="noindex">
+  <style>
+    :root {
+      --bg: #08080c;
+      --bg-panel: #101019;
+      --border: rgba(255,255,255,0.08);
+      --accent: #8B5CF6;
+      --text: #f8fafc;
+      --text-muted: #9fa3b8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.7;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+    a.back { color: var(--accent); font-size: 14px; text-decoration: none; }
+    a.back:hover { text-decoration: underline; }
+    h1 { font-size: 30px; margin: 24px 0 6px; letter-spacing: -0.5px; }
+    .updated { color: #6b7089; font-size: 13px; margin-bottom: 36px; font-family: 'JetBrains Mono', monospace; }
+    h2 { font-size: 18px; margin-top: 36px; margin-bottom: 10px; color: #fff; border-left: 3px solid var(--accent); padding-left: 12px; }
+    p, li { color: var(--text-muted); font-size: 15px; }
+    ul { padding-left: 20px; margin: 8px 0; }
+    li { margin-bottom: 6px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13.5px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { color: #fff; font-weight: 600; background: rgba(255,255,255,0.02); }
+    td { color: var(--text-muted); }
+    code { background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+    .contacts a { color: var(--accent); text-decoration: none; }
+    footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid var(--border); color: #6b7089; font-size: 12.5px; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">&larr; На главную</a>
+  <h1>Политика конфиденциальности</h1>
+  <div class="updated">Редакция от 15.07.2026 · применяется к сайту Pulse и программе Pulse, версия 1.2.4</div>
+
+  <p>Этот документ объясняет, какие данные собирает и обрабатывает Pulse — на сайте и внутри самой программы — зачем это нужно и как вы можете этим управлять.</p>
+
+  <h2>1. Что мы собираем и зачем</h2>
+  <table>
+    <tr><th>Данные</th><th>Откуда</th><th>Зачем</th></tr>
+    <tr>
+      <td>Аппаратный идентификатор устройства (HWID)</td>
+      <td>Вычисляется программой локально на основе неизменных системных идентификаторов (например, ID системного диска и идентификатора установки Windows), необратимо хешируется</td>
+      <td>Привязка одного лицензионного ключа к одному устройству — защита от бесконтрольного копирования ключа</td>
+    </tr>
+    <tr>
+      <td>Ключ активации и статус лицензии</td>
+      <td>Вводится пользователем при активации</td>
+      <td>Проверка валидности и срока действия лицензии при запуске программы</td>
+    </tr>
+    <tr>
+      <td>Локальный конфиг и журнал изменений</td>
+      <td>Хранится только на вашем компьютере: <code>%APPDATA%\Pulse\</code></td>
+      <td>Сохранение ваших настроек, списка исключений и лога применённых твиков между запусками</td>
+    </tr>
+    <tr>
+      <td>Контакт в Telegram/Discord</td>
+      <td>Вы указываете сами при обращении за ключом</td>
+      <td>Выдача, поддержка и, при необходимости, отзыв лицензии — см. EULA</td>
+    </tr>
+  </table>
+  <p>Мы <strong>не собираем</strong>: имена, адреса, платёжные данные на своей стороне (оплата и её реквизиты обрабатываются вне программы, напрямую в переписке/платёжном сервисе), содержимое ваших файлов, список установленных игр или историю браузера.</p>
+
+  <h2>2. Куда уходят данные</h2>
+  <p>Проверка лицензии происходит через облачный сервис хранения данных (Firebase/Firestore, Google) — туда передаётся только HWID-хэш и статус ключа, необходимые для валидации. Мы не передаём и не продаём данные каким-либо ещё третьим лицам в рекламных или маркетинговых целях.</p>
+
+  <h2>3. Хранение и срок</h2>
+  <p>Запись о ключе и привязанном к нему HWID хранится, пока лицензия активна. Локальный конфиг на вашем устройстве хранится, пока установлена программа, и удаляется вместе с ней (папка <code>%APPDATA%\Pulse\</code> при полном удалении программы не создаётся заново).</p>
+
+  <h2>4. Ваши права</h2>
+  <ul>
+    <li><strong>Отвязать HWID</strong> — например, при смене компьютера — по запросу в поддержку.</li>
+    <li><strong>Запросить удаление</strong> записи о вашем ключе и HWID из системы лицензирования после окончания использования программы.</li>
+    <li><strong>Узнать</strong>, какие данные привязаны к вашему ключу.</li>
+  </ul>
+  <p>Для любого из этих запросов напишите в Telegram (<a href="https://t.me/qu5aa" style="color:var(--accent)">@qu5aa</a>) или Discord (<code>qusa.z</code>), указав ключ активации — так мы сможем идентифицировать именно вашу лицензию.</p>
+
+  <h2>5. Дети</h2>
+  <p>Программа не предназначена для лиц младше 16 лет. Мы сознательно не собираем данные, позволяющие определить возраст пользователя.</p>
+
+  <h2>6. Изменения политики</h2>
+  <p>При существенных изменениях в том, что и как мы обрабатываем, дата в начале документа будет обновлена. Рекомендуем периодически проверять эту страницу.</p>
+
+  <h2>7. Контакты</h2>
+  <p class="contacts">По вопросам обработки данных: Telegram — <a href="https://t.me/qu5aa">@qu5aa</a>, Discord — <code>qusa.z</code>.</p>
+
+
+</body>
+</html>
