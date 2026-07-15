@@ -35,7 +35,7 @@
       "availability": "https://schema.org/InStock",
       "description": "Лицензионный ключ выдаётся вручную через Telegram"
     },
-    "softwareVersion": "1.2.4"
+    "softwareVersion": "1.2.6"
   }
   </script>
 
@@ -2296,7 +2296,7 @@
         </a>
         <a class="btn btn-ghost" href="#demo">Смотреть в действии</a>
       </div>
-      <div class="hero-note" id="heroNote">Версия 1.2.4 · Windows 10 / 11 · Платная лицензия · Ключ выдаётся вручную</div>
+      <div class="hero-note" id="heroNote">Версия 1.2.6 · Windows 10 / 11 · Платная лицензия · Ключ выдаётся вручную</div>
 
       <!-- Profile switcher — retints the whole page live -->
       <div class="profile-switch">
@@ -2879,7 +2879,7 @@
         <h2>Скачать Pulse</h2>
         <p>Повысьте стабильность фреймтайма и освободите оперативную память в один клик. Портативная сборка, готовая к запуску — активация по лицензионному ключу.</p>
         <div class="dl-buttons">
-          <a class="btn btn-primary" href="https://github.com/skywhyelo-lab/Plus/releases/download/Pulse/Pulse.exe" download="Pulse.exe">
+          <a class="btn btn-primary" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/Pulse.exe" download="Pulse.exe">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
               <polyline points="7 10 12 15 17 10"/>
@@ -3539,7 +3539,7 @@
     /* ---------- GITHUB RELEASE CHECKER (last update date for Pulse.exe) ---------- */
     async function checkPulseUpdates() {
       try {
-        const res = await fetch('https://api.github.com/repos/skywhyelo-lab/Plus/releases/tags/Pulse');
+        const res = await fetch('https://api.github.com/repos/skywhyelo-lab/Plus/releases/latest');
         if (!res.ok) return;
         const release = await res.json();
         const asset = release.assets && release.assets.find(a => a.name === 'Pulse.exe');
@@ -3550,10 +3550,12 @@
         const month = String(d.getMonth() + 1).padStart(2, '0');
         const year = d.getFullYear();
         const formatted = `${day}.${month}.${year}`;
+        const version = (release.tag_name || '').replace(/^v/i, '');
 
         const heroNote = document.getElementById('heroNote');
         if (heroNote) {
-          heroNote.innerHTML = `Версия 1.2.4 · Windows 10 / 11 · Платная лицензия · Обновлено <span style="color:var(--accent); font-weight:600;">${formatted}</span>`;
+          const versionText = version ? `Версия ${version} · ` : '';
+          heroNote.innerHTML = `${versionText}Windows 10 / 11 · Платная лицензия · Обновлено <span style="color:var(--accent); font-weight:600;">${formatted}</span>`;
         }
 
         const updatedRow = document.getElementById('lastUpdateRow');
