@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pulse — Настройка Windows для игр. Стабильный фреймтайм и низкий пинг</title>
   <meta name="description" content="Pulse — утилита для снижения задержек, очистки оперативной памяти и оптимизации Windows под игровые задачи. Точка восстановления перед изменениями, белый список процессов, открытый лог твиков. Лицензия по ключу.">
-  <link rel="canonical" href="https://pulse-utility.example/">
+  <link rel="canonical" href="https://pulsepc.vercel.app/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%233b82f6'/%3E%3Cpath d='M2 12h4l3-8 4 16 3-8h6' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pulse">
   <meta property="og:title" content="Pulse — стабильный фреймтайм и прирост FPS в Windows">
   <meta property="og:description" content="Утилита для снижения задержек, очистки ОЗУ и твика Windows под игры. Активация по ключу, выдаётся вручную через Telegram/Discord.">
-  <meta property="og:image" content="https://pulse-utility.example/og-image.png">
+  <meta property="og:image" content="https://pulsepc.vercel.app/og-image.png">
   <meta property="og:locale" content="ru_RU">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Pulse — стабильный фреймтайм и прирост FPS в Windows">
   <meta name="twitter:description" content="Утилита для снижения задержек, очистки ОЗУ и твика Windows под игры. Активация по ключу.">
-  <meta name="twitter:image" content="https://pulse-utility.example/og-image.png">
+  <meta name="twitter:image" content="https://pulsepc.vercel.app/og-image.png">
 
   <script type="application/ld+json">
   {
@@ -2910,6 +2910,7 @@
             <li><span class="lbl">Инсталлятор</span><span class="val">Не требуется (Portable)</span></li>
             <li><span class="lbl">Лицензия</span><span class="val">Платная, по ключу</span></li>
             <li><span class="lbl">Активация</span><span class="val">Telegram / Discord</span></li>
+            <li id="lastUpdateRow" style="display:none;"><span class="lbl">Обновлено</span><span class="val" id="specsUpdated">—</span></li>
           </ul>
         </div>
         <div class="hash-info">
@@ -3535,6 +3536,49 @@
         setTimeout(runStep, 400);
       });
     }
+
+    /* ---------- GITHUB RELEASE CHECKER (last update date for Pulse.exe) ---------- */
+    async function checkPulseUpdates() {
+      try {
+        const res = await fetch('https://api.github.com/repos/skywhyelo-lab/Plus/releases/tags/Pulse');
+        if (!res.ok) return;
+        const release = await res.json();
+        const asset = release.assets && release.assets.find(a => a.name === 'Pulse.exe');
+        if (!asset || !asset.updated_at) return;
+
+        const d = new Date(asset.updated_at);
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        const formatted = `${day}.${month}.${year}`;
+
+        const heroNote = document.getElementById('heroNote');
+        if (heroNote) {
+          heroNote.innerHTML = `Версия 1.2.4 · Windows 10 / 11 · Платная лицензия · Обновлено <span style="color:var(--accent); font-weight:600;">${formatted}</span>`;
+        }
+
+        const updatedRow = document.getElementById('lastUpdateRow');
+        const specsUpdated = document.getElementById('specsUpdated');
+        if (updatedRow && specsUpdated) {
+          specsUpdated.textContent = formatted;
+          updatedRow.style.display = '';
+        }
+
+        if (asset.size) {
+          const sizeMB = (asset.size / (1024 * 1024)).toFixed(1);
+          const specsSize = document.getElementById('specsSize');
+          if (specsSize) specsSize.textContent = `${sizeMB} МБ`;
+          const bandCountFile = document.querySelector('.band-card .count[data-target="99.3"]');
+          if (bandCountFile) {
+            bandCountFile.dataset.target = sizeMB;
+            if (bandCountFile.textContent !== '0') bandCountFile.textContent = sizeMB;
+          }
+        }
+      } catch (e) {
+        console.error('Ошибка при получении обновлений с GitHub:', e);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', checkPulseUpdates);
 
     /* ---------- SPOTLIGHT HOVER EFFECT ---------- */
     if (!isMobileDevice) {

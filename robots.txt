@@ -3,4 +3,4 @@ Allow: /
 Disallow: /privacy.html
 Disallow: /eula.html
 
-Sitemap: https://pulse-utility.example/sitemap.xml
+Sitemap: https://pulsepc.vercel.app/sitemap.xml
