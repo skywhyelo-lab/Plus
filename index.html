@@ -2890,11 +2890,11 @@
         </div>
 
         <div class="key-contact">
-          <div class="key-contact-lbl">Лицензия — 200₴ (≈5$), ключ выдаётся автоматически сразу после оплаты:</div>
+          <div class="key-contact-lbl">Лицензия — 5€ (≈200₴), ключ выдаётся автоматически сразу после оплаты:</div>
           <div class="key-contact-buttons">
-            <button class="btn btn-primary btn-sm" id="buyBtn" type="button">
+            <button class="btn btn-primary btn-sm" id="buyCryptoBtn" type="button">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3Z"/><path d="M2 10h20"/></svg>
-              Купить — 200₴
+              Купить криптой
             </button>
             <a class="btn btn-ghost btn-sm" href="https://t.me/Pulse_buy" target="_blank" rel="noopener">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
@@ -3647,32 +3647,72 @@
       countersObserver.observe(counter);
     });
 
-    /* ---------- BUY BUTTON (CryptoCloud checkout) ---------- */
+    /* ---------- BUY BUTTONS (Paddle card checkout + CryptoCloud/Trybit) ---------- */
     (function() {
-      const buyBtn = document.getElementById('buyBtn');
+      const buyCardBtn = document.getElementById('buyCardBtn');
+      const buyCryptoBtn = document.getElementById('buyCryptoBtn');
       const buyError = document.getElementById('buyError');
-      if (!buyBtn) return;
+      if (!buyCardBtn && !buyCryptoBtn) return;
 
-      buyBtn.addEventListener('click', async () => {
-        buyBtn.disabled = true;
-        const originalHtml = buyBtn.innerHTML;
-        buyBtn.textContent = 'Создаём счёт…';
-        buyError.style.display = 'none';
+      const PADDLE_CLIENT_TOKEN = 'live_aec6742e15aae2bef4c8e482107';
+      const PADDLE_PRICE_ID = 'pri_01kxswmzkn326by5m08x7dxayk';
+      if (window.Paddle) {
+        window.Paddle.Setup({ token: PADDLE_CLIENT_TOKEN });
+      }
 
-        try {
-          const res = await fetch('/api/create-invoice', { method: 'POST' });
-          const data = await res.json();
-          if (!res.ok || !data.pay_url) throw new Error(data.error || 'unknown error');
+      function showError(msg) {
+        buyError.textContent = msg;
+        buyError.style.display = 'block';
+      }
 
-          localStorage.setItem('pulse_order_id', data.order_id);
-          window.location.href = data.pay_url;
-        } catch (err) {
-          buyBtn.disabled = false;
-          buyBtn.innerHTML = originalHtml;
-          buyError.textContent = 'Не удалось начать оплату. Попробуйте ещё раз или напишите в Telegram.';
-          buyError.style.display = 'block';
-        }
-      });
+      if (buyCardBtn) {
+        buyCardBtn.addEventListener('click', async () => {
+          buyCardBtn.disabled = true;
+          const originalHtml = buyCardBtn.innerHTML;
+          buyCardBtn.textContent = 'Открываем оплату…';
+          buyError.style.display = 'none';
+
+          try {
+            const res = await fetch('/api/create-order', { method: 'POST' });
+            const data = await res.json();
+            if (!res.ok || !data.order_id) throw new Error(data.error || 'unknown error');
+
+            localStorage.setItem('pulse_order_id', data.order_id);
+            window.Paddle.Checkout.open({
+              items: [{ priceId: PADDLE_PRICE_ID, quantity: 1 }],
+              customData: { order_id: data.order_id },
+              settings: { successUrl: `${location.origin}/success.html?order_id=${data.order_id}` },
+            });
+          } catch (err) {
+            showError('Не удалось начать оплату картой. Попробуйте ещё раз или напишите в Telegram.');
+          } finally {
+            buyCardBtn.disabled = false;
+            buyCardBtn.innerHTML = originalHtml;
+          }
+        });
+      }
+
+      if (buyCryptoBtn) {
+        buyCryptoBtn.addEventListener('click', async () => {
+          buyCryptoBtn.disabled = true;
+          const originalHtml = buyCryptoBtn.innerHTML;
+          buyCryptoBtn.textContent = 'Создаём счёт…';
+          buyError.style.display = 'none';
+
+          try {
+            const res = await fetch('/api/create-invoice', { method: 'POST' });
+            const data = await res.json();
+            if (!res.ok || !data.pay_url) throw new Error(data.error || 'unknown error');
+
+            localStorage.setItem('pulse_order_id', data.order_id);
+            window.location.href = data.pay_url;
+          } catch (err) {
+            buyCryptoBtn.disabled = false;
+            buyCryptoBtn.innerHTML = originalHtml;
+            showError('Не удалось начать оплату криптой. Попробуйте ещё раз или напишите в Telegram.');
+          }
+        });
+      }
     })();
 
   </script>
