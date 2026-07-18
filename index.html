@@ -2590,7 +2590,7 @@
   <div class="band">
     <div class="wrap band-grid">
       <div class="band-card">
-        <div class="num"><span class="count" data-target="200+">0</span></div>
+        <div class="num"><span class="count" data-target="191">0</span></div>
         <div class="lbl">Твик операционной системы</div>
       </div>
       <div class="band-card">
@@ -2890,13 +2890,18 @@
         </div>
 
         <div class="key-contact">
-          <div class="key-contact-lbl">Ключ активации выдаётся вручную — напишите нам:</div>
+          <div class="key-contact-lbl">Лицензия — 200₴ (≈5$), ключ выдаётся автоматически сразу после оплаты:</div>
           <div class="key-contact-buttons">
+            <button class="btn btn-primary btn-sm" id="buyBtn" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3Z"/><path d="M2 10h20"/></svg>
+              Купить — 200₴
+            </button>
             <a class="btn btn-ghost btn-sm" href="https://t.me/Pulse_buy" target="_blank" rel="noopener">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
               Telegram · Pulse
             </a>
           </div>
+          <div class="key-contact-note" id="buyError" style="display:none; color:#ef4444; font-size:12.5px; margin-top:8px;"></div>
         </div>
       </div>
 
@@ -3641,6 +3646,34 @@
     document.querySelectorAll('.band-card .count').forEach(counter => {
       countersObserver.observe(counter);
     });
+
+    /* ---------- BUY BUTTON (CryptoCloud checkout) ---------- */
+    (function() {
+      const buyBtn = document.getElementById('buyBtn');
+      const buyError = document.getElementById('buyError');
+      if (!buyBtn) return;
+
+      buyBtn.addEventListener('click', async () => {
+        buyBtn.disabled = true;
+        const originalHtml = buyBtn.innerHTML;
+        buyBtn.textContent = 'Создаём счёт…';
+        buyError.style.display = 'none';
+
+        try {
+          const res = await fetch('/api/create-invoice', { method: 'POST' });
+          const data = await res.json();
+          if (!res.ok || !data.pay_url) throw new Error(data.error || 'unknown error');
+
+          localStorage.setItem('pulse_order_id', data.order_id);
+          window.location.href = data.pay_url;
+        } catch (err) {
+          buyBtn.disabled = false;
+          buyBtn.innerHTML = originalHtml;
+          buyError.textContent = 'Не удалось начать оплату. Попробуйте ещё раз или напишите в Telegram.';
+          buyError.style.display = 'block';
+        }
+      });
+    })();
 
   </script>
 </body>
