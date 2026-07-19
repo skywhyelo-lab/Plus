@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" data-profile="gaming">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +35,7 @@
       "availability": "https://schema.org/InStock",
       "description": "Лицензионный ключ, оплата автоматически на сайте или через Telegram"
     },
-    "softwareVersion": "1.2.9"
+    "softwareVersion": "1.2.6"
   }
   </script>
 
@@ -2577,402 +2577,6 @@
       .co-stage.co-static{ position:relative; height:auto; min-height:100svh; padding:10vh 0; }
       .co-stage.co-static .co-frag{ transform:none; opacity:1; }
     }
-
-    /* ============ v1.2.9 interactive app mockup ============ */
-    .dm-section{padding:clamp(3rem,8vw,7rem) clamp(1rem,4vw,3rem);max-width:1400px;margin:0 auto}
-    .dm-grid{display:grid;grid-template-columns:320px 1fr;gap:clamp(1.5rem,3vw,3rem);align-items:start}
-    .dm-eyebrow{font:600 12px/1 var(--font-mono);letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin:0 0 1rem}
-    .dm-h2{font:600 clamp(1.6rem,3vw,2.2rem)/1.1 var(--font-display);color:var(--text);margin:0 0 1rem;letter-spacing:-.02em}
-    .dm-lead{font:400 14px/1.6 var(--font-sans);color:var(--text-muted);margin:0 0 1.75rem}
-    .dm-tele{display:flex;flex-direction:column;gap:.75rem}
-    .dm-telecard{position:relative;border:1px solid var(--border);border-radius:12px;padding:14px 16px;background:linear-gradient(180deg,rgba(255,255,255,.03),transparent 60%),var(--bg-panel);overflow:hidden}
-    .dm-telecard::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--border-hover),transparent)}
-    .dm-tele-lbl{font:500 11px/1 var(--font-sans);color:var(--text-dark);text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
-    .dm-tele-val{font:600 22px/1 var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums}
-    .dm-tele-val span{font-size:12px;color:var(--text-muted);margin-left:4px}
-    .dm-tele-good{color:var(--green)}
-    .dm-win{border:1px solid var(--border-hover);border-radius:16px;background:var(--bg-panel);box-shadow:0 40px 90px -30px rgba(0,0,0,.85);overflow:hidden;display:flex;flex-direction:column;min-height:500px}
-    .dm-titlebar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--bg-2)}
-    .dm-brand{display:flex;align-items:center;gap:9px;min-width:0}
-    .dm-logo{width:26px;height:26px;border-radius:8px;background:var(--grad-brand);display:grid;place-items:center;flex:none;box-shadow:0 4px 14px -4px rgb(var(--accent-rgb))}
-    .dm-logo svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .dm-brand b{font:600 14px var(--font-display);color:var(--text)}
-    .dm-ver{font:500 10px var(--font-mono);color:var(--text-dark)}
-    .dm-profiles{display:flex;gap:8px;justify-self:center}
-    .dm-prof{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--bg-panel);display:grid;place-items:center;cursor:pointer;color:var(--text-dark);transition:.18s}
-    .dm-prof svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .dm-prof:hover{border-color:var(--border-hover);color:var(--text-muted)}
-    .dm-prof.dm-on{border-color:transparent;background:var(--grad-brand);color:#fff;box-shadow:0 4px 14px -4px rgb(var(--accent-rgb))}
-    .dm-dots{display:flex;gap:7px;justify-self:end}
-    .dm-dot{width:11px;height:11px;border-radius:50%;background:var(--border-hover)}
-    .dm-dot.dm-close{background:var(--red)}
-    .dm-body{display:grid;grid-template-columns:200px 1fr;flex:1;min-height:0}
-    .dm-side{border-right:1px solid var(--border);padding:10px;display:flex;flex-direction:column;gap:2px;background:var(--bg-2)}
-    .dm-navi{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;border:0;background:transparent;color:var(--text-muted);font:500 13px var(--font-sans);cursor:pointer;text-align:left;width:100%;transition:.15s}
-    .dm-navi svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
-    .dm-navi:hover{background:rgba(150,170,255,.05);color:var(--text)}
-    .dm-navi.dm-on{background:var(--grad-brand);color:#fff;box-shadow:0 6px 18px -8px rgb(var(--accent-rgb))}
-    .dm-main{padding:16px;overflow:auto;min-height:0}
-    .dm-panel{display:none;animation:dm-fade .25s ease}
-    .dm-panel.dm-on{display:block}
-    @keyframes dm-fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-    .dm-card{position:relative;border:1px solid var(--border);border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 55%),var(--bg-panel);padding:14px}
-    .dm-card::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--border-hover),transparent);opacity:.6}
-    .dm-ctitle{font:600 12px var(--font-sans);color:var(--text);margin:0 0 12px;display:flex;align-items:center;justify-content:space-between;letter-spacing:.01em}
-    .dm-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .dm-row2{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
-    .dm-btn{font:600 12px var(--font-sans);border-radius:8px;padding:8px 14px;border:1px solid var(--border-hover);background:var(--bg-2);color:var(--text);cursor:pointer;transition:.15s}
-    .dm-btn:hover{border-color:var(--accent);color:#fff}
-    .dm-btn-p{background:var(--grad-brand);border-color:transparent;box-shadow:0 6px 18px -8px rgb(var(--accent-rgb))}
-    .dm-btn-xs{font-size:11px;padding:5px 10px;border-radius:7px}
-    .dm-btn-g{color:var(--text-muted);border-color:var(--border)}
-    .dm-gauge{display:flex;flex-direction:column;align-items:center;gap:12px}
-    .dm-gwrap{position:relative;width:120px;height:120px}
-    #dm-garc{transition:stroke-dashoffset 1s cubic-bezier(.16,1,.3,1),stroke .6s ease}
-    .dm-glbl.dm-good{color:var(--green)}
-    .dm-gval{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
-    .dm-gnum{font:600 30px var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums;line-height:1}
-    .dm-glbl{font:600 11px var(--font-sans);color:var(--red);margin-top:2px}
-    .dm-plist{display:flex;flex-direction:column;gap:8px}
-    .dm-pitem{display:flex;align-items:center;gap:10px;font:500 12px var(--font-sans);color:var(--text-muted)}
-    .dm-pdot{width:8px;height:8px;border-radius:50%;flex:none}
-    .dm-pname{color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .dm-pmem{font:500 12px var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums}
-    .dm-tag{font:600 9px var(--font-mono);color:var(--accent);border:1px solid var(--border-hover);border-radius:5px;padding:2px 5px;text-transform:uppercase;letter-spacing:.05em}
-    .dm-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
-    .dm-tile{border:1px solid var(--border);border-radius:10px;padding:10px;background:var(--bg-2)}
-    .dm-tlbl{font:500 10px var(--font-sans);color:var(--text-dark);text-transform:uppercase;letter-spacing:.06em;margin:0 0 5px}
-    .dm-tval{font:600 18px var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums;line-height:1}
-    .dm-tsub{font:500 10px var(--font-mono);color:var(--text-muted);margin-top:3px}
-    .dm-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px}
-    .dm-leg{display:flex;align-items:center;gap:6px;font:500 11px var(--font-sans);color:var(--text-muted)}
-    .dm-leg i{width:9px;height:9px;border-radius:2px;display:block}
-    .dm-chart{width:100%;height:auto;display:block}
-    .dm-qa{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--border);border-radius:9px;background:var(--bg-2);font:500 12px var(--font-sans);color:var(--text);margin-bottom:8px}
-    .dm-qa:last-child{margin:0}
-    .dm-toolbar{display:flex;gap:8px;margin-bottom:12px}
-    .dm-input{flex:1;font:500 12px var(--font-sans);background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);outline:none;min-width:0}
-    .dm-input:focus{border-color:var(--accent)}
-    .dm-input::placeholder{color:var(--text-dark)}
-    .dm-tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px}
-    .dm-table{width:100%;border-collapse:collapse;font:500 12px var(--font-sans);min-width:520px}
-    .dm-table th{text-align:left;font:600 10px var(--font-mono);color:var(--text-dark);text-transform:uppercase;letter-spacing:.06em;padding:9px 12px;border-bottom:1px solid var(--border);background:var(--bg-2)}
-    .dm-table td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text-muted)}
-    .dm-table tr:last-child td{border-bottom:0}
-    .dm-table td.dm-mono{font-family:var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums}
-    .dm-tacts{display:flex;gap:6px}
-    .dm-exlist{display:flex;flex-direction:column;gap:6px;max-height:230px;overflow:auto}
-    .dm-exitem{display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg-2);font:500 12px var(--font-mono);color:var(--text)}
-    .dm-exitem svg{width:13px;height:13px;stroke:var(--text-dark);fill:none;stroke-width:1.8;flex:none}
-    .dm-exitem .dm-star{stroke:var(--amber)}
-    .dm-exitem b{flex:1;font-weight:500}
-    .dm-count{font:600 10px var(--font-mono);color:var(--text-muted)}
-    .dm-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:32px;text-align:center;color:var(--text-dark)}
-    .dm-empty svg{width:34px;height:34px;stroke:var(--text-dark);fill:none;stroke-width:1.5}
-    .dm-empty b{font:600 13px var(--font-sans);color:var(--text-muted)}
-    .dm-empty span{font:400 12px var(--font-sans)}
-    .dm-togrow{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:var(--bg-2);margin-bottom:10px}
-    .dm-togrow b{font:600 12px var(--font-sans);color:var(--text);display:block}
-    .dm-togrow span{font:400 11px var(--font-sans);color:var(--text-dark)}
-    .dm-tog{width:38px;height:22px;border-radius:11px;background:var(--border-hover);position:relative;cursor:pointer;border:0;flex:none;transition:.2s}
-    .dm-tog::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s}
-    .dm-tog.dm-on{background:var(--grad-brand)}
-    .dm-tog.dm-on::after{left:18px}
-    .dm-chips{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}
-    .dm-chip{font:600 11px var(--font-sans);padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg-2);color:var(--text-muted);cursor:pointer;transition:.15s}
-    .dm-chip.dm-on{background:rgba(var(--accent-rgb),.15);border-color:var(--accent);color:var(--accent)}
-    .dm-startitem{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg-2);margin-bottom:8px}
-    .dm-startitem b{font:600 12px var(--font-sans);color:var(--text);display:block}
-    .dm-startitem span{font:400 10px var(--font-mono);color:var(--text-dark);word-break:break-all}
-    .dm-toolgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .dm-tool{display:flex;gap:12px;padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--bg-2);cursor:pointer;transition:.18s}
-    .dm-tool:hover{border-color:var(--border-hover);transform:translateY(-2px)}
-    .dm-tico{width:38px;height:38px;border-radius:10px;background:rgba(var(--accent-rgb),.12);display:grid;place-items:center;flex:none;color:var(--accent)}
-    .dm-tico svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .dm-tool b{font:600 13px var(--font-sans);color:var(--text);display:block;margin-bottom:3px}
-    .dm-tool span{font:400 11px var(--font-sans);color:var(--text-muted);line-height:1.4}
-    .dm-opt{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:10px 0}
-    .dm-pulsebtn{width:110px;height:110px;border-radius:50%;border:1px solid var(--accent);background:radial-gradient(circle at 50% 40%,rgba(var(--accent-rgb),.35),rgba(var(--accent-2-rgb),.12));display:grid;place-items:center;cursor:pointer;position:relative;color:#fff;transition:.2s}
-    .dm-pulsebtn svg{width:38px;height:38px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-    .dm-pulsebtn::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(var(--accent-rgb),.4);animation:dm-ring 2.4s ease-out infinite}
-    @keyframes dm-ring{0%{transform:scale(.9);opacity:.7}100%{transform:scale(1.25);opacity:0}}
-    .dm-opt h4{font:600 16px var(--font-display);color:var(--text);margin:0}
-    .dm-opt p{font:400 12px var(--font-sans);color:var(--text-muted);margin:0;max-width:280px}
-    .dm-progwrap{width:100%;max-width:340px;height:6px;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);overflow:hidden;margin-top:4px}
-    .dm-prog{height:100%;width:0;background:var(--grad-brand);transition:width .3s ease}
-    .dm-term{width:100%;max-width:380px;min-height:96px;text-align:left;background:#03050b;border:1px solid var(--border);border-radius:10px;padding:11px 13px;font:500 11px/1.7 var(--font-mono);color:var(--green);white-space:pre-wrap;display:none}
-    .dm-term.dm-show{display:block}
-    @media(max-width:1024px){.dm-grid{grid-template-columns:1fr}}
-    @media(max-width:640px){
-     .dm-body{grid-template-columns:52px 1fr}
-     .dm-navi span{display:none}
-     .dm-navi{justify-content:center;padding:10px}
-     .dm-side{padding:8px 6px}
-     .dm-cols,.dm-toolgrid{grid-template-columns:1fr}
-     .dm-tiles{grid-template-columns:1fr 1fr}
-     .dm-main{padding:12px}
-     .dm-profiles{gap:5px}
-    }
-    @media(prefers-reduced-motion:reduce){.dm-pulsebtn::before{animation:none}.dm-panel{animation:none}}
-
-    /* ===== #demo window fixes (scoped) ===== */
-    .dm-section .dm-win{
-      --accent-rgb:139,92,246;
-      --accent-2-rgb:99,102,241;
-      --profile-rgb:139,92,246;
-      --grad-brand:linear-gradient(120deg,rgb(139,92,246),rgb(99,102,241));
-    }
-    .dm-section .dm-win{ height:548px; min-height:548px; max-height:548px; }
-    .dm-section .dm-card{ padding:12px; }
-    .dm-section .dm-cols{ gap:10px; }
-    .dm-section .dm-row2{ margin-top:10px; }
-    .dm-section .dm-ctitle{ margin-bottom:10px; }
-    .dm-section .dm-tiles{ margin-top:10px; gap:8px; }
-    .dm-section .dm-tile{ padding:8px 10px; }
-    .dm-section .dm-legend{ margin-bottom:6px; }
-    .dm-section .dm-card-mon .dm-chart{ height:56px; }
-    /* Overview must never scroll — content is trimmed to fit the fixed window */
-    .dm-section .dm-panel:first-child{ overflow:hidden; }
-    .dm-section .dm-gauge{ gap:10px; }
-    .dm-section .dm-plist{ gap:7px; }
-    .dm-section .dm-titlebar{ flex:0 0 auto; }
-    .dm-section .dm-body{ flex:1 1 auto; min-height:0; }
-    .dm-section .dm-main{
-      min-height:0;
-      overflow-y:auto; overflow-x:hidden;
-      padding:12px 14px;
-      scrollbar-width:thin;
-      scrollbar-color:rgba(255,255,255,.14) transparent;
-    }
-    .dm-section .dm-main::-webkit-scrollbar{ width:6px; }
-    .dm-section .dm-main::-webkit-scrollbar-track{ background:transparent; }
-    .dm-section .dm-main::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.14); border-radius:999px; }
-    .dm-section .dm-main::-webkit-scrollbar-thumb:hover{ background:rgba(255,255,255,.24); }
-    .dm-section .dm-side{ min-height:0; }
-    .dm-section .dm-gval{
-      position:absolute; inset:0;
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      text-align:center; line-height:1;
-    }
-    .dm-section .dm-gnum{ font:600 30px var(--font-mono); line-height:1; }
-    .dm-section .dm-glbl{
-      font:600 11px var(--font-sans); color:var(--red);
-      position:absolute; top:calc(50% + 18px); left:0; right:0; margin:0;
-    }
-    .dm-section .dm-win .dm-prof,
-    .dm-section .dm-win .dm-navi,
-    .dm-section .dm-win .dm-gnum{
-      transition:color .35s ease, background .35s ease, border-color .35s ease, box-shadow .35s ease;
-    }
-
-    /* ═══════════════════════════════════════════════════════════════════
-       SIGNATURE PASS — additive, cascades last so it overrides predictably.
-       Direction: refined dark-gaming / neon-glow. Goals: one spacing rhythm,
-       tighter type hierarchy, a consistent hover "signature" on every surface,
-       and accessible focus. No structure/content/logic touched.
-       ═══════════════════════════════════════════════════════════════════ */
-    :root {
-      /* Strict spacing scale (perfect-fourth-ish, px) — used for section rhythm */
-      --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
-      --space-5: 24px;  --space-6: 32px;  --space-7: 48px;  --space-8: 64px;
-      --space-9: 96px;  --space-10: 128px;
-      /* Fluid section padding locked to the scale — replaces the flat 90px */
-      --section-y: clamp(var(--space-8), 9vw, var(--space-10));
-      /* Signature easing — one spring for every lift/settle on the page */
-      --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
-      --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px rgb(var(--accent-rgb)), 0 0 18px 2px rgba(var(--accent-rgb), 0.45);
-    }
-
-    /* ---- Rhythm: one vertical cadence for the whole page ---- */
-    section { padding: var(--section-y) 0; }
-    .sec-head { margin-bottom: clamp(var(--space-6), 5vw, var(--space-8)); }
-
-    /* ---- Typography: sharpen the hierarchy contrast ---- */
-    h1 { line-height: 1.02; letter-spacing: -0.035em; }
-    h2 { letter-spacing: -0.03em; line-height: 1.12; }
-    .eyebrow { letter-spacing: 2px; opacity: 0.92; }
-    .eyebrow::before { width: 22px; box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.6); }
-    .hero p.sub { line-height: 1.6; letter-spacing: 0.005em; }
-
-    /* ---- Signature #1: animated neon underline on nav links ---- */
-    .nav-links a { position: relative; }
-    .nav-links a::after {
-      content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px;
-      background: var(--grad-brand); border-radius: 2px;
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.4s var(--ease-signature);
-      box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.6);
-    }
-    .nav-links a:hover::after { transform: scaleX(1); }
-
-    /* ---- Signature #2: accessible focus ring, one look everywhere ---- */
-    a:focus-visible, button:focus-visible, .btn:focus-visible,
-    .profile-pill:focus-visible, [role="tab"]:focus-visible {
-      outline: none; box-shadow: var(--focus-ring); border-radius: 8px;
-    }
-
-    /* ---- Signature #3: card hover — lift + top accent hairline that ignites ---- */
-    .feat-card, .safe-card, .rev-card {
-      position: relative; overflow: hidden;
-      transition: transform 0.4s var(--ease-signature),
-                  border-color 0.35s ease, box-shadow 0.4s var(--ease-signature);
-    }
-    .feat-card::after, .safe-card::after, .rev-card::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgb(var(--accent-rgb)), rgb(var(--accent-2-rgb)), transparent);
-      opacity: 0; transition: opacity 0.4s ease;
-    }
-    .feat-card:hover, .safe-card:hover, .rev-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-card), 0 0 0 1px var(--border-hover), 0 24px 60px -30px rgba(var(--accent-rgb), 0.55);
-    }
-    .feat-card:hover::after, .safe-card:hover::after, .rev-card:hover::after { opacity: 1; }
-
-    /* ---- Signature #4: feature icon reacts to its card ---- */
-    .feat-icon { transition: transform 0.45s var(--ease-signature), box-shadow 0.4s ease; }
-    .feat-card:hover .feat-icon {
-      transform: translateY(-2px) scale(1.06) rotate(-3deg);
-      box-shadow: 0 10px 30px -8px rgba(var(--accent-rgb), 0.5);
-    }
-    .feat-card:hover .feat-icon svg { filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.7)); }
-
-    /* ---- Signature #5: primary button gets a soft aura on hover ---- */
-    .btn-primary::before {
-      content: ''; position: absolute; inset: -1px; border-radius: inherit;
-      background: radial-gradient(120% 140% at 50% 0%, rgba(var(--accent-rgb), 0.5), transparent 70%);
-      opacity: 0; transition: opacity 0.4s ease; z-index: -1; filter: blur(10px);
-    }
-    .btn-primary:hover::before { opacity: 1; }
-
-    /* ---- Hero metrics: make the numbers the loudest thing in the block ---- */
-    .hm-v { letter-spacing: -0.04em; }
-    .hm-k { letter-spacing: 0.03em; text-transform: uppercase; font-size: 10.5px; }
-
-    /* Respect reduced-motion for every signature effect above */
-    @media (prefers-reduced-motion: reduce) {
-      .nav-links a::after { transition: none; }
-      .feat-card, .safe-card, .rev-card, .feat-icon { transition: none; }
-      .feat-card:hover, .safe-card:hover, .rev-card:hover { transform: none; }
-      .feat-card:hover .feat-icon { transform: none; }
-    }
-
-    /* ═══════════════════════════════════════════════════════════════════
-       HERO POWER PASS — make the first screen hit harder. Additive; tilt
-       drives .hero-stage (not .app-window), so the window gets its own
-       levitation + aurora frame without fighting the tilt transform.
-       ═══════════════════════════════════════════════════════════════════ */
-
-    /* Bigger, more confident headline on wide screens */
-    @media (min-width: 900px) {
-      .hero { padding-top: 168px; }
-      h1 { font-size: clamp(44px, 5.6vw, 74px); }
-      .hero p.sub { font-size: 19px; max-width: 540px; }
-    }
-
-    /* Depth: a faint perspective grid + a top vignette behind everything */
-    .hero::before {
-      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(150,170,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(150,170,255,0.04) 1px, transparent 1px);
-      background-size: 46px 46px;
-      mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 72%);
-      -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 72%);
-    }
-
-    /* Levitation uses the `translate` longhand, NOT `transform` — so it composes
-       with the JS tilt (which sets transform: rotateY/rotateX on this element)
-       instead of overriding it. */
-    .app-window { animation: aw-float 7s ease-in-out infinite; }
-    @keyframes aw-float {
-      0%, 100% { translate: 0 0; }
-      50%      { translate: 0 -8px; }
-    }
-    /* Static multicolor aurora edge — no rotation (rotation + preserve-3d escaped
-       the clip and drew flying diagonals); it breathes via opacity instead. */
-    .app-window::after {
-      content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: 2;
-      padding: 1.5px; pointer-events: none;
-      background: linear-gradient(135deg,
-        rgba(var(--accent-rgb), 0.85), rgba(var(--accent-2-rgb), 0.7) 45%,
-        rgba(var(--accent-cyan-rgb), 0.5) 75%, transparent);
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-      opacity: 0.5;
-      animation: aw-frame 6s ease-in-out infinite;
-    }
-    @keyframes aw-frame { 0%, 100% { opacity: 0.32; } 50% { opacity: 0.6; } }
-
-    /* Reflection pooling under the floating window */
-    .hero-stage::after {
-      content: ''; position: absolute; left: 8%; right: 8%; bottom: -6%; height: 60px; z-index: 0;
-      background: radial-gradient(60% 100% at 50% 0%, rgba(var(--accent-rgb), 0.35), transparent 70%);
-      filter: blur(26px); opacity: 0.6;
-    }
-
-    /* The monitoring chart reads as LIVE — the accent trace flows left→right */
-    .aw-spark polyline:last-of-type {
-      stroke-dasharray: 8 6;
-      animation: aw-signal 2.4s linear infinite;
-      filter: drop-shadow(0 0 4px rgba(var(--accent-rgb), 0.8));
-    }
-    @keyframes aw-signal { to { stroke-dashoffset: -28; } }
-
-    /* Gauge ring breathes with the same tempo as the glow */
-    .aw-gauge svg { filter: drop-shadow(0 0 5px rgba(var(--accent-rgb), 0.45)); }
-
-    /* Titlebar sheen — a slow highlight sweeping the top edge */
-    .aw-titlebar { position: relative; overflow: hidden; }
-    .aw-titlebar::after {
-      content: ''; position: absolute; top: 0; left: -60%; width: 60%; height: 100%;
-      background: linear-gradient(100deg, transparent, rgba(255,255,255,0.06), transparent);
-      animation: aw-sheen 6s ease-in-out infinite; animation-delay: 1.5s;
-    }
-    @keyframes aw-sheen { 0% { left: -60%; } 45%, 100% { left: 130%; } }
-
-    @media (prefers-reduced-motion: reduce) {
-      .app-window { animation: none; }
-      .app-window::after, .aw-spark polyline:last-of-type,
-      .aw-titlebar::after { animation: none; }
-    }
-
-    /* ═══ POLISH PASS — count-up, gauge fill, cursor glow, download weight ═══ */
-
-    /* Gauge ring draws itself once the hero mounts (CSS overrides the inline
-       stroke-dashoffset; 207 = empty, 72 = 65% filled). */
-    .aw-gauge-fill { stroke-dashoffset: 207; transition: stroke-dashoffset 1.5s var(--ease-signature) 0.55s; }
-    .hero-loaded .aw-gauge-fill { stroke-dashoffset: 72; }
-
-    /* Soft cursor spotlight over the hero background (behind copy + window).
-       Position fed by JS; opacity toggled only when the pointer is inside. */
-    .hero-cursor-glow {
-      position: absolute; top: 0; left: 0; width: 460px; height: 460px; z-index: 1;
-      margin: -230px 0 0 -230px; border-radius: 50%; pointer-events: none;
-      background: radial-gradient(circle, rgba(var(--accent-rgb), 0.14), transparent 62%);
-      opacity: 0; transition: opacity 0.5s ease;
-      transform: translate(var(--gx, 50%), var(--gy, 50%));
-      will-change: transform, opacity;
-    }
-    .hero:hover .hero-cursor-glow { opacity: 1; }
-
-    /* Download: make the final CTA read as the heaviest surface on the page */
-    .download { position: relative; }
-    .download::before {
-      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background: radial-gradient(680px 340px at 22% 0%, rgba(var(--accent-rgb), 0.10), transparent 64%);
-    }
-    .download .wrap { position: relative; z-index: 1; }
-    .dl-main h2 { letter-spacing: -0.03em; }
-    .dl-buttons .btn-primary { box-shadow: 0 10px 34px -8px rgba(var(--accent-rgb), 0.55); }
-    .hash-info { transition: border-color 0.3s ease, background 0.3s ease; }
-    .hash-info:hover { border-color: var(--border-hover); }
-    .req-list li { transition: color 0.25s ease; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .aw-gauge-fill { transition: none; }
-      .hero-cursor-glow { display: none; }
-    }
   </style>
 </head>
 <body>
@@ -3002,7 +2606,6 @@
   <!-- ============ HERO SECTION ============ -->
   <header class="hero" id="top">
     <canvas id="heroCanvas"></canvas>
-    <div class="hero-cursor-glow" aria-hidden="true"></div>
     <div class="wrap hero-in">
 
       <!-- LEFT: the thesis -->
@@ -3025,18 +2628,18 @@
         <div class="profile-switch" data-hero="6" role="tablist" aria-label="Профиль оптимизации">
           <span class="ps-label">Профиль</span>
           <div class="profile-pills">
-            <button class="profile-pill" data-profile="standard" role="tab"><span class="pp-dot"></span>Стандарт</button>
-            <button class="profile-pill active" data-profile="gaming" role="tab" aria-selected="true"><span class="pp-dot"></span>Игровой</button>
+            <button class="profile-pill active" data-profile="standard" role="tab" aria-selected="true"><span class="pp-dot"></span>Стандарт</button>
+            <button class="profile-pill" data-profile="gaming" role="tab"><span class="pp-dot"></span>Игровой</button>
             <button class="profile-pill" data-profile="maximum" role="tab"><span class="pp-dot"></span>Максимум</button>
           </div>
         </div>
 
         <div class="hero-metrics" data-hero="6">
-          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="70" data-prefix="−">−70</span><span>%</span></div><div class="hm-k">DPC latency</div></div>
+          <div class="hm"><div class="hm-v">−70<span>%</span></div><div class="hm-k">DPC latency</div></div>
           <div class="hm-sep"></div>
-          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="44" data-prefix="+">+44</span><span>%</span></div><div class="hm-k">1% low FPS</div></div>
+          <div class="hm"><div class="hm-v">+44<span>%</span></div><div class="hm-k">1% low FPS</div></div>
           <div class="hm-sep"></div>
-          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="200">200</span><span>+</span></div><div class="hm-k">твиков в один клик</div></div>
+          <div class="hm"><div class="hm-v">191</div><div class="hm-k">твика в один клик</div></div>
         </div>
       </div>
 
@@ -3049,8 +2652,8 @@
               <span class="aw-name">Pulse <em>v1.2.9</em></span>
             </div>
             <div class="aw-profiles" aria-hidden="true">
-              <span class="awp" title="Стандарт"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-              <span class="awp active" title="Игровой"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+              <span class="awp active" title="Стандарт"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <span class="awp" title="Игровой"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
               <span class="awp" title="Максимум"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
             </div>
             <div class="aw-win"><span></span><span></span><span class="x"></span></div>
@@ -3072,10 +2675,10 @@
                   <div class="aw-gauge">
                     <svg viewBox="0 0 80 80">
                       <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="6"/>
-                      <circle class="aw-gauge-fill" cx="40" cy="40" r="33" fill="none" stroke="url(#awg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="207" stroke-dashoffset="72" transform="rotate(-90 40 40)"/>
+                      <circle cx="40" cy="40" r="33" fill="none" stroke="url(#awg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="207" stroke-dashoffset="72" transform="rotate(-90 40 40)"/>
                       <defs><linearGradient id="awg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgb(var(--profile-rgb))"/><stop offset="1" stop-color="rgb(var(--accent-2-rgb))"/></linearGradient></defs>
                     </svg>
-                    <div class="aw-gauge-v"><span class="hm-n" data-target="65">65</span><small>%</small></div>
+                    <div class="aw-gauge-v">65<small>%</small></div>
                   </div>
                   <button class="aw-clean">Быстрая очистка</button>
                 </div>
@@ -3172,7 +2775,7 @@
         <div class="co-frag co-result" style="--x:0px;--y:60px;--r:0deg;--s:.9; left:50%; top:40%; transform-origin:center; margin-left:-160px; width:320px;">
           <span class="co-tick" aria-hidden="true">✓</span>
           <div>
-            <b>200+ твиков применено</b><br>
+            <b>191 твик применён</b><br>
             <span>+138 FPS · DPC ниже в 4 раза</span>
           </div>
         </div>
@@ -3194,226 +2797,201 @@
     </div>
   </section>
 
-  <!-- ============ INTERACTIVE DEMO (THE APP MOCKUP v1.2.9) ============ -->
-  <section class="dm-section" id="demo">
-   <div class="dm-grid">
-    <!-- LEFT INFO -->
-    <div class="dm-info">
-     <p class="dm-eyebrow">Панель управления</p>
-     <h2 class="dm-h2">Интерактивный макет Pulse</h2>
-     <p class="dm-lead">Это не картинка — настоящее окно приложения прямо в браузере. Переключайте вкладки, ищите процессы, добавляйте исключения и запустите оптимизацию, чтобы увидеть, как Pulse работает вживую.</p>
-     <div class="dm-tele">
-      <div class="dm-telecard">
-       <p class="dm-tele-lbl">Задержка DPC</p>
-       <div class="dm-tele-val" id="dm-dpc">142<span>мкс</span></div>
+  <!-- ============ INTERACTIVE DEMO (THE APP MOCKUP) ============ -->
+  <section class="demo" id="demo">
+    <div class="wrap demo-in">
+      <div class="demo-info">
+        <div class="eyebrow">Панель управления</div>
+        <h3>Интерактивный макет Pulse</h3>
+        <p>Изучите интерфейс утилиты прямо в браузере. Переключайте вкладки, ищите и завершайте фоновые процессы или запустите симуляцию оптимизации, чтобы увидеть лог выполняемых команд.</p>
+        
+        <div class="telemetry-compact">
+          <div class="tel-card">
+            <div class="k">DPC Latency</div>
+            <div class="v green" id="telLatency">42 мкс</div>
+          </div>
+          <div class="tel-card">
+            <div class="k">Освобождено RAM</div>
+            <div class="v blue" id="telFreed">0 МБ</div>
+          </div>
+        </div>
       </div>
-      <div class="dm-telecard">
-       <p class="dm-tele-lbl">Освобождено ОЗУ</p>
-       <div class="dm-tele-val dm-tele-good" id="dm-freed">0.0<span>ГБ</span></div>
+
+      <div class="demo-shell">
+        <div class="mock">
+          <!-- Mock Header -->
+          <div class="mock-header">
+            <div class="mock-title">
+              <span class="mock-title-dot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 12h4l3-8 4 16 3-8h6"/>
+                </svg>
+              </span>
+              Pulse
+            </div>
+            <div class="mock-win-controls">
+              <span></span>
+              <span></span>
+              <span class="close"></span>
+            </div>
+          </div>
+          
+          <div class="mock-body">
+            <!-- Mock Sidebar -->
+            <div class="mock-side">
+              <div class="mock-menu-item active" data-target="dash">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                <span>Обзор</span>
+              </div>
+              <div class="mock-menu-item" data-target="proc">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/></svg>
+                <span>Процессы</span>
+              </div>
+              <div class="mock-menu-item" data-target="excs">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>Исключения</span>
+              </div>
+              <div class="mock-menu-item" data-target="opti">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"/></svg>
+                <span>Оптимизация</span>
+              </div>
+            </div>
+
+            <!-- Mock Main Area -->
+            <div class="mock-main">
+              
+              <!-- PANEL: DASHBOARD -->
+              <div class="mock-panel active" id="panel-dash">
+                <div class="mock-section-title">Системная телеметрия</div>
+                <div class="mock-section-desc">Мониторинг ресурсов вашего компьютера в реальном времени</div>
+                
+                <div class="dash-widgets">
+                  <div class="gauge-widget">
+                    <div class="gauge-circle">
+                      <svg width="60" height="60" viewBox="0 0 60 60">
+                        <circle cx="30" cy="30" r="26" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="4.5"/>
+                        <circle id="dashGaugeArc" cx="30" cy="30" r="26" fill="none" stroke="var(--green)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="163.3" stroke-dashoffset="65"/>
+                      </svg>
+                      <div class="gauge-val" id="dashGaugeVal">60%</div>
+                    </div>
+                    <span class="gauge-label" id="dashGaugeState">В норме</span>
+                  </div>
+                  
+                  <div class="dash-telemetry">
+                    <div class="dt-card"><div class="k">CPU Load</div><div class="v" id="telCpu">12%</div></div>
+                    <div class="dt-card"><div class="k">RAM Used</div><div class="v" id="telRam">5.4 GB</div></div>
+                    <div class="dt-card"><div class="k">Disk Active</div><div class="v" id="telDisk">1%</div></div>
+                  </div>
+                </div>
+
+                <div class="chart-container">
+                  <div class="chart-header">
+                    <span>График загрузки ресурсов</span>
+                    <div class="chart-legends">
+                      <span class="chart-legend"><i style="background:var(--accent)"></i>CPU</span>
+                      <span class="chart-legend"><i style="background:var(--green)"></i>RAM</span>
+                    </div>
+                  </div>
+                  <svg class="mock-chart-svg" id="dashChart" viewBox="0 0 400 120" preserveAspectRatio="none">
+                    <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,.02)"/>
+                    <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,.02)"/>
+                    <line x1="0" y1="90" x2="400" y2="90" stroke="rgba(255,255,255,.02)"/>
+                    <path id="pathChartRam" fill="none" stroke="var(--green)" stroke-width="1.8" opacity="0.8"/>
+                    <path id="pathChartCpu" fill="none" stroke="var(--accent)" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- PANEL: PROCESSES -->
+              <div class="mock-panel" id="panel-proc">
+                <div class="mock-section-title">Диспетчер фоновых задач</div>
+                <div class="mock-section-desc">Завершайте прожорливый софт во избежание фризов и статтеров в играх</div>
+                
+                <div class="proc-toolbar">
+                  <input type="text" class="proc-search-input" id="procSearch" placeholder="Поиск по имени процесса...">
+                </div>
+
+                <div class="proc-list-container">
+                  <table class="proc-table">
+                    <thead class="proc-thead">
+                      <tr>
+                        <th>Имя задачи</th>
+                        <th>PID</th>
+                        <th>ОЗУ</th>
+                        <th style="text-align:right">Действия</th>
+                      </tr>
+                    </thead>
+                    <tbody id="procTableBody">
+                      <!-- Добавляется динамически через JS -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="proc-summary-bar">
+                  <span>Доступно для высвобождения: <strong id="procTotalTerminable">0 МБ</strong></span>
+                  <span style="color:var(--text-dark)" id="procFreedStatus">Всего закрыто: 0 МБ</span>
+                </div>
+              </div>
+
+              <!-- PANEL: EXCEPTIONS -->
+              <div class="mock-panel" id="panel-excs">
+                <div class="mock-section-title">Белый список (Исключения)</div>
+                <div class="mock-section-desc">Процессы из этого списка никогда не будут остановлены оптимизатором</div>
+
+                <div class="exc-add-form">
+                  <input type="text" id="excInput" placeholder="Имя процесса (например, streamlabs.exe)">
+                  <button id="excAddBtn">Добавить</button>
+                </div>
+
+                <div class="exc-grid">
+                  <div class="exc-column">
+                    <div class="exc-header">Системные (ядро) <span class="count" id="sysExcCount">4</span></div>
+                    <div class="exc-list" id="sysExcList">
+                      <!-- Системные защищенные по умолчанию -->
+                    </div>
+                  </div>
+                  <div class="exc-column">
+                    <div class="exc-header">Пользовательские <span class="count" id="userExcCount">0</span></div>
+                    <div class="exc-list" id="userExcList">
+                      <!-- Пользовательские исключения -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANEL: OPTIMIZATION -->
+              <div class="mock-panel" id="panel-opti">
+                <div class="mock-section-title">Твики операционной системы</div>
+                <div class="mock-section-desc">Примените оптимизацию системы в один клик</div>
+                
+                <div class="opt-container">
+                  <div class="opt-circle-btn" id="optStartBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+                      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+                      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                    </svg>
+                  </div>
+                  <div class="opt-btn-label" id="optStateLabel">Запуск оптимизации</div>
+                  <div class="opt-btn-sub" id="optStateSub">Все настройки будут применены автоматически</div>
+                  
+                  <div class="opt-progress-track">
+                    <div class="opt-progress-bar" id="optProgressBar"></div>
+                  </div>
+
+                  <div class="opt-terminal" id="optTerminal">
+                    <div class="opt-terminal-line">Pulse готов к оптимизации Windows.</div>
+                    <div class="opt-terminal-line" style="color:var(--text-dark)">Нажмите на ракету выше для старта.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
-     </div>
     </div>
-
-    <!-- WINDOW -->
-    <div class="dm-win">
-     <div class="dm-titlebar">
-      <div class="dm-brand">
-       <div class="dm-logo"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div>
-       <b>Pulse</b><span class="dm-ver">v1.2.9</span>
-      </div>
-      <div class="dm-profiles">
-       <button class="dm-prof" title="Стандарт"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></button>
-       <button class="dm-prof dm-on" title="Игровой"><svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></button>
-       <button class="dm-prof" title="Максимум"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></button>
-      </div>
-      <div class="dm-dots"><span class="dm-dot"></span><span class="dm-dot"></span><span class="dm-dot dm-close"></span></div>
-     </div>
-
-     <div class="dm-body">
-      <div class="dm-side">
-       <button class="dm-navi dm-on" data-tab="0"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Обзор</span></button>
-       <button class="dm-navi" data-tab="1"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Процессы</span></button>
-       <button class="dm-navi" data-tab="2"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Исключения</span></button>
-       <button class="dm-navi" data-tab="3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>История</span></button>
-       <button class="dm-navi" data-tab="4"><svg viewBox="0 0 24 24"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg><span>Автозапуск</span></button>
-       <button class="dm-navi" data-tab="5"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>Прочее</span></button>
-       <button class="dm-navi" data-tab="6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>Оптимизация</span></button>
-      </div>
-
-      <div class="dm-main">
-       <!-- 0 OVERVIEW -->
-       <div class="dm-panel dm-on">
-        <div class="dm-cols">
-         <div class="dm-card">
-          <p class="dm-ctitle">Общая производительность</p>
-          <div class="dm-gauge">
-           <div class="dm-gwrap">
-            <svg width="120" height="120" viewBox="0 0 120 120">
-             <circle cx="60" cy="60" r="52" stroke="rgba(150,170,255,.1)" stroke-width="10" fill="none"/>
-             <circle id="dm-garc" cx="60" cy="60" r="52" stroke="var(--red)" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="114" transform="rotate(-90 60 60)"/>
-            </svg>
-            <div class="dm-gval"><div class="dm-gnum" id="dm-gnum">65%</div><div class="dm-glbl" id="dm-glbl">Плохо</div></div>
-           </div>
-           <button class="dm-btn dm-btn-p" id="dm-clean">Быстрая очистка</button>
-          </div>
-         </div>
-         <div class="dm-card">
-          <p class="dm-ctitle">Активные процессы</p>
-          <div class="dm-plist">
-           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent)"></span><span class="dm-pname">chrome.exe</span><span class="dm-pmem">3.1 ГБ</span></div>
-           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent-2)"></span><span class="dm-pname">Discord.exe</span><span class="dm-pmem">930 МБ</span></div>
-           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent-cyan)"></span><span class="dm-pname">steam.exe</span><span class="dm-pmem">898 МБ</span></div>
-           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--green)"></span><span class="dm-pname">Pulse.exe</span><span class="dm-tag">Системный</span><span class="dm-pmem">214 МБ</span></div>
-          </div>
-         </div>
-        </div>
-        <div class="dm-row2">
-         <div class="dm-card dm-card-mon">
-          <p class="dm-ctitle">Мониторинг системы</p>
-          <div class="dm-legend">
-           <span class="dm-leg"><i style="background:var(--accent)"></i>CPU</span>
-           <span class="dm-leg"><i style="background:var(--green)"></i>RAM</span>
-           <span class="dm-leg"><i style="background:var(--accent-cyan)"></i>Диск</span>
-           <span class="dm-leg"><i style="background:var(--red)"></i>Сеть</span>
-          </div>
-          <svg class="dm-chart" viewBox="0 0 400 110" preserveAspectRatio="none">
-           <polyline fill="none" stroke="var(--accent)" stroke-width="2" points="0,80 40,60 80,72 120,40 160,55 200,30 240,48 280,25 320,44 360,20 400,38"/>
-           <polyline fill="none" stroke="var(--green)" stroke-width="2" points="0,50 40,55 80,48 120,58 160,45 200,52 240,44 280,50 320,42 360,48 400,40"/>
-           <polyline fill="none" stroke="var(--accent-cyan)" stroke-width="2" points="0,95 40,92 80,96 120,88 160,94 200,90 240,95 280,89 320,93 360,90 400,94"/>
-           <polyline fill="none" stroke="var(--red)" stroke-width="1.5" opacity=".7" points="0,104 40,103 80,104 120,102 160,104 200,103 240,104 280,103 320,104 360,103 400,104"/>
-          </svg>
-          <div class="dm-tiles">
-           <div class="dm-tile"><p class="dm-tlbl">CPU</p><div class="dm-tval">13%</div><div class="dm-tsub">Темп 58°C</div></div>
-           <div class="dm-tile"><p class="dm-tlbl">RAM</p><div class="dm-tval">65%</div><div class="dm-tsub">10.4 / 16 ГБ</div></div>
-           <div class="dm-tile"><p class="dm-tlbl">Диск</p><div class="dm-tval">6%</div><div class="dm-tsub">NVMe SSD</div></div>
-           <div class="dm-tile"><p class="dm-tlbl">Сеть</p><div class="dm-tval">0.0</div><div class="dm-tsub">Mbps</div></div>
-          </div>
-         </div>
-        </div>
-       </div>
-
-       <!-- 1 PROCESSES -->
-       <div class="dm-panel">
-        <div class="dm-toolbar">
-         <input class="dm-input" id="dm-psearch" placeholder="Поиск процесса…">
-         <button class="dm-btn">Обновить список</button>
-        </div>
-        <div class="dm-tablewrap">
-         <table class="dm-table" id="dm-ptable">
-          <thead><tr><th>Процесс</th><th>PID</th><th>Память</th><th>Категория</th><th>Действия</th></tr></thead>
-          <tbody>
-           <tr><td>chrome.exe (23)</td><td class="dm-mono">4128</td><td class="dm-mono">2.8 ГБ</td><td>Браузер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>Discord.exe (8)</td><td class="dm-mono">7712</td><td class="dm-mono">840 МБ</td><td>Приложение</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>EpicGamesLauncher.exe</td><td class="dm-mono">6204</td><td class="dm-mono">610 МБ</td><td>Лаунчер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>steam.exe</td><td class="dm-mono">3300</td><td class="dm-mono">512 МБ</td><td>Лаунчер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>Spotify.exe</td><td class="dm-mono">5180</td><td class="dm-mono">430 МБ</td><td>Музыка</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>RiotClientServices.exe</td><td class="dm-mono">8844</td><td class="dm-mono">388 МБ</td><td>Игры</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>Telegram.exe</td><td class="dm-mono">2960</td><td class="dm-mono">295 МБ</td><td>Приложение</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>svchost.exe (34)</td><td class="dm-mono">1204</td><td class="dm-mono">640 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">Защищён</button></div></td></tr>
-           <tr><td>explorer.exe</td><td class="dm-mono">4472</td><td class="dm-mono">320 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">Защищён</button></div></td></tr>
-           <tr><td>Pulse.exe</td><td class="dm-mono">9048</td><td class="dm-mono">214 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">В исключениях</button></div></td></tr>
-          </tbody>
-         </table>
-        </div>
-       </div>
-
-       <!-- 2 EXCEPTIONS -->
-       <div class="dm-panel">
-        <div class="dm-cols">
-         <div class="dm-card">
-          <p class="dm-ctitle">Системные зависимости <span class="dm-count">· 20</span></p>
-          <div class="dm-exlist">
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>audiodg.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>conhost.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>csrss.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>dwm.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>explorer.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>fontdrvhost.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>lsass.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>MsMpEng.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>registry</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>SecurityHealthService.exe</b></div>
-          </div>
-         </div>
-         <div class="dm-card">
-          <p class="dm-ctitle">Ваши исключения</p>
-          <div class="dm-toolbar">
-           <input class="dm-input" id="dm-exinput" placeholder="имя_процесса.exe">
-           <button class="dm-btn dm-btn-p" id="dm-exadd">Добавить</button>
-          </div>
-          <div class="dm-exlist" id="dm-exuser">
-           <div class="dm-exitem"><svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b>Discord.exe</b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button></div>
-           <div class="dm-exitem"><svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b>obs64.exe</b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button></div>
-          </div>
-         </div>
-        </div>
-       </div>
-
-       <!-- 3 HISTORY -->
-       <div class="dm-panel">
-        <div class="dm-card">
-         <p class="dm-ctitle">Динамика за неделю</p>
-         <svg class="dm-chart" viewBox="0 0 400 110" preserveAspectRatio="none">
-          <defs><linearGradient id="dm-hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(59,130,246,.35)"/><stop offset="1" stop-color="rgba(59,130,246,0)"/></linearGradient></defs>
-          <path d="M0,80 60,60 120,68 180,40 240,52 300,32 360,44 400,30 400,110 0,110 Z" fill="url(#dm-hg)"/>
-          <polyline fill="none" stroke="var(--accent)" stroke-width="2" points="0,80 60,60 120,68 180,40 240,52 300,32 360,44 400,30"/>
-          <polyline fill="none" stroke="var(--accent-2)" stroke-width="2" points="0,92 60,84 120,88 180,74 240,80 300,66 360,72 400,60"/>
-         </svg>
-        </div>
-        <div class="dm-row2">
-         <div class="dm-card">
-          <div class="dm-empty">
-           <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
-           <b>Список пуст</b>
-           <span>Запустите очистку системы, чтобы увидеть отчёт здесь</span>
-          </div>
-         </div>
-        </div>
-       </div>
-
-       <!-- 4 STARTUP -->
-       <div class="dm-panel">
-        <div class="dm-togrow"><div><b>Запускать Pulse вместе с Windows</b><span>Автостарт в свёрнутом виде</span></div><button class="dm-tog dm-on"></button></div>
-        <div class="dm-togrow"><div><b>Профиль по игре</b><span>Автопереключение при запуске игры</span></div><button class="dm-tog"></button></div>
-        <div class="dm-chips">
-         <button class="dm-chip dm-on">Все</button>
-         <button class="dm-chip">Ключи реестра</button>
-         <button class="dm-chip">Файлы</button>
-         <button class="dm-chip">Задачи</button>
-         <button class="dm-chip">Службы</button>
-        </div>
-        <div class="dm-startitem"><div><b>Discord</b><span>C:\Users\User\AppData\Local\Discord\Update.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
-        <div class="dm-startitem"><div><b>Steam</b><span>C:\Program Files (x86)\Steam\steam.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
-        <div class="dm-startitem"><div><b>Epic Games Launcher</b><span>C:\Program Files (x86)\Epic Games\Launcher\Portal\Binaries\Win64\EpicGamesLauncher.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
-        <div class="dm-startitem"><div><b>NVIDIA GeForce Experience</b><span>C:\Program Files\NVIDIA Corporation\NVIDIA GeForce Experience\NVIDIA GeForce Experience.exe</span></div><button class="dm-btn dm-btn-xs dm-btn-g">Удалить</button></div>
-       </div>
-
-       <!-- 5 MISC -->
-       <div class="dm-panel">
-        <div class="dm-toolgrid">
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 12h.01M10 12h6"/></svg></div><div><b>Здоровье диска</b><span>S.M.A.R.T. и NVMe диагностика накопителей</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div><div><b>Калькулятор сенсы</b><span>Перенос чувствительности между играми</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="12" rx="2"/><path d="M8 17v3M16 17v3M8 9v4M12 9v4M16 9v4"/></svg></div><div><b>Тест ОЗУ</b><span>Поиск ошибок оперативной памяти</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div><b>Стресс-тест</b><span>Полная нагрузка на CPU и GPU</span></div></div>
-        </div>
-       </div>
-
-       <!-- 6 OPTIMIZE -->
-       <div class="dm-panel">
-        <div class="dm-opt">
-         <button class="dm-pulsebtn" id="dm-runopt"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></button>
-         <h4>Оптимизация</h4>
-         <p>Автоматическая оптимизация системы в один клик</p>
-         <button class="dm-btn dm-btn-p" id="dm-runopt2">Оптимизация</button>
-         <div class="dm-progwrap"><div class="dm-prog" id="dm-prog"></div></div>
-         <pre class="dm-term" id="dm-term"></pre>
-        </div>
-       </div>
-
-      </div>
-     </div>
-    </div>
-   </div>
   </section>
 
   <!-- ============ FEATURES SECTION ============ -->
@@ -3473,7 +3051,7 @@
   <div class="band">
     <div class="wrap band-grid">
       <div class="band-card">
-        <div class="num">200+</div>
+        <div class="num"><span class="count" data-target="191">0</span></div>
         <div class="lbl">Твик операционной системы</div>
       </div>
       <div class="band-card">
@@ -3842,7 +3420,7 @@
     }
 
     /* ---------- BRAND ACCENT (blue, mirrors the app chrome) — read by the hero canvas ---------- */
-    window.pulseAccentRGB = '139, 92, 246';
+    window.pulseAccentRGB = '59, 130, 246';
 
     /* ---------- HERO: entrance choreography + 3D mouse-tilt + magnetic CTAs ---------- */
     (function() {
@@ -3857,7 +3435,6 @@
 
       // 3D tilt of the app window following the pointer (desktop only, respects reduced-motion)
       if (hero && stage && win && canHover && !reducedMotion) {
-        const glow = hero.querySelector('.hero-cursor-glow');
         let tx = 0, ty = 0, raf = null;
         const apply = () => {
           win.style.transform = `rotateY(${tx}deg) rotateX(${ty}deg)`;
@@ -3873,10 +3450,6 @@
           const py = (e.clientY - r.top) / r.height - 0.5;
           tx = px * 10;
           ty = -py * 7;
-          if (glow) {
-            glow.style.setProperty('--gx', (e.clientX - r.left) + 'px');
-            glow.style.setProperty('--gy', (e.clientY - r.top) + 'px');
-          }
           if (!raf) raf = requestAnimationFrame(apply);
         }, { passive: true });
         hero.addEventListener('pointerleave', () => {
@@ -4103,6 +3676,376 @@
     if (barsBlock) resultsObserver.observe(barsBlock);
 
 
+    /* =========================================================
+       MOCKUP CONTROLLER (INTERACTIVE WINDOW)
+       ========================================================= */
+    const mockupState = {
+      activeTab: 'dash',
+      freedRamTotal: 0,
+      customExceptions: ['cs2.exe', 'Discord.exe'],
+      systemExceptions: ['dwm.exe', 'explorer.exe', 'svchost.exe', 'csrss.exe'],
+      
+      // Processes initially available for termination
+      processes: [
+        { name: 'chrome.exe', pid: 9992, ram: 452, color: '#ef4444', terminable: true },
+        { name: 'chrome.exe', pid: 8744, ram: 371, color: '#ef4444', terminable: true },
+        { name: 'Spotify.exe', pid: 5104, ram: 188, color: '#10b981', terminable: true },
+        { name: 'steamwebhelper.exe', pid: 7212, ram: 389, color: '#3b82f6', terminable: true },
+        { name: 'Discord.exe', pid: 6604, ram: 512, color: '#6366f1', terminable: true },
+        { name: 'nvcontainer.exe', pid: 4320, ram: 42, color: '#10b981', terminable: false, badge: 'Protected' },
+        { name: 'cs2.exe', pid: 14201, ram: 1834, color: '#f59e0b', terminable: false, badge: 'Game' },
+        { name: 'explorer.exe', pid: 2110, ram: 85, color: '#64748b', terminable: false, badge: 'System' }
+      ],
+
+      // Optimization status
+      optRunning: false,
+      optProgress: 0,
+      optSteps: [
+        { text: 'Инициализация оптимизации...', w: 10, type: 'info' },
+        { text: 'Создание точки восстановления реестра... ОК', w: 25, type: 'success' },
+        { text: 'Отключение фоновой телеметрии (DiagTrack)... ОК', w: 45, type: 'success' },
+        { text: 'Настройка сетевых задержек (TCP Nodelay)... ОК', w: 65, type: 'success' },
+        { text: 'Очистка системного кэша файловой системы... ОК', w: 80, type: 'success' },
+        { text: 'Сжатие страниц неактивного ОЗУ... ОК', w: 95, type: 'success' },
+        { text: 'Pulse: Оптимизация системы завершена успешно! [191 твик]', w: 100, type: 'done' }
+      ]
+    };
+
+    // DOM Elements
+    const mockupMenuElements = document.querySelectorAll('.mock-menu-item');
+    const mockupPanels = document.querySelectorAll('.mock-panel');
+    const procTableBody = document.getElementById('procTableBody');
+    const procSearch = document.getElementById('procSearch');
+    const sysExcList = document.getElementById('sysExcList');
+    const userExcList = document.getElementById('userExcList');
+    const excInput = document.getElementById('excInput');
+    const excAddBtn = document.getElementById('excAddBtn');
+    const userExcCount = document.getElementById('userExcCount');
+    const sysExcCount = document.getElementById('sysExcCount');
+    
+    const telCpu = document.getElementById('telCpu');
+    const telRam = document.getElementById('telRam');
+    const telDisk = document.getElementById('telDisk');
+    const telLatency = document.getElementById('telLatency');
+    const telFreed = document.getElementById('telFreed');
+    const dashGaugeArc = document.getElementById('dashGaugeArc');
+    const dashGaugeVal = document.getElementById('dashGaugeVal');
+    const dashGaugeState = document.getElementById('dashGaugeState');
+
+    const optStartBtn = document.getElementById('optStartBtn');
+    const optProgressBar = document.getElementById('optProgressBar');
+    const optTerminal = document.getElementById('optTerminal');
+    const optStateLabel = document.getElementById('optStateLabel');
+    const optStateSub = document.getElementById('optStateSub');
+    const procTotalTerminable = document.getElementById('procTotalTerminable');
+    const procFreedStatus = document.getElementById('procFreedStatus');
+
+    /* --- Tab Switcher --- */
+    mockupMenuElements.forEach(item => {
+      item.addEventListener('click', () => {
+        const target = item.dataset.target;
+        
+        // Update Sidebar UI
+        mockupMenuElements.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+
+        // Update Panel Visibility
+        mockupPanels.forEach(p => p.classList.remove('active'));
+        const activePanel = document.getElementById(`panel-${target}`);
+        if (activePanel) activePanel.classList.add('active');
+
+        mockupState.activeTab = target;
+      });
+    });
+
+    /* --- Dashboard Timeline Loop --- */
+    const N = 40;
+    const chartCpuData = Array.from({length: N}, () => 10 + Math.random() * 8);
+    const chartRamData = Array.from({length: N}, () => 40 + Math.random() * 2);
+    
+    function updateChart() {
+      // 1. Generate new values
+      let cpuVal = 8 + Math.random() * 6;
+      let ramVal = 38 + Math.random() * 2;
+      
+      // Spikes
+      if (Math.random() < 0.05) cpuVal += 20 + Math.random() * 15;
+
+      chartCpuData.push(cpuVal);
+      chartCpuData.shift();
+      chartRamData.push(ramVal);
+      chartRamData.shift();
+
+      // 2. Render CPU & RAM paths
+      const step = 400 / (N - 1);
+      
+      let dCpu = `M 0,${120 - chartCpuData[0] * 1.1}`;
+      let dRam = `M 0,${120 - chartRamData[0] * 1.1}`;
+      
+      for (let i = 1; i < N; i++) {
+        dCpu += ` L ${i * step},${120 - chartCpuData[i] * 1.1}`;
+        dRam += ` L ${i * step},${120 - chartRamData[i] * 1.1}`;
+      }
+
+      const pathCpu = document.getElementById('pathChartCpu');
+      const pathRam = document.getElementById('pathChartRam');
+      
+      if (pathCpu) pathCpu.setAttribute('d', dCpu);
+      if (pathRam) pathRam.setAttribute('d', dRam);
+
+      // 3. Update Dashboard Stats text
+      const currentCpu = Math.round(chartCpuData[N-1]);
+      const currentRam = (8.2 * (chartRamData[N-1] / 100)).toFixed(1);
+      
+      if (telCpu) telCpu.textContent = `${currentCpu}%`;
+      if (telRam) telRam.textContent = `${currentRam} GB`;
+      if (telDisk) telDisk.textContent = `${Math.random() < 0.2 ? Math.round(Math.random() * 3) : 0}%`;
+
+      // 4. Update Gauge
+      const totalSystemLoad = Math.min(100, Math.round(currentCpu + 25));
+      if (dashGaugeVal) dashGaugeVal.textContent = `${totalSystemLoad}%`;
+      if (dashGaugeArc) {
+        const C = 163.3; // 2 * PI * r (r=26)
+        dashGaugeArc.style.strokeDashoffset = C - (C * totalSystemLoad) / 100;
+      }
+    }
+
+    if (!reducedMotion) {
+      setInterval(updateChart, 1000);
+    }
+    updateChart();
+
+    /* --- Processes Manager Operations --- */
+    function renderProcesses() {
+      if (!procTableBody) return;
+      
+      const searchVal = procSearch.value.trim().toLowerCase();
+      const filtered = mockupState.processes.filter(p => p.name.toLowerCase().includes(searchVal));
+
+      if (filtered.length === 0) {
+        procTableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--text-dark);padding:24px;">Задачи не найдены</td></tr>`;
+        return;
+      }
+
+      procTableBody.innerHTML = filtered.map((p, idx) => {
+        // Check if the process name is in the user exceptions list
+        const isCustomExcluded = mockupState.customExceptions.includes(p.name);
+        const isSystemExcluded = mockupState.systemExceptions.includes(p.name);
+        
+        let actionsHtml = '';
+        if (isSystemExcluded || isCustomExcluded) {
+          actionsHtml = `<span class="proc-status-shield">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Защищён
+          </span>`;
+        } else {
+          actionsHtml = `
+            <div class="proc-actions">
+              <button class="proc-btn-action btn-list" onclick="addProcessToExceptions('${p.name}')">В список</button>
+              <button class="proc-btn-action btn-kill" onclick="killProcess(${p.pid})">Закрыть</button>
+            </div>
+          `;
+        }
+
+        return `
+          <tr class="proc-tr" id="proc-pid-${p.pid}">
+            <td>
+              <div class="proc-name-cell">
+                <span class="proc-icon" style="background:${p.color}15;color:${p.color};border:1px solid ${p.color}35">
+                  ${p.name[0].toUpperCase()}
+                </span>
+                ${p.name}
+              </div>
+            </td>
+            <td style="font-family:var(--font-mono);color:var(--text-dark)">${p.pid}</td>
+            <td style="font-family:var(--font-mono);font-weight:600">${p.ram} МБ</td>
+            <td style="text-align:right">${actionsHtml}</td>
+          </tr>
+        `;
+      }).join('');
+
+      // Calculate totals
+      let totalTerminable = 0;
+      mockupState.processes.forEach(p => {
+        const isExcluded = mockupState.customExceptions.includes(p.name) || mockupState.systemExceptions.includes(p.name);
+        if (!isExcluded && p.terminable) {
+          totalTerminable += p.ram;
+        }
+      });
+
+      if (procTotalTerminable) {
+        procTotalTerminable.textContent = `${totalTerminable} МБ`;
+      }
+    }
+
+    if (procSearch) {
+      procSearch.addEventListener('input', renderProcesses);
+    }
+
+    function triggerPulse(element) {
+      if (!element) return;
+      element.classList.remove('pulse-effect');
+      void element.offsetWidth; // trigger reflow
+      element.classList.add('pulse-effect');
+      setTimeout(() => element.classList.remove('pulse-effect'), 400);
+    }
+
+    window.killProcess = function(pid) {
+      const idx = mockupState.processes.findIndex(p => p.pid === pid);
+      if (idx === -1) return;
+
+      const p = mockupState.processes[idx];
+      const row = document.getElementById(`proc-pid-${pid}`);
+      if (row) {
+        row.style.background = 'rgba(239, 68, 68, 0.08)';
+        row.style.opacity = '0';
+        row.style.transform = 'translateX(20px)';
+        row.style.transition = 'all 0.4s ease';
+        
+        setTimeout(() => {
+          // Free resources
+          mockupState.freedRamTotal += p.ram;
+          if (telFreed) {
+            telFreed.textContent = `${mockupState.freedRamTotal} МБ`;
+            triggerPulse(telFreed);
+          }
+          if (procFreedStatus) procFreedStatus.textContent = `Всего закрыто: ${mockupState.freedRamTotal} МБ`;
+          
+          // Remove from list
+          mockupState.processes.splice(idx, 1);
+          
+          // Update latency telemetry if RAM is freed (simulating system cleanup)
+          const newLatency = Math.max(38, 42 - Math.round(mockupState.freedRamTotal / 120));
+          if (telLatency) {
+            telLatency.textContent = `${newLatency} мкс`;
+            triggerPulse(telLatency);
+          }
+
+          renderProcesses();
+        }, 400);
+      }
+    };
+
+    window.addProcessToExceptions = function(name) {
+      if (!mockupState.customExceptions.includes(name)) {
+        mockupState.customExceptions.push(name);
+        renderProcesses();
+        renderExceptions();
+      }
+    };
+
+    /* --- Exceptions Manager --- */
+    function renderExceptions() {
+      if (!sysExcList || !userExcList) return;
+
+      // Sys List (Read-only)
+      sysExcList.innerHTML = mockupState.systemExceptions.map(name => `
+        <div class="exc-item">
+          <span class="exc-item-name">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            ${name}
+          </span>
+        </div>
+      `).join('');
+      sysExcCount.textContent = mockupState.systemExceptions.length;
+
+      // User List
+      userExcList.innerHTML = mockupState.customExceptions.map(name => `
+        <div class="exc-item">
+          <span class="exc-item-name">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            ${name}
+          </span>
+          <span class="exc-remove-btn" onclick="removeException('${name}')">Убрать</span>
+        </div>
+      `).join('');
+      userExcCount.textContent = mockupState.customExceptions.length;
+    }
+
+    window.removeException = function(name) {
+      const idx = mockupState.customExceptions.indexOf(name);
+      if (idx !== -1) {
+        mockupState.customExceptions.splice(idx, 1);
+        renderExceptions();
+        renderProcesses();
+      }
+    };
+
+    if (excAddBtn && excInput) {
+      excAddBtn.addEventListener('click', () => {
+        const val = excInput.value.trim().toLowerCase();
+        if (val && !val.includes(' ') && val.endsWith('.exe')) {
+          if (!mockupState.customExceptions.includes(val) && !mockupState.systemExceptions.includes(val)) {
+            mockupState.customExceptions.push(val);
+            excInput.value = '';
+            renderExceptions();
+            renderProcesses();
+          }
+        } else {
+          alert('Введите имя исполняемого файла с расширением .exe (например, game.exe)');
+        }
+      });
+    }
+
+    // Initial render
+    renderProcesses();
+    renderExceptions();
+
+    /* --- Optimization Simulation Logic --- */
+    if (optStartBtn) {
+      optStartBtn.addEventListener('click', () => {
+        if (mockupState.optRunning) return;
+        
+        mockupState.optRunning = true;
+        optStartBtn.classList.add('running');
+        optStateLabel.textContent = 'Оптимизация...';
+        optStateSub.textContent = 'Внесение изменений в реестр Windows';
+
+        optTerminal.innerHTML = '<div class="opt-terminal-line blue">&gt; Запуск оптимизации Pulse...</div>';
+        optProgressBar.style.width = '0%';
+        
+        let stepIdx = 0;
+        function runStep() {
+          if (stepIdx < mockupState.optSteps.length) {
+            const step = mockupState.optSteps[stepIdx];
+            
+            // Add terminal log line
+            const line = document.createElement('div');
+            line.className = 'opt-terminal-line';
+            if (step.type === 'success') line.classList.add('green');
+            if (step.type === 'done') line.classList.add('blue');
+            line.innerHTML = `[${stepIdx + 1}/7] ${step.text}`;
+            optTerminal.appendChild(line);
+            optTerminal.scrollTop = optTerminal.scrollHeight;
+
+            // Progress bar
+            optProgressBar.style.width = `${step.w}%`;
+            
+            stepIdx++;
+            setTimeout(runStep, 800 + Math.random() * 600);
+          } else {
+            // Done
+            mockupState.optRunning = false;
+            optStartBtn.classList.remove('running');
+            optStateLabel.textContent = 'Готово';
+            optStateSub.textContent = 'Система полностью оптимизирована';
+            
+            // Trigger animation on landing page FPS metrics to show before/after
+            document.querySelectorAll('.chart-bar-fill').forEach(fill => {
+              fill.style.width = fill.dataset.w;
+            });
+
+            // Change telemetry values in mockup
+            if (telLatency) {
+              telLatency.textContent = '38 мкс';
+              triggerPulse(telLatency);
+            }
+          }
+        }
+
+        setTimeout(runStep, 400);
+      });
+    }
 
     /* ---------- GITHUB RELEASE CHECKER (last update date for Pulse.exe) ---------- */
     async function checkPulseUpdates() {
@@ -4183,7 +4126,6 @@
           const counter = entry.target;
           const target = parseFloat(counter.dataset.target);
           const decimals = parseInt(counter.dataset.decimals || '0');
-          const prefix = counter.dataset.prefix || ''; // e.g. "−" / "+" for hero metrics
           const duration = 1200; // ms
           const startTime = performance.now();
 
@@ -4192,13 +4134,13 @@
             // Ease out quad
             const easeProgress = progress * (2 - progress);
             const value = easeProgress * target;
-
-            counter.textContent = prefix + value.toFixed(decimals);
+            
+            counter.textContent = value.toFixed(decimals);
 
             if (progress < 1) {
               requestAnimationFrame(update);
             } else {
-              counter.textContent = prefix + target.toFixed(decimals);
+              counter.textContent = target.toFixed(decimals);
             }
           }
           requestAnimationFrame(update);
@@ -4210,11 +4152,6 @@
     document.querySelectorAll('.band-card .count').forEach(counter => {
       countersObserver.observe(counter);
     });
-    // Hero metrics + gauge value count-up (above the fold → fires on mount).
-    // Skip under reduced-motion so the markup's final values stay put.
-    if (!reducedMotion) {
-      document.querySelectorAll('.hm-n').forEach(counter => countersObserver.observe(counter));
-    }
 
     /* ---------- BUY BUTTONS (Paddle card checkout + CryptoCloud/Trybit) ---------- */
     (function() {
@@ -4346,110 +4283,6 @@
     addEventListener('scroll', onScroll, {passive:true});
     addEventListener('resize', function(){ lastP = -1; onScroll(); }, {passive:true});
     update();
-  })();
-  </script>
-
-  <!-- ============ v1.2.9 mockup controller ============ -->
-  <script>
-  (function(){
-   var root=document.getElementById('demo');
-   if(!root)return;
-   var navs=root.querySelectorAll('.dm-navi'),panels=root.querySelectorAll('.dm-panel');
-   navs.forEach(function(n){n.addEventListener('click',function(){
-    var i=+n.dataset.tab;
-    navs.forEach(function(x){x.classList.remove('dm-on')});
-    panels.forEach(function(p){p.classList.remove('dm-on')});
-    n.classList.add('dm-on');panels[i].classList.add('dm-on');
-   });});
-
-   root.querySelectorAll('.dm-tog').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('dm-on')})});
-   var chips=root.querySelectorAll('.dm-chip');
-   chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('dm-on')});c.classList.add('dm-on')})});
-
-   // Быстрая очистка → gauge jumps into the healthy zone
-   var garc=root.querySelector('#dm-garc'),gnum=root.querySelector('#dm-gnum'),glbl=root.querySelector('#dm-glbl'),cleaned=false;
-   function clean(){
-    if(cleaned)return;cleaned=true;
-    if(garc){garc.setAttribute('stroke','var(--green)');garc.setAttribute('stroke-dashoffset','26');}
-    if(gnum)gnum.textContent='94%';
-    if(glbl){glbl.textContent='Отлично';glbl.classList.add('dm-good');}
-    var f=root.querySelector('#dm-freed'),d=root.querySelector('#dm-dpc');
-    if(f)f.innerHTML='3.1<span>ГБ</span>';
-    if(d)d.innerHTML='39<span>мкс</span>';
-   }
-   [root.querySelector('#dm-clean'),root.querySelector('.dm-qa .dm-btn')].forEach(function(b){if(b)b.addEventListener('click',clean)});
-
-   var srch=root.querySelector('#dm-psearch'),rows=root.querySelectorAll('#dm-ptable tbody tr');
-   if(srch)srch.addEventListener('input',function(){
-    var q=srch.value.toLowerCase();
-    rows.forEach(function(r){r.style.display=r.cells[0].textContent.toLowerCase().indexOf(q)>-1?'':'none'});
-   });
-
-   var exlist=root.querySelector('#dm-exuser'),exin=root.querySelector('#dm-exinput'),exadd=root.querySelector('#dm-exadd');
-   function bindRm(b){b.addEventListener('click',function(){b.closest('.dm-exitem').remove()})}
-   root.querySelectorAll('.dm-exrm').forEach(bindRm);
-   function addEx(){
-    var v=(exin.value||'').trim();if(!v)return;
-    var d=document.createElement('div');d.className='dm-exitem';
-    d.innerHTML='<svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b></b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button>';
-    d.querySelector('b').textContent=v;
-    bindRm(d.querySelector('.dm-exrm'));exlist.appendChild(d);exin.value='';
-   }
-   if(exadd)exadd.addEventListener('click',addEx);
-   if(exin)exin.addEventListener('keydown',function(e){if(e.key==='Enter')addEx()});
-
-   var b1=root.querySelector('#dm-runopt'),b2=root.querySelector('#dm-runopt2'),
-       prog=root.querySelector('#dm-prog'),term=root.querySelector('#dm-term'),
-       freed=root.querySelector('#dm-freed'),dpc=root.querySelector('#dm-dpc'),running=false,done=false;
-   var steps=['Создание точки восстановления… ОК','Отключение телеметрии (DiagTrack)… ОК','Настройка сетевых задержек (TCP Nodelay)… ОК','Сжатие неактивного ОЗУ… ОК','Готово: 200+ твиков'];
-   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-   function finish(){if(freed)freed.innerHTML='2.4<span>ГБ</span>';if(dpc)dpc.innerHTML='38<span>мкс</span>';running=false;done=true}
-   function run(){
-    if(running)return;running=true;
-    term.classList.add('dm-show');term.textContent='';prog.style.width='0%';
-    if(reduce){term.textContent=steps.join('\n');prog.style.width='100%';finish();return;}
-    var i=0;
-    (function next(){
-     if(i>=steps.length){finish();return;}
-     term.textContent+=(i?'\n':'')+steps[i];
-     prog.style.width=Math.round((i+1)/steps.length*100)+'%';
-     i++;setTimeout(next,650);
-    })();
-   }
-   if(b1)b1.addEventListener('click',run);
-   if(b2)b2.addEventListener('click',run);
-
-   if(dpc)setInterval(function(){
-    if(running||done||cleaned)return;
-    dpc.innerHTML=(140+Math.floor(Math.random()*10))+'<span>мкс</span>';
-   },2200);
-  })();
-  </script>
-
-  <!-- ============ #demo window: local independent profile tint ============ -->
-  <script>
-  (function(){
-    var win = document.querySelector('#demo .dm-win');
-    if(!win) return;
-    var profs = win.querySelectorAll('.dm-prof');
-    if(!profs || !profs.length) return;
-    var PALETTE = [
-      { a:'59,130,246',  b:'139,92,246'  },
-      { a:'139,92,246',  b:'99,102,241'  },
-      { a:'239,68,68',   b:'249,115,22'  }
-    ];
-    function tint(i){
-      var p = PALETTE[i] || PALETTE[1];
-      win.style.setProperty('--accent-rgb', p.a);
-      win.style.setProperty('--accent-2-rgb', p.b);
-      win.style.setProperty('--profile-rgb', p.a);
-      win.style.setProperty('--grad-brand','linear-gradient(120deg,rgb('+p.a+'),rgb('+p.b+'))');
-      for(var j=0;j<profs.length;j++){ profs[j].classList.toggle('dm-on', j===i); }
-    }
-    for(var k=0;k<profs.length;k++){
-      (function(idx){ profs[idx].addEventListener('click', function(){ tint(idx); }); })(k);
-    }
-    tint(1);
   })();
   </script>
 </body>
