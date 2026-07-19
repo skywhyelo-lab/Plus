@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pulse">
   <meta property="og:title" content="Pulse — стабильный фреймтайм и прирост FPS в Windows">
-  <meta property="og:description" content="Утилита для снижения задержек, очистки ОЗУ и твика Windows под игры. Активация по ключу, выдаётся вручную через Telegram.">
+  <meta property="og:description" content="Утилита для снижения задержек, очистки ОЗУ и твика Windows под игры. Активация по лицензионному ключу, оплата на сайте или через Telegram.">
   <meta property="og:image" content="https://pulsepc.vercel.app/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
       "@type": "Offer",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
-      "description": "Лицензионный ключ выдаётся вручную через Telegram"
+      "description": "Лицензионный ключ, оплата автоматически на сайте или через Telegram"
     },
     "softwareVersion": "1.2.6"
   }
@@ -48,7 +48,7 @@
          The whole site retints when --accent-rgb is swapped by the profile switcher. */
       --accent-rgb: 139, 92, 246;          /* Gaming / violet — app default */
       --accent-deep-rgb: 109, 60, 220;     /* darker shade for gradients */
-      --accent-light-rgb: 183, 148, 255;   /* lighter shade for text gradients */
+      --accent-light-rgb: 167, 139, 250;   /* lighter shade for text gradients — matches app AccentBrightColor #A78BFA */
 
       --bg: #08080c;
       --bg-2: #0b0b12;
@@ -242,7 +242,13 @@
       border-radius: 8px;
       border: 1px solid transparent;
       cursor: pointer;
-      transition: var(--transition);
+      /* hover-lift shares the same easing/duration as the cards so nothing moves at a different tempo */
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(0.98);
+      transition-duration: 0.09s;
     }
 
     .btn-primary {
@@ -1199,7 +1205,7 @@
       justify-content: center;
       cursor: pointer;
       margin-bottom: 16px;
-      transition: all 0.3s ease;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
     }
 
@@ -2199,7 +2205,7 @@
     .feat-card, .safe-card, .rev-card {
       position: relative;
       overflow: hidden;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, background 0.3s, box-shadow 0.4s;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background 0.25s ease, box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
     .feat-card:hover, .safe-card:hover, .rev-card:hover {
@@ -2296,7 +2302,7 @@
         </a>
         <a class="btn btn-ghost" href="#demo">Смотреть в действии</a>
       </div>
-      <div class="hero-note" id="heroNote">Версия 1.2.6 · Windows 10 / 11 · Платная лицензия · Ключ выдаётся вручную</div>
+      <div class="hero-note" id="heroNote">Версия 1.2.6 · Windows 10 / 11 · Платная лицензия · Активация по ключу</div>
 
       <!-- Profile switcher — retints the whole page live -->
       <div class="profile-switch">
@@ -2944,7 +2950,7 @@
         <a href="privacy.html">Конфиденциальность</a>
         <a href="eula.html">Лицензионное соглашение</a>
       </div>
-      <div class="copyright">© 2026 Pulse Utility. Лицензия выдаётся вручную через Telegram, только для личного использования.</div>
+      <div class="copyright">© 2026 Pulse Utility. Активация по лицензионному ключу, только для личного использования.</div>
     </div>
   </footer>
 
@@ -3101,7 +3107,7 @@
 
         // Draw dynamic constellation connection lines between close particles
         if (!reducedMotion) {
-          ctx.strokeStyle = 'rgba(' + (window.pulseAccentRGB || '139, 92, 246') + ', 0.32)';
+          ctx.strokeStyle = 'rgba(' + (window.pulseAccentRGB || '139, 92, 246') + ', 0.18)';
           ctx.lineWidth = 0.75 * dpr;
           for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
@@ -3109,7 +3115,7 @@
               const dy = (particles[i].y - particles[j].y) * height;
               const dist = Math.hypot(dx, dy);
               if (dist < 105 * dpr) { 
-                ctx.globalAlpha = (1 - dist / (105 * dpr)) * 0.45; 
+                ctx.globalAlpha = (1 - dist / (105 * dpr)) * 0.22;
                 ctx.beginPath();
                 ctx.moveTo(particles[i].x * width, particles[i].y * height);
                 ctx.lineTo(particles[j].x * width, particles[j].y * height);
