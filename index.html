@@ -158,9 +158,8 @@
       stroke-linejoin: round;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    /* scroll-behavior: smooth removed — Lenis owns smooth scrolling now and the
+       two fighting over the same scroll position caused a laggy, doubled feel. */
 
     body {
       background: var(--bg);
@@ -2995,7 +2994,75 @@
       .aw-gauge-fill { transition: none; }
       .hero-cursor-glow { display: none; }
     }
+
+    /* ═══ ASSEMBLY VISUAL — three drifting layers snap into one stack ═══
+       Own duotone-glass variant of the "layers merging" idea: not a literal
+       skeuomorphic render, just floating translucent plates that converge
+       under Pulse's mark on hover / .assembly-active (scroll-triggered). */
+    .assembly {
+      margin: 0 0 clamp(var(--space-8), 6vw, var(--space-9));
+      display: flex; flex-direction: column; align-items: center; gap: var(--space-4);
+      outline: none;
+    }
+    .assembly-stage {
+      position: relative; width: 100%; max-width: 460px; height: 280px;
+      perspective: 900px;
+    }
+    .assembly-plate {
+      position: absolute; left: 50%; top: 50%; width: 240px; height: 110px;
+      margin: -55px 0 0 -120px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.22), rgba(var(--accent-2-rgb), 0.10));
+      border: 1px solid rgba(var(--accent-rgb), 0.35);
+      box-shadow: 0 30px 50px -20px rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      transform-style: preserve-3d;
+      transition: transform 0.7s var(--ease-signature), box-shadow 0.7s var(--ease-signature), border-color 0.5s ease;
+      will-change: transform;
+    }
+    .ap-tag {
+      font: 700 13px var(--font-display); color: var(--text-muted);
+      letter-spacing: 0.01em; transition: color 0.5s ease;
+    }
+    /* Resting pose: fanned out clearly left/center/right and offset in depth —
+       exaggerated on purpose so the separation reads even without heavy 3D. */
+    .ap-1 { transform: translate3d(-150px, 60px, -160px) rotateY(26deg) rotateX(6deg);  z-index: 1; }
+    .ap-2 { transform: translate3d(150px, 20px, -80px)   rotateY(-24deg) rotateX(4deg); z-index: 2; }
+    .ap-3 { transform: translate3d(0, -60px, 40px)       rotateY(0deg) rotateX(-4deg);  z-index: 3; }
+    /* Assembled pose: flat stack, evenly spaced on Z, tags fade to full brightness */
+    .assembly:hover .ap-1, .assembly:focus-visible .ap-1, .assembly.assembly-active .ap-1 { transform: translate3d(0,0,0) translateY(38px); }
+    .assembly:hover .ap-2, .assembly:focus-visible .ap-2, .assembly.assembly-active .ap-2 { transform: translate3d(0,0,14px); }
+    .assembly:hover .ap-3, .assembly:focus-visible .ap-3, .assembly.assembly-active .ap-3 { transform: translate3d(0,0,28px) translateY(-38px); }
+    .assembly:hover .ap-tag, .assembly:focus-visible .ap-tag, .assembly.assembly-active .ap-tag { color: var(--text); }
+    .assembly:hover .assembly-plate, .assembly:focus-visible .assembly-plate, .assembly.assembly-active .assembly-plate {
+      box-shadow: 0 30px 60px -24px rgba(var(--accent-rgb), 0.4);
+      border-color: rgba(var(--accent-rgb), 0.55);
+    }
+    /* The Pulse mark at the core — dim while plates are apart, ignites once assembled */
+    .assembly-core {
+      position: absolute; left: 50%; top: 50%; width: 52px; height: 52px;
+      margin: -26px 0 0 -26px; border-radius: 14px; z-index: 4;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--grad-brand);
+      opacity: 0; transform: translateZ(50px) scale(0.6);
+      box-shadow: 0 0 0 rgba(var(--accent-rgb), 0);
+      transition: opacity 0.5s ease 0.25s, transform 0.6s var(--ease-signature) 0.25s, box-shadow 0.5s ease 0.25s;
+    }
+    .assembly-core svg { width: 26px; height: 26px; }
+    .assembly:hover .assembly-core, .assembly:focus-visible .assembly-core, .assembly.assembly-active .assembly-core {
+      opacity: 1; transform: translateZ(50px) scale(1);
+      box-shadow: 0 0 34px rgba(var(--accent-rgb), 0.65);
+    }
+    .assembly-caption {
+      font-family: var(--font-mono); font-size: 12px; color: var(--text-dark);
+      letter-spacing: 0.02em;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .assembly-plate, .assembly-core, .ap-tag { transition: none; }
+    }
   </style>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 </head>
 <body>
 
@@ -3447,6 +3514,28 @@
         <p>Каждое изменение спроектировано для снижения латентности ввода и устранения фонового вмешательства Windows.</p>
       </div>
 
+      <!-- Assembly visual: three drifting layers (system / network / game) that
+           snap together into one stack under Pulse's control on hover/scroll-into-view. -->
+      <div class="assembly" tabindex="0" role="img" aria-label="Три уровня системы — ОЗУ, сеть и игровой процесс — объединяются под управлением Pulse">
+        <div class="assembly-stage">
+          <div class="assembly-plate ap-3">
+            <span class="ap-tag">Игровой процесс</span>
+          </div>
+          <div class="assembly-plate ap-2">
+            <span class="ap-tag">Сеть и драйверы</span>
+          </div>
+          <div class="assembly-plate ap-1">
+            <span class="ap-tag">Система и ОЗУ</span>
+          </div>
+          <div class="assembly-core">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12h4l3-8 4 16 3-8h6"/>
+            </svg>
+          </div>
+        </div>
+        <p class="assembly-caption">Три слоя системы — под одним контролем</p>
+      </div>
+
       <div class="feat-grid">
         <div class="feat-card reveal">
           <div class="feat-icon">
@@ -3857,10 +3946,28 @@
   <script>
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 640;
-    
+
     // Add is-mobile class to body dynamically if mobile
     if (isMobileDevice) {
       document.body.classList.add('is-mobile');
+    }
+
+    // ---- Inertial ("ice-smooth") scroll via Lenis ----
+    // Skipped on reduced-motion (respects the OS setting) and on touch/mobile
+    // (native momentum scroll already feels right there, and Lenis mainly
+    // targets wheel input). Falls back silently if the CDN script failed.
+    let lenis = null;
+    if (!reducedMotion && !isMobileDevice && window.Lenis) {
+      lenis = new Lenis({
+        duration: 0.7,         // was 1.15 — that read as laggy; this keeps a light glide without feeling delayed
+        easing: (t) => 1 - Math.pow(1 - t, 2), // gentler ease-out quad — quicker settle than cubic
+        smoothWheel: true,
+      });
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
     }
 
     /* ---------- BRAND ACCENT (blue, mirrors the app chrome) — read by the hero canvas ---------- */
@@ -4236,6 +4343,19 @@
     // Skip under reduced-motion so the markup's final values stay put.
     if (!reducedMotion) {
       document.querySelectorAll('.hm-n').forEach(counter => countersObserver.observe(counter));
+    }
+
+    // Assembly visual: hover/focus drive it on desktop (pure CSS); on touch
+    // devices there's no hover, so trigger the assembled state once it's
+    // mostly in view instead — same .assembly-active class the CSS already handles.
+    const assemblyEl = document.querySelector('.assembly');
+    if (assemblyEl && !window.matchMedia('(hover: hover)').matches) {
+      const assemblyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          assemblyEl.classList.toggle('assembly-active', entry.isIntersecting);
+        });
+      }, { threshold: 0.5 });
+      assemblyObserver.observe(assemblyEl);
     }
 
     /* ---------- BUY BUTTONS (Paddle card checkout + CryptoCloud/Trybit) ---------- */
