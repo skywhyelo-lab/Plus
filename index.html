@@ -97,9 +97,30 @@
 
     /* Profile switcher retint — swaps the ENTIRE site duotone (bg glows, accents, buttons, window).
        Each profile is a harmonious pair, not a single flat hue. --profile-rgb follows --accent-rgb. */
-    :root[data-profile="standard"] { --accent-rgb: 59, 130, 246;  --accent-2-rgb: 139, 92, 246; }  /* синий → фиолет */
-    :root[data-profile="gaming"]   { --accent-rgb: 139, 92, 246;  --accent-2-rgb: 99, 102, 241; }   /* фиолет → индиго */
-    :root[data-profile="maximum"]  { --accent-rgb: 239, 68, 68;   --accent-2-rgb: 249, 115, 22; }   /* красный → оранж */
+    /* Registering the RGB channels as typed <number>s lets the browser actually
+       interpolate them on profile switch — a plain comma-list custom property
+       (the format used everywhere as rgb(var(--accent-rgb))) can't be animated. */
+    @property --ar { syntax: '<number>'; inherits: true; initial-value: 139; }
+    @property --ag { syntax: '<number>'; inherits: true; initial-value: 92; }
+    @property --ab { syntax: '<number>'; inherits: true; initial-value: 246; }
+    @property --a2r { syntax: '<number>'; inherits: true; initial-value: 99; }
+    @property --a2g { syntax: '<number>'; inherits: true; initial-value: 102; }
+    @property --a2b { syntax: '<number>'; inherits: true; initial-value: 241; }
+    :root {
+      --ar: 139; --ag: 92; --ab: 246;
+      --a2r: 99; --a2g: 102; --a2b: 241;
+      transition: --ar 0.6s ease, --ag 0.6s ease, --ab 0.6s ease,
+                  --a2r 0.6s ease, --a2g 0.6s ease, --a2b 0.6s ease;
+      /* Re-derive the comma-list vars every consumer already uses, now smoothly interpolated */
+      --accent-rgb: var(--ar), var(--ag), var(--ab);
+      --accent-2-rgb: var(--a2r), var(--a2g), var(--a2b);
+    }
+    :root[data-profile="standard"] { --ar: 59;  --ag: 130; --ab: 246; --a2r: 139; --a2g: 92;  --a2b: 246; }
+    :root[data-profile="gaming"]   { --ar: 139; --ag: 92;  --ab: 246; --a2r: 99;  --a2g: 102; --a2b: 241; }
+    :root[data-profile="maximum"]  { --ar: 239; --ag: 68;  --ab: 68;  --a2r: 249; --a2g: 115; --a2b: 22;  }
+    @media (prefers-reduced-motion: reduce) {
+      :root { transition: none; }
+    }
 
     @keyframes tel-pulse {
       0% { transform: scale(1); filter: brightness(1); }
@@ -2947,9 +2968,9 @@
     /* Soft cursor spotlight over the hero background (behind copy + window).
        Position fed by JS; opacity toggled only when the pointer is inside. */
     .hero-cursor-glow {
-      position: absolute; top: 0; left: 0; width: 180px; height: 180px; z-index: 1;
-      margin: -90px 0 0 -90px; border-radius: 50%; pointer-events: none;
-      background: radial-gradient(circle, rgba(var(--accent-rgb), 0.12), transparent 55%);
+      position: absolute; top: 0; left: 0; width: 120px; height: 120px; z-index: 1;
+      margin: -60px 0 0 -60px; border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle, rgba(var(--accent-rgb), 0.12), transparent 52%);
       opacity: 0; transition: opacity 0.5s ease;
       transform: translate(var(--gx, 50%), var(--gy, 50%));
       will-change: transform, opacity;
