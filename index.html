@@ -89,7 +89,10 @@
       --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
       --font-display: 'Exo 2', 'Segoe UI', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Was "all" — forced the browser to diff every animatable property (incl. filter,
+         width/height) on every hover/state change across ~12 selectors. Narrowed to what's
+         actually animated anywhere it's used: color/paint + transform, never geometry. */
+      --transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       /* Signature asymmetric shadow — grows down + sideways, never up (mirrors app card shadow) */
       --shadow-card: 10px 22px 44px -18px rgba(0, 0, 0, 0.75);
       --shadow-accent: 8px 20px 54px -14px rgba(var(--accent-rgb), 0.34);
@@ -3269,7 +3272,6 @@
       -webkit-backdrop-filter: none !important;
     }
   </style>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 </head>
 <body>
 
@@ -4158,6 +4160,11 @@
   </footer>
 
   <!-- ============ JAVASCRIPT ============ -->
+  <!-- Lenis moved here from <head> — it was a synchronous <script src> to a third-party
+       CDN blocking first paint of the ENTIRE page before ANY body markup rendered.
+       By the time the parser reaches it, all visible content above is already painted,
+       so the fetch no longer delays anything the user sees. -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 640;
