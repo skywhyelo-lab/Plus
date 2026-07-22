@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pulse — Настройка Windows для игр. Стабильный фреймтайм и низкий пинг</title>
-  <meta name="description" content="Pulse — утилита для снижения задержек, очистки оперативной памяти и оптимизации Windows под игровые задачи. Точка восстановления перед изменениями, белый список процессов, открытый лог твиков. Лицензия по ключу.">
+  <title>Pulse: настройка Windows для игр. Стабильный фреймтайм и низкий пинг</title>
+  <meta name="description" content="Pulse: утилита для снижения задержек, очистки оперативной памяти и оптимизации Windows под игровые задачи. Точка восстановления перед изменениями, белый список процессов, открытый лог твиков. Лицензия по ключу.">
   <link rel="canonical" href="https://pulsepc.vercel.app/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%233b82f6'/%3E%3Cpath d='M2 12h4l3-8 4 16 3-8h6' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pulse">
-  <meta property="og:title" content="Pulse — стабильный фреймтайм и прирост FPS в Windows">
+  <meta property="og:title" content="Pulse: стабильный фреймтайм и прирост FPS в Windows">
   <meta property="og:description" content="Утилита для снижения задержек, очистки ОЗУ и твика Windows под игры. Активация по лицензионному ключу, оплата на сайте или через Telegram.">
   <meta property="og:image" content="https://pulsepc.vercel.app/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -18,7 +18,7 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:locale" content="ru_RU">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pulse — стабильный фреймтайм и прирост FPS в Windows">
+  <meta name="twitter:title" content="Pulse: стабильный фреймтайм и прирост FPS в Windows">
   <meta name="twitter:description" content="Утилита для снижения задержек, очистки ОЗУ и твика Windows под игры. Активация по ключу.">
   <meta name="twitter:image" content="https://pulsepc.vercel.app/og-image.png">
 
@@ -41,18 +41,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Exo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* ---- Blue→Violet DUOTONE brand system (blue leads, mirrors the app chrome; violet is the second stop) ---- */
-      --accent-rgb: 59, 130, 246;          /* #3B82F6 — primary blue, matches the app UI */
-      --accent-2-rgb: 139, 92, 246;        /* #8B5CF6 — violet, the gradient's far stop */
-      --accent-deep-rgb: 37, 99, 235;      /* #2563EB — darker blue for depth */
-      --accent-light-rgb: 129, 178, 255;   /* lighter blue for text gradients */
+      /* ---- Cyan→Blue DUOTONE brand system (cyan leads on gaming default; blue is the second stop) ---- */
+      --accent-rgb: 34, 211, 238;          /* #22D3EE — cyan lead (gaming default), matches app UI */
+      --accent-2-rgb: 59, 130, 246;        /* #3B82F6 — blue, the gradient's far stop */
+      --accent-deep-rgb: 14, 116, 144;     /* #0E7490 — darker cyan for depth */
+      --accent-light-rgb: 150, 235, 247;   /* lighter cyan for text gradients */
       --accent-cyan-rgb: 34, 211, 238;     /* #22D3EE — cold highlight on peaks/graph */
 
-      /* Profile switcher stays as a second-level accent (Standard=blue, Gaming=violet, Maximum=red),
-         but the site's *chrome* default is blue — consistent with the current app. */
+      /* Profile switcher: Standard=green, Gaming=cyan→blue (default), Maximum=orange.
+         Site chrome default follows the Gaming profile (cyan). */
       --profile-rgb: var(--accent-rgb);
 
       /* Neutrals carry a slight blue-violet bias — chosen, not defaulted grey */
@@ -86,8 +86,8 @@
       --text: #f6f8ff;
       --text-muted: #a2a8c0;
       --text-dark: #656b86;
-      --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Manrope', system-ui, sans-serif;
-      --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+      --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-display: 'Exo 2', 'Segoe UI', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       /* Signature asymmetric shadow — grows down + sideways, never up (mirrors app card shadow) */
@@ -100,24 +100,26 @@
     /* Registering the RGB channels as typed <number>s lets the browser actually
        interpolate them on profile switch — a plain comma-list custom property
        (the format used everywhere as rgb(var(--accent-rgb))) can't be animated. */
-    @property --ar { syntax: '<number>'; inherits: true; initial-value: 139; }
-    @property --ag { syntax: '<number>'; inherits: true; initial-value: 92; }
-    @property --ab { syntax: '<number>'; inherits: true; initial-value: 246; }
-    @property --a2r { syntax: '<number>'; inherits: true; initial-value: 99; }
-    @property --a2g { syntax: '<number>'; inherits: true; initial-value: 102; }
-    @property --a2b { syntax: '<number>'; inherits: true; initial-value: 241; }
+    @property --ar { syntax: '<number>'; inherits: true; initial-value: 34; }
+    @property --ag { syntax: '<number>'; inherits: true; initial-value: 211; }
+    @property --ab { syntax: '<number>'; inherits: true; initial-value: 238; }
+    @property --a2r { syntax: '<number>'; inherits: true; initial-value: 59; }
+    @property --a2g { syntax: '<number>'; inherits: true; initial-value: 130; }
+    @property --a2b { syntax: '<number>'; inherits: true; initial-value: 246; }
     :root {
-      --ar: 139; --ag: 92; --ab: 246;
-      --a2r: 99; --a2g: 102; --a2b: 241;
+      --ar: 34; --ag: 211; --ab: 238;
+      --a2r: 59; --a2g: 130; --a2b: 246;
       transition: --ar 0.6s ease, --ag 0.6s ease, --ab 0.6s ease,
                   --a2r 0.6s ease, --a2g 0.6s ease, --a2b 0.6s ease;
       /* Re-derive the comma-list vars every consumer already uses, now smoothly interpolated */
       --accent-rgb: var(--ar), var(--ag), var(--ab);
       --accent-2-rgb: var(--a2r), var(--a2g), var(--a2b);
     }
-    :root[data-profile="standard"] { --ar: 59;  --ag: 130; --ab: 246; --a2r: 139; --a2g: 92;  --a2b: 246; }
-    :root[data-profile="gaming"]   { --ar: 139; --ag: 92;  --ab: 246; --a2r: 99;  --a2g: 102; --a2b: 241; }
-    :root[data-profile="maximum"]  { --ar: 239; --ag: 68;  --ab: 68;  --a2r: 249; --a2g: 115; --a2b: 22;  }
+    /* Standard=безопасный ЗЕЛЁНЫЙ, Gaming=игровой ЦИАН→СИНИЙ, Maximum=ОРАНЖЕВЫЙ→hot red.
+       Violet/indigo removed — was the #1 "AI-generated" color tell (Tailwind default). */
+    :root[data-profile="standard"] { --ar: 34;  --ag: 224; --ab: 107; --a2r: 18;  --a2g: 184; --a2b: 147; }
+    :root[data-profile="gaming"]   { --ar: 34;  --ag: 211; --ab: 238; --a2r: 59;  --a2g: 130; --a2b: 246; }
+    :root[data-profile="maximum"]  { --ar: 255; --ag: 106; --ab: 26;  --a2r: 255; --a2g: 61;  --a2b: 87;  }
     @media (prefers-reduced-motion: reduce) {
       :root { transition: none; }
     }
@@ -282,16 +284,22 @@
       transition-duration: 0.09s;
     }
 
+    /* Airy frosted-glass CTA — translucent, light "like air/water", not a loud fill */
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
-      color: #fff;
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.20), rgba(var(--accent-rgb), 0.07));
+      -webkit-backdrop-filter: blur(10px);
+              backdrop-filter: blur(10px);
+      color: #eafcff;
+      border-color: rgba(var(--accent-rgb), 0.5);
       position: relative;
-      box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.28), 0 1px 0 rgba(255,255,255,0.15) inset;
+      box-shadow: 0 4px 22px -8px rgba(var(--accent-rgb), 0.35), inset 0 1px 0 rgba(255,255,255,0.14);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(var(--accent-rgb), 0.42), 0 1px 0 rgba(255,255,255,0.18) inset;
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.30), rgba(var(--accent-rgb), 0.12));
+      border-color: rgba(var(--accent-rgb), 0.72);
+      box-shadow: 0 12px 34px -10px rgba(var(--accent-rgb), 0.45), inset 0 1px 0 rgba(255,255,255,0.18);
     }
 
     .btn-ghost {
@@ -346,6 +354,9 @@
       filter: blur(70px);
       opacity: 0.75;
       animation: aurora-spin 34s linear infinite;
+      /* self-fade to transparent at its own edges so overflow:hidden can't clip it into a hard box */
+      -webkit-mask-image: radial-gradient(closest-side, #000 32%, transparent 78%);
+              mask-image: radial-gradient(closest-side, #000 32%, transparent 78%);
     }
 
     @keyframes aurora-spin {
@@ -429,9 +440,26 @@
     .btn-lg { padding: 14px 26px; font-size: 15px; border-radius: 10px; }
 
     .hero-note {
-      font-size: 12.5px;
-      color: var(--text-dark);
-      font-family: var(--font-mono);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .hn-tag {
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      background: rgba(150, 170, 255, 0.045);
+      border: 1px solid var(--border);
+      padding: 3px 9px;
+      border-radius: 6px;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+    .hn-tag.hn-date {
+      color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.07);
+      border-color: rgba(var(--accent-rgb), 0.32);
+      font-weight: 600;
     }
 
     .hero-metrics {
@@ -454,7 +482,7 @@
     .hm-k { font-size: 12px; color: var(--text-dark); margin-top: 2px; }
     .hm-sep { width: 1px; height: 34px; background: var(--border); }
 
-    /* ---- Profile switcher (mirrors the app: Standard=blue, Gaming=violet, Maximum=red) ---- */
+    /* ---- Profile switcher (Standard=green, Gaming=cyan→blue, Maximum=orange) ---- */
     .profile-switch { display: flex; align-items: center; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
     .ps-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dark); }
     .profile-pills {
@@ -470,9 +498,9 @@
       font-family: var(--font-sans); transition: color .25s ease, background .35s ease, box-shadow .35s ease;
     }
     .profile-pill .pp-dot { width: 8px; height: 8px; border-radius: 50%; transition: box-shadow .3s ease; }
-    .profile-pill[data-profile="standard"] .pp-dot { background: #3B82F6; }
-    .profile-pill[data-profile="gaming"] .pp-dot   { background: #8B5CF6; }
-    .profile-pill[data-profile="maximum"] .pp-dot  { background: #EF4444; }
+    .profile-pill[data-profile="standard"] .pp-dot { background: #22E06B; }
+    .profile-pill[data-profile="gaming"] .pp-dot   { background: #22D3EE; }
+    .profile-pill[data-profile="maximum"] .pp-dot  { background: #FF6A1A; }
     .profile-pill:hover { color: var(--text); }
     .profile-pill.active {
       color: #fff; background: rgba(var(--profile-rgb), 0.16);
@@ -488,13 +516,17 @@
     }
     .stage-glow {
       position: absolute;
-      inset: 6%;
-      background: radial-gradient(circle at 50% 48%, rgba(var(--profile-rgb), 0.24), rgba(var(--accent-2-rgb), 0.10) 45%, transparent 66%);
-      filter: blur(58px);
+      inset: 22%;
+      background: radial-gradient(circle at 50% 48%, rgba(var(--profile-rgb), 0.22), rgba(var(--accent-2-rgb), 0.09) 45%, transparent 66%);
+      filter: blur(40px);
       z-index: 0;
-      opacity: 0.8;
+      opacity: 0.7;
       animation: glow-pulse 7s ease-in-out infinite;
       transition: background .5s ease;
+      /* kept small + well inside the window footprint so a tilt never reveals a
+         clipped edge at the hero's overflow:hidden boundary */
+      -webkit-mask-image: radial-gradient(closest-side, #000 24%, transparent 82%);
+              mask-image: radial-gradient(closest-side, #000 24%, transparent 82%);
     }
     @keyframes glow-pulse { 0%,100%{opacity:.7} 50%{opacity:1} }
 
@@ -506,7 +538,10 @@
       border: 1px solid rgba(150, 170, 255, 0.14);
       box-shadow: 0 40px 90px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(0,0,0,.4);
       overflow: hidden;
-      transform-style: preserve-3d;
+      /* flat (not preserve-3d): keeps the glowing aurora border glued to the window
+         face so a hover-tilt can't project it past the overflow:hidden clip.
+         X/Y parallax floats still work (they translate in x/y, not z). */
+      transform-style: flat;
     }
     .aw-titlebar {
       display: flex; align-items: center; justify-content: space-between;
@@ -567,10 +602,12 @@
     .aw-gauge-v { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #fff; }
     .aw-gauge-v small { font-size: 12px; color: var(--text-muted); margin-left: 1px; }
     .aw-clean {
-      width: 100%; padding: 8px; border: none; border-radius: 8px;
-      background: var(--grad-profile); color: #fff; font-weight: 600; font-size: 11.5px;
-      font-family: var(--font-sans); box-shadow: 0 6px 18px rgba(var(--profile-rgb),0.35);
-      transition: background .5s ease, box-shadow .5s ease;
+      width: 100%; padding: 8px; border-radius: 8px;
+      border: 1px solid rgba(var(--profile-rgb),0.5);
+      background: linear-gradient(135deg, rgba(var(--profile-rgb),0.22), rgba(var(--profile-rgb),0.08));
+      color: #eafcff; font-weight: 600; font-size: 11.5px;
+      font-family: var(--font-sans); box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+      transition: background .5s ease, box-shadow .5s ease, border-color .5s ease;
     }
     .awp-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; font-size: 11px; }
     .awp-row + .awp-row { border-top: 1px solid rgba(255,255,255,0.03); }
@@ -704,12 +741,8 @@
       gap: 8px;
     }
 
-    .eyebrow::before {
-      content: '';
-      width: 16px;
-      height: 1px;
-      background: var(--accent);
-    }
+    /* dash before section eyebrows removed — reads as a generic AI-template tell */
+    .eyebrow::before { display: none; }
 
     h2 {
       font-family: var(--font-display);
@@ -1425,7 +1458,11 @@
 
     /* ============ FEATURES (HOW IT WORKS UNDER THE HOOD) ============ */
     .features {
-      background: var(--bg);
+      /* self-contained glow behind the CPU — fades to transparent well before
+         the section edges, so neighbours still meet on plain --bg (no seams). */
+      background:
+        radial-gradient(760px 520px at 50% 30%, rgba(var(--accent-rgb), 0.07), transparent 66%),
+        var(--bg);
     }
 
     .feat-grid {
@@ -1483,40 +1520,61 @@
 
     /* ============ STATS / NUMBERS BAND ============ */
     .band {
-      background: #080b12;
+      background: var(--bg);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 50px 0;
+      padding: 40px 0;
     }
 
     .band-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 30px;
-      text-align: center;
+      gap: 0;
+      text-align: left;
+    }
+
+    .band-card {
+      padding: 2px 32px;
+      border-left: 1px solid var(--border);
+    }
+
+    .band-card:first-child {
+      border-left: none;
+      padding-left: 0;
     }
 
     .band-card .num {
-      font-size: clamp(28px, 3.4vw, 40px);
-      font-weight: 700;
-      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 37px);
+      font-weight: 600;
+      font-family: var(--font-mono);
       letter-spacing: -1.5px;
-      background: linear-gradient(160deg, #ffffff, var(--accent-light));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .band-card .num .u {
+      font-size: 0.5em;
+      font-weight: 700;
+      color: rgb(var(--accent-rgb));
+      letter-spacing: 0;
+      margin-left: 1px;
     }
 
     .band-card .lbl {
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--text-muted);
-      margin-top: 6px;
+      margin-top: 12px;
       font-weight: 500;
+      line-height: 1.45;
+      max-width: 165px;
     }
 
     /* ============ RESULTS ============ */
     .results {
-      background: linear-gradient(180deg, #080b12, var(--bg));
+      /* depth via a centred glow that fades to --bg at every edge → no seams */
+      background:
+        radial-gradient(1000px 640px at 32% 48%, rgba(var(--accent-rgb), 0.055), transparent 66%),
+        var(--bg);
     }
 
     .results-in {
@@ -1583,12 +1641,26 @@
     }
 
     .chart-bar-fill.before {
-      background: linear-gradient(90deg, #334155, #475569);
+      background: #3a4152;
     }
 
     .chart-bar-fill.after {
-      background: linear-gradient(90deg, var(--accent-deep), var(--accent-light));
-      box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.35);
+      background: rgb(var(--accent-rgb));
+    }
+
+    .chart-delta {
+      display: inline-block;
+      margin-left: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: rgb(var(--accent-rgb));
+      background: rgba(var(--accent-rgb), 0.1);
+      border: 1px solid rgba(var(--accent-rgb), 0.25);
+      border-radius: 5px;
+      padding: 2px 6px;
+      vertical-align: middle;
+      letter-spacing: 0;
     }
 
     .results-text h3 {
@@ -1652,10 +1724,20 @@
     }
 
     .col-target {
-      background: rgba(var(--accent-rgb), 0.03);
-      border-left: 1px solid var(--border);
-      border-right: 1px solid var(--border);
+      background: rgba(var(--accent-rgb), 0.05);
+      border-left: 1px solid rgba(var(--accent-rgb), 0.18);
+      border-right: 1px solid rgba(var(--accent-rgb), 0.18);
       font-weight: 600;
+    }
+
+    th.col-target {
+      color: rgb(var(--accent-rgb));
+      background: rgba(var(--accent-rgb), 0.09);
+      border-top: 2px solid rgb(var(--accent-rgb));
+    }
+
+    tr:last-child .col-target {
+      border-bottom: 1px solid rgba(var(--accent-rgb), 0.18);
     }
 
     tr:last-child td {
@@ -1668,7 +1750,9 @@
 
     /* ============ SAFETY PRINCIPLES ============ */
     .safety {
-      background: #080b12;
+      background:
+        radial-gradient(920px 600px at 70% 42%, rgba(var(--accent-rgb), 0.045), transparent 66%),
+        var(--bg);
     }
 
     .safety-grid {
@@ -1733,69 +1817,63 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
+      align-items: stretch;
     }
 
     .rev-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 90px), var(--bg-panel);
+      background: var(--bg-panel);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
+      border-left: 2px solid rgba(var(--accent-rgb), 0.35);
+      border-radius: 4px 10px 10px 4px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      gap: 16px;
-      box-shadow: var(--shadow-card);
       transition: var(--transition);
     }
 
     .rev-card:hover {
-      border-color: rgba(var(--accent-rgb), 0.3);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-accent);
+      border-left-color: rgb(var(--accent-rgb));
+      transform: translateY(-3px);
+    }
+
+    .rev-head {
+      margin-bottom: 12px;
     }
 
     .rev-stars {
       display: flex;
-      gap: 3px;
+      gap: 2px;
       color: var(--amber);
-      font-size: 13px;
     }
 
     .rev-text {
       font-size: 14px;
-      color: #e2e8f0;
-      line-height: 1.5;
+      color: #dbe2ec;
+      line-height: 1.55;
+      margin: 0 0 14px;
+      flex: 1;
     }
 
     .rev-user {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      border-top: 1px solid var(--border);
-      padding-top: 14px;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .rev-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--accent-muted);
-      border: 1px solid rgba(var(--accent-rgb), 0.15);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 12px;
-    }
-
-    .rev-meta .name {
-      font-size: 12px;
+    .rev-user .name {
+      font-size: 12.5px;
       font-weight: 700;
       color: #fff;
     }
 
-    .rev-meta .specs {
+    .rev-user .name::before {
+      content: '@';
+      color: rgba(var(--accent-rgb), 0.6);
+      font-weight: 500;
+    }
+
+    .rev-user .specs {
       font-size: 10px;
       font-family: var(--font-mono);
       color: var(--text-dark);
@@ -1803,37 +1881,42 @@
 
     /* ============ FAQ ============ */
     .faq {
-      background: #080b12;
+      background:
+        radial-gradient(900px 600px at 50% 28%, rgba(var(--accent-rgb), 0.04), transparent 66%),
+        var(--bg);
     }
 
     .faq-container {
       max-width: 760px;
       margin: 0 auto;
+      counter-reset: faq;
     }
 
     details {
       background: var(--bg-panel);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-left: 2px solid var(--border);
+      border-radius: 4px 8px 8px 4px;
       margin-bottom: 10px;
       overflow: hidden;
-      transition: var(--transition);
+      transition: border-color 0.25s ease;
     }
 
     details[open] {
       border-color: var(--border-hover);
+      border-left-color: rgb(var(--accent-rgb));
     }
 
     summary {
       cursor: pointer;
       list-style: none;
+      counter-increment: faq;
       padding: 16px 20px;
       font-weight: 600;
       font-size: 15px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       color: #fff;
     }
 
@@ -1841,30 +1924,47 @@
       display: none;
     }
 
+    /* leading 01 / 02 index in mono */
+    summary::before {
+      content: counter(faq, decimal-leading-zero);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(var(--accent-rgb), 0.55);
+      flex: none;
+    }
+
+    details[open] summary::before {
+      color: rgb(var(--accent-rgb));
+    }
+
+    /* + / – toggle */
     summary::after {
-      content: '';
-      width: 14px;
-      height: 14px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
-      transition: transform 0.25s ease;
+      content: '+';
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
       flex: none;
     }
 
     details[open] summary::after {
-      transform: rotate(180deg);
+      content: '–';
+      color: rgb(var(--accent-rgb));
     }
 
     details .answer {
-      padding: 0 20px 16px;
+      padding: 0 20px 16px 52px;
       color: var(--text-muted);
       font-size: 14px;
     }
 
     /* ============ DOWNLOAD ============ */
     .download {
-      background: linear-gradient(180deg, #080b12, var(--bg));
+      background: var(--bg);
       position: relative;
     }
 
@@ -2295,7 +2395,11 @@
       }
       .band-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px !important;
+        gap: 24px 20px !important;
+      }
+      .band-card {
+        padding: 0 !important;
+        border-left: none !important;
       }
       .band-card .num {
         font-size: 24px !important;
@@ -2354,21 +2458,7 @@
       box-shadow: 0 16px 40px rgba(var(--accent-rgb), 0.06);
     }
 
-    /* Ambient spotlight glow following user cursor */
-    .feat-card::before, .safe-card::before, .rev-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--accent-rgb), 0.05), transparent 80%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    .feat-card:hover::before, .safe-card:hover::before, .rev-card:hover::before {
-      opacity: 1;
-    }
+    /* (cursor-following spotlight removed — it clipped at card edges; plain hover lift + border stays) */
 
     /* Render text above the spotlight glow bg */
     .feat-card > *, .safe-card > *, .rev-card > * {
@@ -2376,7 +2466,9 @@
       z-index: 2;
     }
 
-    /* Reveal scroll entrance animation */
+    /* Reveal scroll entrance animation.
+       Motion is deliberately NOT uniform: each block type enters on its own
+       axis/easing/duration so the page doesn't read as one templated fade-in-up. */
     .reveal {
       opacity: 0;
       transform: translateY(18px);
@@ -2384,20 +2476,39 @@
     }
     .reveal.reveal-active {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
 
-    /* Staggered entrance animations for grids */
+    /* Each section enters on its own feel — but cards in a grid always rise
+       VERTICALLY (a horizontal slide across a row reads as crooked). */
+    /* Feature cards (2×2): short rise + soft overshoot */
+    .feat-card.reveal {
+      transform: translateY(20px) scale(0.98);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.34, 1.26, 0.5, 1);
+    }
+    /* Safety cards (3-col): calm vertical fade-rise, a bit further */
+    .safe-card.reveal {
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Comparison cards: settle down + scale, gentle spring */
+    .rev-card.reveal {
+      transform: translateY(16px) scale(0.94);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    /* Tight stagger so the grid never sits waiting before it moves */
     .feat-card:nth-child(1) { transition-delay: 0s; }
-    .feat-card:nth-child(2) { transition-delay: 0.1s; }
-    .feat-card:nth-child(3) { transition-delay: 0.2s; }
+    .feat-card:nth-child(2) { transition-delay: 0.06s; }
+    .feat-card:nth-child(3) { transition-delay: 0.12s; }
+    .feat-card:nth-child(4) { transition-delay: 0.18s; }
 
     .safe-card:nth-child(1) { transition-delay: 0s; }
-    .safe-card:nth-child(2) { transition-delay: 0.1s; }
-    .safe-card:nth-child(3) { transition-delay: 0.2s; }
+    .safe-card:nth-child(2) { transition-delay: 0.07s; }
+    .safe-card:nth-child(3) { transition-delay: 0.14s; }
 
     .rev-card:nth-child(1) { transition-delay: 0s; }
-    .rev-card:nth-child(2) { transition-delay: 0.15s; }
+    .rev-card:nth-child(2) { transition-delay: 0.1s; }
 
     /* ---- Hero on small screens ---- */
     @media (max-width: 620px) {
@@ -2430,8 +2541,8 @@
       overflow:hidden;
       --p:1; /* default = resolved state; JS lowers it only when motion allowed */
       background:
-        radial-gradient(120% 90% at 50% -10%, rgba(var(--accent-2-rgb),.10), transparent 55%),
-        radial-gradient(90% 80% at 50% 120%, rgba(var(--accent-rgb),.08), transparent 60%),
+        radial-gradient(85% 52% at 50% 40%, rgba(var(--accent-2-rgb),.09), transparent 60%),
+        radial-gradient(78% 46% at 50% 62%, rgba(var(--accent-rgb),.07), transparent 60%),
         var(--bg);
       display:grid;
       place-items:center;
@@ -2545,7 +2656,7 @@
       padding:14px 20px; border-radius:16px;
       border:1px solid var(--border-hover);
       background:linear-gradient(120deg, rgba(var(--accent-rgb),.14), rgba(var(--accent-2-rgb),.14));
-      box-shadow:0 26px 60px -26px rgba(var(--accent-rgb),.5);
+      box-shadow:0 18px 44px -28px rgba(var(--accent-rgb),.3);
       opacity:calc(min(1, max(0,(var(--p) - .76)/.2)));
       transform:translateY(calc((1 - min(1, max(0,(var(--p) - .76)/.2))) * 14px));
     }
@@ -2564,8 +2675,8 @@
       padding:0;
     }
     .co-scope svg{ width:100%; height:100%; display:block; }
-    .co-line--jag{ opacity:calc(1 - var(--p)); }
-    .co-line--calm{ opacity:var(--p); }
+    .co-line--jag{ opacity:calc(1 - var(--p)); filter:drop-shadow(0 0 3px rgba(239,68,68,0.35)); }
+    .co-line--calm{ opacity:var(--p); filter:drop-shadow(0 0 4px rgba(var(--accent-cyan-rgb),0.55)); }
     .co-scope__cap{
       position:absolute; left:16px; top:10px;
       font-family:var(--font-mono); font-size:.72rem; letter-spacing:.04em;
@@ -2631,7 +2742,7 @@
     .dm-navi{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;border:0;background:transparent;color:var(--text-muted);font:500 13px var(--font-sans);cursor:pointer;text-align:left;width:100%;transition:.15s}
     .dm-navi svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
     .dm-navi:hover{background:rgba(150,170,255,.05);color:var(--text)}
-    .dm-navi.dm-on{background:var(--grad-brand);color:#fff;box-shadow:0 6px 18px -8px rgb(var(--accent-rgb))}
+    .dm-navi.dm-on{background:linear-gradient(135deg,rgba(var(--accent-rgb),.20),rgba(var(--accent-rgb),.07));color:#eafcff;box-shadow:inset 0 0 0 1px rgba(var(--accent-rgb),.4)}
     .dm-main{padding:16px;overflow:auto;min-height:0}
     .dm-panel{display:none;animation:dm-fade .25s ease}
     .dm-panel.dm-on{display:block}
@@ -2643,7 +2754,7 @@
     .dm-row2{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
     .dm-btn{font:600 12px var(--font-sans);border-radius:8px;padding:8px 14px;border:1px solid var(--border-hover);background:var(--bg-2);color:var(--text);cursor:pointer;transition:.15s}
     .dm-btn:hover{border-color:var(--accent);color:#fff}
-    .dm-btn-p{background:var(--grad-brand);border-color:transparent;box-shadow:0 6px 18px -8px rgb(var(--accent-rgb))}
+    .dm-btn-p{background:linear-gradient(135deg,rgba(var(--accent-rgb),.20),rgba(var(--accent-rgb),.07));border-color:rgba(var(--accent-rgb),.5);color:#eafcff;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
     .dm-btn-xs{font-size:11px;padding:5px 10px;border-radius:7px}
     .dm-btn-g{color:var(--text-muted);border-color:var(--border)}
     .dm-gauge{display:flex;flex-direction:column;align-items:center;gap:12px}
@@ -2737,10 +2848,10 @@
 
     /* ===== #demo window fixes (scoped) ===== */
     .dm-section .dm-win{
-      --accent-rgb:139,92,246;
-      --accent-2-rgb:99,102,241;
-      --profile-rgb:139,92,246;
-      --grad-brand:linear-gradient(120deg,rgb(139,92,246),rgb(99,102,241));
+      --accent-rgb:34,211,238;
+      --accent-2-rgb:59,130,246;
+      --profile-rgb:34,211,238;
+      --grad-brand:linear-gradient(120deg,rgb(34,211,238),rgb(59,130,246));
     }
     .dm-section .dm-win{ height:548px; min-height:548px; max-height:548px; }
     .dm-section .dm-card{ padding:12px; }
@@ -2813,7 +2924,6 @@
     h1 { line-height: 1.02; letter-spacing: -0.035em; }
     h2 { letter-spacing: -0.03em; line-height: 1.12; }
     .eyebrow { letter-spacing: 2px; opacity: 0.92; }
-    .eyebrow::before { width: 22px; box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.6); }
     .hero p.sub { line-height: 1.6; letter-spacing: 0.005em; }
 
     /* ---- Signature #1: animated neon underline on nav links ---- */
@@ -2910,19 +3020,10 @@
       0%, 100% { translate: 0 0; }
       50%      { translate: 0 -8px; }
     }
-    /* Static multicolor aurora edge — no rotation (rotation + preserve-3d escaped
-       the clip and drew flying diagonals); it breathes via opacity instead. */
-    .app-window::after {
-      content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: 2;
-      padding: 1.5px; pointer-events: none;
-      background: linear-gradient(135deg,
-        rgba(var(--accent-rgb), 0.85), rgba(var(--accent-2-rgb), 0.7) 45%,
-        rgba(var(--accent-cyan-rgb), 0.5) 75%, transparent);
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-      opacity: 0.5;
-      animation: aw-frame 6s ease-in-out infinite;
-    }
+    /* Aurora glowing border REMOVED — under the hover 3D-tilt it projected past
+       the window's overflow:hidden clip and drew a ghost offset glowing outline
+       (the "clipped glow" chased across many sessions). The plain 1px window
+       border stays. */
     @keyframes aw-frame { 0%, 100% { opacity: 0.32; } 50% { opacity: 0.6; } }
 
     /* Reflection pooling under the floating window */
@@ -2930,6 +3031,8 @@
       content: ''; position: absolute; left: 8%; right: 8%; bottom: -6%; height: 60px; z-index: 0;
       background: radial-gradient(60% 100% at 50% 0%, rgba(var(--accent-rgb), 0.35), transparent 70%);
       filter: blur(26px); opacity: 0.6;
+      -webkit-mask-image: radial-gradient(75% 100% at 50% 0%, #000 30%, transparent 78%);
+              mask-image: radial-gradient(75% 100% at 50% 0%, #000 30%, transparent 78%);
     }
 
     /* The monitoring chart reads as LIVE — the accent trace flows left→right */
@@ -2965,102 +3068,192 @@
     .aw-gauge-fill { stroke-dashoffset: 207; transition: stroke-dashoffset 1.5s var(--ease-signature) 0.55s; }
     .hero-loaded .aw-gauge-fill { stroke-dashoffset: 72; }
 
-    /* Soft cursor spotlight over the hero background (behind copy + window).
-       Position fed by JS; opacity toggled only when the pointer is inside. */
-    .hero-cursor-glow {
-      position: absolute; top: 0; left: 0; width: 120px; height: 120px; z-index: 1;
-      margin: -60px 0 0 -60px; border-radius: 50%; pointer-events: none;
-      background: radial-gradient(circle, rgba(var(--accent-rgb), 0.12), transparent 52%);
-      opacity: 0; transition: opacity 0.5s ease;
-      transform: translate(var(--gx, 50%), var(--gy, 50%));
-      will-change: transform, opacity;
+    /* God rays — soft volumetric light shafts drifting from the top, like
+       sunbeams filtering through water. Two layers at different speeds shimmer
+       organically; masked so they dissolve before the bottom edge (no seam). */
+    .godrays {
+      position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+      -webkit-mask-image: radial-gradient(135% 105% at 50% -8%, #000 34%, rgba(0,0,0,.5) 60%, transparent 82%);
+              mask-image: radial-gradient(135% 105% at 50% -8%, #000 34%, rgba(0,0,0,.5) 60%, transparent 82%);
     }
-    .hero:hover .hero-cursor-glow { opacity: 1; }
+    .godrays::before, .godrays::after {
+      content: ""; position: absolute; top: -45%; left: -30%; width: 170%; height: 190%;
+      background: repeating-linear-gradient(72deg,
+        transparent 0 46px,
+        rgba(var(--accent-rgb), 0.055) 46px 52px,
+        transparent 52px 64px,
+        rgba(var(--accent-2-rgb), 0.04) 64px 68px,
+        transparent 68px 128px);
+      filter: blur(9px);
+      transform-origin: top center;
+      animation: rayShift 17s ease-in-out infinite alternate;
+    }
+    .godrays::after {
+      filter: blur(20px); opacity: .65;
+      animation-duration: 24s; animation-direction: alternate-reverse;
+    }
+    @keyframes rayShift {
+      0%   { transform: translateX(-46px) skewX(1deg); }
+      100% { transform: translateX(46px) skewX(-5deg); }
+    }
 
     /* Download: make the final CTA read as the heaviest surface on the page */
     .download { position: relative; }
     .download::before {
       content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background: radial-gradient(680px 340px at 22% 0%, rgba(var(--accent-rgb), 0.10), transparent 64%);
+      background: radial-gradient(820px 520px at 28% 42%, rgba(var(--accent-rgb), 0.07), transparent 66%);
     }
     .download .wrap { position: relative; z-index: 1; }
     .dl-main h2 { letter-spacing: -0.03em; }
-    .dl-buttons .btn-primary { box-shadow: 0 10px 34px -8px rgba(var(--accent-rgb), 0.55); }
+    .dl-buttons .btn-primary { box-shadow: 0 8px 28px -10px rgba(var(--accent-rgb), 0.4), inset 0 1px 0 rgba(255,255,255,0.14); }
     .hash-info { transition: border-color 0.3s ease, background 0.3s ease; }
     .hash-info:hover { border-color: var(--border-hover); }
     .req-list li { transition: color 0.25s ease; }
 
     @media (prefers-reduced-motion: reduce) {
       .aw-gauge-fill { transition: none; }
-      .hero-cursor-glow { display: none; }
+      .godrays::before, .godrays::after { animation: none !important; }
     }
 
-    /* ═══ ASSEMBLY VISUAL — three drifting layers snap into one stack ═══
-       Own duotone-glass variant of the "layers merging" idea: not a literal
-       skeuomorphic render, just floating translucent plates that converge
-       under Pulse's mark on hover / .assembly-active (scroll-triggered). */
+    /* ═══ CPU ASSEMBLY — a real processor builds itself from parts ═══
+       Layers fly in and lock: socket → substrate → contact pins → die →
+       heat-spreader (IHS) drops on top → engraving → power-on pulse.
+       Driven by .assembly-active (scroll) and :hover. */
     .assembly {
       margin: 0 0 clamp(var(--space-8), 6vw, var(--space-9));
-      display: flex; flex-direction: column; align-items: center; gap: var(--space-4);
+      display: flex; flex-direction: column; align-items: center; gap: var(--space-5);
       outline: none;
     }
-    .assembly-stage {
-      position: relative; width: 100%; max-width: 460px; height: 280px;
-      perspective: 900px;
+    .cpu-stage {
+      position: relative; width: 300px; height: 300px;
+      display: grid; place-items: center;
     }
-    .assembly-plate {
-      position: absolute; left: 50%; top: 50%; width: 240px; height: 110px;
-      margin: -55px 0 0 -120px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.22), rgba(var(--accent-2-rgb), 0.10));
-      border: 1px solid rgba(var(--accent-rgb), 0.35);
-      box-shadow: 0 30px 50px -20px rgba(0,0,0,0.7);
-      display: flex; align-items: center; justify-content: center;
-      transform-style: preserve-3d;
-      transition: transform 0.7s var(--ease-signature), box-shadow 0.7s var(--ease-signature), border-color 0.5s ease;
-      will-change: transform;
+    /* every layer centered in the same cell */
+    .cpu-stage > * { grid-area: 1 / 1; }
+
+    /* shared enter transition; each piece overrides delay/transform */
+    .cpu-socket, .cpu-substrate, .cpu-pins, .cpu-die, .cpu-ihs, .cpu-glow {
+      opacity: 0;
+      transition: opacity .55s ease, transform .7s var(--ease-signature);
+      will-change: transform, opacity;
     }
-    .ap-tag {
-      font: 700 13px var(--font-display); color: var(--text-muted);
-      letter-spacing: 0.01em; transition: color 0.5s ease;
+
+    /* 1 — motherboard socket: faint dot-grid pad under everything */
+    .cpu-socket {
+      width: 264px; height: 264px; border-radius: 22px;
+      background:
+        radial-gradient(circle at center, rgba(var(--accent-rgb),.05), transparent 70%),
+        radial-gradient(rgba(150,170,255,.18) 1px, transparent 1.4px) 0 0 / 15px 15px;
+      border: 1px solid var(--border);
+      transform: scale(.92);
     }
-    /* Resting pose: fanned out clearly left/center/right and offset in depth —
-       exaggerated on purpose so the separation reads even without heavy 3D. */
-    .ap-1 { transform: translate3d(-150px, 60px, -160px) rotateY(26deg) rotateX(6deg);  z-index: 1; }
-    .ap-2 { transform: translate3d(150px, 20px, -80px)   rotateY(-24deg) rotateX(4deg); z-index: 2; }
-    .ap-3 { transform: translate3d(0, -60px, 40px)       rotateY(0deg) rotateX(-4deg);  z-index: 3; }
-    /* Assembled pose: flat stack, evenly spaced on Z, tags fade to full brightness */
-    .assembly:hover .ap-1, .assembly:focus-visible .ap-1, .assembly.assembly-active .ap-1 { transform: translate3d(0,0,0) translateY(38px); }
-    .assembly:hover .ap-2, .assembly:focus-visible .ap-2, .assembly.assembly-active .ap-2 { transform: translate3d(0,0,14px); }
-    .assembly:hover .ap-3, .assembly:focus-visible .ap-3, .assembly.assembly-active .ap-3 { transform: translate3d(0,0,28px) translateY(-38px); }
-    .assembly:hover .ap-tag, .assembly:focus-visible .ap-tag, .assembly.assembly-active .ap-tag { color: var(--text); }
-    .assembly:hover .assembly-plate, .assembly:focus-visible .assembly-plate, .assembly.assembly-active .assembly-plate {
-      box-shadow: 0 30px 60px -24px rgba(var(--accent-rgb), 0.4);
-      border-color: rgba(var(--accent-rgb), 0.55);
+    /* 2 — substrate: the PCB the chip sits on, with gold pad edges */
+    .cpu-substrate {
+      width: 214px; height: 214px; border-radius: 16px;
+      background: linear-gradient(145deg, #12202b, #0a141c);
+      border: 1px solid rgba(var(--accent-rgb),.18);
+      box-shadow: 0 26px 50px -22px rgba(0,0,0,.8), inset 0 0 0 8px rgba(var(--accent-rgb),.04);
+      transform: translateY(46px) scale(.88);
     }
-    /* The Pulse mark at the core — dim while plates are apart, ignites once assembled */
-    .assembly-core {
-      position: absolute; left: 50%; top: 50%; width: 52px; height: 52px;
-      margin: -26px 0 0 -26px; border-radius: 14px; z-index: 4;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--grad-brand);
-      opacity: 0; transform: translateZ(50px) scale(0.6);
-      box-shadow: 0 0 0 rgba(var(--accent-rgb), 0);
-      transition: opacity 0.5s ease 0.25s, transform 0.6s var(--ease-signature) 0.25s, box-shadow 0.5s ease 0.25s;
+    /* 3 — contact pins: accent dashes just inside the substrate edge */
+    .cpu-pins {
+      width: 214px; height: 214px; border-radius: 16px;
+      padding: 12px;
+      background:
+        repeating-linear-gradient(90deg, rgba(var(--accent-rgb),.55) 0 3px, transparent 3px 9px) top/100% 2px no-repeat,
+        repeating-linear-gradient(90deg, rgba(var(--accent-rgb),.55) 0 3px, transparent 3px 9px) bottom/100% 2px no-repeat,
+        repeating-linear-gradient(0deg, rgba(var(--accent-rgb),.55) 0 3px, transparent 3px 9px) left/2px 100% no-repeat,
+        repeating-linear-gradient(0deg, rgba(var(--accent-rgb),.55) 0 3px, transparent 3px 9px) right/2px 100% no-repeat;
+      transform: scale(1.08);
     }
-    .assembly-core svg { width: 26px; height: 26px; }
-    .assembly:hover .assembly-core, .assembly:focus-visible .assembly-core, .assembly.assembly-active .assembly-core {
-      opacity: 1; transform: translateZ(50px) scale(1);
-      box-shadow: 0 0 34px rgba(var(--accent-rgb), 0.65);
+    /* 4 — die grid: the silicon, glows once powered */
+    .cpu-die {
+      width: 150px; height: 150px; border-radius: 8px;
+      background:
+        linear-gradient(rgba(var(--accent-rgb),.14), rgba(var(--accent-2-rgb),.06)),
+        repeating-linear-gradient(0deg, rgba(var(--accent-rgb),.22) 0 1px, transparent 1px 13px),
+        repeating-linear-gradient(90deg, rgba(var(--accent-rgb),.22) 0 1px, transparent 1px 13px),
+        #0b1620;
+      border: 1px solid rgba(var(--accent-rgb),.3);
+      transform: scale(.6); z-index: 2;
     }
+    /* 5 — IHS heat spreader: brushed-metal lid that drops on top */
+    .cpu-ihs {
+      position: relative;
+      width: 176px; height: 176px; border-radius: 14px;
+      background:
+        linear-gradient(135deg, #2b3644 0%, #1a222e 42%, #232e3b 60%, #141b24 100%);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 20px 44px -18px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.14);
+      display: grid; place-items: center; gap: 4px; z-index: 3;
+      transform: translateY(-120px) rotateX(52deg) scale(1.02);
+      transform-origin: center 140%;
+    }
+    .cpu-ihs::before { /* corner orientation notch */
+      content: ""; position: absolute; top: 12px; left: 12px;
+      border-top: 10px solid rgba(var(--accent-rgb),.75);
+      border-right: 10px solid transparent;
+    }
+    .cpu-ihs::after { /* slow diagonal sheen once assembled */
+      content: ""; position: absolute; inset: 0; border-radius: 14px;
+      background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.10) 50%, transparent 60%);
+      background-size: 250% 250%; background-position: 120% 0;
+    }
+    .cpu-brand {
+      font: 800 26px/1 var(--font-display); letter-spacing: 1px;
+      color: transparent; -webkit-background-clip: text; background-clip: text;
+      background-image: linear-gradient(180deg, #eaf6ff, #9fb2c6);
+      text-shadow: 0 1px 0 rgba(0,0,0,.5); opacity: 0; transition: opacity .5s ease .5s;
+    }
+    .cpu-model {
+      font: 600 9px var(--font-mono); letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(200,215,235,.4); opacity: 0; transition: opacity .5s ease .62s;
+    }
+    .cpu-led { /* power LED, blinks alive */
+      position: absolute; bottom: 12px; right: 14px; width: 6px; height: 6px; border-radius: 50%;
+      background: rgb(var(--accent-rgb)); opacity: 0; transition: opacity .4s ease .7s;
+    }
+    /* 6 — glow bloom behind the finished chip */
+    .cpu-glow {
+      width: 300px; height: 300px; border-radius: 40%;
+      background: radial-gradient(circle at center, rgba(var(--accent-rgb),.28), transparent 62%);
+      filter: blur(14px); transform: scale(.6); z-index: 0;
+    }
+
+    /* ── ASSEMBLED STATE ─────────────────────────────────────────── */
+    .assembly:hover .cpu-socket, .assembly:focus-visible .cpu-socket, .assembly.assembly-active .cpu-socket { opacity: 1; transform: scale(1); }
+    .assembly:hover .cpu-substrate, .assembly:focus-visible .cpu-substrate, .assembly.assembly-active .cpu-substrate { opacity: 1; transform: translateY(0) scale(1); transition-delay: .1s; }
+    .assembly:hover .cpu-pins, .assembly:focus-visible .cpu-pins, .assembly.assembly-active .cpu-pins { opacity: 1; transform: scale(1); transition-delay: .22s; }
+    .assembly:hover .cpu-die, .assembly:focus-visible .cpu-die, .assembly.assembly-active .cpu-die { opacity: 1; transform: scale(1); transition-delay: .34s; }
+    .assembly:hover .cpu-ihs, .assembly:focus-visible .cpu-ihs, .assembly.assembly-active .cpu-ihs { opacity: 1; transform: translateY(0) rotateX(0) scale(1); transition-delay: .46s; }
+    .assembly:hover .cpu-glow, .assembly:focus-visible .cpu-glow, .assembly.assembly-active .cpu-glow { opacity: 1; transform: scale(1); transition-delay: .7s; }
+    .assembly:hover .cpu-brand, .assembly:focus-visible .cpu-brand, .assembly.assembly-active .cpu-brand,
+    .assembly:hover .cpu-model, .assembly:focus-visible .cpu-model, .assembly.assembly-active .cpu-model,
+    .assembly:hover .cpu-led, .assembly:focus-visible .cpu-led, .assembly.assembly-active .cpu-led { opacity: 1; }
+    /* once assembled: LED breathes, sheen sweeps the lid */
+    .assembly:hover .cpu-led, .assembly:focus-visible .cpu-led, .assembly.assembly-active .cpu-led { animation: cpuLed 2s ease-in-out .9s infinite; }
+    .assembly:hover .cpu-ihs::after, .assembly:focus-visible .cpu-ihs::after, .assembly.assembly-active .cpu-ihs::after { animation: cpuSheen 4.5s ease-in-out 1s infinite; }
+    @keyframes cpuLed { 0%,100% { box-shadow: 0 0 3px 1px rgba(var(--accent-rgb),.5); } 50% { box-shadow: 0 0 9px 2px rgba(var(--accent-rgb),.9); } }
+    @keyframes cpuSheen { 0% { background-position: 130% 0; } 55%,100% { background-position: -40% 0; } }
+
     .assembly-caption {
       font-family: var(--font-mono); font-size: 12px; color: var(--text-dark);
       letter-spacing: 0.02em;
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .assembly-plate, .assembly-core, .ap-tag { transition: none; }
+      .cpu-socket, .cpu-substrate, .cpu-pins, .cpu-die, .cpu-ihs, .cpu-glow,
+      .cpu-brand, .cpu-model, .cpu-led { transition: none !important; opacity: 1 !important; transform: none !important; }
+      .cpu-led, .cpu-ihs::after { animation: none !important; }
     }
+
+    /* THE "clipped glow" fix (chased across ~7 sessions): .stage-glow was a
+       radial-gradient background sitting BEHIND the hero window. Because it's a
+       background (not a shadow/filter/DOM-glow) nothing in the inspector or in
+       class/CSS searches ever flagged it. Under the hover 3D-tilt it peeked past
+       the window and clipped at the hero's overflow:hidden edge. Removed for
+       good, along with the reflection pool. */
+    .stage-glow, .hero-stage::after { display: none !important; }
   </style>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 </head>
@@ -3091,13 +3284,13 @@
   <!-- ============ HERO SECTION ============ -->
   <header class="hero" id="top">
     <canvas id="heroCanvas"></canvas>
-    <div class="hero-cursor-glow" aria-hidden="true"></div>
+    <div class="godrays" aria-hidden="true"></div>
     <div class="wrap hero-in">
 
       <!-- LEFT: the thesis -->
       <div class="hero-copy">
         <h1 data-hero="2">Windows, настроенный<br><span>под каждый кадр</span></h1>
-        <p class="sub" data-hero="3">Pulse убирает микрофризы, срезает задержки и высвобождает оперативную память — пока вы играете. Один клик, полный откат, ноль фонового процесса.</p>
+        <p class="sub" data-hero="3">Pulse убирает микрофризы, срезает задержки и высвобождает оперативную память, пока вы играете. Один клик, полный откат, ноль фонового процесса.</p>
         <div class="hero-cta" data-hero="4">
           <a class="btn btn-primary btn-lg magnetic" href="#download">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -3109,7 +3302,7 @@
           </a>
           <a class="btn btn-ghost btn-lg" href="#demo">Смотреть в действии</a>
         </div>
-        <div class="hero-note" id="heroNote" data-hero="5">Версия 1.2.6 · Windows 10 / 11 · Платная лицензия · Активация по ключу</div>
+        <div class="hero-note" id="heroNote" data-hero="5"><span class="hn-tag">Версия 1.2.6</span><span class="hn-tag">Windows 10 / 11</span><span class="hn-tag">Платная лицензия</span><span class="hn-tag">Активация по ключу</span></div>
 
         <div class="profile-switch" data-hero="6" role="tablist" aria-label="Профиль оптимизации">
           <span class="ps-label">Профиль</span>
@@ -3274,7 +3467,7 @@
               points="0,80 40,40 70,120 100,30 130,110 165,18 200,130 235,55 270,125 305,25 340,115 375,45 410,135 445,60 480,120 515,22 550,128 585,50 620,118 655,35 690,124 725,58 760,110 800,70"/>
             <polyline class="co-line--calm" fill="none" stroke="rgb(var(--accent-cyan-rgb))" stroke-width="2.4"
               stroke-linejoin="round" stroke-linecap="round"
-              points="0,96 60,92 130,95 210,90 300,93 400,90 500,92 600,89 700,91 760,90 800,90"/>
+              points="0,94 90,92 180,93 260,92 330,93 352,91 362,84 370,66 378,106 386,88 398,93 470,92 560,91 650,92 740,91 800,91"/>
           </svg>
         </div>
       </div>
@@ -3290,7 +3483,7 @@
     <div class="dm-info">
      <p class="dm-eyebrow">Панель управления</p>
      <h2 class="dm-h2">Интерактивный макет Pulse</h2>
-     <p class="dm-lead">Это не картинка — настоящее окно приложения прямо в браузере. Переключайте вкладки, ищите процессы, добавляйте исключения и запустите оптимизацию, чтобы увидеть, как Pulse работает вживую.</p>
+     <p class="dm-lead">Это не картинка, а настоящее окно приложения прямо в браузере. Переключайте вкладки, ищите процессы, добавляйте исключения и запустите оптимизацию, чтобы увидеть, как Pulse работает вживую.</p>
      <div class="dm-tele">
       <div class="dm-telecard">
        <p class="dm-tele-lbl">Задержка</p>
@@ -3516,41 +3709,41 @@
 
       <!-- Assembly visual: three drifting layers (system / network / game) that
            snap together into one stack under Pulse's control on hover/scroll-into-view. -->
-      <div class="assembly" tabindex="0" role="img" aria-label="Три уровня системы — ОЗУ, сеть и игровой процесс — объединяются под управлением Pulse">
-        <div class="assembly-stage">
-          <div class="assembly-plate ap-3">
-            <span class="ap-tag">Игровой процесс</span>
-          </div>
-          <div class="assembly-plate ap-2">
-            <span class="ap-tag">Сеть и драйверы</span>
-          </div>
-          <div class="assembly-plate ap-1">
-            <span class="ap-tag">Система и ОЗУ</span>
-          </div>
-          <div class="assembly-core">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 12h4l3-8 4 16 3-8h6"/>
-            </svg>
+      <div class="assembly" tabindex="0" role="img" aria-label="Процессор собирается из частей: подложка, контакты, кристалл и теплораспределитель — Pulse настраивает систему на уровне железа">
+        <div class="cpu-stage">
+          <div class="cpu-glow"></div>
+          <div class="cpu-socket"></div>
+          <div class="cpu-substrate"></div>
+          <div class="cpu-pins"></div>
+          <div class="cpu-die"></div>
+          <div class="cpu-ihs">
+            <span class="cpu-brand">PULSE</span>
+            <span class="cpu-model">System Optimized</span>
+            <span class="cpu-led"></span>
           </div>
         </div>
-        <p class="assembly-caption">Три слоя системы — под одним контролем</p>
+        <p class="assembly-caption">Тонкая настройка на уровне системы</p>
       </div>
 
       <div class="feat-grid">
         <div class="feat-card reveal">
           <div class="feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="7" width="18" height="9.5" rx="1.6"/>
+              <path d="M8 11h2M14 11h2"/>
+              <path d="M7 16.5v3.5M11 16.5v3.5M15 16.5v3.5M19 16.5v3.5"/>
             </svg>
           </div>
           <h3>Освобождение ОЗУ</h3>
-          <p>В отличие от софта, «сбрасывающего» ОЗУ в файл подкачки, Pulse приостанавливает циклы неактивных фоновых приложений (браузеры, лаунчеры, службы обновлений) через WinAPI. На системе с 16 ГБ ОЗУ после оптимизации в простое остаётся занятым всего около 1.5 ГБ — без побочного роста дисковой активности.</p>
+          <p>В отличие от софта, «сбрасывающего» ОЗУ в файл подкачки, Pulse приостанавливает циклы неактивных фоновых приложений (браузеры, лаунчеры, службы обновлений) через WinAPI. На системе с 16 ГБ ОЗУ после оптимизации в простое остаётся занятым всего около 1.5 ГБ, без побочного роста дисковой активности.</p>
         </div>
 
         <div class="feat-card reveal">
           <div class="feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 7h9"/><circle cx="17" cy="7" r="2.5"/>
+              <path d="M4 12h4"/><circle cx="12" cy="12" r="2.5"/><path d="M16 12h4"/>
+              <path d="M4 17h11"/><circle cx="19" cy="17" r="2.5"/>
             </svg>
           </div>
           <h3>Конфигурация WinAPI и служб</h3>
@@ -3559,8 +3752,10 @@
 
         <div class="feat-card reveal">
           <div class="feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 14c3-5 6.5-5 10 0s6.5 4 10-1"/>
+              <circle cx="2" cy="14" r="1.5"/>
+              <path d="M18 4v6M15 7l3 3 3-3"/>
             </svg>
           </div>
           <h3>Снижение сетевых задержек</h3>
@@ -3569,8 +3764,10 @@
 
         <div class="feat-card reveal">
           <div class="feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="13.5" r="7.5"/>
+              <path d="M9.5 2.5h5"/><path d="M19 6.5l1.6-1.6"/>
+              <path d="M8 13.5h2l1.5-3 2 6 1.5-3h2"/>
             </svg>
           </div>
           <h3>Тюнинг I/O и таймера Windows</h3>
@@ -3584,19 +3781,19 @@
   <div class="band">
     <div class="wrap band-grid">
       <div class="band-card">
-        <div class="num">200+</div>
+        <div class="num">200<span class="u">+</span></div>
         <div class="lbl">Твик операционной системы</div>
       </div>
       <div class="band-card">
-        <div class="num"><span class="count" data-target="30">0</span>+</div>
+        <div class="num"><span class="count" data-target="30">0</span><span class="u">+</span></div>
         <div class="lbl">Системных процессов под защитой</div>
       </div>
       <div class="band-card">
-        <div class="num"><span class="count" data-target="0">0</span>%</div>
+        <div class="num"><span class="count" data-target="0">0</span><span class="u">%</span></div>
         <div class="lbl">Нагрузки: утилита закрывается полностью</div>
       </div>
       <div class="band-card">
-        <div class="num"><span class="count" data-target="99.3" data-decimals="1">0</span> МБ</div>
+        <div class="num"><span class="count" data-target="99.3" data-decimals="1">0</span><span class="u">МБ</span></div>
         <div class="lbl">Размер исполняемого файла</div>
       </div>
     </div>
@@ -3619,7 +3816,7 @@
         <div class="chart-bar-row">
           <div class="chart-bar-head">
             <span class="chart-bar-name">Средний FPS в CS2 (С примененным Pulse)</span>
-            <span class="chart-bar-val" style="color:var(--accent)">450 <span class="unit" style="color:var(--accent)">FPS</span></span>
+            <span class="chart-bar-val" style="color:var(--accent)">450 <span class="unit" style="color:var(--accent)">FPS</span><span class="chart-delta">+44%</span></span>
           </div>
           <div class="chart-bar-track">
             <div class="chart-bar-fill after" data-w="80%"></div>
@@ -3628,7 +3825,7 @@
 
         <div class="chart-bar-row" style="margin-top: 36px;">
           <div class="chart-bar-head">
-            <span class="chart-bar-name">Показатель 1% Low — Редкие события (Без Pulse)</span>
+            <span class="chart-bar-name">Показатель 1% Low: редкие события (без Pulse)</span>
             <span class="chart-bar-val">138 <span class="unit">FPS</span></span>
           </div>
           <div class="chart-bar-track">
@@ -3638,8 +3835,8 @@
 
         <div class="chart-bar-row">
           <div class="chart-bar-head">
-            <span class="chart-bar-name">Показатель 1% Low — Стабильность (С примененным Pulse)</span>
-            <span class="chart-bar-val" style="color:var(--accent)">200 <span class="unit" style="color:var(--accent)">FPS</span></span>
+            <span class="chart-bar-name">Показатель 1% Low: стабильность (с Pulse)</span>
+            <span class="chart-bar-val" style="color:var(--accent)">200 <span class="unit" style="color:var(--accent)">FPS</span><span class="chart-delta">+45%</span></span>
           </div>
           <div class="chart-bar-track">
             <div class="chart-bar-fill after" data-w="44%"></div>
@@ -3650,8 +3847,8 @@
       <div class="results-text reveal">
         <div class="eyebrow">Замеры производительности</div>
         <h3>Реальное влияние на стабильность кадра</h3>
-        <p>Игроки часто смотрят только на средний FPS, но комфорт игры определяют просадки в экшн-сценах (показатель 1% low). За счет отключения системных прерываний, задержка снижается со 150 до 45 микросекунд. Как результат — пропадают микрофризы и дергания при перестрелках.</p>
-        <p style="margin-top:-8px;"><strong style="color:#fff;">450 FPS avg / 200 FPS 1% low — потолок результата</strong>, достижимый только при грамотной ручной настройке системы поверх Pulse (проверено автором лично). Из коробки прирост более умеренный и зависит от вашего железа и фона.</p>
+        <p>Игроки часто смотрят только на средний FPS, но комфорт игры определяют просадки в экшн-сценах (показатель 1% low). За счет отключения системных прерываний, задержка снижается со 150 до 45 микросекунд. Как результат, пропадают микрофризы и дергания при перестрелках.</p>
+        <p style="margin-top:-8px;"><strong style="color:#fff;">450 FPS avg / 200 FPS 1% low: потолок результата</strong>, достижимый только при грамотной ручной настройке системы поверх Pulse (проверено автором лично). Из коробки прирост более умеренный и зависит от вашего железа и фона.</p>
         <div class="system-specs">
           Конфигурация тестового стенда: AMD Ryzen 5 5600 · GeForce GTX 1660 · 16 GB DDR4 RAM · Чистая Windows 10 (22H2).
         </div>
@@ -3738,8 +3935,10 @@
       <div class="safety-grid">
         <div class="safe-card reveal">
           <div class="safe-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="10.5" width="16" height="10.5" rx="2"/>
+              <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
+              <path d="M12 14.5v2.5"/>
             </svg>
           </div>
           <h3>Аппаратное ядро под защитой</h3>
@@ -3748,9 +3947,9 @@
 
         <div class="safe-card reveal">
           <div class="safe-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <polyline points="1 4 1 10 7 10"></polyline>
-              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+              <path d="M17 21v-8H7v8"/><path d="M8 3v4h6"/>
             </svg>
           </div>
           <h3>Создание резервной копии</h3>
@@ -3759,8 +3958,9 @@
 
         <div class="safe-card reveal">
           <div class="safe-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="m7 9 2.5 2.5L7 14"/><path d="M12.5 14.5h4.5"/>
             </svg>
           </div>
           <h3>Техническая прозрачность</h3>
@@ -3780,56 +3980,53 @@
 
       <div class="reviews-grid">
         <div class="rev-card reveal">
-          <div class="rev-stars">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <div class="rev-head">
+            <div class="rev-stars">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
           </div>
           <p class="rev-text">«Играю в кс почти каждый день, 4-5 часов минимум. Раньше периодически дёргало прямо в раунде вроде и пекарня не топовая, но и не должно так тротлить. Погонял с Pulse недели две дёргания пропали, мышка ведёт себя четко. Не супергерой, но раздражитель убрал полностью, для меня этого хватило.»</p>
           <div class="rev-user">
-            <div class="rev-avatar">A</div>
-            <div class="rev-meta">
-              <div class="name">AimLab</div>
-              <div class="specs">Ryzen 5 5600 / GTX 1660 / CS2</div>
-            </div>
+            <span class="name">AimLab</span>
+            <span class="specs">Ryzen 5 5600 · GTX 1660 · CS2</span>
           </div>
         </div>
 
         <div class="rev-card reveal">
-          <div class="rev-stars">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <div class="rev-head">
+            <div class="rev-stars">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
           </div>
           <p class="rev-text">«Один твикер в прошлом году убил мне драйвер звука, с тех пор к такому софту отношусь с подозрением. Тут перед стартом сам сделал точку восстановления я вообще ничего руками не трогал, это подкупило. После чистки автозагрузки хром с стимом перестали жрать всё в фоне, комп стал отзывчивее в целом, не только в игре.»</p>
           <div class="rev-user">
-            <div class="rev-avatar">E</div>
-            <div class="rev-meta">
-              <div class="name">Enrique!</div>
-              <div class="specs">i5-12400F / GTX 1660 Ti / CS2</div>
-            </div>
+            <span class="name">Enrique!</span>
+            <span class="specs">i5-12400F · GTX 1660 Ti · CS2</span>
           </div>
         </div>
 
         <div class="rev-card reveal">
-          <div class="rev-stars">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <div class="rev-head">
+            <div class="rev-stars">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
           </div>
           <p class="rev-text">«RX 580 и Ryzen 5 3600 железо не самое новое, апгрейд не в этом году точно, так что трясусь над каждым кадром. Раньше в перестрелках тайминг рвался, списывал на возраст видеокарты. Оказалось часть проблемы была в фоновых службах после Pulse стало ровнее, хотя чуда никакого не жду с таким железом. Свои деньги отбило, буду брать ключ и на следующий комп.»</p>
           <div class="rev-user">
-            <div class="rev-avatar">A</div>
-            <div class="rev-meta">
-              <div class="name">Anxiety</div>
-              <div class="specs">Ryzen 5 3600 / RX 580 / CS2</div>
-            </div>
+            <span class="name">Anxiety</span>
+            <span class="specs">Ryzen 5 3600 · RX 580 · CS2</span>
           </div>
         </div>
       </div>
@@ -3861,6 +4058,10 @@
           <summary>Влияет ли утилита на работу систем безопасности Windows?</summary>
           <div class="answer">Да. В рамках оптимизации Pulse отключает встроенный защитник (Windows Defender), так как его фоновое сканирование заметно нагружает диск и процессор во время игры. Перед отключением создаётся точка восстановления, чтобы при необходимости можно было откатить изменение.</div>
         </details>
+        <details>
+          <summary>Почему антивирус может ругаться на .exe?</summary>
+          <div class="answer">Pulse правит реестр и управляет службами без установщика, а такое поведение эвристики иногда помечают как подозрительное — это ложное срабатывание. Файл не подписан дорогим EV-сертификатом, отсюда и предупреждение SmartScreen. Сверьте SHA-256 сборки со значением в блоке загрузки ниже; при желании проверьте файл на VirusTotal перед запуском.</div>
+        </details>
       </div>
     </div>
   </section>
@@ -3871,7 +4072,7 @@
       <div class="dl-main">
         <div class="eyebrow">Дистрибутив</div>
         <h2>Скачать Pulse</h2>
-        <p>Повысьте стабильность фреймтайма и освободите оперативную память в один клик. Портативная сборка, готовая к запуску — активация по лицензионному ключу.</p>
+        <p>Повысьте стабильность фреймтайма и освободите оперативную память одной кнопкой. Портативная сборка, готовая к запуску. Активация по лицензионному ключу.</p>
         <div class="dl-buttons">
           <a class="btn btn-primary" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/Pulse.exe" download="Pulse.exe">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -3884,7 +4085,7 @@
         </div>
 
         <div class="key-contact">
-          <div class="key-contact-lbl">Лицензия — 5€ (≈200₴), ключ выдаётся автоматически сразу после оплаты:</div>
+          <div class="key-contact-lbl">Лицензия 5€ (≈200₴). Ключ выдаётся автоматически сразу после оплаты:</div>
           <div class="key-contact-buttons">
             <button class="btn btn-primary btn-sm" id="buyCryptoBtn" type="button">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3Z"/><path d="M2 10h20"/></svg>
@@ -3908,7 +4109,7 @@
             <li><span class="lbl">Инсталлятор</span><span class="val">Не требуется (Portable)</span></li>
             <li><span class="lbl">Лицензия</span><span class="val">Платная, по ключу</span></li>
             <li><span class="lbl">Активация</span><span class="val">Telegram</span></li>
-            <li id="lastUpdateRow" style="display:none;"><span class="lbl">Обновлено</span><span class="val" id="specsUpdated">—</span></li>
+            <li id="lastUpdateRow" style="display:none;"><span class="lbl">Обновлено</span><span class="val" id="specsUpdated">…</span></li>
           </ul>
         </div>
         <div class="hash-info">
@@ -3971,7 +4172,7 @@
     }
 
     /* ---------- BRAND ACCENT (blue, mirrors the app chrome) — read by the hero canvas ---------- */
-    window.pulseAccentRGB = '139, 92, 246';
+    window.pulseAccentRGB = '34, 211, 238';
 
     /* ---------- HERO: entrance choreography + 3D mouse-tilt + magnetic CTAs ---------- */
     (function() {
@@ -3986,7 +4187,6 @@
 
       // 3D tilt of the app window following the pointer (desktop only, respects reduced-motion)
       if (hero && stage && win && canHover && !reducedMotion) {
-        const glow = hero.querySelector('.hero-cursor-glow');
         let tx = 0, ty = 0, raf = null;
         const apply = () => {
           win.style.transform = `rotateY(${tx}deg) rotateX(${ty}deg)`;
@@ -4002,10 +4202,6 @@
           const py = (e.clientY - r.top) / r.height - 0.5;
           tx = px * 10;
           ty = -py * 7;
-          if (glow) {
-            glow.style.setProperty('--gx', (e.clientX - r.left) + 'px');
-            glow.style.setProperty('--gy', (e.clientY - r.top) + 'px');
-          }
           if (!raf) raf = requestAnimationFrame(apply);
         }, { passive: true });
         hero.addEventListener('pointerleave', () => {
@@ -4028,7 +4224,7 @@
       }
 
       // Profile switcher — retints the hero (glow, canvas, app-window) like the real app
-      const profileRGB = { standard: '59, 130, 246', gaming: '139, 92, 246', maximum: '239, 68, 68' };
+      const profileRGB = { standard: '34, 224, 107', gaming: '34, 211, 238', maximum: '255, 106, 26' };
       const profileIdx = { standard: 0, gaming: 1, maximum: 2 };
       const pills = document.querySelectorAll('.profile-pill');
       const awProfileIcons = document.querySelectorAll('.aw-profiles .awp');
@@ -4081,21 +4277,26 @@
         });
       }
 
-      // Latency wave coordinates
-      const wavePoints = [];
-      let beatCountdown = 0;
-      const beatPattern = [0, -3, 10, -25, 8, -2, 0];
-      
+      // ECG waveform — a real PQRST heartbeat (P wave · QRS complex · T wave).
+      // Negative = upward on canvas. One normalized beat, scaled per-beat below.
+      let wave = null;   // ring buffer of sample heights, one slot per screen column
+      let head = 0;      // write-head column index — sweeps left→right like a monitor pen
+      const PQRST = [0, 0, -3, -5, -6, -4, -1, 0, 0, 5, -34, 14, -3, 0, 0, -5, -9, -11, -9, -5, -1, 0, 0, 0];
+      let beatQueue = [];
+      let restBeats = 12;
+
       function getNextWaveHeight() {
-        if (beatCountdown > 0) {
-          const val = beatPattern[beatPattern.length - beatCountdown];
-          beatCountdown--;
-          return val;
+        if (beatQueue.length > 0) return beatQueue.shift();
+        if (restBeats > 0) {
+          restBeats--;
+          return (Math.random() - 0.5) * 1.1; // isoelectric baseline shimmer between beats
         }
-        if (Math.random() < 0.012) {
-          beatCountdown = beatPattern.length - 1;
-        }
-        return (Math.random() - 0.5) * 1.5;
+        // Queue the next beat with a randomized height and R-R interval → every beat differs
+        let amp = 0.55 + Math.random() * 0.85;           // 0.55–1.40× → clearly varying beat size
+        if (Math.random() < 0.12) amp += 0.35;           // occasional taller beat
+        beatQueue = PQRST.map(v => v * amp);
+        restBeats = 70 + Math.floor(Math.random() * 90); // long calm gap between beats
+        return beatQueue.shift();
       }
 
       // 2. Define sizing functions
@@ -4119,17 +4320,7 @@
         }
         ctx.clearRect(0, 0, width, height);
 
-        // Ambient cursor glow trail under particles
-        if (mouse.active && !reducedMotion) {
-          const AC = window.pulseAccentRGB || '139, 92, 246';
-          const rad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 110 * dpr);
-          rad.addColorStop(0, 'rgba(' + AC + ', 0.08)');
-          rad.addColorStop(1, 'rgba(' + AC + ', 0)');
-          ctx.fillStyle = rad;
-          ctx.beginPath();
-          ctx.arc(mouse.x, mouse.y, 110 * dpr, 0, Math.PI * 2);
-          ctx.fill();
-        }
+        // (cursor glow trail removed — it was drawn on the canvas and clipped at the hero edge)
 
         // Draw particles
         for (const p of particles) {
@@ -4155,7 +4346,7 @@
           }
 
           ctx.globalAlpha = p.alpha;
-          ctx.fillStyle = 'rgb(' + (window.pulseAccentRGB || '139, 92, 246') + ')';
+          ctx.fillStyle = 'rgb(' + (window.pulseAccentRGB || '34, 211, 238') + ')';
           ctx.beginPath();
           ctx.arc(p.x * width, p.y * height, p.r * dpr, 0, Math.PI * 2);
           ctx.fill();
@@ -4163,7 +4354,7 @@
 
         // Draw dynamic constellation connection lines between close particles
         if (!reducedMotion) {
-          ctx.strokeStyle = 'rgba(' + (window.pulseAccentRGB || '139, 92, 246') + ', 0.18)';
+          ctx.strokeStyle = 'rgba(' + (window.pulseAccentRGB || '34, 211, 238') + ', 0.18)';
           ctx.lineWidth = 0.75 * dpr;
           for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
@@ -4181,30 +4372,58 @@
           }
         }
 
-        // Draw subtle latency wave (ECG)
+        // ECG monitor sweep — a pen head writes left→right, erasing a gap ahead of itself
         ctx.globalAlpha = 1;
-        const step = 4 * dpr;
-        const maxPoints = Math.ceil(width / step) + 2;
+        const step = 3 * dpr;
+        const cols = Math.max(2, Math.ceil(width / step) + 1);
 
-        wavePoints.push(getNextWaveHeight());
-        while (wavePoints.length > maxPoints) {
-          wavePoints.shift();
+        if (!wave || wave.length !== cols) {
+          wave = new Array(cols).fill(null);
+          head = 0;
         }
 
-        const baseline = height * 0.55;
-        ctx.strokeStyle = 'rgba(' + (window.pulseAccentRGB || '139, 92, 246') + ', 0.16)';
-        ctx.lineWidth = 1.5 * dpr;
+        if (!reducedMotion) {
+          // write one new sample at the head, then blank a small window just ahead of it
+          wave[head] = getNextWaveHeight();
+          const gap = Math.max(2, Math.round(16 * dpr / step));
+          for (let g = 1; g <= gap; g++) wave[(head + g) % cols] = null;
+          head = (head + 1) % cols;
+        }
+
+        const accent = window.pulseAccentRGB || '34, 211, 238';
+        const baseline = height * 0.56;
+        const ampY = 2.7 * dpr;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
+        ctx.shadowColor = 'rgb(' + accent + ')';
+        ctx.shadowBlur = 3 * dpr;
+        ctx.strokeStyle = 'rgba(' + accent + ', 0.13)';
+        ctx.lineWidth = 1.4 * dpr;
         ctx.beginPath();
-
-        for (let i = 0; i < wavePoints.length; i++) {
+        let penDown = false;
+        for (let i = 0; i < cols; i++) {
+          const v = wave[i];
+          if (v === null || v === undefined) { penDown = false; continue; }
           const x = i * step;
-          const y = baseline + wavePoints[i] * dpr * 1.8;
-          if (i === 0) ctx.moveTo(x, y);
+          const y = baseline + v * ampY;
+          if (!penDown) { ctx.moveTo(x, y); penDown = true; }
           else ctx.lineTo(x, y);
         }
         ctx.stroke();
+
+        // glowing pen head at the last written column
+        const hi = (head - 1 + cols) % cols;
+        const hv = wave[hi];
+        if (hv !== null && hv !== undefined) {
+          const hx = hi * step;
+          const hy = baseline + hv * ampY;
+          ctx.shadowBlur = 8 * dpr;
+          ctx.fillStyle = 'rgba(' + accent + ', 0.55)';
+          ctx.beginPath();
+          ctx.arc(hx, hy, 1.8 * dpr, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.shadowBlur = 0;
 
         if (!reducedMotion) requestAnimationFrame(draw);
       }
@@ -4251,8 +4470,8 @@
 
         const heroNote = document.getElementById('heroNote');
         if (heroNote) {
-          const versionText = version ? `Версия ${version} · ` : '';
-          heroNote.innerHTML = `${versionText}Windows 10 / 11 · Платная лицензия · Обновлено <span style="color:var(--accent); font-weight:600;">${formatted}</span>`;
+          const versionText = version ? `<span class="hn-tag">Версия ${version}</span>` : '';
+          heroNote.innerHTML = `${versionText}<span class="hn-tag">Windows 10 / 11</span><span class="hn-tag">Платная лицензия</span><span class="hn-tag hn-date">Обновлено ${formatted}</span>`;
         }
 
         const updatedRow = document.getElementById('lastUpdateRow');
@@ -4278,18 +4497,7 @@
     }
     window.addEventListener('DOMContentLoaded', checkPulseUpdates);
 
-    /* ---------- SPOTLIGHT HOVER EFFECT ---------- */
-    if (!isMobileDevice) {
-      document.querySelectorAll('.feat-card, .safe-card, .rev-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          card.style.setProperty('--mouse-x', `${x}px`);
-          card.style.setProperty('--mouse-y', `${y}px`);
-        });
-      });
-    }
+    /* (cursor-spotlight JS removed — effect deleted; native cursor only) */
 
     /* ---------- REVEAL ON SCROLL ---------- */
     const revealObserver = new IntersectionObserver((entries) => {
@@ -4345,16 +4553,16 @@
       document.querySelectorAll('.hm-n').forEach(counter => countersObserver.observe(counter));
     }
 
-    // Assembly visual: hover/focus drive it on desktop (pure CSS); on touch
-    // devices there's no hover, so trigger the assembled state once it's
-    // mostly in view instead — same .assembly-active class the CSS already handles.
+    // CPU assembly: play once it scrolls into view on ALL devices (hover just
+    // replays it on desktop). Toggling on isIntersecting lets it re-assemble
+    // each time it re-enters the viewport.
     const assemblyEl = document.querySelector('.assembly');
-    if (assemblyEl && !window.matchMedia('(hover: hover)').matches) {
+    if (assemblyEl) {
       const assemblyObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           assemblyEl.classList.toggle('assembly-active', entry.isIntersecting);
         });
-      }, { threshold: 0.5 });
+      }, { threshold: 0.4 });
       assemblyObserver.observe(assemblyEl);
     }
 
@@ -4595,9 +4803,9 @@
     var profs = win.querySelectorAll('.dm-prof');
     if(!profs || !profs.length) return;
     var PALETTE = [
-      { a:'59,130,246',  b:'139,92,246'  },
-      { a:'139,92,246',  b:'99,102,241'  },
-      { a:'239,68,68',   b:'249,115,22'  }
+      { a:'34,224,107',  b:'18,184,147'  },
+      { a:'34,211,238',  b:'59,130,246'  },
+      { a:'255,106,26',  b:'255,61,87'   }
     ];
     function tint(i){
       var p = PALETTE[i] || PALETTE[1];
