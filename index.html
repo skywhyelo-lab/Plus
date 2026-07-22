@@ -4247,12 +4247,12 @@
       const canvas = document.getElementById('heroCanvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       let width, height;
 
       // 1. Declare and initialize data arrays first (avoids TDZ reference errors on initial resize)
       const particles = [];
-      const particleCount = isMobileDevice ? 15 : 65; 
+      const particleCount = isMobileDevice ? 14 : 38;
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random(),
@@ -4356,15 +4356,19 @@
         if (!reducedMotion) {
           ctx.strokeStyle = 'rgba(' + (window.pulseAccentRGB || '34, 211, 238') + ', 0.18)';
           ctx.lineWidth = 0.75 * dpr;
+          const maxD = 105 * dpr;
+          const maxD2 = maxD * maxD;
           for (let i = 0; i < particles.length; i++) {
+            const pix = particles[i].x * width, piy = particles[i].y * height;
             for (let j = i + 1; j < particles.length; j++) {
-              const dx = (particles[i].x - particles[j].x) * width;
-              const dy = (particles[i].y - particles[j].y) * height;
-              const dist = Math.hypot(dx, dy);
-              if (dist < 105 * dpr) { 
-                ctx.globalAlpha = (1 - dist / (105 * dpr)) * 0.22;
+              const dx = pix - particles[j].x * width;
+              if (dx > maxD || dx < -maxD) continue;      // cheap reject before the sqrt path
+              const dy = piy - particles[j].y * height;
+              const dist2 = dx * dx + dy * dy;
+              if (dist2 < maxD2) {
+                ctx.globalAlpha = (1 - Math.sqrt(dist2) / maxD) * 0.22;
                 ctx.beginPath();
-                ctx.moveTo(particles[i].x * width, particles[i].y * height);
+                ctx.moveTo(pix, piy);
                 ctx.lineTo(particles[j].x * width, particles[j].y * height);
                 ctx.stroke();
               }
@@ -4395,9 +4399,7 @@
         const ampY = 2.7 * dpr;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
-        ctx.shadowColor = 'rgb(' + accent + ')';
-        ctx.shadowBlur = 3 * dpr;
-        ctx.strokeStyle = 'rgba(' + accent + ', 0.13)';
+        ctx.strokeStyle = 'rgba(' + accent + ', 0.15)';
         ctx.lineWidth = 1.4 * dpr;
         ctx.beginPath();
         let penDown = false;
@@ -4425,14 +4427,33 @@
         }
         ctx.shadowBlur = 0;
 
-        if (!reducedMotion) requestAnimationFrame(draw);
+        if (!reducedMotion && running) requestAnimationFrame(draw);
       }
 
       // 4. Initialize size, bind events, and start rendering loop only after full scope setup
+      // Pause the loop when the hero is off-screen or the tab is hidden — no wasted frames.
+      let running = false;
+      let heroVisible = true;
+      function setRunning(on) {
+        if (on && !running && !reducedMotion) { running = true; requestAnimationFrame(draw); }
+        else if (!on) { running = false; }
+      }
+      function updateRunning() {
+        setRunning(heroVisible && !document.hidden);
+      }
+      const heroEl = document.querySelector('.hero');
+      if (heroEl && 'IntersectionObserver' in window) {
+        new IntersectionObserver((entries) => {
+          heroVisible = entries[0].isIntersecting;
+          updateRunning();
+        }, { threshold: 0 }).observe(heroEl);
+      }
+      document.addEventListener('visibilitychange', updateRunning);
+
       resize();
       window.addEventListener('resize', resize);
-      window.addEventListener('load', resize); 
-      draw();
+      window.addEventListener('load', resize);
+      updateRunning();
     })();
 
     /* ---------- RESULTS PROGRESS BARS ANIMATION ---------- */
