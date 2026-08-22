@@ -4,22 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pulse: настройка Windows для игр. Стабильный фреймтайм и низкий пинг</title>
-  <meta name="description" content="Pulse: утилита для снижения задержек, очистки оперативной памяти и оптимизации Windows под игровые задачи. Точка восстановления перед изменениями, белый список процессов, открытый лог твиков. Лицензия по ключу.">
+  <meta name="description" content="Pulse: утилита для снижения задержек, очистки оперативной памяти и оптимизации Windows под игровые задачи. Точка восстановления перед изменениями, белый список системных процессов, откат в один клик. Лицензия по ключу.">
   <link rel="canonical" href="https://pulsepc.vercel.app/">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%233b82f6'/%3E%3Cpath d='M2 12h4l3-8 4 16 3-8h6' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%2322d3ee'/%3E%3Cpath d='M2 12h4l3-8 4 16 3-8h6' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pulse">
-  <meta property="og:title" content="Pulse: стабильный фреймтайм и прирост FPS в Windows">
-  <meta property="og:description" content="Утилита для снижения задержек, очистки ОЗУ и твика Windows под игры. Активация по лицензионному ключу, оплата на сайте или через Telegram.">
+  <meta property="og:title" content="Pulse: чистая Windows, стабильный FPS">
+  <meta property="og:description" content="Убирает микрофризы, срезает задержки и высвобождает ОЗУ, пока вы играете. 200+ твиков в один клик, полный откат, ноль фонового процесса.">
   <meta property="og:image" content="https://pulsepc.vercel.app/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/png">
   <meta property="og:locale" content="ru_RU">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pulse: стабильный фреймтайм и прирост FPS в Windows">
-  <meta name="twitter:description" content="Утилита для снижения задержек, очистки ОЗУ и твика Windows под игры. Активация по ключу.">
+  <meta name="twitter:title" content="Pulse: чистая Windows, стабильный FPS">
+  <meta name="twitter:description" content="Убирает микрофризы, срезает задержки и высвобождает ОЗУ, пока вы играете. 200+ твиков в один клик, полный откат.">
   <meta name="twitter:image" content="https://pulsepc.vercel.app/og-image.png">
 
   <script type="application/ld+json">
@@ -33,9 +33,8 @@
       "@type": "Offer",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
-      "description": "Лицензионный ключ, оплата автоматически на сайте или через Telegram"
-    },
-    "softwareVersion": "1.2.9"
+      "description": "Разовый лицензионный ключ, покупка через Telegram"
+    }
   }
   </script>
 
@@ -112,8 +111,8 @@
     :root {
       --ar: 34; --ag: 211; --ab: 238;
       --a2r: 59; --a2g: 130; --a2b: 246;
-      transition: --ar 0.6s ease, --ag 0.6s ease, --ab 0.6s ease,
-                  --a2r 0.6s ease, --a2g 0.6s ease, --a2b 0.6s ease;
+      transition: --ar 0.25s ease, --ag 0.25s ease, --ab 0.25s ease,
+                  --a2r 0.25s ease, --a2g 0.25s ease, --a2b 0.25s ease;
       /* Re-derive the comma-list vars every consumer already uses, now smoothly interpolated */
       --accent-rgb: var(--ar), var(--ag), var(--ab);
       --accent-2-rgb: var(--a2r), var(--a2g), var(--a2b);
@@ -123,7 +122,7 @@
     :root[data-profile="standard"] { --ar: 34;  --ag: 224; --ab: 107; --a2r: 18;  --a2g: 184; --a2b: 147; }
     :root[data-profile="gaming"]   { --ar: 34;  --ag: 211; --ab: 238; --a2r: 59;  --a2g: 130; --a2b: 246; }
     :root[data-profile="maximum"]  { --ar: 255; --ag: 106; --ab: 26;  --a2r: 255; --a2g: 61;  --a2b: 87;  }
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       :root { transition: none; }
     }
 
@@ -179,7 +178,7 @@
 
     nav, .hero-in, section, .band, footer { position: relative; z-index: 2; }
 
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       .hero::after, .badge .dot, h1 span, .games-track {
         animation: none !important;
       }
@@ -489,26 +488,34 @@
     .profile-switch { display: flex; align-items: center; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
     .ps-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dark); }
     .profile-pills {
+      position: relative;
       display: inline-flex; gap: 3px; padding: 4px;
       border-radius: 100px; border: 1px solid var(--border);
       background: rgba(255,255,255,0.02); backdrop-filter: blur(8px);
     }
+    .ps-thumb {
+      position: absolute; top: 4px; bottom: 4px; left: 4px; width: 0;
+      border-radius: 100px;
+      background: rgba(var(--profile-rgb), 0.16);
+      box-shadow: 0 0 0 1px rgba(var(--profile-rgb), 0.4) inset, 0 4px 16px rgba(var(--profile-rgb), 0.22);
+      transition: left .4s cubic-bezier(0.34, 1.2, 0.4, 1), width .4s cubic-bezier(0.34, 1.2, 0.4, 1),
+                  background .35s ease, box-shadow .35s ease;
+      pointer-events: none;
+    }
     .profile-pill {
+      position: relative; z-index: 1;
       display: inline-flex; align-items: center; gap: 7px;
       padding: 7px 15px; border-radius: 100px;
       font-size: 12.5px; font-weight: 600; color: var(--text-muted);
       cursor: pointer; border: none; background: transparent;
-      font-family: var(--font-sans); transition: color .25s ease, background .35s ease, box-shadow .35s ease;
+      font-family: var(--font-sans); transition: color .25s ease;
     }
     .profile-pill .pp-dot { width: 8px; height: 8px; border-radius: 50%; transition: box-shadow .3s ease; }
     .profile-pill[data-profile="standard"] .pp-dot { background: #22E06B; }
     .profile-pill[data-profile="gaming"] .pp-dot   { background: #22D3EE; }
     .profile-pill[data-profile="maximum"] .pp-dot  { background: #FF6A1A; }
     .profile-pill:hover { color: var(--text); }
-    .profile-pill.active {
-      color: #fff; background: rgba(var(--profile-rgb), 0.16);
-      box-shadow: 0 0 0 1px rgba(var(--profile-rgb), 0.4) inset, 0 4px 16px rgba(var(--profile-rgb), 0.22);
-    }
+    .profile-pill.active { color: #fff; }
     .profile-pill.active .pp-dot { box-shadow: 0 0 10px 1px currentColor; }
 
     /* ---- Right column: floating app window ---- */
@@ -589,6 +596,7 @@
     }
     .aws svg { width: 13px; height: 13px; flex: none; }
     .aws.active { background: var(--grad-profile); color: #fff; box-shadow: 0 4px 14px rgba(var(--profile-rgb),0.35); transition: background .5s ease, box-shadow .5s ease; }
+    .aws-pinned { margin-top: auto; border-top: 1px solid var(--border); padding-top: 9px; }
 
     .aw-main { flex: 1; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
     .aw-row { display: grid; grid-template-columns: 1fr 1.1fr; gap: 12px; }
@@ -678,6 +686,10 @@
 
     .games-marquee {
       flex: 1;
+      /* min-width:0 is required: without it a flex item floors at its content width
+         (the track is ~1750px wide), so the marquee itself overflowed the page and
+         put a horizontal scrollbar on the whole site at phone widths. */
+      min-width: 0;
       overflow: hidden;
       mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
@@ -1687,69 +1699,110 @@
       padding-top: 16px;
     }
 
-    /* ============ VS TABLE ============ */
+    /* ============ СРАВНЕНИЕ ============ */
     .vs {
       background: var(--bg);
     }
 
-    .vs-container {
-      overflow-x: auto;
+    .cmp {
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       background: var(--bg-panel);
+      overflow: hidden;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 700px;
-    }
-
-    th, td {
-      padding: 16px 20px;
-      text-align: center;
-      font-size: 14.5px;
+    .cmp-row {
+      display: grid;
+      grid-template-columns: 1.7fr 0.85fr 0.85fr 0.85fr;
+      align-items: center;
       border-bottom: 1px solid var(--border);
     }
 
-    th {
-      font-weight: 600;
-      color: #fff;
+    .cmp-row:last-child { border-bottom: 0; }
+
+    .cmp-head {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .cmp-head > * {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    .cmp-head .cmp-us { color: rgb(var(--accent-rgb)); }
+
+    .cmp-row > * {
+      padding: 15px 18px;
       font-size: 14px;
-      background: rgba(255, 255, 255, 0.01);
     }
 
-    td:first-child, th:first-child {
-      text-align: left;
+    .cmp-what {
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .cmp-val {
+      color: var(--text-dark);
+      text-align: center;
+    }
+
+    /* Колонка Pulse читается как основная: своя подложка на всю высоту таблицы
+       и обычный светлый текст вместо приглушённого. */
+    .cmp-us {
+      background: rgba(var(--accent-rgb), 0.055);
+      box-shadow: inset 1px 0 0 rgba(var(--accent-rgb), 0.16), inset -1px 0 0 rgba(var(--accent-rgb), 0.16);
+      color: var(--text);
       font-weight: 600;
-      color: var(--text-muted);
-      width: 40%;
+      text-align: center;
     }
 
-    .col-target {
-      background: rgba(var(--accent-rgb), 0.05);
-      border-left: 1px solid rgba(var(--accent-rgb), 0.18);
-      border-right: 1px solid rgba(var(--accent-rgb), 0.18);
-      font-weight: 600;
-    }
+    .cmp-head .cmp-us { box-shadow: inset 1px 0 0 rgba(var(--accent-rgb), 0.16), inset -1px 0 0 rgba(var(--accent-rgb), 0.16), inset 0 2px 0 rgb(var(--accent-rgb)); }
 
-    th.col-target {
-      color: rgb(var(--accent-rgb));
-      background: rgba(var(--accent-rgb), 0.09);
-      border-top: 2px solid rgb(var(--accent-rgb));
-    }
+    .cmp-no { color: #4a5160; }
 
-    tr:last-child .col-target {
-      border-bottom: 1px solid rgba(var(--accent-rgb), 0.18);
-    }
+    @media (max-width: 760px) {
+      /* На телефоне четыре колонки не помещаются: каждая строка становится карточкой,
+         где под названием идут три подписи с ответами. */
+      .cmp-row {
+        grid-template-columns: 1fr;
+        padding: 4px 0 10px;
+      }
 
-    tr:last-child td {
-      border-bottom: none;
-    }
+      .cmp-head { display: none; }
 
-    .icon-check { color: var(--green); font-weight: 700; }
-    .icon-cross { color: var(--text-dark); }
-    .icon-partial { color: var(--amber); }
+      .cmp-what { padding-bottom: 8px; }
+
+      .cmp-row > .cmp-val,
+      .cmp-row > .cmp-us {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        text-align: left;
+        padding: 7px 18px;
+        font-size: 13.5px;
+        background: none;
+        box-shadow: none;
+      }
+
+      .cmp-row > .cmp-val::before,
+      .cmp-row > .cmp-us::before {
+        content: attr(data-col);
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-dark);
+        font-weight: 400;
+      }
+
+      .cmp-row > .cmp-us { color: rgb(var(--accent-rgb)); }
+    }
 
     /* ============ SAFETY PRINCIPLES ============ */
     .safety {
@@ -1880,6 +1933,214 @@
       font-size: 10px;
       font-family: var(--font-mono);
       color: var(--text-dark);
+    }
+
+    /* ============ REMOTE (MOBILE COMPANION) ============ */
+    .remote-app {
+      padding: clamp(4.5rem, 10vw, 9rem) 0;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(1100px 520px at 78% 42%, rgba(var(--accent-rgb), 0.10), transparent 68%),
+        linear-gradient(180deg, var(--bg-2), var(--bg));
+    }
+    .remote-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.86fr;
+      gap: clamp(2.5rem, 6vw, 5.5rem);
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ---- left column ---- */
+    .remote-copy h2 { margin-bottom: 16px; }
+    .remote-copy .sub {
+      color: var(--text-muted); font-size: 15.5px; line-height: 1.65;
+      margin-bottom: 30px; max-width: 470px;
+    }
+    .remote-feats { list-style: none; display: flex; flex-direction: column; }
+    .remote-feats li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .remote-feats li:first-child { padding-top: 0; }
+    .remote-feats li:last-child { border-bottom: 0; }
+    .rf-ic {
+      flex: none; width: 34px; height: 34px; border-radius: 10px;
+      background: rgba(var(--accent-rgb), 0.10);
+      border: 1px solid rgba(var(--accent-rgb), 0.22);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      transition: background .25s ease, border-color .25s ease;
+    }
+    .remote-feats li:hover .rf-ic { background: rgba(var(--accent-rgb), 0.18); border-color: rgba(var(--accent-rgb), 0.42); }
+    .rf-ic svg { width: 16px; height: 16px; }
+    .rf-txt b {
+      display: block; font-size: 13.5px; font-weight: 600; color: var(--text);
+      margin-bottom: 3px; letter-spacing: -0.1px;
+    }
+    .rf-txt span { display: block; font-size: 12.5px; color: var(--text-dark); line-height: 1.5; }
+
+    .remote-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .remote-specs span {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 12px; font-weight: 500; color: var(--text-muted);
+      padding: 7px 13px; border-radius: 100px;
+      border: 1px solid var(--border); background: rgba(255,255,255,0.02);
+    }
+    .remote-specs span::before {
+      content: ""; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 7px rgba(var(--accent-rgb), 0.8);
+    }
+
+    /* ---- right column: device ---- */
+    .remote-stage {
+      position: relative;
+      display: flex; align-items: center; justify-content: flex-end;
+      min-height: 560px;
+    }
+    /* Device sits at the right edge of its column so the widget always has room to
+       its left; centering it made the widget collide with the copy near 1100px. */
+    .remote-device::before {
+      content: ""; position: absolute; z-index: 0;
+      left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 380px; height: 380px;
+      border-radius: 50%; filter: blur(90px); pointer-events: none;
+      background: radial-gradient(circle, rgba(var(--accent-rgb), 0.26), transparent 70%);
+      transition: background .45s ease;
+    }
+
+    .remote-device { position: relative; width: 272px; }
+    .remote-phone {
+      position: relative; z-index: 2;
+      width: 272px;
+      background: linear-gradient(180deg, #0b0f1a, #070a12);
+      border: 1px solid rgba(150, 170, 255, 0.16);
+      border-radius: 38px;
+      padding: 12px 14px 18px;
+      box-shadow:
+        0 40px 90px -20px rgba(0,0,0,0.85),
+        0 0 0 8px rgba(6, 9, 16, 0.9),
+        0 0 0 9px rgba(150, 170, 255, 0.07),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    /* physical side buttons */
+    .remote-phone::before, .remote-phone::after {
+      content: ""; position: absolute; right: -11px; width: 3px;
+      border-radius: 0 2px 2px 0; background: rgba(150,170,255,0.13);
+    }
+    .remote-phone::before { top: 112px; height: 30px; }
+    .remote-phone::after  { top: 152px; height: 52px; }
+
+    .rp-notch {
+      width: 74px; height: 20px; background: #05070e;
+      border-radius: 0 0 12px 12px; margin: -12px auto 8px;
+    }
+    .rp-status {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 10.5px; color: var(--text-dark); font-family: var(--font-mono);
+      padding: 0 2px; margin-bottom: 14px;
+    }
+    .rp-live { display: inline-flex; align-items: center; gap: 5px; color: var(--green); font-size: 9.5px; letter-spacing: .04em; }
+    .rp-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 7px var(--green); }
+
+    .rp-tabs {
+      display: flex; gap: 18px; font-size: 13px; font-weight: 600;
+      color: var(--text-dark); margin-bottom: 16px;
+    }
+    .rp-tabs span { position: relative; padding-bottom: 8px; }
+    .rp-tabs .active { color: #fff; }
+    .rp-tabs .active::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+      height: 2px; border-radius: 2px; background: var(--grad-brand);
+    }
+
+    .rp-card {
+      background: rgba(255,255,255,0.028);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 18px 16px; margin-bottom: 14px;
+    }
+    .rp-ring { position: relative; width: 118px; height: 118px; margin: 0 auto 16px; }
+    .rp-ring svg { width: 100%; height: 100%; }
+    .rp-ring-txt { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .rp-ring-txt b { font-family: var(--font-display); font-size: 30px; font-weight: 700; color: #fff; line-height: 1; }
+    .rp-ring-txt i { font-style: normal; font-size: 13px; color: var(--text-muted); margin-left: 1px; }
+    .rp-ring-txt span { font-size: 8.5px; color: var(--text-dark); margin-top: 5px; letter-spacing: .04em; text-transform: uppercase; }
+
+    .rp-bars { display: flex; flex-direction: column; gap: 11px; }
+    .rp-bar-h { display: flex; justify-content: space-between; align-items: baseline; font-size: 11.5px; color: var(--text-muted); margin-bottom: 5px; }
+    .rp-bar-h b { color: #fff; font-weight: 600; font-family: var(--font-mono); font-size: 11px; }
+    .rp-track { height: 4px; border-radius: 3px; background: rgba(255,255,255,0.06); overflow: hidden; }
+    .rp-fill { height: 100%; border-radius: 3px; background: var(--grad-brand); transition: background .45s ease; }
+
+    .rp-lbl { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dark); margin-bottom: 8px; font-family: var(--font-mono); }
+    .rp-profiles { display: flex; gap: 6px; margin-bottom: 14px; }
+    .rp-profiles span {
+      flex: 1; text-align: center; padding: 9px 4px; border-radius: 11px;
+      font-size: 10.5px; font-weight: 600; color: var(--text-dark);
+      border: 1px solid var(--border); background: rgba(255,255,255,0.015);
+    }
+    .rp-profiles .active {
+      color: #fff; background: rgba(var(--accent-rgb), 0.14);
+      border-color: rgba(var(--accent-rgb), 0.45);
+      box-shadow: 0 0 16px -4px rgba(var(--accent-rgb), 0.55);
+    }
+    .rp-cta {
+      text-align: center; padding: 14px; border-radius: 14px;
+      font-size: 13.5px; font-weight: 700; color: #05070e;
+      background: var(--grad-brand);
+      box-shadow: 0 12px 30px -10px rgba(var(--accent-rgb), 0.75);
+      transition: background .45s ease, box-shadow .45s ease;
+    }
+
+    /* ---- floating desktop widget ---- */
+    .remote-widget {
+      position: absolute; z-index: 3;
+      left: -194px; bottom: 26px;
+      width: 186px; padding: 13px 14px;
+      border-radius: 16px;
+      background: rgba(10, 14, 24, 0.92);
+      border: 1px solid rgba(150, 170, 255, 0.14);
+      box-shadow: 0 26px 55px -14px rgba(0,0,0,0.9);
+      backdrop-filter: blur(10px);
+    }
+    .rw-top { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; }
+    .rw-mark {
+      width: 20px; height: 20px; border-radius: 6px; background: var(--grad-brand);
+      display: flex; align-items: center; justify-content: center; flex: none;
+      transition: background .45s ease;
+    }
+    .rw-mark svg { width: 11px; height: 11px; }
+    .rw-top b { font-size: 11.5px; font-weight: 700; color: #fff; }
+    .rw-top em { font-style: normal; font-size: 9px; color: var(--text-dark); margin-left: auto; font-family: var(--font-mono); }
+    .rw-rows { display: flex; flex-direction: column; gap: 7px; }
+    .rw-row { display: flex; align-items: center; gap: 8px; font-size: 10px; color: var(--text-dark); font-family: var(--font-mono); }
+    .rw-row > span { width: 26px; flex: none; }
+    .rw-row .rp-track { flex: 1; height: 3px; }
+    .rw-row b { color: var(--text-muted); font-weight: 600; width: 26px; text-align: right; }
+    .remote-widget-tag {
+      position: absolute; z-index: 3; left: -186px; bottom: 4px;
+      font-size: 10.5px; color: var(--text-dark); font-family: var(--font-mono); letter-spacing: .03em;
+    }
+
+    @media (max-width: 980px) {
+      .remote-grid { grid-template-columns: 1fr; gap: 3rem; }
+      /* stacked layout has the full width, so re-centre the device */
+      .remote-stage { order: -1; min-height: 520px; justify-content: center; padding-left: 120px; }
+      .remote-copy .sub { max-width: none; }
+    }
+    @media (max-width: 640px) {
+      /* No room to overlap on a phone-width screen without burying the UI it is
+         meant to showcase, so the widget stacks under the device instead. */
+      .remote-device { width: auto; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+      .remote-widget { position: static; width: 208px; }
+      .remote-widget-tag { position: static; text-align: center; }
+      /* widget no longer hangs to the left here, so drop the compensating padding */
+      .remote-stage { min-height: 0; padding-left: 0; }
     }
 
     /* ============ FAQ ============ */
@@ -2014,10 +2275,116 @@
       flex-wrap: wrap;
     }
 
+    .key-contact-note {
+      font-size: 12.5px;
+      color: var(--text-dark);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
     .dl-buttons {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
+    }
+
+    /* ---- Две редакции: Pulse и Pulse Lite ---- */
+    .ed-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 4px;
+    }
+
+    .ed-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .ed-card:hover { border-color: var(--border-hover); }
+
+    .ed-card.ed-main {
+      border-color: rgba(var(--accent-rgb), 0.35);
+      background: linear-gradient(160deg, rgba(var(--accent-rgb), 0.07), transparent 60%), var(--bg-2);
+    }
+
+    .ed-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .ed-name {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .ed-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dark);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+
+    .ed-card.ed-main .ed-tag {
+      color: rgb(var(--accent-rgb));
+      border-color: rgba(var(--accent-rgb), 0.4);
+    }
+
+    .ed-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .ed-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .ed-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.45;
+    }
+
+    .ed-list svg { flex: none; margin-top: 2px; }
+    .ed-list li.no { color: var(--text-dark); }
+
+    .ed-card .btn { margin-top: auto; justify-content: center; }
+
+    .ed-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dark);
+      letter-spacing: 0.03em;
+    }
+
+    @media (max-width: 720px) {
+      .ed-grid { grid-template-columns: 1fr; }
     }
 
     .dl-side {
@@ -2111,7 +2478,11 @@
 
     .foot-links {
       display: flex;
-      gap: 24px;
+      /* wrap is required: six links in one non-wrapping row measured 702px wide and
+         dragged the whole page into horizontal scroll on phones. */
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 24px;
       font-size: 13.5px;
       color: var(--text-muted);
     }
@@ -2121,18 +2492,6 @@
     }
 
     /* ============ RESPONSIVE LAYOUTS ============ */
-    /* Webkit scrollbar for comparison table horizontal scroll */
-    .vs-container::-webkit-scrollbar {
-      height: 5px;
-    }
-    .vs-container::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.01);
-    }
-    .vs-container::-webkit-scrollbar-thumb {
-      background: var(--border-hover);
-      border-radius: 10px;
-    }
-
     @media (max-width: 1024px) {
       .demo-in {
         grid-template-columns: 1fr;
@@ -2384,9 +2743,7 @@
       .chart-bar-val {
         font-size: 15px !important;
       }
-      .vs-container table {
-        min-width: 580px !important;
-      }
+/* (мобильный оверрайд старой таблицы удалён вместе с ней) */
     }
 
     @media (max-width: 480px) {
@@ -2422,14 +2779,6 @@
       .hero {
         padding: 100px 0 40px !important;
       }
-      th, td {
-        padding: 8px 10px !important;
-        font-size: 11.5px !important;
-      }
-      .vs-container {
-        border-radius: 8px !important;
-      }
-      
       /* Make download/cta buttons full width on small phones */
       .dl-buttons .btn, .hero-cta .btn {
         width: 100% !important;
@@ -2525,191 +2874,10 @@
     }
 
     /* ---- prefers-reduced-motion: freeze all the assembly, show final state ---- */
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       [data-hero], .hero-stage[data-hero="7"], .reveal { opacity: 1 !important; transform: none !important; }
       .hero::after, .stage-glow, .games-track, .badge .dot, .hero-badge .dot, h1 span { animation: none !important; }
       .app-window { transform: none !important; }
-    }
-
-    /* ============ Хаос → Порядок — pinned scroll assembly ============ */
-    .co-wrap{
-      height:200vh;
-      position:relative;
-    }
-    .co-stage{
-      position:sticky;
-      top:0;
-      height:100vh;
-      height:100svh;
-      overflow:hidden;
-      --p:1; /* default = resolved state; JS lowers it only when motion allowed */
-      background:
-        radial-gradient(85% 52% at 50% 40%, rgba(var(--accent-2-rgb),.09), transparent 60%),
-        radial-gradient(78% 46% at 50% 62%, rgba(var(--accent-rgb),.07), transparent 60%),
-        var(--bg);
-      display:grid;
-      place-items:center;
-      isolation:isolate;
-    }
-    .co-grid{
-      position:absolute; inset:0;
-      background-image:
-        linear-gradient(rgba(150,170,255,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(150,170,255,.05) 1px, transparent 1px);
-      background-size:44px 44px;
-      opacity:calc(.25 + .55 * var(--p));
-      mask-image:radial-gradient(120% 90% at 50% 45%, #000 40%, transparent 78%);
-      -webkit-mask-image:radial-gradient(120% 90% at 50% 45%, #000 40%, transparent 78%);
-      pointer-events:none;
-      transform:translateZ(0);
-    }
-    .co-inner{
-      position:relative;
-      width:min(1080px, 92vw);
-      height:min(660px, 82svh);
-      z-index:1;
-    }
-    .co-heads{
-      position:absolute; left:0; right:0; top:-2.2rem;
-      text-align:center; pointer-events:none; z-index:6;
-    }
-    .co-head{
-      position:absolute; left:0; right:0; top:0;
-      margin:0;
-      font-family:var(--font-display);
-      font-weight:600;
-      letter-spacing:-.03em;
-      line-height:1.02;
-      font-size:clamp(1.5rem, 4.4vw, 3rem);
-      color:var(--text);
-      transition:opacity .05s linear;
-    }
-    .co-head b{
-      background:var(--grad-brand);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .co-head--1{ opacity:calc(1 - min(1, max(0, (var(--p) - .18) / .17))); }
-    .co-head--2{ opacity:calc(min(1, max(0,(var(--p) - .30)/.15)) * (1 - min(1, max(0,(var(--p) - .68)/.12)))); }
-    .co-head--3{ opacity:calc(min(1, max(0,(var(--p) - .74)/.14))); }
-    .co-board{
-      position:absolute; inset:0;
-      border:1px solid var(--border);
-      border-radius:22px;
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.14)), var(--bg-panel);
-      box-shadow:0 40px 90px -30px rgba(0,0,0,.85);
-      opacity:calc(.12 + .88 * min(1, max(0,(var(--p) - .28)/.42)));
-      transform:scale(calc(.965 + .035 * min(1, max(0,(var(--p) - .28)/.42))));
-    }
-    .co-frag{
-      position:absolute;
-      will-change:transform, opacity;
-      transform:
-        translate(calc(var(--x,0px) * (1 - var(--p))), calc(var(--y,0px) * (1 - var(--p))))
-        rotate(calc(var(--r,0deg) * (1 - var(--p))))
-        scale(calc(var(--s,1) + (1 - var(--s,1)) * var(--p)));
-      opacity:calc(.28 + .72 * var(--p));
-    }
-    .co-card{
-      width:236px;
-      padding:14px 16px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.025), transparent), var(--bg-2);
-      box-shadow:0 24px 50px -26px rgba(0,0,0,.8);
-      font-family:var(--font-sans);
-    }
-    .co-card__row{ display:flex; align-items:center; gap:10px; }
-    .co-dot{
-      width:9px; height:9px; border-radius:50%;
-      background:color-mix(in srgb, var(--red) calc((1 - var(--p)) * 100%), var(--green));
-      box-shadow:0 0 12px 0 color-mix(in srgb, var(--red) calc((1 - var(--p)) * 100%), var(--green));
-      flex:none;
-    }
-    .co-card__name{ font-size:.86rem; color:var(--text); font-weight:600; letter-spacing:-.01em; }
-    .co-card__meta{ margin-top:8px; display:flex; justify-content:space-between; align-items:flex-end; }
-    .co-card__mem{ font-family:var(--font-mono); font-size:1.02rem; color:var(--text-muted); font-variant-numeric:tabular-nums; }
-    .co-card__tag{ font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dark); }
-    .co-bar{ margin-top:9px; height:5px; border-radius:4px; background:rgba(150,170,255,.08); overflow:hidden; }
-    .co-bar > i{
-      display:block; height:100%; border-radius:4px;
-      width:var(--fill, 60%);
-      background:linear-gradient(90deg,
-         color-mix(in srgb, var(--red) calc((1 - var(--p)) * 100%), rgb(var(--accent-rgb))),
-         color-mix(in srgb, var(--amber) calc((1 - var(--p)) * 100%), rgb(var(--accent-2-rgb))));
-    }
-    .co-stat{
-      min-width:150px;
-      padding:13px 16px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:var(--bg-2);
-      box-shadow:0 22px 46px -28px rgba(0,0,0,.8);
-    }
-    .co-stat__label{ font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dark); }
-    .co-stat__val{
-      margin-top:4px;
-      font-family:var(--font-mono); font-weight:600;
-      font-size:1.7rem; letter-spacing:-.02em;
-      font-variant-numeric:tabular-nums;
-      color:color-mix(in srgb, var(--red) calc((1 - var(--p)) * 100%), rgb(var(--accent-cyan-rgb)));
-    }
-    .co-stat__val small{ font-size:.62em; color:var(--text-muted); margin-left:3px; font-weight:400; }
-    .co-result{
-      display:flex; align-items:center; gap:12px;
-      padding:14px 20px; border-radius:16px;
-      border:1px solid var(--border-hover);
-      background:linear-gradient(120deg, rgba(var(--accent-rgb),.14), rgba(var(--accent-2-rgb),.14));
-      box-shadow:0 18px 44px -28px rgba(var(--accent-rgb),.3);
-      opacity:calc(min(1, max(0,(var(--p) - .76)/.2)));
-      transform:translateY(calc((1 - min(1, max(0,(var(--p) - .76)/.2))) * 14px));
-    }
-    .co-result b{ font-family:var(--font-display); font-size:1.35rem; letter-spacing:-.02em;
-      background:var(--grad-brand); -webkit-background-clip:text; background-clip:text; color:transparent; }
-    .co-result span{ font-size:.82rem; color:var(--text-muted); }
-    .co-result .co-tick{
-      width:34px; height:34px; border-radius:50%; flex:none;
-      display:grid; place-items:center; font-size:1rem; color:#fff;
-      background:var(--grad-brand);
-    }
-    .co-scope{
-      position:absolute; left:0; right:0; bottom:0;
-      height:150px;
-      border-top:1px solid var(--border);
-      padding:0;
-    }
-    .co-scope svg{ width:100%; height:100%; display:block; }
-    .co-line--jag{ opacity:calc(1 - var(--p)); filter:drop-shadow(0 0 3px rgba(239,68,68,0.35)); }
-    .co-line--calm{ opacity:var(--p); filter:drop-shadow(0 0 4px rgba(var(--accent-cyan-rgb),0.55)); }
-    .co-scope__cap{
-      position:absolute; left:16px; top:10px;
-      font-family:var(--font-mono); font-size:.72rem; letter-spacing:.04em;
-      color:var(--text-dark);
-    }
-    .co-scope__cap b{ color:color-mix(in srgb, var(--red) calc((1 - var(--p)) * 100%), rgb(var(--accent-cyan-rgb))); font-variant-numeric:tabular-nums; }
-    .co-hint{
-      position:absolute; left:50%; bottom:18px; transform:translateX(-50%);
-      z-index:7; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase;
-      color:var(--text-dark); font-family:var(--font-mono);
-      opacity:calc(1 - min(1, var(--p) * 2.2));
-      pointer-events:none;
-    }
-    @media (prefers-reduced-motion: reduce){
-      .co-wrap{ height:auto; }
-      .co-stage{ position:relative; height:auto; min-height:100svh; padding:8vh 0; --p:1; }
-      .co-frag{ transform:none !important; opacity:1 !important; }
-      .co-hint{ display:none; }
-    }
-    @media (max-width:760px){
-      .co-wrap{ height:160vh; }
-      .co-inner{ width:94vw; height:auto; min-height:74svh; }
-      .co-card{ width:min(74vw, 240px); }
-      .co-scope{ height:120px; }
-      .co-head{ font-size:clamp(1.35rem, 6.6vw, 2rem); }
-      .co-heads{ top:-1rem; }
-    }
-    @media (max-width:760px){
-      .co-stage.co-static{ position:relative; height:auto; min-height:100svh; padding:10vh 0; }
-      .co-stage.co-static .co-frag{ transform:none; opacity:1; }
     }
 
     /* ============ v1.2.9 interactive app mockup ============ */
@@ -2745,6 +2913,7 @@
     .dm-navi{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;border:0;background:transparent;color:var(--text-muted);font:500 13px var(--font-sans);cursor:pointer;text-align:left;width:100%;transition:.15s}
     .dm-navi svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
     .dm-navi:hover{background:rgba(150,170,255,.05);color:var(--text)}
+    .dm-navi-pinned{margin-top:auto;border-top:1px solid var(--border);padding-top:11px}
     .dm-navi.dm-on{background:linear-gradient(135deg,rgba(var(--accent-rgb),.20),rgba(var(--accent-rgb),.07));color:#eafcff;box-shadow:inset 0 0 0 1px rgba(var(--accent-rgb),.4)}
     .dm-main{padding:16px;overflow:auto;min-height:0}
     .dm-panel{display:none;animation:dm-fade .25s ease}
@@ -2818,13 +2987,22 @@
     .dm-startitem{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg-2);margin-bottom:8px}
     .dm-startitem b{font:600 12px var(--font-sans);color:var(--text);display:block}
     .dm-startitem span{font:400 10px var(--font-mono);color:var(--text-dark);word-break:break-all}
-    .dm-toolgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .dm-tool{display:flex;gap:12px;padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--bg-2);cursor:pointer;transition:.18s}
+    .dm-net-server{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:var(--bg-2);margin-bottom:12px;font:600 12.5px var(--font-sans);color:var(--text)}
+    .dm-net-server b{font:600 13px var(--font-mono);color:var(--accent)}
+    .dm-net-start{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:14px}
+    .dm-net-start svg{width:13px;height:13px}
+    .dm-net-res{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .dm-key-row{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:var(--bg-2);flex-wrap:wrap}
+    .dm-key-lbl{font:600 10px var(--font-mono);color:var(--text-dark);text-transform:uppercase;letter-spacing:.05em}
+    .dm-key-val{font:600 13px var(--font-mono);color:var(--text);margin-right:auto}
+    .dm-toolgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .dm-tool{display:flex;align-items:center;gap:9px;padding:9px 10px;border:1px solid var(--border);border-radius:10px;background:var(--bg-2);cursor:pointer;transition:.18s}
     .dm-tool:hover{border-color:var(--border-hover);transform:translateY(-2px)}
-    .dm-tico{width:38px;height:38px;border-radius:10px;background:rgba(var(--accent-rgb),.12);display:grid;place-items:center;flex:none;color:var(--accent)}
-    .dm-tico svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .dm-tool b{font:600 13px var(--font-sans);color:var(--text);display:block;margin-bottom:3px}
-    .dm-tool span{font:400 11px var(--font-sans);color:var(--text-muted);line-height:1.4}
+    .dm-tico{width:28px;height:28px;border-radius:8px;background:rgba(var(--accent-rgb),.12);display:grid;place-items:center;flex:none;color:var(--accent)}
+    .dm-tico svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .dm-tool b{font:600 11.5px var(--font-sans);color:var(--text);display:block;margin-bottom:1px}
+    .dm-tool span{font:400 9.5px var(--font-sans);color:var(--text-muted);line-height:1.3;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    @media (max-width:640px){ .dm-toolgrid{grid-template-columns:1fr 1fr} }
     .dm-opt{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:10px 0}
     .dm-pulsebtn{width:110px;height:110px;border-radius:50%;border:1px solid var(--accent);background:radial-gradient(circle at 50% 40%,rgba(var(--accent-rgb),.35),rgba(var(--accent-2-rgb),.12));display:grid;place-items:center;cursor:pointer;position:relative;color:#fff;transition:.2s}
     .dm-pulsebtn svg{width:38px;height:38px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -2847,7 +3025,7 @@
      .dm-main{padding:12px}
      .dm-profiles{gap:5px}
     }
-    @media(prefers-reduced-motion:reduce){.dm-pulsebtn::before{animation:none}.dm-panel{animation:none}}
+    @media(prefers-reduced-motion:never-match){.dm-pulsebtn::before{animation:none}.dm-panel{animation:none}}
 
     /* ===== #demo window fixes (scoped) ===== */
     .dm-section .dm-win{
@@ -2984,7 +3162,7 @@
     .hm-k { letter-spacing: 0.03em; text-transform: uppercase; font-size: 10.5px; }
 
     /* Respect reduced-motion for every signature effect above */
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       .nav-links a::after { transition: none; }
       .feat-card, .safe-card, .rev-card, .feat-icon { transition: none; }
       .feat-card:hover, .safe-card:hover, .rev-card:hover { transform: none; }
@@ -3058,7 +3236,7 @@
     }
     @keyframes aw-sheen { 0% { left: -60%; } 45%, 100% { left: 130%; } }
 
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       .app-window { animation: none; }
       .app-window::after, .aw-spark polyline:last-of-type,
       .aw-titlebar::after { animation: none; }
@@ -3113,7 +3291,7 @@
     .hash-info:hover { border-color: var(--border-hover); }
     .req-list li { transition: color 0.25s ease; }
 
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       .aw-gauge-fill { transition: none; }
       .godrays::before, .godrays::after { animation: none !important; }
     }
@@ -3244,7 +3422,7 @@
       letter-spacing: 0.02em;
     }
 
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       .cpu-socket, .cpu-substrate, .cpu-pins, .cpu-die, .cpu-ihs, .cpu-glow,
       .cpu-brand, .cpu-model, .cpu-led { transition: none !important; opacity: 1 !important; transform: none !important; }
       .cpu-led, .cpu-ihs::after { animation: none !important; }
@@ -3289,6 +3467,7 @@
       <div class="nav-links">
         <a href="#features">Как это работает</a>
         <a href="#results">Результаты</a>
+        <a href="#remote">Remote</a>
         <a href="#vs">Сравнение</a>
         <a href="#safety">Безопасность</a>
         <a href="#faq">FAQ</a>
@@ -3305,8 +3484,8 @@
 
       <!-- LEFT: the thesis -->
       <div class="hero-copy">
-        <h1 data-hero="2">Windows, настроенный<br><span>под каждый кадр</span></h1>
-        <p class="sub" data-hero="3">Pulse убирает микрофризы, срезает задержки и высвобождает оперативную память, пока вы играете. Один клик, полный откат, ноль фонового процесса.</p>
+        <h1 data-hero="2">Чистая Windows.<br><span>Стабильный FPS.</span></h1>
+        <p class="sub" data-hero="3">Pulse убирает микрофризы, срезает задержки и высвобождает оперативную память, пока вы играете. Один клик, полный откат, никаких служб в фоне.</p>
         <div class="hero-cta" data-hero="4">
           <a class="btn btn-primary btn-lg magnetic" href="#download">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -3318,11 +3497,12 @@
           </a>
           <a class="btn btn-ghost btn-lg" href="#demo">Смотреть в действии</a>
         </div>
-        <div class="hero-note" id="heroNote" data-hero="5"><span class="hn-tag">Версия 1.2.6</span><span class="hn-tag">Windows 10 / 11</span><span class="hn-tag">Платная лицензия</span><span class="hn-tag">Активация по ключу</span></div>
+        <div class="hero-note" id="heroNote" data-hero="5"><span class="hn-tag">Версия 1.3.3</span><span class="hn-tag">Windows 10 / 11</span><span class="hn-tag">Платная лицензия</span><span class="hn-tag">Активация по ключу</span></div>
 
         <div class="profile-switch" data-hero="6" role="tablist" aria-label="Профиль оптимизации">
           <span class="ps-label">Профиль</span>
           <div class="profile-pills">
+            <span class="ps-thumb" aria-hidden="true"></span>
             <button class="profile-pill" data-profile="standard" role="tab"><span class="pp-dot"></span>Стандарт</button>
             <button class="profile-pill active" data-profile="gaming" role="tab" aria-selected="true"><span class="pp-dot"></span>Игровой</button>
             <button class="profile-pill" data-profile="maximum" role="tab"><span class="pp-dot"></span>Максимум</button>
@@ -3344,11 +3524,11 @@
           <div class="aw-titlebar">
             <div class="aw-brand">
               <span class="aw-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></span>
-              <span class="aw-name">Pulse <em>v1.2.9</em></span>
+              <span class="aw-name">Pulse <em>v1.3.3</em></span>
             </div>
             <div class="aw-profiles" aria-hidden="true">
               <span class="awp" title="Стандарт"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-              <span class="awp active" title="Игровой"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+              <span class="awp active" title="Игровой"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg></span>
               <span class="awp" title="Максимум"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
             </div>
             <div class="aw-win"><span></span><span></span><span class="x"></span></div>
@@ -3360,13 +3540,15 @@
               <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Исключения</span></div>
               <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>История</span></div>
               <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64A9 9 0 1 1 5.64 6.64"/><line x1="12" y1="2" x2="12" y2="12"/></svg><span>Автозапуск</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><span>Сеть</span></div>
               <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>Прочее</span></div>
               <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><span>Оптимизация</span></div>
+              <div class="aws aws-pinned"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Профиль</span></div>
             </div>
             <div class="aw-main" data-tilt-layer>
               <div class="aw-row">
                 <div class="aw-card aw-perf">
-                  <div class="aw-card-t">Общая производительность</div>
+                  <div class="aw-card-t">Использование памяти</div>
                   <div class="aw-gauge">
                     <svg viewBox="0 0 80 80">
                       <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="6"/>
@@ -3411,87 +3593,6 @@
     </div>
   </header>
 
-  <!-- ============ Хаос → Порядок ============ -->
-  <section class="co-wrap" aria-label="Как Pulse наводит порядок в системе">
-    <div class="co-stage">
-      <div class="co-grid" aria-hidden="true"></div>
-
-      <div class="co-inner">
-        <div class="co-heads">
-          <h2 class="co-head co-head--1">Так выглядит Windows <b>без оптимизации</b></h2>
-          <h2 class="co-head co-head--2"><b>Pulse</b> наводит порядок</h2>
-          <h2 class="co-head co-head--3">Готово. <b>Каждый кадр под контролем</b></h2>
-        </div>
-
-        <div class="co-board" aria-hidden="true"></div>
-
-        <!-- Process cards -->
-        <div class="co-frag co-card" style="--x:-360px;--y:-150px;--r:-13deg;--s:.62; left:2%; top:12%;">
-          <div class="co-card__row"><span class="co-dot"></span><span class="co-card__name">chrome.exe</span></div>
-          <div class="co-card__meta"><span class="co-card__mem" data-co-mem data-unit="ГБ" data-from="3.1" data-to="0.6" data-decimals="1">3.1 <small style="font-size:.62em">ГБ</small></span><span class="co-card__tag">RAM</span></div>
-          <div class="co-bar"><i data-co-bar data-from="92" data-to="18" style="--fill:92%"></i></div>
-        </div>
-
-        <div class="co-frag co-card" style="--x:380px;--y:-120px;--r:15deg;--s:.55; right:2%; top:9%;">
-          <div class="co-card__row"><span class="co-dot"></span><span class="co-card__name">Discord.exe</span></div>
-          <div class="co-card__meta"><span class="co-card__mem" data-co-mem data-unit="МБ" data-from="930" data-to="210" data-decimals="0">930 <small style="font-size:.62em">МБ</small></span><span class="co-card__tag">RAM</span></div>
-          <div class="co-bar"><i data-co-bar data-from="64" data-to="15" style="--fill:64%"></i></div>
-        </div>
-
-        <div class="co-frag co-card" style="--x:-330px;--y:180px;--r:9deg;--s:.6; left:4%; bottom:20%;">
-          <div class="co-card__row"><span class="co-dot"></span><span class="co-card__name">Spotify.exe</span></div>
-          <div class="co-card__meta"><span class="co-card__mem" data-co-mem data-unit="МБ" data-from="610" data-to="140" data-decimals="0">610 <small style="font-size:.62em">МБ</small></span><span class="co-card__tag">RAM</span></div>
-          <div class="co-bar"><i data-co-bar data-from="48" data-to="11" style="--fill:48%"></i></div>
-        </div>
-
-        <div class="co-frag co-card" style="--x:340px;--y:150px;--r:-11deg;--s:.58; right:5%; bottom:24%;">
-          <div class="co-card__row"><span class="co-dot"></span><span class="co-card__name">SearchHost.exe</span></div>
-          <div class="co-card__meta"><span class="co-card__mem" data-co-mem data-unit="МБ" data-from="280" data-to="70" data-decimals="0">280 <small style="font-size:.62em">МБ</small></span><span class="co-card__tag">Фон</span></div>
-          <div class="co-bar"><i data-co-bar data-from="33" data-to="8" style="--fill:33%"></i></div>
-        </div>
-
-        <!-- Telemetry stats -->
-        <div class="co-frag co-stat" style="--x:-210px;--y:-40px;--r:-7deg;--s:.7; left:26%; top:2%;">
-          <div class="co-stat__label">Задержка</div>
-          <div class="co-stat__val" data-co-count data-from="150" data-to="38" data-suffix=" мкс">150 мкс</div>
-        </div>
-
-        <div class="co-frag co-stat" style="--x:230px;--y:40px;--r:8deg;--s:.68; right:24%; top:4%;">
-          <div class="co-stat__label">Средний FPS</div>
-          <div class="co-stat__val" data-co-count data-from="164" data-to="302">164</div>
-        </div>
-
-        <div class="co-frag co-stat" style="--x:-120px;--y:120px;--r:6deg;--s:.72; left:30%; bottom:30%;">
-          <div class="co-stat__label">1% Low</div>
-          <div class="co-stat__val" data-co-count data-from="71" data-to="188">71</div>
-        </div>
-
-        <!-- Result chip (final beat) -->
-        <div class="co-frag co-result" style="--x:0px;--y:60px;--r:0deg;--s:.9; left:50%; top:40%; transform-origin:center; margin-left:-160px; width:320px;">
-          <span class="co-tick" aria-hidden="true">✓</span>
-          <div>
-            <b>200+ твиков применено</b><br>
-            <span>+138 FPS · задержка ниже в 4 раза</span>
-          </div>
-        </div>
-
-        <!-- Oscilloscope -->
-        <div class="co-scope" aria-hidden="true">
-          <div class="co-scope__cap">LATENCY&nbsp; <b class="co-scope-val">150 мкс</b></div>
-          <svg viewBox="0 0 800 150" preserveAspectRatio="none">
-            <polyline class="co-line--jag" fill="none" stroke="var(--red)" stroke-width="2.4"
-              points="0,80 40,40 70,120 100,30 130,110 165,18 200,130 235,55 270,125 305,25 340,115 375,45 410,135 445,60 480,120 515,22 550,128 585,50 620,118 655,35 690,124 725,58 760,110 800,70"/>
-            <polyline class="co-line--calm" fill="none" stroke="rgb(var(--accent-cyan-rgb))" stroke-width="2.4"
-              stroke-linejoin="round" stroke-linecap="round"
-              points="0,94 90,92 180,93 260,92 330,93 352,91 362,84 370,66 378,106 386,88 398,93 470,92 560,91 650,92 740,91 800,91"/>
-          </svg>
-        </div>
-      </div>
-
-      <div class="co-hint">Прокрутите ↓</div>
-    </div>
-  </section>
-
   <!-- ============ INTERACTIVE DEMO (THE APP MOCKUP v1.2.9) ============ -->
   <section class="dm-section" id="demo">
    <div class="dm-grid">
@@ -3517,11 +3618,11 @@
      <div class="dm-titlebar">
       <div class="dm-brand">
        <div class="dm-logo"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div>
-       <b>Pulse</b><span class="dm-ver">v1.2.9</span>
+       <b>Pulse</b><span class="dm-ver">v1.3.3</span>
       </div>
       <div class="dm-profiles">
        <button class="dm-prof" title="Стандарт"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></button>
-       <button class="dm-prof dm-on" title="Игровой"><svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></button>
+       <button class="dm-prof dm-on" title="Игровой"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg></button>
        <button class="dm-prof" title="Максимум"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></button>
       </div>
       <div class="dm-dots"><span class="dm-dot"></span><span class="dm-dot"></span><span class="dm-dot dm-close"></span></div>
@@ -3534,8 +3635,10 @@
        <button class="dm-navi" data-tab="2"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Исключения</span></button>
        <button class="dm-navi" data-tab="3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>История</span></button>
        <button class="dm-navi" data-tab="4"><svg viewBox="0 0 24 24"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg><span>Автозапуск</span></button>
-       <button class="dm-navi" data-tab="5"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>Прочее</span></button>
-       <button class="dm-navi" data-tab="6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>Оптимизация</span></button>
+       <button class="dm-navi" data-tab="5"><svg viewBox="0 0 24 24"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><span>Сеть</span></button>
+       <button class="dm-navi" data-tab="6"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>Прочее</span></button>
+       <button class="dm-navi" data-tab="7"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>Оптимизация</span></button>
+       <button class="dm-navi dm-navi-pinned" data-tab="8"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Профиль</span></button>
       </div>
 
       <div class="dm-main">
@@ -3543,7 +3646,7 @@
        <div class="dm-panel dm-on">
         <div class="dm-cols">
          <div class="dm-card">
-          <p class="dm-ctitle">Общая производительность</p>
+          <p class="dm-ctitle">Использование памяти</p>
           <div class="dm-gauge">
            <div class="dm-gwrap">
             <svg width="120" height="120" viewBox="0 0 120 120">
@@ -3619,24 +3722,9 @@
        <div class="dm-panel">
         <div class="dm-cols">
          <div class="dm-card">
-          <p class="dm-ctitle">Системные зависимости <span class="dm-count">· 20</span></p>
-          <div class="dm-exlist">
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>audiodg.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>conhost.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>csrss.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>dwm.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>explorer.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>fontdrvhost.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>lsass.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>MsMpEng.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>registry</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>SecurityHealthService.exe</b></div>
-          </div>
-         </div>
-         <div class="dm-card">
           <p class="dm-ctitle">Ваши исключения</p>
           <div class="dm-toolbar">
-           <input class="dm-input" id="dm-exinput" placeholder="имя_процесса.exe">
+           <input class="dm-input" id="dm-exinput" placeholder="имя процесса, например game.exe">
            <button class="dm-btn dm-btn-p" id="dm-exadd">Добавить</button>
           </div>
           <div class="dm-exlist" id="dm-exuser">
@@ -3644,26 +3732,41 @@
            <div class="dm-exitem"><svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b>obs64.exe</b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button></div>
           </div>
          </div>
+         <div class="dm-card">
+          <p class="dm-ctitle">Системные зависимости <span class="dm-count">· 20</span></p>
+          <p class="dm-tsub" style="margin:-6px 0 10px">Зашиты в Pulse, менять нельзя</p>
+          <div class="dm-exlist">
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>audiodg.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>conhost.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>csrss.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>dwm.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>explorer.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>fontdrvhost.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>lsass.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>MsMpEng.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>registry</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>SecurityHealthService.exe</b></div>
+          </div>
+         </div>
         </div>
        </div>
 
-       <!-- 3 HISTORY -->
+       <!-- 3 HISTORY (real app: chronological cleanup-report log, no chart) -->
        <div class="dm-panel">
         <div class="dm-card">
-         <p class="dm-ctitle">Динамика за неделю</p>
-         <svg class="dm-chart" viewBox="0 0 400 110" preserveAspectRatio="none">
-          <defs><linearGradient id="dm-hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(59,130,246,.35)"/><stop offset="1" stop-color="rgba(59,130,246,0)"/></linearGradient></defs>
-          <path d="M0,80 60,60 120,68 180,40 240,52 300,32 360,44 400,30 400,110 0,110 Z" fill="url(#dm-hg)"/>
-          <polyline fill="none" stroke="var(--accent)" stroke-width="2" points="0,80 60,60 120,68 180,40 240,52 300,32 360,44 400,30"/>
-          <polyline fill="none" stroke="var(--accent-2)" stroke-width="2" points="0,92 60,84 120,88 180,74 240,80 300,66 360,72 400,60"/>
-         </svg>
+         <p class="dm-ctitle">Хронология оптимизаций вашей системы</p>
+         <div class="dm-exlist">
+          <div class="dm-exitem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>21.08 06:18</b><span class="dm-pmem" style="margin-left:auto">ОЗУ 17% → 11%, освобождено 1.0 ГБ</span></div>
+          <div class="dm-exitem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>20.08 21:04</b><span class="dm-pmem" style="margin-left:auto">ОЗУ 22% → 13%, освобождено 1.4 ГБ</span></div>
+          <div class="dm-exitem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>19.08 09:47</b><span class="dm-pmem" style="margin-left:auto">ОЗУ 19% → 12%, освобождено 1.1 ГБ</span></div>
+         </div>
         </div>
         <div class="dm-row2">
          <div class="dm-card">
           <div class="dm-empty">
            <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
-           <b>Список пуст</b>
-           <span>Запустите очистку системы, чтобы увидеть отчёт здесь</span>
+           <b>История очисток пуста</b>
+           <span>Запустите «Чистку системы» на главном экране, чтобы здесь сохранился отчёт</span>
           </div>
          </div>
         </div>
@@ -3686,17 +3789,53 @@
         <div class="dm-startitem"><div><b>NVIDIA GeForce Experience</b><span>C:\Program Files\NVIDIA Corporation\NVIDIA GeForce Experience\NVIDIA GeForce Experience.exe</span></div><button class="dm-btn dm-btn-xs dm-btn-g">Удалить</button></div>
        </div>
 
-       <!-- 5 MISC -->
+       <!-- 5 NETWORK -->
        <div class="dm-panel">
-        <div class="dm-toolgrid">
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 12h.01M10 12h6"/></svg></div><div><b>Здоровье диска</b><span>S.M.A.R.T. и NVMe диагностика накопителей</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div><div><b>Калькулятор сенсы</b><span>Перенос чувствительности между играми</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="12" rx="2"/><path d="M8 17v3M16 17v3M8 9v4M12 9v4M16 9v4"/></svg></div><div><b>Тест ОЗУ</b><span>Поиск ошибок оперативной памяти</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div><b>Стресс-тест</b><span>Полная нагрузка на CPU и GPU</span></div></div>
+        <div class="dm-cols">
+         <div class="dm-card">
+          <p class="dm-ctitle">Прошлые тесты</p>
+          <div class="dm-exlist">
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><b>Франкфурт</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><b>Амстердам</b></div>
+          </div>
+         </div>
+         <div class="dm-card">
+          <p class="dm-ctitle">Пинг до серверов CS2, скорость через Cloudflare</p>
+          <div class="dm-net-server">
+           <span>Амстердам</span><b id="dm-net-ping">43 мс</b>
+          </div>
+          <button class="dm-btn dm-btn-p dm-net-start" id="dm-net-start">
+           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+           Начать тест
+          </button>
+          <div class="dm-net-res">
+           <div class="dm-tile"><p class="dm-tlbl">Приём</p><div class="dm-tval" id="dm-net-down">0.0</div><div class="dm-tsub">Мбит/с</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">Отправка</p><div class="dm-tval" id="dm-net-up">0.0</div><div class="dm-tsub">Мбит/с</div></div>
+          </div>
+         </div>
         </div>
        </div>
 
-       <!-- 6 OPTIMIZE -->
+       <!-- 6 MISC (Pulse Lab — matches the real app's tool grid) -->
+       <div class="dm-panel">
+        <p class="dm-ctitle">Диагностика системы</p>
+        <div class="dm-toolgrid">
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div><div><b>Диагностика задержек</b><span>DPC/ISR, таймер, ввод и виновники микрофризов во время игры</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div><b>Стресс-тест</b><span>Нагрузка CPU и GPU</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="12" rx="2"/><path d="M8 17v3M16 17v3M8 9v4M12 9v4M16 9v4"/></svg></div><div><b>Проверка памяти</b><span>Поиск ошибок ОЗУ</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 12h.01M10 12h6"/></svg></div><div><b>Здоровье диска</b><span>S.M.A.R.T. и NVMe</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/><path d="M12 7v4M12 11 6 17M12 11l6 6"/></svg></div><div><b>USB и прерывания</b><span>Маршрут и привязка CPU</span></div></div>
+        </div>
+        <p class="dm-ctitle" style="margin-top:18px">Игровые инструменты и оптимизация</p>
+        <div class="dm-toolgrid">
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><b>Pulse Sentinel</b><span>Приоритеты и процессы</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg></div><div><b>Game Mode X</b><span>Игровой профиль и турбо</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M4 6h6M4 12h10M4 18h4"/><circle cx="14" cy="6" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg></div><div><b>CS2 Config Lab</b><span>Бинды, графика и autoexec</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div><div><b>Калькулятор сенсы</b><span>Перенос cm/360° между играми</span></div></div>
+        </div>
+       </div>
+
+       <!-- 7 OPTIMIZE -->
        <div class="dm-panel">
         <div class="dm-opt">
          <button class="dm-pulsebtn" id="dm-runopt"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></button>
@@ -3705,6 +3844,36 @@
          <button class="dm-btn dm-btn-p" id="dm-runopt2">Оптимизация</button>
          <div class="dm-progwrap"><div class="dm-prog" id="dm-prog"></div></div>
          <pre class="dm-term" id="dm-term"></pre>
+        </div>
+       </div>
+
+       <!-- 8 PROFILE -->
+       <div class="dm-panel">
+        <div class="dm-cols">
+         <div class="dm-card">
+          <p class="dm-ctitle">Лицензия</p>
+          <div class="dm-key-row">
+           <span class="dm-key-lbl">Базовая лицензия</span>
+           <code class="dm-key-val" id="dm-key-val">····-····-····-····</code>
+           <button class="dm-btn dm-btn-xs">Копировать</button>
+          </div>
+          <p class="dm-ctitle" style="margin-top:16px">Статистика</p>
+          <div class="dm-tiles">
+           <div class="dm-tile"><p class="dm-tlbl">Чисток</p><div class="dm-tval">78</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">Подряд</p><div class="dm-tval">21</div><div class="dm-tsub">дней</div></div>
+          </div>
+          <div class="dm-tiles" style="margin-top:8px">
+           <div class="dm-tile"><p class="dm-tlbl">Освобождено</p><div class="dm-tval">231.6 ГБ</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">Закрыто проц.</p><div class="dm-tval">443</div></div>
+          </div>
+         </div>
+         <div class="dm-card">
+          <p class="dm-ctitle">Патч-ноуты</p>
+          <div class="dm-exlist">
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><b>Pulse v1.3.3: что нового</b></div>
+          </div>
+          <p class="dm-lead" style="margin-top:10px">Доработали дизайн, обновили историю очисток и добавили вкладку теста скорости интернета.</p>
+         </div>
         </div>
        </div>
 
@@ -3720,12 +3889,12 @@
       <div class="sec-head center">
         <div class="eyebrow">Архитектура утилиты</div>
         <h2>Как Pulse оптимизирует систему</h2>
-        <p>Каждое изменение спроектировано для снижения латентности ввода и устранения фонового вмешательства Windows.</p>
+        <p>200+ конкретных изменений в службах, реестре и сети Windows, каждое можно откатить.</p>
       </div>
 
       <!-- Assembly visual: three drifting layers (system / network / game) that
            snap together into one stack under Pulse's control on hover/scroll-into-view. -->
-      <div class="assembly" tabindex="0" role="img" aria-label="Процессор собирается из частей: подложка, контакты, кристалл и теплораспределитель — Pulse настраивает систему на уровне железа">
+      <div class="assembly" tabindex="0" role="img" aria-label="Процессор собирается из частей: подложка, контакты, кристалл и теплораспределитель. Pulse настраивает систему на уровне железа">
         <div class="cpu-stage">
           <div class="cpu-glow"></div>
           <div class="cpu-socket"></div>
@@ -3751,7 +3920,7 @@
             </svg>
           </div>
           <h3>Освобождение ОЗУ</h3>
-          <p>В отличие от софта, «сбрасывающего» ОЗУ в файл подкачки, Pulse приостанавливает циклы неактивных фоновых приложений (браузеры, лаунчеры, службы обновлений) через WinAPI. На системе с 16 ГБ ОЗУ после оптимизации в простое остаётся занятым всего около 1.5 ГБ, без побочного роста дисковой активности.</p>
+          <p>Часть фоновых процессов (браузеры, лаунчеры, службы обновлений) Pulse закрывает, у остальных обрезает используемую память через EmptyWorkingSet, не выгружая их из системы. Игре при этом выставляется повышенный приоритет процесса. На системе с 16 ГБ после очистки в простое остаётся занятым около 1.5 ГБ.</p>
         </div>
 
         <div class="feat-card reveal">
@@ -3762,8 +3931,8 @@
               <path d="M4 17h11"/><circle cx="19" cy="17" r="2.5"/>
             </svg>
           </div>
-          <h3>Конфигурация WinAPI и служб</h3>
-          <p>Автоматическое отключение систем телеметрии (DiagTrack, WPP, Event Logs) и планировщика архивации. Утилита выгружает ресурсоемкие службы отчетов об ошибках Windows, освобождая процессорные потоки во время игр.</p>
+          <h3>Отключение служб и телеметрии</h3>
+          <p>Выключает службу телеметрии Windows (DiagTrack), отчёты об ошибках (WerSvc), индексацию поиска (WSearch) и кэширование SysMain/Superfetch, плюс десятки фоновых задач планировщика (диагностика, синхронизация, проверки лицензий). Перед изменениями создаётся точка восстановления, поэтому любой шаг обратим.</p>
         </div>
 
         <div class="feat-card reveal">
@@ -3774,8 +3943,8 @@
               <path d="M18 4v6M15 7l3 3 3-3"/>
             </svg>
           </div>
-          <h3>Снижение сетевых задержек</h3>
-          <p>Pulse вносит изменения в конфигурацию сетевых драйверов в реестре, отключая алгоритм Нагла (TCP Nodelay) и Network Throttling. Это устраняет принудительное накопление пакетов в буфере и снижает микро-скачки пинга.</p>
+          <h3>Настройка сети</h3>
+          <p>Через netsh отключает RSC, TCP-эвристики, timestamps и ECN, переключает congestion provider на CTCP. В реестре сетевого адаптера выключает энергосбережение (EEE, Green Ethernet) и офлоады, которые добавляют случайные микро-задержки пакетам.</p>
         </div>
 
         <div class="feat-card reveal">
@@ -3786,8 +3955,8 @@
               <path d="M8 13.5h2l1.5-3 2 6 1.5-3h2"/>
             </svg>
           </div>
-          <h3>Тюнинг I/O и таймера Windows</h3>
-          <p>Принудительно переключает системный таймер высокого разрешения (HPET) в оптимальное состояние для игр, снижая задержки на уровне драйверов. Приоритизирует I/O дисковые запросы запущенной игры.</p>
+          <h3>Приоритет CPU и таймер</h3>
+          <p>Ставит Win32PrioritySeparation в режим короткого кванта времени: приоритет у приложения на переднем плане, а не у фона. Восстанавливает разрешение системного таймера (GlobalTimerResolutionRequests), от которого зависит стабильность фреймтайма.</p>
         </div>
       </div>
     </div>
@@ -3873,68 +4042,167 @@
   </section>
 
   <!-- ============ VS TABLE SECTION ============ -->
+  <!-- ============ PULSE REMOTE (MOBILE COMPANION) ============ -->
+  <section class="remote-app" id="remote">
+    <div class="wrap remote-grid">
+
+      <div class="remote-copy">
+        <div class="eyebrow">Мобильное приложение</div>
+        <h2>Pulse Remote: телефон как пульт от ПК</h2>
+        <p class="sub">Приложение для Android в пару к Pulse. Смотрите нагрузку компьютера, чистите память и выключайте его, не вставая из-за стола и даже из другой комнаты.</p>
+
+        <ul class="remote-feats">
+          <li>
+            <span class="rf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></span>
+            <span class="rf-txt"><b>Нагрузка в реальном времени</b><span>Процессор, память, диск и сеть, значения обновляются раз в секунду</span></span>
+          </li>
+          <li>
+            <span class="rf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
+            <span class="rf-txt"><b>Очистка с телефона</b><span>Те же три профиля, что и в программе: Стандарт, Игровой, Максимум</span></span>
+          </li>
+          <li>
+            <span class="rf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+            <span class="rf-txt"><b>Диспетчер задач</b><span>Топ процессов по памяти, любой закрывается одним тапом</span></span>
+          </li>
+          <li>
+            <span class="rf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></span>
+            <span class="rf-txt"><b>Питание</b><span>Сон, перезагрузка и выключение ПК, с отменой, если передумали</span></span>
+          </li>
+          <li>
+            <span class="rf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></span>
+            <span class="rf-txt"><b>Виджет на рабочий стол</b><span>Загрузка ПК прямо на экране телефона, заходить в приложение не нужно</span></span>
+          </li>
+        </ul>
+
+        <div class="remote-specs">
+          <span>Android</span>
+          <span>Связь по домашней сети</span>
+          <span>Без облака и сторонних серверов</span>
+        </div>
+      </div>
+
+      <div class="remote-stage">
+       <div class="remote-device">
+        <div class="remote-phone">
+          <div class="rp-notch"></div>
+          <div class="rp-status">
+            <span>09:41</span>
+            <span class="rp-live"><span class="rp-dot"></span>ПК НА СВЯЗИ</span>
+          </div>
+          <div class="rp-tabs"><span class="active">Главная</span><span>Инструменты</span></div>
+
+          <div class="rp-card">
+            <div class="rp-ring">
+              <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7"/>
+                <circle cx="50" cy="50" r="42" fill="none" stroke="url(#rpGrad)" stroke-width="7" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="174" transform="rotate(-90 50 50)"/>
+                <defs><linearGradient id="rpGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgb(var(--accent-rgb))"/><stop offset="100%" stop-color="rgb(var(--accent-2-rgb))"/></linearGradient></defs>
+              </svg>
+              <div class="rp-ring-txt"><b>34<i>%</i></b><span>память ПК</span></div>
+            </div>
+            <div class="rp-bars">
+              <div>
+                <div class="rp-bar-h"><span>Процессор</span><b>12%</b></div>
+                <div class="rp-track"><div class="rp-fill" style="width:12%"></div></div>
+              </div>
+              <div>
+                <div class="rp-bar-h"><span>Диск</span><b>3%</b></div>
+                <div class="rp-track"><div class="rp-fill" style="width:3%"></div></div>
+              </div>
+              <div>
+                <div class="rp-bar-h"><span>Сеть</span><b>1%</b></div>
+                <div class="rp-track"><div class="rp-fill" style="width:1%"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rp-lbl">Режим очистки</div>
+          <div class="rp-profiles">
+            <span>Стандарт</span><span class="active">Игровой</span><span>Максимум</span>
+          </div>
+          <div class="rp-cta">Очистить систему</div>
+        </div>
+
+        <div class="remote-widget">
+          <div class="rw-top">
+            <span class="rw-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#05070e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></span>
+            <b>Pulse</b><em>сейчас</em>
+          </div>
+          <div class="rw-rows">
+            <div class="rw-row"><span>ОЗУ</span><div class="rp-track"><div class="rp-fill" style="width:34%"></div></div><b>34%</b></div>
+            <div class="rw-row"><span>ЦП</span><div class="rp-track"><div class="rp-fill" style="width:12%"></div></div><b>12%</b></div>
+            <div class="rw-row"><span>Диск</span><div class="rp-track"><div class="rp-fill" style="width:3%"></div></div><b>3%</b></div>
+          </div>
+        </div>
+        <div class="remote-widget-tag">виджет на рабочем столе</div>
+       </div>
+      </div>
+
+    </div>
+  </section>
+
   <section class="vs" id="vs">
     <div class="wrap">
       <div class="sec-head center">
         <div class="eyebrow">Сравнение решений</div>
-        <h2>Отличия Pulse от стандартного софта</h2>
+        <h2>Чем Pulse отличается от чистилок и бустеров</h2>
       </div>
 
-      <div class="vs-container reveal">
-        <table>
-          <thead>
-            <tr>
-              <th>Функционал</th>
-              <th class="col-target">Pulse</th>
-              <th>Очистители диска</th>
-              <th>Платные бустеры</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Устранение системных задержек и настройка HPET</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Частично</td>
-            </tr>
-            <tr>
-              <td>Принудительная остановка фоновых задач</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
-            </tr>
-            <tr>
-              <td>Белый список критических процессов ОС</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (30+)</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-            </tr>
-            <tr>
-              <td>Автоматический бэкап реестра</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Иногда</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Редко</td>
-            </tr>
-            <tr>
-              <td>Прозрачный лог изменений</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (лог)</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-            </tr>
-            <tr>
-              <td>Отсутствие фонового процесса в трее</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (0% ОЗУ)</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-            </tr>
-            <tr>
-              <td>Модель оплаты</td>
-              <td class="col-target" style="color:var(--green); font-weight:700;">Разовый ключ, без подписки</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Бесплатно, с рекламой</td>
-              <td>Подписка от $12/мес</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="cmp reveal">
+        <div class="cmp-row cmp-head">
+          <div>Что делает</div>
+          <div class="cmp-us">Pulse</div>
+          <div class="cmp-val">Чистилки диска</div>
+          <div class="cmp-val">Платные бустеры</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-what">Отключение служб, телеметрии и тюнинг сети</div>
+          <div class="cmp-us" data-col="Pulse">есть</div>
+          <div class="cmp-val cmp-no" data-col="Чистилки">нет</div>
+          <div class="cmp-val" data-col="Бустеры">частично</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-what">Закрытие фоновых процессов</div>
+          <div class="cmp-us" data-col="Pulse">есть</div>
+          <div class="cmp-val cmp-no" data-col="Чистилки">нет</div>
+          <div class="cmp-val" data-col="Бустеры">есть</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-what">Защищённый список системных процессов</div>
+          <div class="cmp-us" data-col="Pulse">23 процесса</div>
+          <div class="cmp-val cmp-no" data-col="Чистилки">нет</div>
+          <div class="cmp-val cmp-no" data-col="Бустеры">нет</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-what">Точка восстановления перед изменениями</div>
+          <div class="cmp-us" data-col="Pulse">есть</div>
+          <div class="cmp-val" data-col="Чистилки">иногда</div>
+          <div class="cmp-val" data-col="Бустеры">редко</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-what">Возврат системы к прежним настройкам</div>
+          <div class="cmp-us" data-col="Pulse">в один клик</div>
+          <div class="cmp-val cmp-no" data-col="Чистилки">нет</div>
+          <div class="cmp-val" data-col="Бустеры">частично</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-what">Профили Стандарт, Игровой, Максимум</div>
+          <div class="cmp-us" data-col="Pulse">есть</div>
+          <div class="cmp-val cmp-no" data-col="Чистилки">нет</div>
+          <div class="cmp-val" data-col="Бустеры">частично</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-what">Остаётся в системе после закрытия</div>
+          <div class="cmp-us" data-col="Pulse">ничего</div>
+          <div class="cmp-val" data-col="Чистилки">служба</div>
+          <div class="cmp-val" data-col="Бустеры">служба</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-what">Оплата</div>
+          <div class="cmp-us" data-col="Pulse">разовый ключ</div>
+          <div class="cmp-val" data-col="Чистилки">реклама</div>
+          <div class="cmp-val" data-col="Бустеры">подписка</div>
+        </div>
       </div>
     </div>
   </section>
@@ -3958,7 +4226,7 @@
             </svg>
           </div>
           <h3>Аппаратное ядро под защитой</h3>
-          <p>В коде жестко зафиксирован список из 32 процессов Windows (таких как dwm.exe, explorer.exe, lsass.exe), которые утилита не имеет права останавливать или изменять.</p>
+          <p>В коде жёстко зафиксирован список из 23 процессов Windows (dwm.exe, explorer.exe, lsass.exe, sihost.exe и другие), которые утилита не трогает ни на одном профиле, включая «Максимум». На «Игровом» к ним добавляются игры, лаунчеры и анти-читы.</p>
         </div>
 
         <div class="safe-card reveal">
@@ -3979,8 +4247,8 @@
               <path d="m7 9 2.5 2.5L7 14"/><path d="M12.5 14.5h4.5"/>
             </svg>
           </div>
-          <h3>Техническая прозрачность</h3>
-          <p>Pulse не использует скрытые бинарные скрипты. Все твики применяются через стандартные ветки реестра. В конце работы утилита сохраняет читаемый текстовый лог всех измененных ключей.</p>
+          <h3>Штатные средства Windows</h3>
+          <p>Pulse не использует скрытые бинарные скрипты и не лезет в память чужих процессов. Все изменения делаются через стандартные ветки реестра и штатные механизмы системы, поэтому их видит и умеет откатывать сама Windows.</p>
         </div>
       </div>
     </div>
@@ -4075,8 +4343,20 @@
           <div class="answer">Да. В рамках оптимизации Pulse отключает встроенный защитник (Windows Defender), так как его фоновое сканирование заметно нагружает диск и процессор во время игры. Перед отключением создаётся точка восстановления, чтобы при необходимости можно было откатить изменение.</div>
         </details>
         <details>
+          <summary>Чем Pulse Lite отличается от полной версии?</summary>
+          <div class="answer">Оптимизация одинаковая: те же три профиля, та же очистка памяти, те же твики. Разница в оболочке. В Lite одно окно с памятью, профилями и двумя кнопками, без вкладок с процессами, автозапуском и историей и без связи с телефоном. Зато файл весит полтора мегабайта вместо ста.</div>
+        </details>
+        <details>
+          <summary>Нужен ли для Lite отдельный ключ?</summary>
+          <div class="answer">Нет. Ключ один на обе версии и привязан к компьютеру, а не к сборке. Активируете в одной, вторая подхватит сама. Ключ проверяется через интернет, так что при первом запуске нужна сеть.</div>
+        </details>
+        <details>
+          <summary>Почему Lite просит установить .NET 8?</summary>
+          <div class="answer">Так файл остаётся маленьким. Полная версия несёт всё внутри себя, отсюда и сто мегабайт. Lite берёт готовый компонент Windows, .NET 8 Desktop Runtime. Если его нет, Windows при первом запуске сама даст ссылку. Ставится один раз, за минуту.</div>
+        </details>
+        <details>
           <summary>Почему антивирус может ругаться на .exe?</summary>
-          <div class="answer">Pulse правит реестр и управляет службами без установщика, а такое поведение эвристики иногда помечают как подозрительное — это ложное срабатывание. Файл не подписан дорогим EV-сертификатом, отсюда и предупреждение SmartScreen. Сверьте SHA-256 сборки со значением в блоке загрузки ниже; при желании проверьте файл на VirusTotal перед запуском.</div>
+          <div class="answer">Pulse правит реестр и управляет службами без установщика, а такое поведение эвристики иногда помечают как подозрительное: это ложное срабатывание. Файл не подписан дорогим EV-сертификатом, отсюда и предупреждение SmartScreen. Сверьте SHA-256 сборки со значением в блоке загрузки ниже; при желании проверьте файл на VirusTotal перед запуском.</div>
         </details>
       </div>
     </div>
@@ -4088,31 +4368,58 @@
       <div class="dl-main">
         <div class="eyebrow">Дистрибутив</div>
         <h2>Скачать Pulse</h2>
-        <p>Повысьте стабильность фреймтайма и освободите оперативную память одной кнопкой. Портативная сборка, готовая к запуску. Активация по лицензионному ключу.</p>
-        <div class="dl-buttons">
-          <a class="btn btn-primary" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/Pulse.exe" download="Pulse.exe">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Скачать Pulse (.EXE)
-          </a>
+        <p>Две сборки. Полная версия со всеми вкладками и Lite весом полтора мегабайта. Оптимизирует одинаково, ключ подходит к обеим.</p>
+        <div class="ed-grid">
+
+          <div class="ed-card ed-main">
+            <div class="ed-head">
+              <span class="ed-name">Pulse</span>
+              <span class="ed-tag">Полная версия</span>
+            </div>
+            <p class="ed-desc">Все инструменты сразу: очистка, оптимизация Windows, процессы, автозапуск, исключения, история и работа с телефоном.</p>
+            <ul class="ed-list">
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Очистка памяти и три профиля</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 200+ твиков системы</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Процессы, автозапуск, история, исключения</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Управление с телефона через Pulse Remote</li>
+            </ul>
+            <div class="ed-meta"><span id="specsSizeInline">99.3 МБ</span> · без установки · .NET не нужен</div>
+            <a class="btn btn-primary" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/Pulse.exe" download="Pulse.exe">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Скачать Pulse (.EXE)
+            </a>
+          </div>
+
+          <div class="ed-card">
+            <div class="ed-head">
+              <span class="ed-name">Pulse Lite</span>
+              <span class="ed-tag">Лёгкая версия</span>
+            </div>
+            <p class="ed-desc">Одно окно: занятая память, выбор профиля, две кнопки. Внутри та же оптимизация, что и в полной версии.</p>
+            <ul class="ed-list">
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Очистка памяти и три профиля</li>
+              <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 200+ твиков системы</li>
+              <li class="no"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Без вкладок процессов и автозапуска</li>
+              <li class="no"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Без управления с телефона</li>
+            </ul>
+            <div class="ed-meta"><span id="specsSizeLite">1.4 МБ</span> · без установки · нужен .NET 8</div>
+            <a class="btn btn-ghost" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/PulseLite.exe" download="PulseLite.exe">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Скачать Pulse Lite
+            </a>
+          </div>
+
         </div>
 
         <div class="key-contact">
-          <div class="key-contact-lbl">Лицензия 5€ (≈200₴). Ключ выдаётся автоматически сразу после оплаты:</div>
+          <div class="key-contact-lbl">Лицензия 5€ (около 200₴), разовый ключ без подписки. Выдаём в Telegram:</div>
           <div class="key-contact-buttons">
-            <button class="btn btn-primary btn-sm" id="buyCryptoBtn" type="button">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3Z"/><path d="M2 10h20"/></svg>
-              Купить криптой
-            </button>
-            <a class="btn btn-ghost btn-sm" href="https://t.me/Pulse_buy" target="_blank" rel="noopener">
+            <a class="btn btn-primary btn-sm" href="https://t.me/Pulse_buy" target="_blank" rel="noopener">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-              Telegram · Pulse
+              Купить ключ в Telegram
             </a>
           </div>
-          <div class="key-contact-note" id="buyError" style="display:none; color:#ef4444; font-size:12.5px; margin-top:8px;"></div>
+          <div class="key-contact-note">Напишите в чат, пришлём ключ и поможем с активацией. Других способов оплаты нет.</div>
         </div>
       </div>
 
@@ -4121,16 +4428,20 @@
           <h3>Характеристики сборки</h3>
           <ul class="req-list">
             <li><span class="lbl">ОС</span><span class="val">Windows 10 / 11 64-bit</span></li>
-            <li><span class="lbl">Размер</span><span class="val" id="specsSize">99.3 МБ</span></li>
+            <li><span class="lbl">Pulse</span><span class="val" id="specsSize">99.3 МБ</span></li>
+            <li><span class="lbl">Pulse Lite</span><span class="val" id="specsSizeSide">1.4 МБ</span></li>
             <li><span class="lbl">Инсталлятор</span><span class="val">Не требуется (Portable)</span></li>
-            <li><span class="lbl">Лицензия</span><span class="val">Платная, по ключу</span></li>
+            <li><span class="lbl">Права</span><span class="val">Администратор</span></li>
+            <li><span class="lbl">Лицензия</span><span class="val">Один ключ на обе версии</span></li>
             <li><span class="lbl">Активация</span><span class="val">Telegram</span></li>
             <li id="lastUpdateRow" style="display:none;"><span class="lbl">Обновлено</span><span class="val" id="specsUpdated">…</span></li>
           </ul>
         </div>
         <div class="hash-info">
-          <div class="hash-lbl">SHA-256 Контрольная сумма</div>
-          <div class="hash-val">d6c85f4533146dc58e01b7e4b2efeacb5970d25dc578243596ebdebdefdfe3b2</div>
+          <div class="hash-lbl">SHA-256 · Pulse.exe</div>
+          <div class="hash-val" id="hashFull">7d4fe9a6c10ddc7521d78491578e0a808a8512cdd801dcc0e733023f720fbbeb</div>
+          <div class="hash-lbl" style="margin-top:14px;">SHA-256 · PulseLite.exe</div>
+          <div class="hash-val" id="hashLite">не опубликован</div>
         </div>
       </div>
     </div>
@@ -4150,6 +4461,7 @@
       <div class="foot-links">
         <a href="#features">Оптимизация</a>
         <a href="#results">Результаты</a>
+        <a href="#remote">Remote</a>
         <a href="#safety">Безопасность</a>
         <a href="#download">Скачать</a>
         <a href="privacy.html">Конфиденциальность</a>
@@ -4166,7 +4478,7 @@
        so the fetch no longer delays anything the user sees. -->
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedMotion = false; /* анимации всегда включены, не зависят от системной настройки */
     const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 640;
     // "Ведро": слабый CPU (<=4 логических ядер) или мало памяти (<=4ГБ, если браузер это раскрывает).
     // На таких устройствах отключаем самые дорогие эффекты (Lenis, созвездия частиц, тяжёлый blur) вместо
@@ -4189,9 +4501,10 @@
     let lenis = null;
     if (!reducedMotion && !isMobileDevice && !isLowPower && window.Lenis) {
       lenis = new Lenis({
-        duration: 0.7,         // was 1.15 — that read as laggy; this keeps a light glide without feeling delayed
-        easing: (t) => 1 - Math.pow(1 - t, 2), // gentler ease-out quad — quicker settle than cubic
+        duration: 0.45,        // was 0.7 — user reported scroll felt sluggish/icy; shorter glide reacts faster to wheel input
+        easing: (t) => 1 - Math.pow(1 - t, 2.2), // slightly sharper ease-out — settles quicker, still not abrupt
         smoothWheel: true,
+        wheelMultiplier: 1.1,  // wheel input carries a bit more weight, so it doesn't feel like it's fighting the mouse
       });
       function raf(time) {
         lenis.raf(time);
@@ -4265,18 +4578,48 @@
       const profileRGB = { standard: '34, 224, 107', gaming: '34, 211, 238', maximum: '255, 106, 26' };
       const profileIdx = { standard: 0, gaming: 1, maximum: 2 };
       const pills = document.querySelectorAll('.profile-pill');
+      const pillsTrack = document.querySelector('.profile-pills');
+      const psThumb = document.querySelector('.ps-thumb');
       const awProfileIcons = document.querySelectorAll('.aw-profiles .awp');
+
+      function moveThumb(pill) {
+        if (!psThumb || !pillsTrack || !pill) return;
+        const trackRect = pillsTrack.getBoundingClientRect();
+        const pillRect = pill.getBoundingClientRect();
+        psThumb.style.left = (pillRect.left - trackRect.left) + 'px';
+        psThumb.style.width = pillRect.width + 'px';
+      }
+
+      function selectProfile(p, { animateThumb = true } = {}) {
+        document.documentElement.setAttribute('data-profile', p);
+        window.pulseAccentRGB = profileRGB[p] || profileRGB.standard;
+        pills.forEach(x => { x.classList.remove('active'); x.removeAttribute('aria-selected'); });
+        const targetPill = document.querySelector(`.profile-pill[data-profile="${p}"]`);
+        if (targetPill) {
+          targetPill.classList.add('active');
+          targetPill.setAttribute('aria-selected', 'true');
+          if (!animateThumb) psThumb && (psThumb.style.transition = 'none');
+          moveThumb(targetPill);
+          if (!animateThumb) requestAnimationFrame(() => { psThumb && (psThumb.style.transition = ''); });
+        }
+        // Mirror the selection on the app-window's top toggle — always re-synced, never left stale
+        awProfileIcons.forEach((ic, i) => ic.classList.toggle('active', i === profileIdx[p]));
+        // Broadcast so any other mockup on the page (e.g. the #demo panel below) stays in sync too
+        window.dispatchEvent(new CustomEvent('pulse-profile-change', { detail: { profile: p, idx: profileIdx[p] } }));
+      }
+      // Exposed so other mockups can drive the hero's own switcher (two-way sync)
+      window.pulseSelectProfile = selectProfile;
+
       pills.forEach(pill => {
-        pill.addEventListener('click', () => {
-          const p = pill.dataset.profile;
-          document.documentElement.setAttribute('data-profile', p);
-          window.pulseAccentRGB = profileRGB[p] || profileRGB.standard;
-          pills.forEach(x => { x.classList.remove('active'); x.removeAttribute('aria-selected'); });
-          pill.classList.add('active');
-          pill.setAttribute('aria-selected', 'true');
-          // Mirror the selection on the app-window's top toggle
-          awProfileIcons.forEach((ic, i) => ic.classList.toggle('active', i === profileIdx[p]));
-        });
+        pill.addEventListener('click', () => selectProfile(pill.dataset.profile));
+      });
+
+      // Initial sync: pill, thumb and the app-window icon must always agree on load
+      const initialPill = document.querySelector('.profile-pill.active') || pills[0];
+      if (initialPill) selectProfile(initialPill.dataset.profile, { animateThumb: false });
+      window.addEventListener('resize', () => {
+        const active = document.querySelector('.profile-pill.active');
+        if (active) moveThumb(active);
       });
     })();
 
@@ -4293,7 +4636,24 @@
       const particleCount = isLowPower ? 10 : (isMobileDevice ? 14 : 38);
       // The O(n²) constellation-line pass (~700 pair checks at 38 particles) is the
       // single costliest part of this loop — skip it entirely on weak hardware.
-      const drawConstellation = !isLowPower;
+      let drawConstellation = !isLowPower;
+      // Adaptive downgrade: some visitors pass the hardwareConcurrency/deviceMemory
+      // check but their PC is loaded with other stuff (background apps, weak GPU,
+      // many tabs) and still drops frames. Measure real frame time and cut the
+      // expensive parts if the page is actually struggling, not just guessing upfront.
+      let perfLastT = 0, perfBadFrames = 0, perfDowngraded = false;
+      function perfWatch(now) {
+        if (perfLastT) {
+          const dt = now - perfLastT;
+          perfBadFrames = dt > 33 ? perfBadFrames + 1 : Math.max(0, perfBadFrames - 2);
+          if (!perfDowngraded && perfBadFrames > 45) {
+            perfDowngraded = true;
+            drawConstellation = false;
+            if (particles.length > 12) particles.length = 12;
+          }
+        }
+        perfLastT = now;
+      }
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random(),
@@ -4359,6 +4719,7 @@
             return;
           }
         }
+        perfWatch(performance.now());
         ctx.clearRect(0, 0, width, height);
 
         // (cursor glow trail removed — it was drawn on the canvas and clipped at the hero edge)
@@ -4520,8 +4881,29 @@
         const res = await fetch('https://api.github.com/repos/skywhyelo-lab/Plus/releases/latest');
         if (!res.ok) return;
         const release = await res.json();
-        const asset = release.assets && release.assets.find(a => a.name === 'Pulse.exe');
+        const assets = release.assets || [];
+        const asset = assets.find(a => a.name === 'Pulse.exe');
+
+        // Lite публикуется тем же релизом отдельным файлом. Размер и контрольную сумму
+        // берём из ответа API (поле digest), чтобы на сайте не осталось цифр, которые
+        // надо править руками на каждой сборке.
+        const liteAsset = assets.find(a => a.name === 'PulseLite.exe');
+        if (liteAsset) {
+          if (liteAsset.size) {
+            const liteMB = (liteAsset.size / (1024 * 1024)).toFixed(1);
+            ['specsSizeLite', 'specsSizeSide'].forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.textContent = `${liteMB} МБ`;
+            });
+          }
+          const liteHash = document.getElementById('hashLite');
+          if (liteHash && liteAsset.digest) liteHash.textContent = String(liteAsset.digest).replace(/^sha256:/, '');
+        }
+
         if (!asset || !asset.updated_at) return;
+
+        const fullHash = document.getElementById('hashFull');
+        if (fullHash && asset.digest) fullHash.textContent = String(asset.digest).replace(/^sha256:/, '');
 
         const d = new Date(asset.updated_at);
         const day = String(d.getDate()).padStart(2, '0');
@@ -4545,8 +4927,10 @@
 
         if (asset.size) {
           const sizeMB = (asset.size / (1024 * 1024)).toFixed(1);
-          const specsSize = document.getElementById('specsSize');
-          if (specsSize) specsSize.textContent = `${sizeMB} МБ`;
+          ['specsSize', 'specsSizeInline'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = `${sizeMB} МБ`;
+          });
           const bandCountFile = document.querySelector('.band-card .count[data-target="99.3"]');
           if (bandCountFile) {
             bandCountFile.dataset.target = sizeMB;
@@ -4628,156 +5012,7 @@
       assemblyObserver.observe(assemblyEl);
     }
 
-    /* ---------- BUY BUTTONS (Paddle card checkout + CryptoCloud/Trybit) ---------- */
-    (function() {
-      const buyCardBtn = document.getElementById('buyCardBtn');
-      const buyCryptoBtn = document.getElementById('buyCryptoBtn');
-      const buyError = document.getElementById('buyError');
-      if (!buyCardBtn && !buyCryptoBtn) return;
 
-      const PADDLE_CLIENT_TOKEN = 'live_aec6742e15aae2bef4c8e482107';
-      const PADDLE_PRICE_ID = 'pri_01kxswmzkn326by5m08x7dxayk';
-      if (window.Paddle) {
-        window.Paddle.Setup({ token: PADDLE_CLIENT_TOKEN });
-      }
-
-      function showError(msg) {
-        buyError.textContent = msg;
-        buyError.style.display = 'block';
-      }
-
-      if (buyCardBtn) {
-        buyCardBtn.addEventListener('click', async () => {
-          buyCardBtn.disabled = true;
-          const originalHtml = buyCardBtn.innerHTML;
-          buyCardBtn.textContent = 'Открываем оплату…';
-          buyError.style.display = 'none';
-
-          try {
-            const res = await fetch('/api/create-order', { method: 'POST' });
-            const data = await res.json();
-            if (!res.ok || !data.order_id) throw new Error(data.error || 'unknown error');
-
-            localStorage.setItem('pulse_order_id', data.order_id);
-            window.Paddle.Checkout.open({
-              items: [{ priceId: PADDLE_PRICE_ID, quantity: 1 }],
-              customData: { order_id: data.order_id },
-              settings: { successUrl: `${location.origin}/success.html?order_id=${data.order_id}` },
-            });
-          } catch (err) {
-            showError('Не удалось начать оплату картой. Попробуйте ещё раз или напишите в Telegram.');
-          } finally {
-            buyCardBtn.disabled = false;
-            buyCardBtn.innerHTML = originalHtml;
-          }
-        });
-      }
-
-      if (buyCryptoBtn) {
-        buyCryptoBtn.addEventListener('click', async () => {
-          buyCryptoBtn.disabled = true;
-          const originalHtml = buyCryptoBtn.innerHTML;
-          buyCryptoBtn.textContent = 'Создаём счёт…';
-          buyError.style.display = 'none';
-
-          try {
-            const res = await fetch('/api/create-invoice', { method: 'POST' });
-            const data = await res.json();
-            if (!res.ok || !data.pay_url) throw new Error(data.error || 'unknown error');
-
-            localStorage.setItem('pulse_order_id', data.order_id);
-            window.location.href = data.pay_url;
-          } catch (err) {
-            buyCryptoBtn.disabled = false;
-            buyCryptoBtn.innerHTML = originalHtml;
-            showError('Не удалось начать оплату криптой. Попробуйте ещё раз или напишите в Telegram.');
-          }
-        });
-      }
-    })();
-
-  </script>
-
-  <!-- ============ Хаос → Порядок — scroll scrub ============ -->
-  <script>
-  (function(){
-    var wrap  = document.querySelector('.co-wrap');
-    var stage = document.querySelector('.co-stage');
-    if(!wrap || !stage) return;
-
-    var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var isMobile = matchMedia('(max-width:760px)').matches;
-    var counters = [].slice.call(stage.querySelectorAll('[data-co-count]'));
-    var mems = [].slice.call(stage.querySelectorAll('[data-co-mem]'));
-    var bars = [].slice.call(stage.querySelectorAll('[data-co-bar]'));
-    var scopeVal = stage.querySelector('.co-scope-val');
-
-    function clamp(v,a,b){ return v<a?a:(v>b?b:v); }
-    function fmt(n){ return Math.round(n).toLocaleString('ru-RU'); }
-
-    function setMemsBarsTo(cp){
-      mems.forEach(function(el){
-        var from = +el.dataset.from, to = +el.dataset.to, decimals = +el.dataset.decimals || 0, unit = el.dataset.unit;
-        var val = from + (to - from) * cp;
-        var small = el.querySelector('small');
-        el.firstChild.textContent = val.toFixed(decimals) + ' ';
-        if (small) small.textContent = unit;
-      });
-      bars.forEach(function(el){
-        var from = +el.dataset.from, to = +el.dataset.to;
-        el.style.setProperty('--fill', (from + (to - from) * cp) + '%');
-      });
-    }
-
-    if(rm){
-      counters.forEach(function(el){ el.textContent = fmt(+el.dataset.to) + (el.dataset.suffix||''); });
-      if(scopeVal) scopeVal.textContent = '38 мкс';
-      setMemsBarsTo(1);
-      return;
-    }
-
-    if(isMobile){
-      stage.classList.add('co-static');
-      var io = new IntersectionObserver(function(ents){
-        ents.forEach(function(e){
-          if(e.isIntersecting){
-            stage.style.setProperty('--p','1');
-            counters.forEach(function(el){ el.textContent = fmt(+el.dataset.to) + (el.dataset.suffix||''); });
-            if(scopeVal) scopeVal.textContent = '38 мкс';
-            setMemsBarsTo(1);
-            io.disconnect();
-          }
-        });
-      }, {threshold:.35});
-      io.observe(stage);
-      return;
-    }
-
-    stage.style.setProperty('--p','0');
-    var ticking = false, lastP = -1;
-
-    function update(){
-      ticking = false;
-      var rect = wrap.getBoundingClientRect();
-      var range = rect.height - stage.offsetHeight;
-      var p = clamp(-rect.top / (range || 1), 0, 1);
-      if(p === lastP) return;
-      lastP = p;
-      stage.style.setProperty('--p', p);
-      var cp = clamp((p - 0.30) / 0.48, 0, 1);
-      counters.forEach(function(el){
-        var from = +el.dataset.from, to = +el.dataset.to, suf = el.dataset.suffix || '';
-        el.textContent = fmt(from + (to - from) * cp) + suf;
-      });
-      if(scopeVal) scopeVal.textContent = fmt(150 + (38 - 150) * cp) + ' мкс';
-      setMemsBarsTo(cp);
-    }
-
-    function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
-    addEventListener('scroll', onScroll, {passive:true});
-    addEventListener('resize', function(){ lastP = -1; onScroll(); }, {passive:true});
-    update();
-  })();
   </script>
 
   <!-- ============ v1.2.9 mockup controller ============ -->
@@ -4796,6 +5031,44 @@
    root.querySelectorAll('.dm-tog').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('dm-on')})});
    var chips=root.querySelectorAll('.dm-chip');
    chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('dm-on')});c.classList.add('dm-on')})});
+
+   // Network test tab: fake a realistic-looking measurement on click
+   var netBtn=root.querySelector('#dm-net-start'),netPing=root.querySelector('#dm-net-ping'),
+       netDown=root.querySelector('#dm-net-down'),netUp=root.querySelector('#dm-net-up'),netRunning=false;
+   if(netBtn)netBtn.addEventListener('click',function(){
+    if(netRunning)return;netRunning=true;
+    netBtn.textContent='Тестирование…';
+    setTimeout(function(){
+     if(netPing)netPing.textContent=(38+Math.floor(Math.random()*10))+' мс';
+     if(netDown)netDown.textContent=(180+Math.floor(Math.random()*60));
+     if(netUp)netUp.textContent=(35+Math.floor(Math.random()*15));
+     netBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>Начать тест';
+     netRunning=false;
+    },1100);
+   });
+
+   // Profile tab: a fresh-looking random key each page load (not the same string for every visitor),
+   // same alphabet as the real KeyGenerator — excludes 0/O/1/I to avoid look-alike characters.
+   var keyEl=root.querySelector('#dm-key-val');
+   if(keyEl){
+    var ALPHA='23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    function randKey(){
+     var groups=[];
+     for(var g=0;g<4;g++){
+      var s='';
+      for(var c=0;c<4;c++) s+=ALPHA[Math.floor(Math.random()*ALPHA.length)];
+      groups.push(s);
+     }
+     return groups.join('-');
+    }
+    keyEl.textContent=randKey();
+   }
+
+   var copyBtn=root.querySelector('.dm-key-val')?.nextElementSibling;
+   if(copyBtn)copyBtn.addEventListener('click',function(){
+    copyBtn.textContent='Скопировано';
+    setTimeout(function(){copyBtn.textContent='Копировать';},1400);
+   });
 
    // Быстрая очистка → gauge jumps into the healthy zone
    var garc=root.querySelector('#dm-garc'),gnum=root.querySelector('#dm-gnum'),glbl=root.querySelector('#dm-glbl'),cleaned=false;
@@ -4833,7 +5106,7 @@
        prog=root.querySelector('#dm-prog'),term=root.querySelector('#dm-term'),
        freed=root.querySelector('#dm-freed'),dpc=root.querySelector('#dm-dpc'),running=false,done=false;
    var steps=['Создание точки восстановления… ОК','Отключение телеметрии (DiagTrack)… ОК','Настройка сетевых задержек (TCP Nodelay)… ОК','Сжатие неактивного ОЗУ… ОК','Готово: 200+ твиков'];
-   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+   var reduce=false; /* анимации всегда включены */
    function finish(){if(freed)freed.innerHTML='2.4<span>ГБ</span>';if(dpc)dpc.innerHTML='38<span>мкс</span>';running=false;done=true}
    function run(){
     if(running)return;running=true;
@@ -4857,13 +5130,14 @@
   })();
   </script>
 
-  <!-- ============ #demo window: local independent profile tint ============ -->
+  <!-- ============ #demo window: profile tint, synced with the hero switcher ============ -->
   <script>
   (function(){
     var win = document.querySelector('#demo .dm-win');
     if(!win) return;
     var profs = win.querySelectorAll('.dm-prof');
     if(!profs || !profs.length) return;
+    var NAMES = ['standard', 'gaming', 'maximum'];
     var PALETTE = [
       { a:'34,224,107',  b:'18,184,147'  },
       { a:'34,211,238',  b:'59,130,246'  },
@@ -4877,10 +5151,23 @@
       win.style.setProperty('--grad-brand','linear-gradient(120deg,rgb('+p.a+'),rgb('+p.b+'))');
       for(var j=0;j<profs.length;j++){ profs[j].classList.toggle('dm-on', j===i); }
     }
+    // Clicking a profile icon here drives the hero's own switcher — one source of truth,
+    // so the pill up top, its own app-window and this demo can never disagree again.
     for(var k=0;k<profs.length;k++){
-      (function(idx){ profs[idx].addEventListener('click', function(){ tint(idx); }); })(k);
+      (function(idx){
+        profs[idx].addEventListener('click', function(){
+          if (window.pulseSelectProfile) window.pulseSelectProfile(NAMES[idx]);
+          else tint(idx);
+        });
+      })(k);
     }
-    tint(1);
+    window.addEventListener('pulse-profile-change', function(e){
+      tint(e.detail.idx);
+    });
+    // Initial paint: match whatever profile is already active (hero default or saved state),
+    // not a hardcoded guess.
+    var current = document.documentElement.getAttribute('data-profile') || 'gaming';
+    tint(NAMES.indexOf(current) >= 0 ? NAMES.indexOf(current) : 1);
   })();
   </script>
 </body>

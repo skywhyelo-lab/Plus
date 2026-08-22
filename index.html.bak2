@@ -1,0 +1,4543 @@
+<!DOCTYPE html>
+<html lang="ru" data-profile="gaming">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse: настройка Windows для игр. Стабильный фреймтайм и низкий пинг</title>
+  <meta name="description" content="Pulse: утилита для снижения задержек, очистки оперативной памяти и оптимизации Windows под игровые задачи. Точка восстановления перед изменениями, белый список процессов, открытый лог твиков. Лицензия по ключу.">
+  <link rel="canonical" href="https://pulsepc.vercel.app/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%2322d3ee'/%3E%3Cpath d='M2 12h4l3-8 4 16 3-8h6' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pulse">
+  <meta property="og:title" content="Pulse — Windows, настроенный под каждый кадр">
+  <meta property="og:description" content="Убирает микрофризы, срезает задержки и высвобождает ОЗУ, пока вы играете. 200+ твиков в один клик, полный откат, ноль фонового процесса.">
+  <meta property="og:image" content="https://pulsepc.vercel.app/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pulse — Windows, настроенный под каждый кадр">
+  <meta name="twitter:description" content="Убирает микрофризы, срезает задержки и высвобождает ОЗУ, пока вы играете. 200+ твиков в один клик, полный откат.">
+  <meta name="twitter:image" content="https://pulsepc.vercel.app/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Pulse",
+    "operatingSystem": "Windows 10, Windows 11",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "description": "Лицензионный ключ, оплата автоматически на сайте или через Telegram"
+    },
+    "softwareVersion": "1.2.9"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Exo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* ---- Cyan→Blue DUOTONE brand system (cyan leads on gaming default; blue is the second stop) ---- */
+      --accent-rgb: 34, 211, 238;          /* #22D3EE — cyan lead (gaming default), matches app UI */
+      --accent-2-rgb: 59, 130, 246;        /* #3B82F6 — blue, the gradient's far stop */
+      --accent-deep-rgb: 14, 116, 144;     /* #0E7490 — darker cyan for depth */
+      --accent-light-rgb: 150, 235, 247;   /* lighter cyan for text gradients */
+      --accent-cyan-rgb: 34, 211, 238;     /* #22D3EE — cold highlight on peaks/graph */
+
+      /* Profile switcher: Standard=green, Gaming=cyan→blue (default), Maximum=orange.
+         Site chrome default follows the Gaming profile (cyan). */
+      --profile-rgb: var(--accent-rgb);
+
+      /* Neutrals carry a slight blue-violet bias — chosen, not defaulted grey */
+      --bg: #05070e;
+      --bg-2: #080b14;
+      --bg-panel: #0e1220;
+      --bg-panel-hover: #141a2c;
+      --border: rgba(150, 170, 255, 0.075);
+      --border-hover: rgba(150, 170, 255, 0.18);
+
+      --accent: rgb(var(--accent-rgb));
+      --accent-2: rgb(var(--accent-2-rgb));
+      /* deep/light derive from the primary so they follow the profile retint automatically */
+      --accent-deep: color-mix(in srgb, rgb(var(--accent-rgb)) 72%, #000);
+      --accent-light: color-mix(in srgb, rgb(var(--accent-rgb)) 50%, #fff);
+      --accent-cyan: rgb(var(--accent-cyan-rgb));
+      --accent-muted: rgba(var(--accent-rgb), 0.15);
+      --accent-glow: rgba(var(--accent-rgb), 0.32);
+      /* The signature duotone gradient — reused everywhere for brand cohesion */
+      --grad-brand: linear-gradient(120deg, rgb(var(--accent-rgb)), rgb(var(--accent-2-rgb)));
+      --grad-brand-soft: linear-gradient(135deg, rgba(var(--accent-rgb), 0.9), rgba(var(--accent-2-rgb), 0.85));
+      /* Profile-tinted gradient — same-hue, retints when the profile switcher changes --profile-rgb */
+      --grad-profile: linear-gradient(120deg, rgb(var(--profile-rgb)), color-mix(in srgb, rgb(var(--profile-rgb)) 55%, #1a1030));
+
+      --green: #22c55e;
+      --green-muted: rgba(34, 197, 94, 0.15);
+      --amber: #f59e0b;
+      --amber-muted: rgba(245, 158, 11, 0.15);
+      --red: #ef4444;
+      --red-muted: rgba(239, 68, 68, 0.15);
+      --text: #f6f8ff;
+      --text-muted: #a2a8c0;
+      --text-dark: #656b86;
+      --font-sans: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-display: 'Exo 2', 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      /* Was "all" — forced the browser to diff every animatable property (incl. filter,
+         width/height) on every hover/state change across ~12 selectors. Narrowed to what's
+         actually animated anywhere it's used: color/paint + transform, never geometry. */
+      --transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Signature asymmetric shadow — grows down + sideways, never up (mirrors app card shadow) */
+      --shadow-card: 10px 22px 44px -18px rgba(0, 0, 0, 0.75);
+      --shadow-accent: 8px 20px 54px -14px rgba(var(--accent-rgb), 0.34);
+    }
+
+    /* Profile switcher retint — swaps the ENTIRE site duotone (bg glows, accents, buttons, window).
+       Each profile is a harmonious pair, not a single flat hue. --profile-rgb follows --accent-rgb. */
+    /* Registering the RGB channels as typed <number>s lets the browser actually
+       interpolate them on profile switch — a plain comma-list custom property
+       (the format used everywhere as rgb(var(--accent-rgb))) can't be animated. */
+    @property --ar { syntax: '<number>'; inherits: true; initial-value: 34; }
+    @property --ag { syntax: '<number>'; inherits: true; initial-value: 211; }
+    @property --ab { syntax: '<number>'; inherits: true; initial-value: 238; }
+    @property --a2r { syntax: '<number>'; inherits: true; initial-value: 59; }
+    @property --a2g { syntax: '<number>'; inherits: true; initial-value: 130; }
+    @property --a2b { syntax: '<number>'; inherits: true; initial-value: 246; }
+    :root {
+      --ar: 34; --ag: 211; --ab: 238;
+      --a2r: 59; --a2g: 130; --a2b: 246;
+      transition: --ar 0.6s ease, --ag 0.6s ease, --ab 0.6s ease,
+                  --a2r 0.6s ease, --a2g 0.6s ease, --a2b 0.6s ease;
+      /* Re-derive the comma-list vars every consumer already uses, now smoothly interpolated */
+      --accent-rgb: var(--ar), var(--ag), var(--ab);
+      --accent-2-rgb: var(--a2r), var(--a2g), var(--a2b);
+    }
+    /* Standard=безопасный ЗЕЛЁНЫЙ, Gaming=игровой ЦИАН→СИНИЙ, Maximum=ОРАНЖЕВЫЙ→hot red.
+       Violet/indigo removed — was the #1 "AI-generated" color tell (Tailwind default). */
+    :root[data-profile="standard"] { --ar: 34;  --ag: 224; --ab: 107; --a2r: 18;  --a2g: 184; --a2b: 147; }
+    :root[data-profile="gaming"]   { --ar: 34;  --ag: 211; --ab: 238; --a2r: 59;  --a2g: 130; --a2b: 246; }
+    :root[data-profile="maximum"]  { --ar: 255; --ag: 106; --ab: 26;  --a2r: 255; --a2g: 61;  --a2b: 87;  }
+    @media (prefers-reduced-motion: reduce) {
+      :root { transition: none; }
+    }
+
+    @keyframes tel-pulse {
+      0% { transform: scale(1); filter: brightness(1); }
+      50% { transform: scale(1.06); filter: brightness(1.25); color: var(--accent); }
+      100% { transform: scale(1); filter: brightness(1); }
+    }
+    .pulse-effect {
+      animation: tel-pulse 0.4s ease-out;
+      display: inline-block;
+    }
+
+    @keyframes hero-shine {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+    }
+
+    /* Brand "heartbeat" — a literal double-beat, period 1.6s, echoing the Pulse logo/ECG */
+    @keyframes heartbeat {
+      0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(var(--dot-rgb, var(--accent-rgb)), 0.55); }
+      12%  { transform: scale(1.5);  box-shadow: 0 0 10px 2px rgba(var(--dot-rgb, var(--accent-rgb)), 0.55); }
+      24%  { transform: scale(1);    box-shadow: 0 0 0 0 rgba(var(--dot-rgb, var(--accent-rgb)), 0.0); }
+      36%  { transform: scale(1.32); box-shadow: 0 0 8px 1px rgba(var(--dot-rgb, var(--accent-rgb)), 0.4); }
+      48%  { transform: scale(1);    box-shadow: 0 0 0 6px rgba(var(--dot-rgb, var(--accent-rgb)), 0); }
+      100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(var(--dot-rgb, var(--accent-rgb)), 0); }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    svg {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* scroll-behavior: smooth removed — Lenis owns smooth scrolling now and the
+       two fighting over the same scroll position caused a laggy, doubled feel. */
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    nav, .hero-in, section, .band, footer { position: relative; z-index: 2; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero::after, .badge .dot, h1 span, .games-track {
+        animation: none !important;
+      }
+      * { scroll-behavior: auto !important; }
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============ NAV ============ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(8, 8, 12, 0.62);
+      backdrop-filter: blur(22px) saturate(150%);
+      -webkit-backdrop-filter: blur(22px) saturate(150%);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px -20px rgba(0, 0, 0, 0.9);
+      transition: var(--transition);
+    }
+    
+    .nav-in {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .logo-mark svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      /* hover-lift shares the same easing/duration as the cards so nothing moves at a different tempo */
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(0.98);
+      transition-duration: 0.09s;
+    }
+
+    /* Airy frosted-glass CTA — translucent, light "like air/water", not a loud fill */
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.20), rgba(var(--accent-rgb), 0.07));
+      -webkit-backdrop-filter: blur(10px);
+              backdrop-filter: blur(10px);
+      color: #eafcff;
+      border-color: rgba(var(--accent-rgb), 0.5);
+      position: relative;
+      box-shadow: 0 4px 22px -8px rgba(var(--accent-rgb), 0.35), inset 0 1px 0 rgba(255,255,255,0.14);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.30), rgba(var(--accent-rgb), 0.12));
+      border-color: rgba(var(--accent-rgb), 0.72);
+      box-shadow: 0 12px 34px -10px rgba(var(--accent-rgb), 0.45), inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--border-hover);
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 13.5px;
+      border-radius: 6px;
+    }
+
+    /* ============ HERO ============ */
+    .hero {
+      position: relative;
+      padding: 150px 0 96px;
+      overflow: hidden;
+      transition: background .6s ease;
+      background:
+        radial-gradient(1100px 520px at 78% -6%, rgba(var(--accent-2-rgb), 0.18), transparent 62%),
+        radial-gradient(900px 480px at 6% 4%, rgba(var(--accent-rgb), 0.16), transparent 60%),
+        radial-gradient(760px 420px at 60% 40%, rgba(var(--accent-cyan-rgb), 0.05), transparent 62%),
+        linear-gradient(180deg, var(--bg) 68%, var(--bg-2) 100%);
+    }
+    /* soft seam so the hero melts into the next section instead of cutting hard */
+    .hero::before {
+      content: '';
+      position: absolute; left: 0; right: 0; bottom: 0; height: 160px;
+      background: linear-gradient(180deg, transparent, var(--bg-2));
+      pointer-events: none; z-index: 1;
+    }
+
+    /* Aurora sweep behind the hero content for motion + depth */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 60%;
+      width: 130%;
+      height: 130%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+      background: conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(var(--accent-rgb), 0.12) 80deg, transparent 190deg, rgba(var(--accent-2-rgb), 0.11) 300deg, transparent 360deg);
+      filter: blur(70px);
+      opacity: 0.75;
+      animation: aurora-spin 34s linear infinite;
+      /* self-fade to transparent at its own edges so overflow:hidden can't clip it into a hard box */
+      -webkit-mask-image: radial-gradient(closest-side, #000 32%, transparent 78%);
+              mask-image: radial-gradient(closest-side, #000 32%, transparent 78%);
+    }
+
+    @keyframes aurora-spin {
+      to { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.9;
+    }
+
+    .hero-in {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 48px;
+      perspective: 1400px;
+    }
+
+    /* ---- Left column ---- */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-light);
+      border: 1px solid rgba(var(--accent-rgb), 0.28);
+      border-radius: 100px;
+      padding: 6px 14px;
+      background: rgba(var(--accent-rgb), 0.07);
+      margin-bottom: 26px;
+    }
+    .hero-badge .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); --dot-rgb: 34, 197, 94;
+      animation: heartbeat 1.6s ease-out infinite;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: -2.4px;
+      margin-bottom: 22px;
+      color: #fff;
+      text-wrap: balance;
+    }
+    h1 span {
+      background: linear-gradient(108deg, var(--accent-light) 0%, var(--accent) 42%, var(--accent-2) 92%);
+      background-size: 220% auto;
+      animation: hero-shine 8s ease-in-out infinite;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p.sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 34px;
+      line-height: 1.55;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .btn-lg { padding: 14px 26px; font-size: 15px; border-radius: 10px; }
+
+    .hero-note {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .hn-tag {
+      font-family: var(--font-sans);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      background: rgba(150, 170, 255, 0.045);
+      border: 1px solid var(--border);
+      padding: 3px 9px;
+      border-radius: 6px;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+    .hn-tag.hn-date {
+      color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.07);
+      border-color: rgba(var(--accent-rgb), 0.32);
+      font-weight: 600;
+    }
+
+    .hero-metrics {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin-top: 34px;
+      padding-top: 26px;
+      border-top: 1px solid var(--border);
+    }
+    .hm-v {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      background: var(--grad-brand);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hm-v span { font-size: 18px; }
+    .hm-k { font-size: 12px; color: var(--text-dark); margin-top: 2px; }
+    .hm-sep { width: 1px; height: 34px; background: var(--border); }
+
+    /* ---- Profile switcher (Standard=green, Gaming=cyan→blue, Maximum=orange) ---- */
+    .profile-switch { display: flex; align-items: center; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+    .ps-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dark); }
+    .profile-pills {
+      display: inline-flex; gap: 3px; padding: 4px;
+      border-radius: 100px; border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02); backdrop-filter: blur(8px);
+    }
+    .profile-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 15px; border-radius: 100px;
+      font-size: 12.5px; font-weight: 600; color: var(--text-muted);
+      cursor: pointer; border: none; background: transparent;
+      font-family: var(--font-sans); transition: color .25s ease, background .35s ease, box-shadow .35s ease;
+    }
+    .profile-pill .pp-dot { width: 8px; height: 8px; border-radius: 50%; transition: box-shadow .3s ease; }
+    .profile-pill[data-profile="standard"] .pp-dot { background: #22E06B; }
+    .profile-pill[data-profile="gaming"] .pp-dot   { background: #22D3EE; }
+    .profile-pill[data-profile="maximum"] .pp-dot  { background: #FF6A1A; }
+    .profile-pill:hover { color: var(--text); }
+    .profile-pill.active {
+      color: #fff; background: rgba(var(--profile-rgb), 0.16);
+      box-shadow: 0 0 0 1px rgba(var(--profile-rgb), 0.4) inset, 0 4px 16px rgba(var(--profile-rgb), 0.22);
+    }
+    .profile-pill.active .pp-dot { box-shadow: 0 0 10px 1px currentColor; }
+
+    /* ---- Right column: floating app window ---- */
+    .hero-stage {
+      position: relative;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .stage-glow {
+      position: absolute;
+      inset: 22%;
+      background: radial-gradient(circle at 50% 48%, rgba(var(--profile-rgb), 0.22), rgba(var(--accent-2-rgb), 0.09) 45%, transparent 66%);
+      filter: blur(40px);
+      z-index: 0;
+      opacity: 0.7;
+      animation: glow-pulse 7s ease-in-out infinite;
+      transition: background .5s ease;
+      /* kept small + well inside the window footprint so a tilt never reveals a
+         clipped edge at the hero's overflow:hidden boundary */
+      -webkit-mask-image: radial-gradient(closest-side, #000 24%, transparent 82%);
+              mask-image: radial-gradient(closest-side, #000 24%, transparent 82%);
+    }
+    @keyframes glow-pulse { 0%,100%{opacity:.7} 50%{opacity:1} }
+
+    .app-window {
+      position: relative;
+      z-index: 1;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #0d1322, #090d18);
+      border: 1px solid rgba(150, 170, 255, 0.14);
+      box-shadow: 0 40px 90px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(0,0,0,.4);
+      overflow: hidden;
+      /* flat (not preserve-3d): keeps the glowing aurora border glued to the window
+         face so a hover-tilt can't project it past the overflow:hidden clip.
+         X/Y parallax floats still work (they translate in x/y, not z). */
+      transform-style: flat;
+    }
+    .aw-titlebar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 14px;
+      background: rgba(255,255,255,0.015);
+      border-bottom: 1px solid var(--border);
+    }
+    .aw-brand { display: flex; align-items: center; gap: 9px; }
+    .aw-logo {
+      width: 24px; height: 24px; border-radius: 7px;
+      background: var(--grad-brand);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.5);
+    }
+    .aw-logo svg { width: 14px; height: 14px; }
+    .aw-name { font-weight: 700; font-size: 13px; color: #fff; }
+    .aw-name em { font-style: normal; font-weight: 500; font-size: 10.5px; color: var(--text-dark); margin-left: 3px; }
+    .aw-profiles { display: flex; gap: 6px; }
+    .awp {
+      width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dark); background: rgba(255,255,255,0.03);
+    }
+    .awp svg { width: 13px; height: 13px; }
+    .awp { transition: background .4s ease, color .4s ease; }
+    .awp.active { color: #fff; background: var(--grad-profile); box-shadow: 0 0 12px rgba(var(--profile-rgb), 0.5); }
+    .aw-win { display: flex; gap: 7px; }
+    .aw-win span { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+    .aw-win .x { background: rgba(239,68,68,0.6); }
+
+    .aw-body { display: flex; min-height: 300px; }
+    .aw-side {
+      width: 132px; flex: none; padding: 10px 8px;
+      border-right: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .aws {
+      display: flex; align-items: center; gap: 9px;
+      padding: 7px 9px; border-radius: 7px;
+      font-size: 11.5px; font-weight: 500; color: var(--text-muted);
+    }
+    .aws svg { width: 13px; height: 13px; flex: none; }
+    .aws.active { background: var(--grad-profile); color: #fff; box-shadow: 0 4px 14px rgba(var(--profile-rgb),0.35); transition: background .5s ease, box-shadow .5s ease; }
+
+    .aw-main { flex: 1; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    .aw-row { display: grid; grid-template-columns: 1fr 1.1fr; gap: 12px; }
+    .aw-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 11px; padding: 13px;
+    }
+    .aw-card-t { font-size: 11px; font-weight: 600; color: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+    .aw-perf { display: flex; flex-direction: column; align-items: center; }
+    .aw-perf .aw-card-t { align-self: flex-start; margin-bottom: 6px; }
+    .aw-gauge { position: relative; width: 82px; height: 82px; margin: 2px 0 12px; }
+    .aw-gauge svg { width: 82px; height: 82px; }
+    .aw-gauge-v { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #fff; }
+    .aw-gauge-v small { font-size: 12px; color: var(--text-muted); margin-left: 1px; }
+    .aw-clean {
+      width: 100%; padding: 8px; border-radius: 8px;
+      border: 1px solid rgba(var(--profile-rgb),0.5);
+      background: linear-gradient(135deg, rgba(var(--profile-rgb),0.22), rgba(var(--profile-rgb),0.08));
+      color: #eafcff; font-weight: 600; font-size: 11.5px;
+      font-family: var(--font-sans); box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+      transition: background .5s ease, box-shadow .5s ease, border-color .5s ease;
+    }
+    .awp-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; font-size: 11px; }
+    .awp-row + .awp-row { border-top: 1px solid rgba(255,255,255,0.03); }
+    .awp-n { display: flex; align-items: center; gap: 7px; color: #d6dcf0; }
+    .awp-n i { width: 6px; height: 6px; border-radius: 2px; }
+    .awp-m { font-family: var(--font-mono); color: var(--text-muted); font-size: 10.5px; }
+    .aw-chart .aw-legend { display: flex; gap: 9px; font-size: 8.5px; color: var(--text-muted); font-weight: 500; }
+    .aw-legend i { width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-right: 2px; }
+    .aw-spark { width: 100%; height: 70px; }
+
+    .float-chip {
+      position: absolute; z-index: 3;
+      display: flex; align-items: center; gap: 7px;
+      padding: 8px 13px; border-radius: 100px;
+      background: rgba(13, 18, 32, 0.82);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-hover);
+      font-size: 12px; font-weight: 600; color: #fff;
+      font-family: var(--font-mono);
+      box-shadow: 0 14px 34px -12px rgba(0,0,0,.7);
+      will-change: transform;
+    }
+    .fc-dot { width: 8px; height: 8px; border-radius: 50%; background: rgb(var(--profile-rgb)); box-shadow: 0 0 8px rgb(var(--profile-rgb)); }
+    .fc-dot.good { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .fc-1 { top: 14%; left: -16px; }
+    .fc-2 { bottom: 10%; right: -12px; }
+
+    /* ---- Hero entrance choreography (assembles on load) ---- */
+    [data-hero] { opacity: 0; transform: translateY(26px); }
+    .hero-loaded [data-hero] {
+      opacity: 1; transform: none;
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+    }
+    .hero-loaded [data-hero="1"] { transition-delay: .05s; }
+    .hero-loaded [data-hero="2"] { transition-delay: .14s; }
+    .hero-loaded [data-hero="3"] { transition-delay: .23s; }
+    .hero-loaded [data-hero="4"] { transition-delay: .32s; }
+    .hero-loaded [data-hero="5"] { transition-delay: .40s; }
+    .hero-loaded [data-hero="6"] { transition-delay: .48s; }
+    .hero-stage[data-hero="7"] { opacity: 0; transform: translateY(40px) rotateY(-14deg) scale(.94); transform-origin: right center; }
+    .hero-loaded .hero-stage[data-hero="7"] {
+      opacity: 1; transform: translateY(0) rotateY(-7deg) scale(1);
+      transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1.1s cubic-bezier(.16,1,.3,1);
+      transition-delay: .3s;
+    }
+
+    /* Games Marquee — quiet full-width trust strip under the hero */
+    .games-row {
+      margin-top: 54px;
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .games-label {
+      flex: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .games-marquee {
+      flex: 1;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+    }
+
+    .games-track {
+      display: flex;
+      gap: 40px;
+      width: max-content;
+      animation: marquee 25s linear infinite;
+      align-items: center;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .gchip {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gchip::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--border-hover);
+      border-radius: 50%;
+    }
+
+    /* ============ SECTION HEADER ============ */
+    section {
+      padding: 90px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sec-head {
+      max-width: 640px;
+      margin-bottom: 50px;
+    }
+
+    .sec-head.center {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* dash before section eyebrows removed — reads as a generic AI-template tell */
+    .eyebrow::before { display: none; }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(27px, 3.6vw, 38px);
+      font-weight: 700;
+      line-height: 1.18;
+      color: #fff;
+      letter-spacing: -1.1px;
+      margin-bottom: 16px;
+    }
+
+    .sec-head p {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    /* ============ DEMO SECTION (INTERACTIVE MOCKUP) ============ */
+    .demo {
+      background: linear-gradient(180deg, var(--bg-2), #080b12);
+    }
+
+    .demo-in {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .demo-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .demo-info h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .demo-info p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .telemetry-compact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .tel-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+
+    .tel-card .k {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tel-card .v {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .tel-card .v.green { color: var(--green); }
+    .tel-card .v.blue { color: var(--accent); }
+    .tel-card .v.amber { color: var(--amber); }
+
+    /* Mockup window */
+    .mock {
+      background: #090d16;
+      border: 1px solid var(--border-hover);
+      border-radius: 12px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+    }
+
+    .mock-header {
+      background: rgba(255, 255, 255, 0.01);
+      border-bottom: 1px solid var(--border);
+      height: 38px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .mock-title {
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mock-title-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mock-title-dot svg {
+      width: 9px;
+      height: 9px;
+    }
+
+    .mock-win-controls {
+      display: flex;
+      gap: 7px;
+    }
+
+    .mock-win-controls span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .mock-win-controls span.close {
+      background: var(--red);
+      opacity: 0.7;
+    }
+
+    .mock-body {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Mockup Sidebar */
+    .mock-side {
+      width: 170px;
+      border-right: 1px solid var(--border);
+      padding: 16px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .mock-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .mock-menu-item svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2.2;
+    }
+
+    .mock-menu-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+      color: #fff;
+    }
+
+    .mock-menu-item.active {
+      background: var(--accent-muted);
+      color: #fff;
+      border: 1px solid rgba(var(--accent-rgb), 0.2);
+    }
+
+    /* Mockup Main Panel */
+    .mock-main {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      background: #090d16;
+      overflow-y: auto;
+    }
+
+    .mock-section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .mock-section-desc {
+      font-size: 11px;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .mock-panel {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .mock-panel.active {
+      display: flex;
+    }
+
+    /* Dashboard Tab Content */
+    .dash-widgets {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .gauge-widget {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      position: relative;
+    }
+
+    .gauge-circle {
+      position: relative;
+      width: 60px;
+      height: 60px;
+    }
+
+    .gauge-circle svg {
+      display: block;
+      transform: rotate(-90deg);
+      overflow: visible; /* Prevent stroke clipping */
+    }
+
+    .gauge-val {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-sans); /* Prevents monospace line-height centering shift */
+      color: #fff;
+    }
+    
+    #dashGaugeArc {
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gauge-label {
+      font-size: 9px;
+      color: var(--green);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    .dash-telemetry {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .dt-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    .dt-card .k {
+      font-size: 8.5px;
+      font-family: var(--font-mono);
+      color: var(--text-dark);
+      text-transform: uppercase;
+    }
+
+    .dt-card .v {
+      font-size: 13.5px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #fff;
+      margin-top: 2px;
+    }
+
+    .chart-container {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 180px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .chart-legends {
+      display: flex;
+      gap: 12px;
+    }
+
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chart-legend i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .mock-chart-svg {
+      width: 100%;
+      height: 100%;
+      flex: 1;
+    }
+
+    /* Processes Tab Content */
+    .proc-toolbar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .proc-search-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: #fff;
+      font-size: 11px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .proc-search-input:focus {
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .proc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .proc-thead {
+      border-bottom: 1px solid var(--border);
+      color: var(--text-dark);
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.5px;
+    }
+
+    .proc-thead th {
+      padding: 6px 8px;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    .proc-list-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .proc-tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      transition: var(--transition);
+    }
+
+    .proc-tr:hover {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .proc-tr td {
+      padding: 8px;
+      vertical-align: middle;
+    }
+
+    .proc-name-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .proc-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .proc-actions {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .proc-btn-action {
+      font-size: 9.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: var(--transition);
+    }
+
+    .proc-btn-action.btn-kill {
+      background: var(--red-muted);
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.15);
+    }
+
+    .proc-btn-action.btn-kill:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+
+    .proc-btn-action.btn-list {
+      background: var(--amber-muted);
+      color: #fde047;
+      border-color: rgba(245, 158, 11, 0.15);
+    }
+
+    .proc-btn-action.btn-list:hover {
+      background: rgba(245, 158, 11, 0.25);
+    }
+
+    .proc-status-shield {
+      color: var(--green);
+      font-weight: 600;
+      font-size: 9.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .proc-status-shield svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .proc-summary-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      font-family: var(--font-mono);
+      color: var(--green);
+    }
+
+    /* Exceptions Tab Content */
+    .exc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .exc-column {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exc-header {
+      font-size: 11px;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .exc-header span.count {
+      font-family: var(--font-mono);
+      color: var(--text-dark);
+    }
+
+    .exc-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .exc-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      border-radius: 5px;
+      padding: 6px 10px;
+      font-size: 10.5px;
+    }
+
+    .exc-item-name {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    .exc-item-name svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .exc-remove-btn {
+      color: var(--red);
+      font-size: 9px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--red-muted);
+      background: rgba(239, 68, 68, 0.05);
+      padding: 1px 6px;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .exc-remove-btn:hover {
+      background: var(--red-muted);
+    }
+
+    .exc-add-form {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .exc-add-form input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: #fff;
+      font-size: 11px;
+      outline: none;
+    }
+
+    .exc-add-form input:focus {
+      border-color: var(--accent);
+    }
+
+    .exc-add-form button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0 14px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-sans);
+    }
+
+    /* Optimization Tab Content */
+    .opt-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .opt-circle-btn {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #1e3a8a, #0f172a);
+      border: 1px solid rgba(var(--accent-rgb), 0.4);
+      box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-bottom: 16px;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .opt-circle-btn:hover {
+      transform: scale(1.03);
+      border-color: var(--accent);
+      box-shadow: 0 0 35px var(--accent-glow);
+    }
+
+    .opt-circle-btn svg {
+      width: 32px;
+      height: 32px;
+      color: #fff;
+      transition: var(--transition);
+    }
+
+    .opt-circle-btn.running {
+      animation: pulse-opt-btn 1.5s ease-in-out infinite alternate;
+      cursor: not-allowed;
+    }
+
+    @keyframes pulse-opt-btn {
+      from { box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.2); border-color: rgba(var(--accent-rgb), 0.3); }
+      to { box-shadow: 0 0 35px rgba(var(--accent-rgb), 0.5); border-color: rgba(var(--accent-rgb), 0.8); }
+    }
+
+    .opt-btn-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .opt-btn-sub {
+      font-size: 10px;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .opt-progress-track {
+      width: 260px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .opt-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+
+    .opt-terminal {
+      width: 100%;
+      max-width: 420px;
+      background: #04060b;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: var(--text-muted);
+      height: 100px;
+      overflow-y: auto;
+      text-align: left;
+    }
+
+    .opt-terminal-line {
+      margin-bottom: 3px;
+      line-height: 1.4;
+    }
+
+    .opt-terminal-line.green { color: var(--green); }
+    .opt-terminal-line.blue { color: var(--accent); }
+
+    /* ============ FEATURES (HOW IT WORKS UNDER THE HOOD) ============ */
+    .features {
+      /* self-contained glow behind the CPU — fades to transparent well before
+         the section edges, so neighbours still meet on plain --bg (no seams). */
+      background:
+        radial-gradient(760px 520px at 50% 30%, rgba(var(--accent-rgb), 0.07), transparent 66%),
+        var(--bg);
+    }
+
+    .feat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .feat-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 90px), var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+
+    .feat-card:hover {
+      border-color: rgba(var(--accent-rgb), 0.35) !important;
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-accent);
+    }
+
+    .feat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--accent-muted);
+      border: 1px solid rgba(var(--accent-rgb), 0.15);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .feat-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.2;
+    }
+
+    .feat-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .feat-card p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ============ STATS / NUMBERS BAND ============ */
+    .band {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .band-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      text-align: left;
+    }
+
+    .band-card {
+      padding: 2px 32px;
+      border-left: 1px solid var(--border);
+    }
+
+    .band-card:first-child {
+      border-left: none;
+      padding-left: 0;
+    }
+
+    .band-card .num {
+      font-size: clamp(26px, 3vw, 37px);
+      font-weight: 600;
+      font-family: var(--font-mono);
+      letter-spacing: -1.5px;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .band-card .num .u {
+      font-size: 0.5em;
+      font-weight: 700;
+      color: rgb(var(--accent-rgb));
+      letter-spacing: 0;
+      margin-left: 1px;
+    }
+
+    .band-card .lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-weight: 500;
+      line-height: 1.45;
+      max-width: 165px;
+    }
+
+    /* ============ RESULTS ============ */
+    .results {
+      /* depth via a centred glow that fades to --bg at every edge → no seams */
+      background:
+        radial-gradient(1000px 640px at 32% 48%, rgba(var(--accent-rgb), 0.055), transparent 66%),
+        var(--bg);
+    }
+
+    .results-in {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .results-chart {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .chart-bar-row {
+      margin-bottom: 24px;
+    }
+
+    .chart-bar-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .chart-bar-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .chart-bar-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .chart-bar-val {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #fff;
+    }
+
+    .chart-bar-val span.unit {
+      font-size: 12px;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .chart-bar-track {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .chart-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      width: 0%;
+      transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .chart-bar-fill.before {
+      background: #3a4152;
+    }
+
+    .chart-bar-fill.after {
+      background: rgb(var(--accent-rgb));
+    }
+
+    .chart-delta {
+      display: inline-block;
+      margin-left: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: rgb(var(--accent-rgb));
+      background: rgba(var(--accent-rgb), 0.1);
+      border: 1px solid rgba(var(--accent-rgb), 0.25);
+      border-radius: 5px;
+      padding: 2px 6px;
+      vertical-align: middle;
+      letter-spacing: 0;
+    }
+
+    .results-text h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .results-text p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .results-text .system-specs {
+      font-size: 12.5px;
+      color: var(--text-dark);
+      font-family: var(--font-mono);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    /* ============ VS TABLE ============ */
+    .vs {
+      background: var(--bg);
+    }
+
+    .vs-container {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-panel);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+
+    th, td {
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 14.5px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 600;
+      color: #fff;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    td:first-child, th:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-muted);
+      width: 40%;
+    }
+
+    .col-target {
+      background: rgba(var(--accent-rgb), 0.05);
+      border-left: 1px solid rgba(var(--accent-rgb), 0.18);
+      border-right: 1px solid rgba(var(--accent-rgb), 0.18);
+      font-weight: 600;
+    }
+
+    th.col-target {
+      color: rgb(var(--accent-rgb));
+      background: rgba(var(--accent-rgb), 0.09);
+      border-top: 2px solid rgb(var(--accent-rgb));
+    }
+
+    tr:last-child .col-target {
+      border-bottom: 1px solid rgba(var(--accent-rgb), 0.18);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .icon-check { color: var(--green); font-weight: 700; }
+    .icon-cross { color: var(--text-dark); }
+    .icon-partial { color: var(--amber); }
+
+    /* ============ SAFETY PRINCIPLES ============ */
+    .safety {
+      background:
+        radial-gradient(920px 600px at 70% 42%, rgba(var(--accent-rgb), 0.045), transparent 66%),
+        var(--bg);
+    }
+
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .safe-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 90px), var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+
+    .safe-card:hover {
+      border-color: rgba(34, 197, 94, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 8px 20px 44px -14px rgba(34, 197, 94, 0.22);
+    }
+
+    .safe-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: var(--green-muted);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .safe-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.2;
+    }
+
+    .safe-card h3 {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .safe-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* ============ REVIEWS ============ */
+    .reviews {
+      background: var(--bg);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .rev-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-left: 2px solid rgba(var(--accent-rgb), 0.35);
+      border-radius: 4px 10px 10px 4px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .rev-card:hover {
+      border-left-color: rgb(var(--accent-rgb));
+      transform: translateY(-3px);
+    }
+
+    .rev-head {
+      margin-bottom: 12px;
+    }
+
+    .rev-stars {
+      display: flex;
+      gap: 2px;
+      color: var(--amber);
+    }
+
+    .rev-text {
+      font-size: 14px;
+      color: #dbe2ec;
+      line-height: 1.55;
+      margin: 0 0 14px;
+      flex: 1;
+    }
+
+    .rev-user {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .rev-user .name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .rev-user .name::before {
+      content: '@';
+      color: rgba(var(--accent-rgb), 0.6);
+      font-weight: 500;
+    }
+
+    .rev-user .specs {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text-dark);
+    }
+
+    /* ============ FAQ ============ */
+    .faq {
+      background:
+        radial-gradient(900px 600px at 50% 28%, rgba(var(--accent-rgb), 0.04), transparent 66%),
+        var(--bg);
+    }
+
+    .faq-container {
+      max-width: 760px;
+      margin: 0 auto;
+      counter-reset: faq;
+    }
+
+    details {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--border);
+      border-radius: 4px 8px 8px 4px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+
+    details[open] {
+      border-color: var(--border-hover);
+      border-left-color: rgb(var(--accent-rgb));
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      counter-increment: faq;
+      padding: 16px 20px;
+      font-weight: 600;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #fff;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* leading 01 / 02 index in mono */
+    summary::before {
+      content: counter(faq, decimal-leading-zero);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(var(--accent-rgb), 0.55);
+      flex: none;
+    }
+
+    details[open] summary::before {
+      color: rgb(var(--accent-rgb));
+    }
+
+    /* + / – toggle */
+    summary::after {
+      content: '+';
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+      flex: none;
+    }
+
+    details[open] summary::after {
+      content: '–';
+      color: rgb(var(--accent-rgb));
+    }
+
+    details .answer {
+      padding: 0 20px 16px 52px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* ============ DOWNLOAD ============ */
+    .download {
+      background: var(--bg);
+      position: relative;
+    }
+
+    .dl-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .dl-main {
+      background: radial-gradient(circle at 100% 0%, rgba(var(--accent-rgb), 0.08), transparent 50%), var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    .dl-main h2 {
+      margin-bottom: 12px;
+    }
+
+    .dl-main p {
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 30px;
+      font-size: 15px;
+    }
+
+    .key-contact {
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .key-contact-lbl {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .key-contact-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .dl-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .dl-side {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .dl-side h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .req-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .req-list li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      padding-bottom: 8px;
+    }
+
+    .req-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .req-list .lbl {
+      color: var(--text-dark);
+    }
+
+    .req-list .val {
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      font-size: 12.5px;
+    }
+
+    .hash-info {
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .hash-info .hash-lbl {
+      font-size: 10px;
+      color: var(--text-dark);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+    }
+
+    .hash-info .hash-val {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      word-break: break-all;
+      margin-top: 2px;
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      background: #05070a;
+    }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .foot .copyright {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dark);
+    }
+
+    .foot-links {
+      display: flex;
+      gap: 24px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .foot-links a:hover {
+      color: var(--text);
+    }
+
+    /* ============ RESPONSIVE LAYOUTS ============ */
+    /* Webkit scrollbar for comparison table horizontal scroll */
+    .vs-container::-webkit-scrollbar {
+      height: 5px;
+    }
+    .vs-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .vs-container::-webkit-scrollbar-thumb {
+      background: var(--border-hover);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 1024px) {
+      .demo-in {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .demo-info {
+        max-width: 600px;
+      }
+      .results-in {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      /* Hero collapses to single column; window sits below the copy, centered */
+      .hero-in { grid-template-columns: 1fr; gap: 40px; max-width: 660px; margin: 0 auto; }
+      .hero-stage[data-hero="7"], .hero-loaded .hero-stage[data-hero="7"] { transform: none; }
+      .hero p.sub { max-width: none; }
+      .fc-1 { left: -12px; }
+      .fc-2 { right: -8px; }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 50px 0;
+      }
+      .games-row {
+        margin-top: 30px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+      }
+      .games-marquee {
+        width: 100%;
+      }
+      .feat-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .band-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .safety-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .dl-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      
+      /* Shrink padding inside cards on tablet/mobile to save space */
+      .feat-card, .safe-card, .rev-card, .dl-main, .dl-side {
+        padding: 20px;
+      }
+
+      /* ============ MOCKUP MOBILE OVERHAUL FOR PORTABLE SCREENS ============ */
+      .demo-shell {
+        min-width: 0 !important;
+        width: 100% !important;
+        overflow: hidden !important;
+      }
+      .mock {
+        height: 440px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
+      /* Transform desktop app simulator layout into a native mobile app bottom tab layout */
+      .mock-body {
+        flex-direction: column-reverse; /* Sidebar becomes bottom tab bar */
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+      .mock-side {
+        width: 100% !important;
+        height: 52px !important;
+        flex-direction: row !important;
+        border-right: none !important;
+        border-top: 1px solid var(--border) !important;
+        padding: 4px 8px !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        background: #06090f !important;
+      }
+      .mock-menu-item {
+        flex: 1 !important;
+        justify-content: center !important;
+        padding: 8px 4px !important;
+        font-size: 11px !important;
+        border: none !important;
+      }
+      .mock-menu-item.active {
+        background: rgba(var(--accent-rgb), 0.08) !important;
+      }
+      .mock-menu-item span {
+        display: none !important; /* Force hide tab text on mobile/tablet screens, show only SVGs */
+      }
+      .mock-menu-item svg {
+        width: 18px !important;
+        height: 18px !important;
+      }
+      .mock-main {
+        padding: 14px !important;
+        flex: 1 !important;
+        min-height: 0 !important;
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+
+      /* Mockup processes table mobile optimization */
+      .proc-table th:nth-child(2),
+      .proc-table td:nth-child(2) {
+        display: none !important; /* Hide PID */
+      }
+      .proc-table {
+        table-layout: fixed !important;
+        width: 100% !important;
+      }
+      .proc-table th, .proc-table td {
+        padding: 6px 4px !important; /* Reduced padding on mobile cells to maximize space */
+        font-size: 10.5px !important;
+      }
+      /* Explicit column width percentages to prevent overflow */
+      .proc-table th:nth-child(1),
+      .proc-table td:nth-child(1) {
+        width: 45% !important;
+      }
+      .proc-table th:nth-child(3),
+      .proc-table td:nth-child(3) {
+        width: 22% !important;
+      }
+      .proc-table th:nth-child(4),
+      .proc-table td:nth-child(4) {
+        width: 33% !important;
+      }
+      .proc-list-container {
+        overflow-x: hidden !important; /* Prevent horizontal scroll bar */
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+      .proc-name-cell {
+        max-width: 90px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        display: inline-block !important; /* switch to inline-block so ellipsis works properly */
+        vertical-align: middle !important;
+      }
+      .proc-icon {
+        display: inline-flex !important;
+        vertical-align: middle !important;
+        margin-right: 4px !important;
+      }
+      .proc-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        align-items: flex-end !important;
+      }
+      .proc-btn-action {
+        padding: 3px 6px !important;
+        font-size: 9px !important;
+        width: max-content !important;
+      }
+
+      /* Whitelist panel mobile collapse */
+      .exc-columns {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+      .exc-col {
+        height: auto !important;
+        max-height: 150px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+      .exc-grid {
+        overflow-y: auto !important;
+        max-height: 120px !important;
+        width: 100% !important;
+      }
+      .exc-card span {
+        max-width: 100px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        display: inline-block !important;
+      }
+
+      /* Mockup dashboard tab mobile layout (iOS style telemetry list) */
+      .dash-widgets {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+      .gauge-widget {
+        flex-direction: row !important;
+        gap: 16px !important;
+        padding: 8px 16px !important;
+        justify-content: flex-start !important;
+        align-items: center !important; /* Center the circle and status label vertically */
+      }
+      .gauge-circle {
+        width: 44px !important;
+        height: 44px !important;
+        flex-shrink: 0 !important;
+      }
+      .gauge-circle svg {
+        width: 44px !important;
+        height: 44px !important;
+      }
+      .gauge-label {
+        margin: 0 !important; /* Reset top margin to align next to circle */
+        font-size: 11px !important;
+      }
+      .dash-telemetry {
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+      }
+      .dt-card {
+        padding: 8px 12px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+      .dt-card .v {
+        margin-top: 0 !important;
+        font-size: 12.5px !important;
+      }
+
+      /* Results chart card padding & labels */
+      .results-chart {
+        padding: 16px;
+      }
+      .chart-bar-name {
+        font-size: 11.5px !important;
+      }
+      .chart-bar-val {
+        font-size: 15px !important;
+      }
+      .vs-container table {
+        min-width: 580px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wrap {
+        padding: 0 16px !important;
+      }
+      .hide-mobile {
+        display: none !important;
+      }
+      .band-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 24px 20px !important;
+      }
+      .band-card {
+        padding: 0 !important;
+        border-left: none !important;
+      }
+      .band-card .num {
+        font-size: 24px !important;
+      }
+      .band-card .lbl {
+        font-size: 11px !important;
+      }
+      h1 {
+        font-size: 26px !important;
+        letter-spacing: -0.5px !important;
+        line-height: 1.25 !important;
+      }
+      .hero p.sub {
+        font-size: 14.5px !important;
+        margin-bottom: 24px !important;
+      }
+      .hero {
+        padding: 100px 0 40px !important;
+      }
+      th, td {
+        padding: 8px 10px !important;
+        font-size: 11.5px !important;
+      }
+      .vs-container {
+        border-radius: 8px !important;
+      }
+      
+      /* Make download/cta buttons full width on small phones */
+      .dl-buttons .btn, .hero-cta .btn {
+        width: 100% !important;
+      }
+
+      /* FAQ summaries fonts */
+      summary {
+        padding: 12px 14px !important;
+        font-size: 13.5px !important;
+      }
+      details .answer {
+        padding: 0 14px 12px !important;
+        font-size: 12.5px !important;
+      }
+    }
+
+    /* ============ DYNAMIC INTERACTIVE ANIMATIONS (ALIVE EFFECTS) ============ */
+
+    /* Cards smooth transition & translate hover elevation */
+    .feat-card, .safe-card, .rev-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background 0.25s ease, box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .feat-card:hover, .safe-card:hover, .rev-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(var(--accent-rgb), 0.35) !important;
+      box-shadow: 0 16px 40px rgba(var(--accent-rgb), 0.06);
+    }
+
+    /* (cursor-following spotlight removed — it clipped at card edges; plain hover lift + border stays) */
+
+    /* Render text above the spotlight glow bg */
+    .feat-card > *, .safe-card > *, .rev-card > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Reveal scroll entrance animation.
+       Motion is deliberately NOT uniform: each block type enters on its own
+       axis/easing/duration so the page doesn't read as one templated fade-in-up. */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.reveal-active {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Each section enters on its own feel — but cards in a grid always rise
+       VERTICALLY (a horizontal slide across a row reads as crooked). */
+    /* Feature cards (2×2): short rise + soft overshoot */
+    .feat-card.reveal {
+      transform: translateY(20px) scale(0.98);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.34, 1.26, 0.5, 1);
+    }
+    /* Safety cards (3-col): calm vertical fade-rise, a bit further */
+    .safe-card.reveal {
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Comparison cards: settle down + scale, gentle spring */
+    .rev-card.reveal {
+      transform: translateY(16px) scale(0.94);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    /* Tight stagger so the grid never sits waiting before it moves */
+    .feat-card:nth-child(1) { transition-delay: 0s; }
+    .feat-card:nth-child(2) { transition-delay: 0.06s; }
+    .feat-card:nth-child(3) { transition-delay: 0.12s; }
+    .feat-card:nth-child(4) { transition-delay: 0.18s; }
+
+    .safe-card:nth-child(1) { transition-delay: 0s; }
+    .safe-card:nth-child(2) { transition-delay: 0.07s; }
+    .safe-card:nth-child(3) { transition-delay: 0.14s; }
+
+    .rev-card:nth-child(1) { transition-delay: 0s; }
+    .rev-card:nth-child(2) { transition-delay: 0.1s; }
+
+    /* ---- Hero on small screens ---- */
+    @media (max-width: 620px) {
+      .float-chip { display: none; }
+      .aw-side { width: 46px; }
+      .aws span { display: none; }
+      .aw-row { grid-template-columns: 1fr; }
+      .hero-metrics { gap: 14px; }
+      .hm-v { font-size: 24px; }
+      .aw-name em { display: none; }
+    }
+
+    /* ---- prefers-reduced-motion: freeze all the assembly, show final state ---- */
+    @media (prefers-reduced-motion: reduce) {
+      [data-hero], .hero-stage[data-hero="7"], .reveal { opacity: 1 !important; transform: none !important; }
+      .hero::after, .stage-glow, .games-track, .badge .dot, .hero-badge .dot, h1 span { animation: none !important; }
+      .app-window { transform: none !important; }
+    }
+
+    /* ============ v1.2.9 interactive app mockup ============ */
+    .dm-section{padding:clamp(3rem,8vw,7rem) clamp(1rem,4vw,3rem);max-width:1400px;margin:0 auto}
+    .dm-grid{display:grid;grid-template-columns:320px 1fr;gap:clamp(1.5rem,3vw,3rem);align-items:start}
+    .dm-eyebrow{font:600 12px/1 var(--font-mono);letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin:0 0 1rem}
+    .dm-h2{font:600 clamp(1.6rem,3vw,2.2rem)/1.1 var(--font-display);color:var(--text);margin:0 0 1rem;letter-spacing:-.02em}
+    .dm-lead{font:400 14px/1.6 var(--font-sans);color:var(--text-muted);margin:0 0 1.75rem}
+    .dm-tele{display:flex;flex-direction:column;gap:.75rem}
+    .dm-telecard{position:relative;border:1px solid var(--border);border-radius:12px;padding:14px 16px;background:linear-gradient(180deg,rgba(255,255,255,.03),transparent 60%),var(--bg-panel);overflow:hidden}
+    .dm-telecard::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--border-hover),transparent)}
+    .dm-tele-lbl{font:500 11px/1 var(--font-sans);color:var(--text-dark);text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+    .dm-tele-val{font:600 22px/1 var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums}
+    .dm-tele-val span{font-size:12px;color:var(--text-muted);margin-left:4px}
+    .dm-tele-good{color:var(--green)}
+    .dm-win{border:1px solid var(--border-hover);border-radius:16px;background:var(--bg-panel);box-shadow:0 40px 90px -30px rgba(0,0,0,.85);overflow:hidden;display:flex;flex-direction:column;min-height:500px}
+    .dm-titlebar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--bg-2)}
+    .dm-brand{display:flex;align-items:center;gap:9px;min-width:0}
+    .dm-logo{width:26px;height:26px;border-radius:8px;background:var(--grad-brand);display:grid;place-items:center;flex:none;box-shadow:0 4px 14px -4px rgb(var(--accent-rgb))}
+    .dm-logo svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .dm-brand b{font:600 14px var(--font-display);color:var(--text)}
+    .dm-ver{font:500 10px var(--font-mono);color:var(--text-dark)}
+    .dm-profiles{display:flex;gap:8px;justify-self:center}
+    .dm-prof{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--bg-panel);display:grid;place-items:center;cursor:pointer;color:var(--text-dark);transition:.18s}
+    .dm-prof svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .dm-prof:hover{border-color:var(--border-hover);color:var(--text-muted)}
+    .dm-prof.dm-on{border-color:transparent;background:var(--grad-brand);color:#fff;box-shadow:0 4px 14px -4px rgb(var(--accent-rgb))}
+    .dm-dots{display:flex;gap:7px;justify-self:end}
+    .dm-dot{width:11px;height:11px;border-radius:50%;background:var(--border-hover)}
+    .dm-dot.dm-close{background:var(--red)}
+    .dm-body{display:grid;grid-template-columns:200px 1fr;flex:1;min-height:0}
+    .dm-side{border-right:1px solid var(--border);padding:10px;display:flex;flex-direction:column;gap:2px;background:var(--bg-2)}
+    .dm-navi{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;border:0;background:transparent;color:var(--text-muted);font:500 13px var(--font-sans);cursor:pointer;text-align:left;width:100%;transition:.15s}
+    .dm-navi svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+    .dm-navi:hover{background:rgba(150,170,255,.05);color:var(--text)}
+    .dm-navi.dm-on{background:linear-gradient(135deg,rgba(var(--accent-rgb),.20),rgba(var(--accent-rgb),.07));color:#eafcff;box-shadow:inset 0 0 0 1px rgba(var(--accent-rgb),.4)}
+    .dm-main{padding:16px;overflow:auto;min-height:0}
+    .dm-panel{display:none;animation:dm-fade .25s ease}
+    .dm-panel.dm-on{display:block}
+    @keyframes dm-fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .dm-card{position:relative;border:1px solid var(--border);border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 55%),var(--bg-panel);padding:14px}
+    .dm-card::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--border-hover),transparent);opacity:.6}
+    .dm-ctitle{font:600 12px var(--font-sans);color:var(--text);margin:0 0 12px;display:flex;align-items:center;justify-content:space-between;letter-spacing:.01em}
+    .dm-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .dm-row2{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+    .dm-btn{font:600 12px var(--font-sans);border-radius:8px;padding:8px 14px;border:1px solid var(--border-hover);background:var(--bg-2);color:var(--text);cursor:pointer;transition:.15s}
+    .dm-btn:hover{border-color:var(--accent);color:#fff}
+    .dm-btn-p{background:linear-gradient(135deg,rgba(var(--accent-rgb),.20),rgba(var(--accent-rgb),.07));border-color:rgba(var(--accent-rgb),.5);color:#eafcff;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+    .dm-btn-xs{font-size:11px;padding:5px 10px;border-radius:7px}
+    .dm-btn-g{color:var(--text-muted);border-color:var(--border)}
+    .dm-gauge{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .dm-gwrap{position:relative;width:120px;height:120px}
+    #dm-garc{transition:stroke-dashoffset 1s cubic-bezier(.16,1,.3,1),stroke .6s ease}
+    .dm-glbl.dm-good{color:var(--green)}
+    .dm-gval{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+    .dm-gnum{font:600 30px var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums;line-height:1}
+    .dm-glbl{font:600 11px var(--font-sans);color:var(--red);margin-top:2px}
+    .dm-plist{display:flex;flex-direction:column;gap:8px}
+    .dm-pitem{display:flex;align-items:center;gap:10px;font:500 12px var(--font-sans);color:var(--text-muted)}
+    .dm-pdot{width:8px;height:8px;border-radius:50%;flex:none}
+    .dm-pname{color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .dm-pmem{font:500 12px var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums}
+    .dm-tag{font:600 9px var(--font-mono);color:var(--accent);border:1px solid var(--border-hover);border-radius:5px;padding:2px 5px;text-transform:uppercase;letter-spacing:.05em}
+    .dm-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+    .dm-tile{border:1px solid var(--border);border-radius:10px;padding:10px;background:var(--bg-2)}
+    .dm-tlbl{font:500 10px var(--font-sans);color:var(--text-dark);text-transform:uppercase;letter-spacing:.06em;margin:0 0 5px}
+    .dm-tval{font:600 18px var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums;line-height:1}
+    .dm-tsub{font:500 10px var(--font-mono);color:var(--text-muted);margin-top:3px}
+    .dm-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+    .dm-leg{display:flex;align-items:center;gap:6px;font:500 11px var(--font-sans);color:var(--text-muted)}
+    .dm-leg i{width:9px;height:9px;border-radius:2px;display:block}
+    .dm-chart{width:100%;height:auto;display:block}
+    .dm-qa{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--border);border-radius:9px;background:var(--bg-2);font:500 12px var(--font-sans);color:var(--text);margin-bottom:8px}
+    .dm-qa:last-child{margin:0}
+    .dm-toolbar{display:flex;gap:8px;margin-bottom:12px}
+    .dm-input{flex:1;font:500 12px var(--font-sans);background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);outline:none;min-width:0}
+    .dm-input:focus{border-color:var(--accent)}
+    .dm-input::placeholder{color:var(--text-dark)}
+    .dm-tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px}
+    .dm-table{width:100%;border-collapse:collapse;font:500 12px var(--font-sans);min-width:520px}
+    .dm-table th{text-align:left;font:600 10px var(--font-mono);color:var(--text-dark);text-transform:uppercase;letter-spacing:.06em;padding:9px 12px;border-bottom:1px solid var(--border);background:var(--bg-2)}
+    .dm-table td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text-muted)}
+    .dm-table tr:last-child td{border-bottom:0}
+    .dm-table td.dm-mono{font-family:var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums}
+    .dm-tacts{display:flex;gap:6px}
+    .dm-exlist{display:flex;flex-direction:column;gap:6px;max-height:230px;overflow:auto}
+    .dm-exitem{display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg-2);font:500 12px var(--font-mono);color:var(--text)}
+    .dm-exitem svg{width:13px;height:13px;stroke:var(--text-dark);fill:none;stroke-width:1.8;flex:none}
+    .dm-exitem .dm-star{stroke:var(--amber)}
+    .dm-exitem b{flex:1;font-weight:500}
+    .dm-count{font:600 10px var(--font-mono);color:var(--text-muted)}
+    .dm-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:32px;text-align:center;color:var(--text-dark)}
+    .dm-empty svg{width:34px;height:34px;stroke:var(--text-dark);fill:none;stroke-width:1.5}
+    .dm-empty b{font:600 13px var(--font-sans);color:var(--text-muted)}
+    .dm-empty span{font:400 12px var(--font-sans)}
+    .dm-togrow{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:var(--bg-2);margin-bottom:10px}
+    .dm-togrow b{font:600 12px var(--font-sans);color:var(--text);display:block}
+    .dm-togrow span{font:400 11px var(--font-sans);color:var(--text-dark)}
+    .dm-tog{width:38px;height:22px;border-radius:11px;background:var(--border-hover);position:relative;cursor:pointer;border:0;flex:none;transition:.2s}
+    .dm-tog::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s}
+    .dm-tog.dm-on{background:var(--grad-brand)}
+    .dm-tog.dm-on::after{left:18px}
+    .dm-chips{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}
+    .dm-chip{font:600 11px var(--font-sans);padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg-2);color:var(--text-muted);cursor:pointer;transition:.15s}
+    .dm-chip.dm-on{background:rgba(var(--accent-rgb),.15);border-color:var(--accent);color:var(--accent)}
+    .dm-startitem{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg-2);margin-bottom:8px}
+    .dm-startitem b{font:600 12px var(--font-sans);color:var(--text);display:block}
+    .dm-startitem span{font:400 10px var(--font-mono);color:var(--text-dark);word-break:break-all}
+    .dm-toolgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .dm-tool{display:flex;gap:12px;padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--bg-2);cursor:pointer;transition:.18s}
+    .dm-tool:hover{border-color:var(--border-hover);transform:translateY(-2px)}
+    .dm-tico{width:38px;height:38px;border-radius:10px;background:rgba(var(--accent-rgb),.12);display:grid;place-items:center;flex:none;color:var(--accent)}
+    .dm-tico svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .dm-tool b{font:600 13px var(--font-sans);color:var(--text);display:block;margin-bottom:3px}
+    .dm-tool span{font:400 11px var(--font-sans);color:var(--text-muted);line-height:1.4}
+    .dm-opt{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:10px 0}
+    .dm-pulsebtn{width:110px;height:110px;border-radius:50%;border:1px solid var(--accent);background:radial-gradient(circle at 50% 40%,rgba(var(--accent-rgb),.35),rgba(var(--accent-2-rgb),.12));display:grid;place-items:center;cursor:pointer;position:relative;color:#fff;transition:.2s}
+    .dm-pulsebtn svg{width:38px;height:38px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+    .dm-pulsebtn::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(var(--accent-rgb),.4);animation:dm-ring 2.4s ease-out infinite}
+    @keyframes dm-ring{0%{transform:scale(.9);opacity:.7}100%{transform:scale(1.25);opacity:0}}
+    .dm-opt h4{font:600 16px var(--font-display);color:var(--text);margin:0}
+    .dm-opt p{font:400 12px var(--font-sans);color:var(--text-muted);margin:0;max-width:280px}
+    .dm-progwrap{width:100%;max-width:340px;height:6px;border-radius:4px;background:var(--bg-2);border:1px solid var(--border);overflow:hidden;margin-top:4px}
+    .dm-prog{height:100%;width:0;background:var(--grad-brand);transition:width .3s ease}
+    .dm-term{width:100%;max-width:380px;min-height:96px;text-align:left;background:#03050b;border:1px solid var(--border);border-radius:10px;padding:11px 13px;font:500 11px/1.7 var(--font-mono);color:var(--green);white-space:pre-wrap;display:none}
+    .dm-term.dm-show{display:block}
+    @media(max-width:1024px){.dm-grid{grid-template-columns:1fr}}
+    @media(max-width:640px){
+     .dm-body{grid-template-columns:52px 1fr}
+     .dm-navi span{display:none}
+     .dm-navi{justify-content:center;padding:10px}
+     .dm-side{padding:8px 6px}
+     .dm-cols,.dm-toolgrid{grid-template-columns:1fr}
+     .dm-tiles{grid-template-columns:1fr 1fr}
+     .dm-main{padding:12px}
+     .dm-profiles{gap:5px}
+    }
+    @media(prefers-reduced-motion:reduce){.dm-pulsebtn::before{animation:none}.dm-panel{animation:none}}
+
+    /* ===== #demo window fixes (scoped) ===== */
+    .dm-section .dm-win{
+      --accent-rgb:34,211,238;
+      --accent-2-rgb:59,130,246;
+      --profile-rgb:34,211,238;
+      --grad-brand:linear-gradient(120deg,rgb(34,211,238),rgb(59,130,246));
+    }
+    .dm-section .dm-win{ height:548px; min-height:548px; max-height:548px; }
+    .dm-section .dm-card{ padding:12px; }
+    .dm-section .dm-cols{ gap:10px; }
+    .dm-section .dm-row2{ margin-top:10px; }
+    .dm-section .dm-ctitle{ margin-bottom:10px; }
+    .dm-section .dm-tiles{ margin-top:10px; gap:8px; }
+    .dm-section .dm-tile{ padding:8px 10px; }
+    .dm-section .dm-legend{ margin-bottom:6px; }
+    .dm-section .dm-card-mon .dm-chart{ height:56px; }
+    /* Overview must never scroll — content is trimmed to fit the fixed window */
+    .dm-section .dm-panel:first-child{ overflow:hidden; }
+    .dm-section .dm-gauge{ gap:10px; }
+    .dm-section .dm-plist{ gap:7px; }
+    .dm-section .dm-titlebar{ flex:0 0 auto; }
+    .dm-section .dm-body{ flex:1 1 auto; min-height:0; }
+    .dm-section .dm-main{
+      min-height:0;
+      overflow-y:auto; overflow-x:hidden;
+      padding:12px 14px;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(255,255,255,.14) transparent;
+    }
+    .dm-section .dm-main::-webkit-scrollbar{ width:6px; }
+    .dm-section .dm-main::-webkit-scrollbar-track{ background:transparent; }
+    .dm-section .dm-main::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.14); border-radius:999px; }
+    .dm-section .dm-main::-webkit-scrollbar-thumb:hover{ background:rgba(255,255,255,.24); }
+    .dm-section .dm-side{ min-height:0; }
+    .dm-section .dm-gval{
+      position:absolute; inset:0;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center; line-height:1;
+    }
+    .dm-section .dm-gnum{ font:600 30px var(--font-mono); line-height:1; }
+    .dm-section .dm-glbl{
+      font:600 11px var(--font-sans); color:var(--red);
+      position:absolute; top:calc(50% + 18px); left:0; right:0; margin:0;
+    }
+    .dm-section .dm-glbl.dm-good{ color:var(--green); }
+    .dm-section .dm-win .dm-prof,
+    .dm-section .dm-win .dm-navi,
+    .dm-section .dm-win .dm-gnum{
+      transition:color .35s ease, background .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       SIGNATURE PASS — additive, cascades last so it overrides predictably.
+       Direction: refined dark-gaming / neon-glow. Goals: one spacing rhythm,
+       tighter type hierarchy, a consistent hover "signature" on every surface,
+       and accessible focus. No structure/content/logic touched.
+       ═══════════════════════════════════════════════════════════════════ */
+    :root {
+      /* Strict spacing scale (perfect-fourth-ish, px) — used for section rhythm */
+      --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
+      --space-5: 24px;  --space-6: 32px;  --space-7: 48px;  --space-8: 64px;
+      --space-9: 96px;  --space-10: 128px;
+      /* Fluid section padding locked to the scale — replaces the flat 90px */
+      --section-y: clamp(var(--space-8), 9vw, var(--space-10));
+      /* Signature easing — one spring for every lift/settle on the page */
+      --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
+      --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px rgb(var(--accent-rgb)), 0 0 18px 2px rgba(var(--accent-rgb), 0.45);
+    }
+
+    /* ---- Rhythm: one vertical cadence for the whole page ---- */
+    section { padding: var(--section-y) 0; }
+    .sec-head { margin-bottom: clamp(var(--space-6), 5vw, var(--space-8)); }
+
+    /* ---- Typography: sharpen the hierarchy contrast ---- */
+    h1 { line-height: 1.02; letter-spacing: -0.035em; }
+    h2 { letter-spacing: -0.03em; line-height: 1.12; }
+    .eyebrow { letter-spacing: 2px; opacity: 0.92; }
+    .hero p.sub { line-height: 1.6; letter-spacing: 0.005em; }
+
+    /* ---- Signature #1: animated neon underline on nav links ---- */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px;
+      background: var(--grad-brand); border-radius: 2px;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s var(--ease-signature);
+      box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.6);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* ---- Signature #2: accessible focus ring, one look everywhere ---- */
+    a:focus-visible, button:focus-visible, .btn:focus-visible,
+    .profile-pill:focus-visible, [role="tab"]:focus-visible {
+      outline: none; box-shadow: var(--focus-ring); border-radius: 8px;
+    }
+
+    /* ---- Signature #3: card hover — lift + top accent hairline that ignites ---- */
+    .feat-card, .safe-card, .rev-card {
+      position: relative; overflow: hidden;
+      transition: transform 0.4s var(--ease-signature),
+                  border-color 0.35s ease, box-shadow 0.4s var(--ease-signature);
+    }
+    .feat-card::after, .safe-card::after, .rev-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgb(var(--accent-rgb)), rgb(var(--accent-2-rgb)), transparent);
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .feat-card:hover, .safe-card:hover, .rev-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card), 0 0 0 1px var(--border-hover), 0 24px 60px -30px rgba(var(--accent-rgb), 0.55);
+    }
+    .feat-card:hover::after, .safe-card:hover::after, .rev-card:hover::after { opacity: 1; }
+
+    /* ---- Signature #4: feature icon reacts to its card ---- */
+    .feat-icon { transition: transform 0.45s var(--ease-signature), box-shadow 0.4s ease; }
+    .feat-card:hover .feat-icon {
+      transform: translateY(-2px) scale(1.06) rotate(-3deg);
+      box-shadow: 0 10px 30px -8px rgba(var(--accent-rgb), 0.5);
+    }
+    .feat-card:hover .feat-icon svg { filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.7)); }
+
+    /* ---- Signature #5: primary button gets a soft aura on hover ---- */
+    .btn-primary::before {
+      content: ''; position: absolute; inset: -1px; border-radius: inherit;
+      background: radial-gradient(120% 140% at 50% 0%, rgba(var(--accent-rgb), 0.5), transparent 70%);
+      opacity: 0; transition: opacity 0.4s ease; z-index: -1; filter: blur(10px);
+    }
+    .btn-primary:hover::before { opacity: 1; }
+
+    /* ---- Hero metrics: make the numbers the loudest thing in the block ---- */
+    .hm-v { letter-spacing: -0.04em; }
+    .hm-k { letter-spacing: 0.03em; text-transform: uppercase; font-size: 10.5px; }
+
+    /* Respect reduced-motion for every signature effect above */
+    @media (prefers-reduced-motion: reduce) {
+      .nav-links a::after { transition: none; }
+      .feat-card, .safe-card, .rev-card, .feat-icon { transition: none; }
+      .feat-card:hover, .safe-card:hover, .rev-card:hover { transform: none; }
+      .feat-card:hover .feat-icon { transform: none; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       HERO POWER PASS — make the first screen hit harder. Additive; tilt
+       drives .hero-stage (not .app-window), so the window gets its own
+       levitation + aurora frame without fighting the tilt transform.
+       ═══════════════════════════════════════════════════════════════════ */
+
+    /* Bigger, more confident headline on wide screens */
+    @media (min-width: 900px) {
+      .hero { padding-top: 168px; }
+      h1 { font-size: clamp(44px, 5.6vw, 74px); }
+      .hero p.sub { font-size: 19px; max-width: 540px; }
+    }
+
+    /* Depth: a faint perspective grid + a top vignette behind everything */
+    .hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(150,170,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(150,170,255,0.04) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 72%);
+      -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 72%);
+    }
+
+    /* Levitation uses the `translate` longhand, NOT `transform` — so it composes
+       with the JS tilt (which sets transform: rotateY/rotateX on this element)
+       instead of overriding it. */
+    .app-window { animation: aw-float 7s ease-in-out infinite; }
+    @keyframes aw-float {
+      0%, 100% { translate: 0 0; }
+      50%      { translate: 0 -8px; }
+    }
+    /* Aurora glowing border REMOVED — under the hover 3D-tilt it projected past
+       the window's overflow:hidden clip and drew a ghost offset glowing outline
+       (the "clipped glow" chased across many sessions). The plain 1px window
+       border stays. */
+    @keyframes aw-frame { 0%, 100% { opacity: 0.32; } 50% { opacity: 0.6; } }
+
+    /* Reflection pooling under the floating window */
+    .hero-stage::after {
+      content: ''; position: absolute; left: 8%; right: 8%; bottom: -6%; height: 60px; z-index: 0;
+      background: radial-gradient(60% 100% at 50% 0%, rgba(var(--accent-rgb), 0.35), transparent 70%);
+      filter: blur(26px); opacity: 0.6;
+      -webkit-mask-image: radial-gradient(75% 100% at 50% 0%, #000 30%, transparent 78%);
+              mask-image: radial-gradient(75% 100% at 50% 0%, #000 30%, transparent 78%);
+    }
+
+    /* The monitoring chart reads as LIVE — the accent trace flows left→right */
+    .aw-spark polyline:last-of-type {
+      stroke-dasharray: 8 6;
+      animation: aw-signal 2.4s linear infinite;
+      filter: drop-shadow(0 0 4px rgba(var(--accent-rgb), 0.8));
+    }
+    @keyframes aw-signal { to { stroke-dashoffset: -28; } }
+
+    /* Gauge ring breathes with the same tempo as the glow */
+    .aw-gauge svg { filter: drop-shadow(0 0 5px rgba(var(--accent-rgb), 0.45)); }
+
+    /* Titlebar sheen — a slow highlight sweeping the top edge */
+    .aw-titlebar { position: relative; overflow: hidden; }
+    .aw-titlebar::after {
+      content: ''; position: absolute; top: 0; left: -60%; width: 60%; height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,0.06), transparent);
+      animation: aw-sheen 6s ease-in-out infinite; animation-delay: 1.5s;
+    }
+    @keyframes aw-sheen { 0% { left: -60%; } 45%, 100% { left: 130%; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .app-window { animation: none; }
+      .app-window::after, .aw-spark polyline:last-of-type,
+      .aw-titlebar::after { animation: none; }
+    }
+
+    /* ═══ POLISH PASS — count-up, gauge fill, cursor glow, download weight ═══ */
+
+    /* Gauge ring draws itself once the hero mounts (CSS overrides the inline
+       stroke-dashoffset; 207 = empty, 72 = 65% filled). */
+    .aw-gauge-fill { stroke-dashoffset: 207; transition: stroke-dashoffset 1.5s var(--ease-signature) 0.55s; }
+    .hero-loaded .aw-gauge-fill { stroke-dashoffset: 72; }
+
+    /* God rays — soft volumetric light shafts drifting from the top, like
+       sunbeams filtering through water. Two layers at different speeds shimmer
+       organically; masked so they dissolve before the bottom edge (no seam). */
+    .godrays {
+      position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+      -webkit-mask-image: radial-gradient(135% 105% at 50% -8%, #000 34%, rgba(0,0,0,.5) 60%, transparent 82%);
+              mask-image: radial-gradient(135% 105% at 50% -8%, #000 34%, rgba(0,0,0,.5) 60%, transparent 82%);
+    }
+    .godrays::before, .godrays::after {
+      content: ""; position: absolute; top: -45%; left: -30%; width: 170%; height: 190%;
+      background: repeating-linear-gradient(72deg,
+        transparent 0 46px,
+        rgba(var(--accent-rgb), 0.055) 46px 52px,
+        transparent 52px 64px,
+        rgba(var(--accent-2-rgb), 0.04) 64px 68px,
+        transparent 68px 128px);
+      filter: blur(9px);
+      transform-origin: top center;
+      animation: rayShift 17s ease-in-out infinite alternate;
+    }
+    .godrays::after {
+      filter: blur(20px); opacity: .65;
+      animation-duration: 24s; animation-direction: alternate-reverse;
+    }
+    @keyframes rayShift {
+      0%   { transform: translateX(-46px) skewX(1deg); }
+      100% { transform: translateX(46px) skewX(-5deg); }
+    }
+
+    /* Download: make the final CTA read as the heaviest surface on the page */
+    .download { position: relative; }
+    .download::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(820px 520px at 28% 42%, rgba(var(--accent-rgb), 0.07), transparent 66%);
+    }
+    .download .wrap { position: relative; z-index: 1; }
+    .dl-main h2 { letter-spacing: -0.03em; }
+    .dl-buttons .btn-primary { box-shadow: 0 8px 28px -10px rgba(var(--accent-rgb), 0.4), inset 0 1px 0 rgba(255,255,255,0.14); }
+    .hash-info { transition: border-color 0.3s ease, background 0.3s ease; }
+    .hash-info:hover { border-color: var(--border-hover); }
+    .req-list li { transition: color 0.25s ease; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .aw-gauge-fill { transition: none; }
+      .godrays::before, .godrays::after { animation: none !important; }
+    }
+
+    /* ═══ CPU ASSEMBLY — a real processor builds itself from parts ═══
+       Layers fly in and lock: socket → substrate → contact pins → die →
+       heat-spreader (IHS) drops on top → engraving → power-on pulse.
+       Driven by .assembly-active (scroll) and :hover. */
+    .assembly {
+      margin: 0 0 clamp(var(--space-8), 6vw, var(--space-9));
+      display: flex; flex-direction: column; align-items: center; gap: var(--space-5);
+      outline: none;
+    }
+    .cpu-stage {
+      position: relative; width: 300px; height: 300px;
+      display: grid; place-items: center;
+    }
+    /* every layer centered in the same cell */
+    .cpu-stage > * { grid-area: 1 / 1; }
+
+    /* shared enter transition; each piece overrides delay/transform */
+    .cpu-socket, .cpu-substrate, .cpu-pins, .cpu-die, .cpu-ihs, .cpu-glow {
+      opacity: 0;
+      transition: opacity .55s ease, transform .7s var(--ease-signature);
+      will-change: transform, opacity;
+    }
+
+    /* 1 — motherboard socket: faint dot-grid pad under everything */
+    .cpu-socket {
+      width: 264px; height: 264px; border-radius: 22px;
+      background:
+        radial-gradient(circle at center, rgba(var(--accent-rgb),.05), transparent 70%),
+        radial-gradient(rgba(150,170,255,.18) 1px, transparent 1.4px) 0 0 / 15px 15px;
+      border: 1px solid var(--border);
+      transform: scale(.92);
+    }
+    /* 2 — substrate: the PCB the chip sits on, with gold pad edges */
+    .cpu-substrate {
+      width: 214px; height: 214px; border-radius: 16px;
+      background: linear-gradient(145deg, #12202b, #0a141c);
+      border: 1px solid rgba(var(--accent-rgb),.18);
+      box-shadow: 0 26px 50px -22px rgba(0,0,0,.8), inset 0 0 0 8px rgba(var(--accent-rgb),.04);
+      transform: translateY(46px) scale(.88);
+    }
+    /* 3 — contact pins: accent dashes just inside the substrate edge */
+    .cpu-pins {
+      width: 214px; height: 214px; border-radius: 16px;
+      padding: 12px;
+      background:
+        repeating-linear-gradient(90deg, rgba(var(--accent-rgb),.55) 0 3px, transparent 3px 9px) top/100% 2px no-repeat,
+        repeating-linear-gradient(90deg, rgba(var(--accent-rgb),.55) 0 3px, transparent 3px 9px) bottom/100% 2px no-repeat,
+        repeating-linear-gradient(0deg, rgba(var(--accent-rgb),.55) 0 3px, transparent 3px 9px) left/2px 100% no-repeat,
+        repeating-linear-gradient(0deg, rgba(var(--accent-rgb),.55) 0 3px, transparent 3px 9px) right/2px 100% no-repeat;
+      transform: scale(1.08);
+    }
+    /* 4 — die grid: the silicon, glows once powered */
+    .cpu-die {
+      width: 150px; height: 150px; border-radius: 8px;
+      background:
+        linear-gradient(rgba(var(--accent-rgb),.14), rgba(var(--accent-2-rgb),.06)),
+        repeating-linear-gradient(0deg, rgba(var(--accent-rgb),.22) 0 1px, transparent 1px 13px),
+        repeating-linear-gradient(90deg, rgba(var(--accent-rgb),.22) 0 1px, transparent 1px 13px),
+        #0b1620;
+      border: 1px solid rgba(var(--accent-rgb),.3);
+      transform: scale(.6); z-index: 2;
+    }
+    /* 5 — IHS heat spreader: brushed-metal lid that drops on top */
+    .cpu-ihs {
+      position: relative;
+      width: 176px; height: 176px; border-radius: 14px;
+      background:
+        linear-gradient(135deg, #2b3644 0%, #1a222e 42%, #232e3b 60%, #141b24 100%);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 20px 44px -18px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.14);
+      display: grid; place-items: center; gap: 4px; z-index: 3;
+      transform: translateY(-120px) rotateX(52deg) scale(1.02);
+      transform-origin: center 140%;
+    }
+    .cpu-ihs::before { /* corner orientation notch */
+      content: ""; position: absolute; top: 12px; left: 12px;
+      border-top: 10px solid rgba(var(--accent-rgb),.75);
+      border-right: 10px solid transparent;
+    }
+    .cpu-ihs::after { /* slow diagonal sheen once assembled */
+      content: ""; position: absolute; inset: 0; border-radius: 14px;
+      background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.10) 50%, transparent 60%);
+      background-size: 250% 250%; background-position: 120% 0;
+    }
+    .cpu-brand {
+      font: 800 26px/1 var(--font-display); letter-spacing: 1px;
+      color: transparent; -webkit-background-clip: text; background-clip: text;
+      background-image: linear-gradient(180deg, #eaf6ff, #9fb2c6);
+      text-shadow: 0 1px 0 rgba(0,0,0,.5); opacity: 0; transition: opacity .5s ease .5s;
+    }
+    .cpu-model {
+      font: 600 9px var(--font-mono); letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(200,215,235,.4); opacity: 0; transition: opacity .5s ease .62s;
+    }
+    .cpu-led { /* power LED, blinks alive */
+      position: absolute; bottom: 12px; right: 14px; width: 6px; height: 6px; border-radius: 50%;
+      background: rgb(var(--accent-rgb)); opacity: 0; transition: opacity .4s ease .7s;
+    }
+    /* 6 — glow bloom behind the finished chip */
+    .cpu-glow {
+      width: 300px; height: 300px; border-radius: 40%;
+      background: radial-gradient(circle at center, rgba(var(--accent-rgb),.28), transparent 62%);
+      filter: blur(14px); transform: scale(.6); z-index: 0;
+    }
+
+    /* ── ASSEMBLED STATE ─────────────────────────────────────────── */
+    .assembly:hover .cpu-socket, .assembly:focus-visible .cpu-socket, .assembly.assembly-active .cpu-socket { opacity: 1; transform: scale(1); }
+    .assembly:hover .cpu-substrate, .assembly:focus-visible .cpu-substrate, .assembly.assembly-active .cpu-substrate { opacity: 1; transform: translateY(0) scale(1); transition-delay: .1s; }
+    .assembly:hover .cpu-pins, .assembly:focus-visible .cpu-pins, .assembly.assembly-active .cpu-pins { opacity: 1; transform: scale(1); transition-delay: .22s; }
+    .assembly:hover .cpu-die, .assembly:focus-visible .cpu-die, .assembly.assembly-active .cpu-die { opacity: 1; transform: scale(1); transition-delay: .34s; }
+    .assembly:hover .cpu-ihs, .assembly:focus-visible .cpu-ihs, .assembly.assembly-active .cpu-ihs { opacity: 1; transform: translateY(0) rotateX(0) scale(1); transition-delay: .46s; }
+    .assembly:hover .cpu-glow, .assembly:focus-visible .cpu-glow, .assembly.assembly-active .cpu-glow { opacity: 1; transform: scale(1); transition-delay: .7s; }
+    .assembly:hover .cpu-brand, .assembly:focus-visible .cpu-brand, .assembly.assembly-active .cpu-brand,
+    .assembly:hover .cpu-model, .assembly:focus-visible .cpu-model, .assembly.assembly-active .cpu-model,
+    .assembly:hover .cpu-led, .assembly:focus-visible .cpu-led, .assembly.assembly-active .cpu-led { opacity: 1; }
+    /* once assembled: LED breathes, sheen sweeps the lid */
+    .assembly:hover .cpu-led, .assembly:focus-visible .cpu-led, .assembly.assembly-active .cpu-led { animation: cpuLed 2s ease-in-out .9s infinite; }
+    .assembly:hover .cpu-ihs::after, .assembly:focus-visible .cpu-ihs::after, .assembly.assembly-active .cpu-ihs::after { animation: cpuSheen 4.5s ease-in-out 1s infinite; }
+    @keyframes cpuLed { 0%,100% { box-shadow: 0 0 3px 1px rgba(var(--accent-rgb),.5); } 50% { box-shadow: 0 0 9px 2px rgba(var(--accent-rgb),.9); } }
+    @keyframes cpuSheen { 0% { background-position: 130% 0; } 55%,100% { background-position: -40% 0; } }
+
+    .assembly-caption {
+      font-family: var(--font-mono); font-size: 12px; color: var(--text-dark);
+      letter-spacing: 0.02em;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cpu-socket, .cpu-substrate, .cpu-pins, .cpu-die, .cpu-ihs, .cpu-glow,
+      .cpu-brand, .cpu-model, .cpu-led { transition: none !important; opacity: 1 !important; transform: none !important; }
+      .cpu-led, .cpu-ihs::after { animation: none !important; }
+    }
+
+    /* THE "clipped glow" fix (chased across ~7 sessions): .stage-glow was a
+       radial-gradient background sitting BEHIND the hero window. Because it's a
+       background (not a shadow/filter/DOM-glow) nothing in the inspector or in
+       class/CSS searches ever flagged it. Under the hover 3D-tilt it peeked past
+       the window and clipped at the hero's overflow:hidden edge. Removed for
+       good, along with the reflection pool. */
+    .stage-glow, .hero-stage::after { display: none !important; }
+
+    /* "Ведро" mode: backdrop-filter blur is one of the most GPU-expensive CSS effects,
+       and nav's is always-fixed so it recomposites every scroll frame. On weak hardware
+       (detected via JS as html.low-power) drop it and fall back to a slightly more
+       opaque flat background — keeps the look close without the filter cost. */
+    html.low-power nav {
+      background: rgba(8, 8, 12, 0.92);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    html.low-power * {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav>
+    <div class="wrap nav-in">
+      <a class="logo" href="#top">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12h4l3-8 4 16 3-8h6"/>
+          </svg>
+        </span>
+        Pulse
+      </a>
+      <div class="nav-links">
+        <a href="#features">Как это работает</a>
+        <a href="#results">Результаты</a>
+        <a href="#vs">Сравнение</a>
+        <a href="#safety">Безопасность</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a class="btn btn-primary btn-sm" href="#download">Получить <span class="hide-mobile">ключ</span></a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO SECTION ============ -->
+  <header class="hero" id="top">
+    <canvas id="heroCanvas"></canvas>
+    <div class="godrays" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+
+      <!-- LEFT: the thesis -->
+      <div class="hero-copy">
+        <h1 data-hero="2">Windows, настроенный<br><span>под каждый кадр</span></h1>
+        <p class="sub" data-hero="3">Pulse убирает микрофризы, срезает задержки и высвобождает оперативную память, пока вы играете. Один клик, полный откат, ноль фонового процесса.</p>
+        <div class="hero-cta" data-hero="4">
+          <a class="btn btn-primary btn-lg magnetic" href="#download">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Скачать Pulse
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#demo">Смотреть в действии</a>
+        </div>
+        <div class="hero-note" id="heroNote" data-hero="5"><span class="hn-tag">Версия 1.2.6</span><span class="hn-tag">Windows 10 / 11</span><span class="hn-tag">Платная лицензия</span><span class="hn-tag">Активация по ключу</span></div>
+
+        <div class="profile-switch" data-hero="6" role="tablist" aria-label="Профиль оптимизации">
+          <span class="ps-label">Профиль</span>
+          <div class="profile-pills">
+            <button class="profile-pill" data-profile="standard" role="tab"><span class="pp-dot"></span>Стандарт</button>
+            <button class="profile-pill active" data-profile="gaming" role="tab" aria-selected="true"><span class="pp-dot"></span>Игровой</button>
+            <button class="profile-pill" data-profile="maximum" role="tab"><span class="pp-dot"></span>Максимум</button>
+          </div>
+        </div>
+
+        <div class="hero-metrics" data-hero="6">
+          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="70" data-prefix="−">−70</span><span>%</span></div><div class="hm-k">задержка</div></div>
+          <div class="hm-sep"></div>
+          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="44" data-prefix="+">+44</span><span>%</span></div><div class="hm-k">1% low FPS</div></div>
+          <div class="hm-sep"></div>
+          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="200">200</span><span>+</span></div><div class="hm-k">твиков в один клик</div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: the product, floating with depth -->
+      <div class="hero-stage" data-hero="7">
+        <div class="app-window" id="heroWindow">
+          <div class="aw-titlebar">
+            <div class="aw-brand">
+              <span class="aw-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></span>
+              <span class="aw-name">Pulse <em>v1.2.9</em></span>
+            </div>
+            <div class="aw-profiles" aria-hidden="true">
+              <span class="awp" title="Стандарт"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <span class="awp active" title="Игровой"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+              <span class="awp" title="Максимум"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
+            </div>
+            <div class="aw-win"><span></span><span></span><span class="x"></span></div>
+          </div>
+          <div class="aw-body">
+            <div class="aw-side">
+              <div class="aws active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/></svg><span>Процессы</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Исключения</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>История</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64A9 9 0 1 1 5.64 6.64"/><line x1="12" y1="2" x2="12" y2="12"/></svg><span>Автозапуск</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>Прочее</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><span>Оптимизация</span></div>
+            </div>
+            <div class="aw-main" data-tilt-layer>
+              <div class="aw-row">
+                <div class="aw-card aw-perf">
+                  <div class="aw-card-t">Общая производительность</div>
+                  <div class="aw-gauge">
+                    <svg viewBox="0 0 80 80">
+                      <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="6"/>
+                      <circle class="aw-gauge-fill" cx="40" cy="40" r="33" fill="none" stroke="url(#awg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="207" stroke-dashoffset="72" transform="rotate(-90 40 40)"/>
+                      <defs><linearGradient id="awg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgb(var(--profile-rgb))"/><stop offset="1" stop-color="rgb(var(--accent-2-rgb))"/></linearGradient></defs>
+                    </svg>
+                    <div class="aw-gauge-v"><span class="hm-n" data-target="65">65</span><small>%</small></div>
+                  </div>
+                  <button class="aw-clean">Быстрая очистка</button>
+                </div>
+                <div class="aw-card aw-proc">
+                  <div class="aw-card-t">Активные процессы</div>
+                  <div class="awp-row"><span class="awp-n"><i style="background:#ef4444"></i>chrome.exe</span><span class="awp-m">3.1 GB</span></div>
+                  <div class="awp-row"><span class="awp-n"><i style="background:#6366f1"></i>Discord.exe</span><span class="awp-m">930 MB</span></div>
+                  <div class="awp-row"><span class="awp-n"><i style="background:#22c55e"></i>steam.exe</span><span class="awp-m">898 MB</span></div>
+                  <div class="awp-row"><span class="awp-n"><i style="background:#3b82f6"></i>Pulse.exe</span><span class="awp-m">214 MB</span></div>
+                </div>
+              </div>
+              <div class="aw-card aw-chart">
+                <div class="aw-card-t">Мониторинг системы <span class="aw-legend"><i style="background:var(--accent)"></i>CPU <i style="background:var(--green)"></i>RAM <i style="background:var(--accent-cyan)"></i>Диск</span></div>
+                <svg class="aw-spark" viewBox="0 0 320 70" preserveAspectRatio="none">
+                  <polyline fill="none" stroke="var(--green)" stroke-width="1.6" opacity=".65" points="0,50 40,44 80,46 120,30 160,34 200,20 240,26 280,14 320,18"/>
+                  <polyline fill="none" stroke="var(--accent-cyan)" stroke-width="1.6" opacity=".5" points="0,58 40,56 80,52 120,54 160,40 200,46 240,42 280,48 320,44"/>
+                  <polyline fill="none" stroke="var(--accent)" stroke-width="2.2" points="0,40 40,38 80,42 120,22 160,36 200,12 240,30 280,16 320,24"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- games marquee: quiet trust strip under the hero -->
+    <div class="games-row wrap">
+      <div class="games-label">Проверено в</div>
+      <div class="games-marquee">
+        <div class="games-track">
+          <span class="gchip">CS2</span><span class="gchip">VALORANT</span><span class="gchip">PUBG</span><span class="gchip">RUST</span><span class="gchip">DOTA 2</span><span class="gchip">APEX LEGENDS</span><span class="gchip">WARZONE</span><span class="gchip">FORTNITE</span>
+          <span class="gchip">CS2</span><span class="gchip">VALORANT</span><span class="gchip">PUBG</span><span class="gchip">RUST</span><span class="gchip">DOTA 2</span><span class="gchip">APEX LEGENDS</span><span class="gchip">WARZONE</span><span class="gchip">FORTNITE</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ INTERACTIVE DEMO (THE APP MOCKUP v1.2.9) ============ -->
+  <section class="dm-section" id="demo">
+   <div class="dm-grid">
+    <!-- LEFT INFO -->
+    <div class="dm-info">
+     <p class="dm-eyebrow">Панель управления</p>
+     <h2 class="dm-h2">Интерактивный макет Pulse</h2>
+     <p class="dm-lead">Это не картинка, а настоящее окно приложения прямо в браузере. Переключайте вкладки, ищите процессы, добавляйте исключения и запустите оптимизацию, чтобы увидеть, как Pulse работает вживую.</p>
+     <div class="dm-tele">
+      <div class="dm-telecard">
+       <p class="dm-tele-lbl">Задержка</p>
+       <div class="dm-tele-val" id="dm-dpc">142<span>мкс</span></div>
+      </div>
+      <div class="dm-telecard">
+       <p class="dm-tele-lbl">Освобождено ОЗУ</p>
+       <div class="dm-tele-val dm-tele-good" id="dm-freed">0.0<span>ГБ</span></div>
+      </div>
+     </div>
+    </div>
+
+    <!-- WINDOW -->
+    <div class="dm-win">
+     <div class="dm-titlebar">
+      <div class="dm-brand">
+       <div class="dm-logo"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div>
+       <b>Pulse</b><span class="dm-ver">v1.2.9</span>
+      </div>
+      <div class="dm-profiles">
+       <button class="dm-prof" title="Стандарт"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></button>
+       <button class="dm-prof dm-on" title="Игровой"><svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></button>
+       <button class="dm-prof" title="Максимум"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></button>
+      </div>
+      <div class="dm-dots"><span class="dm-dot"></span><span class="dm-dot"></span><span class="dm-dot dm-close"></span></div>
+     </div>
+
+     <div class="dm-body">
+      <div class="dm-side">
+       <button class="dm-navi dm-on" data-tab="0"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Обзор</span></button>
+       <button class="dm-navi" data-tab="1"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Процессы</span></button>
+       <button class="dm-navi" data-tab="2"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Исключения</span></button>
+       <button class="dm-navi" data-tab="3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>История</span></button>
+       <button class="dm-navi" data-tab="4"><svg viewBox="0 0 24 24"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg><span>Автозапуск</span></button>
+       <button class="dm-navi" data-tab="5"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>Прочее</span></button>
+       <button class="dm-navi" data-tab="6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>Оптимизация</span></button>
+      </div>
+
+      <div class="dm-main">
+       <!-- 0 OVERVIEW -->
+       <div class="dm-panel dm-on">
+        <div class="dm-cols">
+         <div class="dm-card">
+          <p class="dm-ctitle">Общая производительность</p>
+          <div class="dm-gauge">
+           <div class="dm-gwrap">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+             <circle cx="60" cy="60" r="52" stroke="rgba(150,170,255,.1)" stroke-width="10" fill="none"/>
+             <circle id="dm-garc" cx="60" cy="60" r="52" stroke="var(--red)" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="114" transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="dm-gval"><div class="dm-gnum" id="dm-gnum">65%</div><div class="dm-glbl" id="dm-glbl">Плохо</div></div>
+           </div>
+           <button class="dm-btn dm-btn-p" id="dm-clean">Быстрая очистка</button>
+          </div>
+         </div>
+         <div class="dm-card">
+          <p class="dm-ctitle">Активные процессы</p>
+          <div class="dm-plist">
+           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent)"></span><span class="dm-pname">chrome.exe</span><span class="dm-pmem">3.1 ГБ</span></div>
+           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent-2)"></span><span class="dm-pname">Discord.exe</span><span class="dm-pmem">930 МБ</span></div>
+           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent-cyan)"></span><span class="dm-pname">steam.exe</span><span class="dm-pmem">898 МБ</span></div>
+           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--green)"></span><span class="dm-pname">Pulse.exe</span><span class="dm-tag">Системный</span><span class="dm-pmem">214 МБ</span></div>
+          </div>
+         </div>
+        </div>
+        <div class="dm-row2">
+         <div class="dm-card dm-card-mon">
+          <p class="dm-ctitle">Мониторинг системы</p>
+          <div class="dm-legend">
+           <span class="dm-leg"><i style="background:var(--accent)"></i>CPU</span>
+           <span class="dm-leg"><i style="background:var(--green)"></i>RAM</span>
+           <span class="dm-leg"><i style="background:var(--accent-cyan)"></i>Диск</span>
+           <span class="dm-leg"><i style="background:var(--red)"></i>Сеть</span>
+          </div>
+          <svg class="dm-chart" viewBox="0 0 400 110" preserveAspectRatio="none">
+           <polyline fill="none" stroke="var(--accent)" stroke-width="2" points="0,80 40,60 80,72 120,40 160,55 200,30 240,48 280,25 320,44 360,20 400,38"/>
+           <polyline fill="none" stroke="var(--green)" stroke-width="2" points="0,50 40,55 80,48 120,58 160,45 200,52 240,44 280,50 320,42 360,48 400,40"/>
+           <polyline fill="none" stroke="var(--accent-cyan)" stroke-width="2" points="0,95 40,92 80,96 120,88 160,94 200,90 240,95 280,89 320,93 360,90 400,94"/>
+           <polyline fill="none" stroke="var(--red)" stroke-width="1.5" opacity=".7" points="0,104 40,103 80,104 120,102 160,104 200,103 240,104 280,103 320,104 360,103 400,104"/>
+          </svg>
+          <div class="dm-tiles">
+           <div class="dm-tile"><p class="dm-tlbl">CPU</p><div class="dm-tval">13%</div><div class="dm-tsub">Темп 58°C</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">RAM</p><div class="dm-tval">65%</div><div class="dm-tsub">10.4 / 16 ГБ</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">Диск</p><div class="dm-tval">6%</div><div class="dm-tsub">NVMe SSD</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">Сеть</p><div class="dm-tval">0.0</div><div class="dm-tsub">Mbps</div></div>
+          </div>
+         </div>
+        </div>
+       </div>
+
+       <!-- 1 PROCESSES -->
+       <div class="dm-panel">
+        <div class="dm-toolbar">
+         <input class="dm-input" id="dm-psearch" placeholder="Поиск процесса…">
+         <button class="dm-btn">Обновить список</button>
+        </div>
+        <div class="dm-tablewrap">
+         <table class="dm-table" id="dm-ptable">
+          <thead><tr><th>Процесс</th><th>PID</th><th>Память</th><th>Категория</th><th>Действия</th></tr></thead>
+          <tbody>
+           <tr><td>chrome.exe (23)</td><td class="dm-mono">4128</td><td class="dm-mono">2.8 ГБ</td><td>Браузер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>Discord.exe (8)</td><td class="dm-mono">7712</td><td class="dm-mono">840 МБ</td><td>Приложение</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>EpicGamesLauncher.exe</td><td class="dm-mono">6204</td><td class="dm-mono">610 МБ</td><td>Лаунчер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>steam.exe</td><td class="dm-mono">3300</td><td class="dm-mono">512 МБ</td><td>Лаунчер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>Spotify.exe</td><td class="dm-mono">5180</td><td class="dm-mono">430 МБ</td><td>Музыка</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>RiotClientServices.exe</td><td class="dm-mono">8844</td><td class="dm-mono">388 МБ</td><td>Игры</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>Telegram.exe</td><td class="dm-mono">2960</td><td class="dm-mono">295 МБ</td><td>Приложение</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>svchost.exe (34)</td><td class="dm-mono">1204</td><td class="dm-mono">640 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">Защищён</button></div></td></tr>
+           <tr><td>explorer.exe</td><td class="dm-mono">4472</td><td class="dm-mono">320 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">Защищён</button></div></td></tr>
+           <tr><td>Pulse.exe</td><td class="dm-mono">9048</td><td class="dm-mono">214 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">В исключениях</button></div></td></tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+
+       <!-- 2 EXCEPTIONS -->
+       <div class="dm-panel">
+        <div class="dm-cols">
+         <div class="dm-card">
+          <p class="dm-ctitle">Системные зависимости <span class="dm-count">· 20</span></p>
+          <div class="dm-exlist">
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>audiodg.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>conhost.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>csrss.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>dwm.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>explorer.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>fontdrvhost.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>lsass.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>MsMpEng.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>registry</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>SecurityHealthService.exe</b></div>
+          </div>
+         </div>
+         <div class="dm-card">
+          <p class="dm-ctitle">Ваши исключения</p>
+          <div class="dm-toolbar">
+           <input class="dm-input" id="dm-exinput" placeholder="имя_процесса.exe">
+           <button class="dm-btn dm-btn-p" id="dm-exadd">Добавить</button>
+          </div>
+          <div class="dm-exlist" id="dm-exuser">
+           <div class="dm-exitem"><svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b>Discord.exe</b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button></div>
+           <div class="dm-exitem"><svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b>obs64.exe</b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button></div>
+          </div>
+         </div>
+        </div>
+       </div>
+
+       <!-- 3 HISTORY -->
+       <div class="dm-panel">
+        <div class="dm-card">
+         <p class="dm-ctitle">Динамика за неделю</p>
+         <svg class="dm-chart" viewBox="0 0 400 110" preserveAspectRatio="none">
+          <defs><linearGradient id="dm-hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(59,130,246,.35)"/><stop offset="1" stop-color="rgba(59,130,246,0)"/></linearGradient></defs>
+          <path d="M0,80 60,60 120,68 180,40 240,52 300,32 360,44 400,30 400,110 0,110 Z" fill="url(#dm-hg)"/>
+          <polyline fill="none" stroke="var(--accent)" stroke-width="2" points="0,80 60,60 120,68 180,40 240,52 300,32 360,44 400,30"/>
+          <polyline fill="none" stroke="var(--accent-2)" stroke-width="2" points="0,92 60,84 120,88 180,74 240,80 300,66 360,72 400,60"/>
+         </svg>
+        </div>
+        <div class="dm-row2">
+         <div class="dm-card">
+          <div class="dm-empty">
+           <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+           <b>Список пуст</b>
+           <span>Запустите очистку системы, чтобы увидеть отчёт здесь</span>
+          </div>
+         </div>
+        </div>
+       </div>
+
+       <!-- 4 STARTUP -->
+       <div class="dm-panel">
+        <div class="dm-togrow"><div><b>Запускать Pulse вместе с Windows</b><span>Автостарт в свёрнутом виде</span></div><button class="dm-tog dm-on"></button></div>
+        <div class="dm-togrow"><div><b>Профиль по игре</b><span>Автопереключение при запуске игры</span></div><button class="dm-tog"></button></div>
+        <div class="dm-chips">
+         <button class="dm-chip dm-on">Все</button>
+         <button class="dm-chip">Ключи реестра</button>
+         <button class="dm-chip">Файлы</button>
+         <button class="dm-chip">Задачи</button>
+         <button class="dm-chip">Службы</button>
+        </div>
+        <div class="dm-startitem"><div><b>Discord</b><span>C:\Users\User\AppData\Local\Discord\Update.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
+        <div class="dm-startitem"><div><b>Steam</b><span>C:\Program Files (x86)\Steam\steam.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
+        <div class="dm-startitem"><div><b>Epic Games Launcher</b><span>C:\Program Files (x86)\Epic Games\Launcher\Portal\Binaries\Win64\EpicGamesLauncher.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
+        <div class="dm-startitem"><div><b>NVIDIA GeForce Experience</b><span>C:\Program Files\NVIDIA Corporation\NVIDIA GeForce Experience\NVIDIA GeForce Experience.exe</span></div><button class="dm-btn dm-btn-xs dm-btn-g">Удалить</button></div>
+       </div>
+
+       <!-- 5 MISC -->
+       <div class="dm-panel">
+        <div class="dm-toolgrid">
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 12h.01M10 12h6"/></svg></div><div><b>Здоровье диска</b><span>S.M.A.R.T. и NVMe диагностика накопителей</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div><div><b>Калькулятор сенсы</b><span>Перенос чувствительности между играми</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="12" rx="2"/><path d="M8 17v3M16 17v3M8 9v4M12 9v4M16 9v4"/></svg></div><div><b>Тест ОЗУ</b><span>Поиск ошибок оперативной памяти</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div><b>Стресс-тест</b><span>Полная нагрузка на CPU и GPU</span></div></div>
+        </div>
+       </div>
+
+       <!-- 6 OPTIMIZE -->
+       <div class="dm-panel">
+        <div class="dm-opt">
+         <button class="dm-pulsebtn" id="dm-runopt"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></button>
+         <h4>Оптимизация</h4>
+         <p>Автоматическая оптимизация системы в один клик</p>
+         <button class="dm-btn dm-btn-p" id="dm-runopt2">Оптимизация</button>
+         <div class="dm-progwrap"><div class="dm-prog" id="dm-prog"></div></div>
+         <pre class="dm-term" id="dm-term"></pre>
+        </div>
+       </div>
+
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <!-- ============ FEATURES SECTION ============ -->
+  <section class="features" id="features">
+    <div class="wrap">
+      <div class="sec-head center">
+        <div class="eyebrow">Архитектура утилиты</div>
+        <h2>Как Pulse оптимизирует систему</h2>
+        <p>Каждое изменение спроектировано для снижения латентности ввода и устранения фонового вмешательства Windows.</p>
+      </div>
+
+      <!-- Assembly visual: three drifting layers (system / network / game) that
+           snap together into one stack under Pulse's control on hover/scroll-into-view. -->
+      <div class="assembly" tabindex="0" role="img" aria-label="Процессор собирается из частей: подложка, контакты, кристалл и теплораспределитель — Pulse настраивает систему на уровне железа">
+        <div class="cpu-stage">
+          <div class="cpu-glow"></div>
+          <div class="cpu-socket"></div>
+          <div class="cpu-substrate"></div>
+          <div class="cpu-pins"></div>
+          <div class="cpu-die"></div>
+          <div class="cpu-ihs">
+            <span class="cpu-brand">PULSE</span>
+            <span class="cpu-model">System Optimized</span>
+            <span class="cpu-led"></span>
+          </div>
+        </div>
+        <p class="assembly-caption">Тонкая настройка на уровне системы</p>
+      </div>
+
+      <div class="feat-grid">
+        <div class="feat-card reveal">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="7" width="18" height="9.5" rx="1.6"/>
+              <path d="M8 11h2M14 11h2"/>
+              <path d="M7 16.5v3.5M11 16.5v3.5M15 16.5v3.5M19 16.5v3.5"/>
+            </svg>
+          </div>
+          <h3>Освобождение ОЗУ</h3>
+          <p>В отличие от софта, «сбрасывающего» ОЗУ в файл подкачки, Pulse приостанавливает циклы неактивных фоновых приложений (браузеры, лаунчеры, службы обновлений) через WinAPI. На системе с 16 ГБ ОЗУ после оптимизации в простое остаётся занятым всего около 1.5 ГБ, без побочного роста дисковой активности.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 7h9"/><circle cx="17" cy="7" r="2.5"/>
+              <path d="M4 12h4"/><circle cx="12" cy="12" r="2.5"/><path d="M16 12h4"/>
+              <path d="M4 17h11"/><circle cx="19" cy="17" r="2.5"/>
+            </svg>
+          </div>
+          <h3>Конфигурация WinAPI и служб</h3>
+          <p>Автоматическое отключение систем телеметрии (DiagTrack, WPP, Event Logs) и планировщика архивации. Утилита выгружает ресурсоемкие службы отчетов об ошибках Windows, освобождая процессорные потоки во время игр.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 14c3-5 6.5-5 10 0s6.5 4 10-1"/>
+              <circle cx="2" cy="14" r="1.5"/>
+              <path d="M18 4v6M15 7l3 3 3-3"/>
+            </svg>
+          </div>
+          <h3>Снижение сетевых задержек</h3>
+          <p>Pulse вносит изменения в конфигурацию сетевых драйверов в реестре, отключая алгоритм Нагла (TCP Nodelay) и Network Throttling. Это устраняет принудительное накопление пакетов в буфере и снижает микро-скачки пинга.</p>
+        </div>
+
+        <div class="feat-card reveal">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="13.5" r="7.5"/>
+              <path d="M9.5 2.5h5"/><path d="M19 6.5l1.6-1.6"/>
+              <path d="M8 13.5h2l1.5-3 2 6 1.5-3h2"/>
+            </svg>
+          </div>
+          <h3>Тюнинг I/O и таймера Windows</h3>
+          <p>Принудительно переключает системный таймер высокого разрешения (HPET) в оптимальное состояние для игр, снижая задержки на уровне драйверов. Приоритизирует I/O дисковые запросы запущенной игры.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BAND ============ -->
+  <div class="band">
+    <div class="wrap band-grid">
+      <div class="band-card">
+        <div class="num">200<span class="u">+</span></div>
+        <div class="lbl">Твик операционной системы</div>
+      </div>
+      <div class="band-card">
+        <div class="num"><span class="count" data-target="30">0</span><span class="u">+</span></div>
+        <div class="lbl">Системных процессов под защитой</div>
+      </div>
+      <div class="band-card">
+        <div class="num"><span class="count" data-target="0">0</span><span class="u">%</span></div>
+        <div class="lbl">Нагрузки: утилита закрывается полностью</div>
+      </div>
+      <div class="band-card">
+        <div class="num"><span class="count" data-target="99.3" data-decimals="1">0</span><span class="u">МБ</span></div>
+        <div class="lbl">Размер исполняемого файла</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ RESULTS SECTION ============ -->
+  <section class="results" id="results">
+    <div class="wrap results-in">
+      <div class="results-chart reveal" id="barsBlock">
+        <div class="chart-bar-row">
+          <div class="chart-bar-head">
+            <span class="chart-bar-name">Средний FPS в CS2 (Без Pulse)</span>
+            <span class="chart-bar-val">312 <span class="unit">FPS</span></span>
+          </div>
+          <div class="chart-bar-track">
+            <div class="chart-bar-fill before" data-w="55%"></div>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <div class="chart-bar-head">
+            <span class="chart-bar-name">Средний FPS в CS2 (С примененным Pulse)</span>
+            <span class="chart-bar-val" style="color:var(--accent)">450 <span class="unit" style="color:var(--accent)">FPS</span><span class="chart-delta">+44%</span></span>
+          </div>
+          <div class="chart-bar-track">
+            <div class="chart-bar-fill after" data-w="80%"></div>
+          </div>
+        </div>
+
+        <div class="chart-bar-row" style="margin-top: 36px;">
+          <div class="chart-bar-head">
+            <span class="chart-bar-name">Показатель 1% Low: редкие события (без Pulse)</span>
+            <span class="chart-bar-val">138 <span class="unit">FPS</span></span>
+          </div>
+          <div class="chart-bar-track">
+            <div class="chart-bar-fill before" data-w="28%"></div>
+          </div>
+        </div>
+
+        <div class="chart-bar-row">
+          <div class="chart-bar-head">
+            <span class="chart-bar-name">Показатель 1% Low: стабильность (с Pulse)</span>
+            <span class="chart-bar-val" style="color:var(--accent)">200 <span class="unit" style="color:var(--accent)">FPS</span><span class="chart-delta">+45%</span></span>
+          </div>
+          <div class="chart-bar-track">
+            <div class="chart-bar-fill after" data-w="44%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-text reveal">
+        <div class="eyebrow">Замеры производительности</div>
+        <h3>Реальное влияние на стабильность кадра</h3>
+        <p>Игроки часто смотрят только на средний FPS, но комфорт игры определяют просадки в экшн-сценах (показатель 1% low). За счет отключения системных прерываний, задержка снижается со 150 до 45 микросекунд. Как результат, пропадают микрофризы и дергания при перестрелках.</p>
+        <p style="margin-top:-8px;"><strong style="color:#fff;">450 FPS avg / 200 FPS 1% low: потолок результата</strong>, достижимый только при грамотной ручной настройке системы поверх Pulse (проверено автором лично). Из коробки прирост более умеренный и зависит от вашего железа и фона.</p>
+        <div class="system-specs">
+          Конфигурация тестового стенда: AMD Ryzen 5 5600 · GeForce GTX 1660 · 16 GB DDR4 RAM · Чистая Windows 10 (22H2).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VS TABLE SECTION ============ -->
+  <section class="vs" id="vs">
+    <div class="wrap">
+      <div class="sec-head center">
+        <div class="eyebrow">Сравнение решений</div>
+        <h2>Отличия Pulse от стандартного софта</h2>
+      </div>
+
+      <div class="vs-container reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>Функционал</th>
+              <th class="col-target">Pulse</th>
+              <th>Очистители диска</th>
+              <th>Платные бустеры</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Устранение системных задержек и настройка HPET</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Частично</td>
+            </tr>
+            <tr>
+              <td>Принудительная остановка фоновых задач</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
+            </tr>
+            <tr>
+              <td>Белый список критических процессов ОС</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (30+)</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+            </tr>
+            <tr>
+              <td>Автоматический бэкап реестра</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Иногда</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Редко</td>
+            </tr>
+            <tr>
+              <td>Прозрачный лог изменений</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (лог)</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+            </tr>
+            <tr>
+              <td>Отсутствие фонового процесса в трее</td>
+              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (0% ОЗУ)</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
+            </tr>
+            <tr>
+              <td>Модель оплаты</td>
+              <td class="col-target" style="color:var(--green); font-weight:700;">Разовый ключ, без подписки</td>
+              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Бесплатно, с рекламой</td>
+              <td>Подписка от $12/мес</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SAFETY PRINCIPLES SECTION ============ -->
+  <section class="safety" id="safety">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Безопасность системы</div>
+        <h2>Принципы защиты от системных сбоев</h2>
+        <p>Многие твикеры ломают службы Windows и приводят к «синему экрану». Pulse спроектирован с упором на отказоустойчивость.</p>
+      </div>
+
+      <div class="safety-grid">
+        <div class="safe-card reveal">
+          <div class="safe-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="10.5" width="16" height="10.5" rx="2"/>
+              <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
+              <path d="M12 14.5v2.5"/>
+            </svg>
+          </div>
+          <h3>Аппаратное ядро под защитой</h3>
+          <p>В коде жестко зафиксирован список из 32 процессов Windows (таких как dwm.exe, explorer.exe, lsass.exe), которые утилита не имеет права останавливать или изменять.</p>
+        </div>
+
+        <div class="safe-card reveal">
+          <div class="safe-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+              <path d="M17 21v-8H7v8"/><path d="M8 3v4h6"/>
+            </svg>
+          </div>
+          <h3>Создание резервной копии</h3>
+          <p>Перед каждым изменением системного реестра Pulse принудительно инициирует создание системной точки восстановления (System Restore Point). Любые изменения можно отменить в один клик.</p>
+        </div>
+
+        <div class="safe-card reveal">
+          <div class="safe-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="m7 9 2.5 2.5L7 14"/><path d="M12.5 14.5h4.5"/>
+            </svg>
+          </div>
+          <h3>Техническая прозрачность</h3>
+          <p>Pulse не использует скрытые бинарные скрипты. Все твики применяются через стандартные ветки реестра. В конце работы утилита сохраняет читаемый текстовый лог всех измененных ключей.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS SECTION ============ -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="sec-head center">
+        <div class="eyebrow">Обратная связь</div>
+        <h2>Отзывы с профильных ресурсов</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="rev-card reveal">
+          <div class="rev-head">
+            <div class="rev-stars">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
+          </div>
+          <p class="rev-text">«Играю в кс почти каждый день, 4-5 часов минимум. Раньше периодически дёргало прямо в раунде вроде и пекарня не топовая, но и не должно так тротлить. Погонял с Pulse недели две дёргания пропали, мышка ведёт себя четко. Не супергерой, но раздражитель убрал полностью, для меня этого хватило.»</p>
+          <div class="rev-user">
+            <span class="name">AimLab</span>
+            <span class="specs">Ryzen 5 5600 · GTX 1660 · CS2</span>
+          </div>
+        </div>
+
+        <div class="rev-card reveal">
+          <div class="rev-head">
+            <div class="rev-stars">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
+          </div>
+          <p class="rev-text">«Один твикер в прошлом году убил мне драйвер звука, с тех пор к такому софту отношусь с подозрением. Тут перед стартом сам сделал точку восстановления я вообще ничего руками не трогал, это подкупило. После чистки автозагрузки хром с стимом перестали жрать всё в фоне, комп стал отзывчивее в целом, не только в игре.»</p>
+          <div class="rev-user">
+            <span class="name">Enrique!</span>
+            <span class="specs">i5-12400F · GTX 1660 Ti · CS2</span>
+          </div>
+        </div>
+
+        <div class="rev-card reveal">
+          <div class="rev-head">
+            <div class="rev-stars">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
+          </div>
+          <p class="rev-text">«RX 580 и Ryzen 5 3600 железо не самое новое, апгрейд не в этом году точно, так что трясусь над каждым кадром. Раньше в перестрелках тайминг рвался, списывал на возраст видеокарты. Оказалось часть проблемы была в фоновых службах после Pulse стало ровнее, хотя чуда никакого не жду с таким железом. Свои деньги отбило, буду брать ключ и на следующий комп.»</p>
+          <div class="rev-user">
+            <span class="name">Anxiety</span>
+            <span class="specs">Ryzen 5 3600 · RX 580 · CS2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ SECTION ============ -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="sec-head center">
+        <div class="eyebrow">FAQ</div>
+        <h2>Ответы на частые вопросы</h2>
+      </div>
+
+      <div class="faq-container">
+        <details>
+          <summary>Требуются ли права администратора?</summary>
+          <div class="answer">Да. Изменение сетевых параметров, приоритизация ввода-вывода и управление службами Windows происходят на системном уровне через реестр и требуют прав локального администратора.</div>
+        </details>
+        <details>
+          <summary>Могут ли забанить в играх (VAC, Faceit Anti-Cheat)?</summary>
+          <div class="answer">Нет. Pulse работает исключительно с конфигурацией операционной системы и стандартным API Windows. Утилита не внедряется в память запущенных процессов, не изменяет файлы игр и не нарушает правила античитов.</div>
+        </details>
+        <details>
+          <summary>Как вернуть стандартные настройки системы?</summary>
+          <div class="answer">При первом запуске Pulse делает полную резервную копию изменяемых веток реестра. Для возврата к исходному состоянию достаточно открыть Pulse и нажать кнопку «Восстановить настройки» во вкладке резервных копий.</div>
+        </details>
+        <details>
+          <summary>Влияет ли утилита на работу систем безопасности Windows?</summary>
+          <div class="answer">Да. В рамках оптимизации Pulse отключает встроенный защитник (Windows Defender), так как его фоновое сканирование заметно нагружает диск и процессор во время игры. Перед отключением создаётся точка восстановления, чтобы при необходимости можно было откатить изменение.</div>
+        </details>
+        <details>
+          <summary>Почему антивирус может ругаться на .exe?</summary>
+          <div class="answer">Pulse правит реестр и управляет службами без установщика, а такое поведение эвристики иногда помечают как подозрительное — это ложное срабатывание. Файл не подписан дорогим EV-сертификатом, отсюда и предупреждение SmartScreen. Сверьте SHA-256 сборки со значением в блоке загрузки ниже; при желании проверьте файл на VirusTotal перед запуском.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOWNLOAD SECTION ============ -->
+  <section class="download" id="download">
+    <div class="wrap dl-grid">
+      <div class="dl-main">
+        <div class="eyebrow">Дистрибутив</div>
+        <h2>Скачать Pulse</h2>
+        <p>Повысьте стабильность фреймтайма и освободите оперативную память одной кнопкой. Портативная сборка, готовая к запуску. Активация по лицензионному ключу.</p>
+        <div class="dl-buttons">
+          <a class="btn btn-primary" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/Pulse.exe" download="Pulse.exe">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Скачать Pulse (.EXE)
+          </a>
+        </div>
+
+        <div class="key-contact">
+          <div class="key-contact-lbl">Лицензия 5€ (≈200₴). Ключ выдаётся автоматически сразу после оплаты:</div>
+          <div class="key-contact-buttons">
+            <button class="btn btn-primary btn-sm" id="buyCryptoBtn" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3Z"/><path d="M2 10h20"/></svg>
+              Купить криптой
+            </button>
+            <a class="btn btn-ghost btn-sm" href="https://t.me/Pulse_buy" target="_blank" rel="noopener">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              Telegram · Pulse
+            </a>
+          </div>
+          <div class="key-contact-note" id="buyError" style="display:none; color:#ef4444; font-size:12.5px; margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <div class="dl-side">
+        <div>
+          <h3>Характеристики сборки</h3>
+          <ul class="req-list">
+            <li><span class="lbl">ОС</span><span class="val">Windows 10 / 11 64-bit</span></li>
+            <li><span class="lbl">Размер</span><span class="val" id="specsSize">99.3 МБ</span></li>
+            <li><span class="lbl">Инсталлятор</span><span class="val">Не требуется (Portable)</span></li>
+            <li><span class="lbl">Лицензия</span><span class="val">Платная, по ключу</span></li>
+            <li><span class="lbl">Активация</span><span class="val">Telegram</span></li>
+            <li id="lastUpdateRow" style="display:none;"><span class="lbl">Обновлено</span><span class="val" id="specsUpdated">…</span></li>
+          </ul>
+        </div>
+        <div class="hash-info">
+          <div class="hash-lbl">SHA-256 Контрольная сумма</div>
+          <div class="hash-val">d6c85f4533146dc58e01b7e4b2efeacb5970d25dc578243596ebdebdefdfe3b2</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap foot">
+      <a class="logo" href="#top" style="font-size: 16px;">
+        <span class="logo-mark" style="width: 24px; height: 24px; border-radius: 6px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" style="width: 13px; height: 13px;">
+            <path d="M2 12h4l3-8 4 16 3-8h6"/>
+          </svg>
+        </span>
+        Pulse
+      </a>
+      <div class="foot-links">
+        <a href="#features">Оптимизация</a>
+        <a href="#results">Результаты</a>
+        <a href="#safety">Безопасность</a>
+        <a href="#download">Скачать</a>
+        <a href="privacy.html">Конфиденциальность</a>
+        <a href="eula.html">Лицензионное соглашение</a>
+      </div>
+      <div class="copyright">© 2026 Pulse Utility. Активация по лицензионному ключу, только для личного использования.</div>
+    </div>
+  </footer>
+
+  <!-- ============ JAVASCRIPT ============ -->
+  <!-- Lenis moved here from <head> — it was a synchronous <script src> to a third-party
+       CDN blocking first paint of the ENTIRE page before ANY body markup rendered.
+       By the time the parser reaches it, all visible content above is already painted,
+       so the fetch no longer delays anything the user sees. -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script>
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 640;
+    // "Ведро": слабый CPU (<=4 логических ядер) или мало памяти (<=4ГБ, если браузер это раскрывает).
+    // На таких устройствах отключаем самые дорогие эффекты (Lenis, созвездия частиц, тяжёлый blur) вместо
+    // урезания их интенсивности — половинчатые меры всё равно лагали на реальном слабом железе.
+    const isLowPower = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+                        (navigator.deviceMemory && navigator.deviceMemory <= 4);
+
+    // Add is-mobile class to body dynamically if mobile
+    if (isMobileDevice) {
+      document.body.classList.add('is-mobile');
+    }
+    if (isLowPower) {
+      document.documentElement.classList.add('low-power');
+    }
+
+    // ---- Inertial ("ice-smooth") scroll via Lenis ----
+    // Skipped on reduced-motion (respects the OS setting) and on touch/mobile
+    // (native momentum scroll already feels right there, and Lenis mainly
+    // targets wheel input). Falls back silently if the CDN script failed.
+    let lenis = null;
+    if (!reducedMotion && !isMobileDevice && !isLowPower && window.Lenis) {
+      lenis = new Lenis({
+        duration: 0.7,         // was 1.15 — that read as laggy; this keeps a light glide without feeling delayed
+        easing: (t) => 1 - Math.pow(1 - t, 2), // gentler ease-out quad — quicker settle than cubic
+        smoothWheel: true,
+      });
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+
+    /* ---------- BRAND ACCENT (blue, mirrors the app chrome) — read by the hero canvas ---------- */
+    window.pulseAccentRGB = '34, 211, 238';
+
+    /* ---------- HERO: entrance choreography + 3D mouse-tilt + magnetic CTAs ---------- */
+    (function() {
+      // Trigger the staggered entrance once the DOM is ready
+      const hero = document.querySelector('.hero');
+      requestAnimationFrame(() => document.body.classList.add('hero-loaded'));
+
+      const canHover = window.matchMedia('(hover: hover)').matches;
+      const stage = document.querySelector('.hero-stage');
+      const win = document.getElementById('heroWindow');
+      const floats = document.querySelectorAll('[data-tilt-float]');
+
+      // 3D tilt of the app window following the pointer (desktop only, respects reduced-motion)
+      if (hero && stage && win && canHover && !reducedMotion) {
+        let tx = 0, ty = 0, raf = null;
+        const apply = () => {
+          win.style.transform = `rotateY(${tx}deg) rotateX(${ty}deg)`;
+          floats.forEach((f, i) => {
+            const depth = (i + 1) * 6;
+            f.style.transform = `translate3d(${tx * depth * 0.4}px, ${ty * -depth * 0.4}px, 0)`;
+          });
+          raf = null;
+        };
+        hero.addEventListener('pointermove', (e) => {
+          const r = hero.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          tx = px * 10;
+          ty = -py * 7;
+          if (!raf) raf = requestAnimationFrame(apply);
+        }, { passive: true });
+        hero.addEventListener('pointerleave', () => {
+          tx = 0; ty = 0;
+          if (!raf) raf = requestAnimationFrame(apply);
+        });
+      }
+
+      // Magnetic pull on primary CTAs — throttled via rAF (was firing a forced
+      // layout read + style write on every raw pointermove, causing visible jank).
+      if (canHover && !reducedMotion && !isLowPower) {
+        document.querySelectorAll('.magnetic').forEach(btn => {
+          let mx = 0, my = 0, raf = null;
+          const apply = () => {
+            btn.style.transform = `translate(${mx}px, ${my}px)`;
+            raf = null;
+          };
+          btn.addEventListener('pointermove', (e) => {
+            const r = btn.getBoundingClientRect();
+            mx = (e.clientX - r.left - r.width / 2) * 0.25;
+            my = (e.clientY - r.top - r.height / 2) * 0.35;
+            if (!raf) raf = requestAnimationFrame(apply);
+          }, { passive: true });
+          btn.addEventListener('pointerleave', () => {
+            mx = 0; my = 0;
+            if (!raf) raf = requestAnimationFrame(apply);
+          });
+        });
+      }
+
+      // Profile switcher — retints the hero (glow, canvas, app-window) like the real app
+      const profileRGB = { standard: '34, 224, 107', gaming: '34, 211, 238', maximum: '255, 106, 26' };
+      const profileIdx = { standard: 0, gaming: 1, maximum: 2 };
+      const pills = document.querySelectorAll('.profile-pill');
+      const awProfileIcons = document.querySelectorAll('.aw-profiles .awp');
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          const p = pill.dataset.profile;
+          document.documentElement.setAttribute('data-profile', p);
+          window.pulseAccentRGB = profileRGB[p] || profileRGB.standard;
+          pills.forEach(x => { x.classList.remove('active'); x.removeAttribute('aria-selected'); });
+          pill.classList.add('active');
+          pill.setAttribute('aria-selected', 'true');
+          // Mirror the selection on the app-window's top toggle
+          awProfileIcons.forEach((ic, i) => ic.classList.toggle('active', i === profileIdx[p]));
+        });
+      });
+    })();
+
+    /* ---------- HERO CANVAS BACKGROUND (SUBTLE ECG WAVE + PARTICLES) ---------- */
+    (function() {
+      const canvas = document.getElementById('heroCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const dpr = Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 1.5);
+      let width, height;
+
+      // 1. Declare and initialize data arrays first (avoids TDZ reference errors on initial resize)
+      const particles = [];
+      const particleCount = isLowPower ? 10 : (isMobileDevice ? 14 : 38);
+      // The O(n²) constellation-line pass (~700 pair checks at 38 particles) is the
+      // single costliest part of this loop — skip it entirely on weak hardware.
+      const drawConstellation = !isLowPower;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random(),
+          y: Math.random(),
+          r: Math.random() * 1.6 + 0.5, 
+          speedY: Math.random() * 0.0003 + 0.0001,
+          alpha: Math.random() * 0.32 + 0.06 
+        });
+      }
+
+      // Track mouse position
+      let mouse = { x: -1000, y: -1000, active: false };
+      if (!isMobileDevice) {
+        window.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouse.x = (e.clientX - rect.left) * dpr;
+          mouse.y = (e.clientY - rect.top) * dpr;
+          mouse.active = true;
+        });
+        window.addEventListener('mouseleave', () => {
+          mouse.active = false;
+        });
+      }
+
+      // ECG waveform — a real PQRST heartbeat (P wave · QRS complex · T wave).
+      // Negative = upward on canvas. One normalized beat, scaled per-beat below.
+      let wave = null;   // ring buffer of sample heights, one slot per screen column
+      let head = 0;      // write-head column index — sweeps left→right like a monitor pen
+      const PQRST = [0, 0, -3, -5, -6, -4, -1, 0, 0, 5, -34, 14, -3, 0, 0, -5, -9, -11, -9, -5, -1, 0, 0, 0];
+      let beatQueue = [];
+      let restBeats = 12;
+
+      function getNextWaveHeight() {
+        if (beatQueue.length > 0) return beatQueue.shift();
+        if (restBeats > 0) {
+          restBeats--;
+          return (Math.random() - 0.5) * 1.1; // isoelectric baseline shimmer between beats
+        }
+        // Queue the next beat with a randomized height and R-R interval → every beat differs
+        let amp = 0.55 + Math.random() * 0.85;           // 0.55–1.40× → clearly varying beat size
+        if (Math.random() < 0.12) amp += 0.35;           // occasional taller beat
+        beatQueue = PQRST.map(v => v * amp);
+        restBeats = 70 + Math.floor(Math.random() * 90); // long calm gap between beats
+        return beatQueue.shift();
+      }
+
+      // 2. Define sizing functions
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        width = canvas.width = (rect.width || canvas.offsetWidth) * dpr;
+        height = canvas.height = (rect.height || canvas.offsetHeight) * dpr;
+        if (reducedMotion && width > 0 && height > 0) {
+          draw(); 
+        }
+      }
+
+      // 3. Define rendering loop
+      function draw() {
+        if (!width || !height) {
+          resize();
+          if (!width || !height) {
+            if (!reducedMotion) requestAnimationFrame(draw);
+            return;
+          }
+        }
+        ctx.clearRect(0, 0, width, height);
+
+        // (cursor glow trail removed — it was drawn on the canvas and clipped at the hero edge)
+
+        // Draw particles
+        for (const p of particles) {
+          p.y -= p.speedY;
+          if (p.y < -0.01) {
+            p.y = 1.01;
+            p.x = Math.random();
+          }
+          
+          let px = p.x * width;
+          let py = p.y * height;
+
+          // Gentle mouse repulsion force
+          if (mouse.active && !reducedMotion) {
+            const dx = px - mouse.x;
+            const dy = py - mouse.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 90 * dpr) {
+              const force = (90 * dpr - dist) / (90 * dpr);
+              p.x += (dx / dist) * force * 0.006;
+              p.x = Math.max(0.001, Math.min(0.999, p.x));
+            }
+          }
+
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = 'rgb(' + (window.pulseAccentRGB || '34, 211, 238') + ')';
+          ctx.beginPath();
+          ctx.arc(p.x * width, p.y * height, p.r * dpr, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Draw dynamic constellation connection lines between close particles
+        if (!reducedMotion && drawConstellation) {
+          ctx.strokeStyle = 'rgba(' + (window.pulseAccentRGB || '34, 211, 238') + ', 0.18)';
+          ctx.lineWidth = 0.75 * dpr;
+          const maxD = 105 * dpr;
+          const maxD2 = maxD * maxD;
+          for (let i = 0; i < particles.length; i++) {
+            const pix = particles[i].x * width, piy = particles[i].y * height;
+            for (let j = i + 1; j < particles.length; j++) {
+              const dx = pix - particles[j].x * width;
+              if (dx > maxD || dx < -maxD) continue;      // cheap reject before the sqrt path
+              const dy = piy - particles[j].y * height;
+              const dist2 = dx * dx + dy * dy;
+              if (dist2 < maxD2) {
+                ctx.globalAlpha = (1 - Math.sqrt(dist2) / maxD) * 0.22;
+                ctx.beginPath();
+                ctx.moveTo(pix, piy);
+                ctx.lineTo(particles[j].x * width, particles[j].y * height);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+
+        // ECG monitor sweep — a pen head writes left→right, erasing a gap ahead of itself
+        ctx.globalAlpha = 1;
+        const step = 3 * dpr;
+        const cols = Math.max(2, Math.ceil(width / step) + 1);
+
+        if (!wave || wave.length !== cols) {
+          wave = new Array(cols).fill(null);
+          head = 0;
+        }
+
+        if (!reducedMotion) {
+          // write one new sample at the head, then blank a small window just ahead of it
+          wave[head] = getNextWaveHeight();
+          const gap = Math.max(2, Math.round(16 * dpr / step));
+          for (let g = 1; g <= gap; g++) wave[(head + g) % cols] = null;
+          head = (head + 1) % cols;
+        }
+
+        const accent = window.pulseAccentRGB || '34, 211, 238';
+        const baseline = height * 0.56;
+        const ampY = 2.7 * dpr;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = 'rgba(' + accent + ', 0.15)';
+        ctx.lineWidth = 1.4 * dpr;
+        ctx.beginPath();
+        let penDown = false;
+        for (let i = 0; i < cols; i++) {
+          const v = wave[i];
+          if (v === null || v === undefined) { penDown = false; continue; }
+          const x = i * step;
+          const y = baseline + v * ampY;
+          if (!penDown) { ctx.moveTo(x, y); penDown = true; }
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // glowing pen head at the last written column
+        const hi = (head - 1 + cols) % cols;
+        const hv = wave[hi];
+        if (hv !== null && hv !== undefined) {
+          const hx = hi * step;
+          const hy = baseline + hv * ampY;
+          ctx.shadowBlur = 8 * dpr;
+          ctx.fillStyle = 'rgba(' + accent + ', 0.55)';
+          ctx.beginPath();
+          ctx.arc(hx, hy, 1.8 * dpr, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.shadowBlur = 0;
+
+        if (!reducedMotion && running) requestAnimationFrame(draw);
+      }
+
+      // 4. Initialize size, bind events, and start rendering loop only after full scope setup
+      // Pause the loop when the hero is off-screen or the tab is hidden — no wasted frames.
+      let running = false;
+      let heroVisible = true;
+      function setRunning(on) {
+        if (on && !running && !reducedMotion) { running = true; requestAnimationFrame(draw); }
+        else if (!on) { running = false; }
+      }
+      function updateRunning() {
+        setRunning(heroVisible && !document.hidden);
+      }
+      const heroEl = document.querySelector('.hero');
+      if (heroEl && 'IntersectionObserver' in window) {
+        new IntersectionObserver((entries) => {
+          heroVisible = entries[0].isIntersecting;
+          updateRunning();
+        }, { threshold: 0 }).observe(heroEl);
+      }
+      document.addEventListener('visibilitychange', updateRunning);
+
+      resize();
+      window.addEventListener('resize', resize);
+      window.addEventListener('load', resize);
+      updateRunning();
+    })();
+
+    /* ---------- RESULTS PROGRESS BARS ANIMATION ---------- */
+    const resultsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.chart-bar-fill').forEach(fill => {
+            fill.style.width = fill.dataset.w;
+          });
+          resultsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const barsBlock = document.getElementById('barsBlock');
+    if (barsBlock) resultsObserver.observe(barsBlock);
+
+
+
+    /* ---------- GITHUB RELEASE CHECKER (last update date for Pulse.exe) ---------- */
+    async function checkPulseUpdates() {
+      try {
+        const res = await fetch('https://api.github.com/repos/skywhyelo-lab/Plus/releases/latest');
+        if (!res.ok) return;
+        const release = await res.json();
+        const asset = release.assets && release.assets.find(a => a.name === 'Pulse.exe');
+        if (!asset || !asset.updated_at) return;
+
+        const d = new Date(asset.updated_at);
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        const formatted = `${day}.${month}.${year}`;
+        const version = (release.tag_name || '').replace(/^v/i, '');
+
+        const heroNote = document.getElementById('heroNote');
+        if (heroNote) {
+          const versionText = version ? `<span class="hn-tag">Версия ${version}</span>` : '';
+          heroNote.innerHTML = `${versionText}<span class="hn-tag">Windows 10 / 11</span><span class="hn-tag">Платная лицензия</span><span class="hn-tag hn-date">Обновлено ${formatted}</span>`;
+        }
+
+        const updatedRow = document.getElementById('lastUpdateRow');
+        const specsUpdated = document.getElementById('specsUpdated');
+        if (updatedRow && specsUpdated) {
+          specsUpdated.textContent = formatted;
+          updatedRow.style.display = '';
+        }
+
+        if (asset.size) {
+          const sizeMB = (asset.size / (1024 * 1024)).toFixed(1);
+          const specsSize = document.getElementById('specsSize');
+          if (specsSize) specsSize.textContent = `${sizeMB} МБ`;
+          const bandCountFile = document.querySelector('.band-card .count[data-target="99.3"]');
+          if (bandCountFile) {
+            bandCountFile.dataset.target = sizeMB;
+            if (bandCountFile.textContent !== '0') bandCountFile.textContent = sizeMB;
+          }
+        }
+      } catch (e) {
+        console.error('Ошибка при получении обновлений с GitHub:', e);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', checkPulseUpdates);
+
+    /* (cursor-spotlight JS removed — effect deleted; native cursor only) */
+
+    /* ---------- REVEAL ON SCROLL ---------- */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    /* ---------- DYNAMIC NUMBER COUNTERS ON SCROLL ---------- */
+    const countersObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseFloat(counter.dataset.target);
+          const decimals = parseInt(counter.dataset.decimals || '0');
+          const prefix = counter.dataset.prefix || ''; // e.g. "−" / "+" for hero metrics
+          const duration = 1200; // ms
+          const startTime = performance.now();
+
+          function update(currentTime) {
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+            // Ease out quad
+            const easeProgress = progress * (2 - progress);
+            const value = easeProgress * target;
+
+            counter.textContent = prefix + value.toFixed(decimals);
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              counter.textContent = prefix + target.toFixed(decimals);
+            }
+          }
+          requestAnimationFrame(update);
+          countersObserver.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.band-card .count').forEach(counter => {
+      countersObserver.observe(counter);
+    });
+    // Hero metrics + gauge value count-up (above the fold → fires on mount).
+    // Skip under reduced-motion so the markup's final values stay put.
+    if (!reducedMotion) {
+      document.querySelectorAll('.hm-n').forEach(counter => countersObserver.observe(counter));
+    }
+
+    // CPU assembly: play once it scrolls into view on ALL devices (hover just
+    // replays it on desktop). Toggling on isIntersecting lets it re-assemble
+    // each time it re-enters the viewport.
+    const assemblyEl = document.querySelector('.assembly');
+    if (assemblyEl) {
+      const assemblyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          assemblyEl.classList.toggle('assembly-active', entry.isIntersecting);
+        });
+      }, { threshold: 0.4 });
+      assemblyObserver.observe(assemblyEl);
+    }
+
+    /* ---------- BUY BUTTONS (Paddle card checkout + CryptoCloud/Trybit) ---------- */
+    (function() {
+      const buyCardBtn = document.getElementById('buyCardBtn');
+      const buyCryptoBtn = document.getElementById('buyCryptoBtn');
+      const buyError = document.getElementById('buyError');
+      if (!buyCardBtn && !buyCryptoBtn) return;
+
+      const PADDLE_CLIENT_TOKEN = 'live_aec6742e15aae2bef4c8e482107';
+      const PADDLE_PRICE_ID = 'pri_01kxswmzkn326by5m08x7dxayk';
+      if (window.Paddle) {
+        window.Paddle.Setup({ token: PADDLE_CLIENT_TOKEN });
+      }
+
+      function showError(msg) {
+        buyError.textContent = msg;
+        buyError.style.display = 'block';
+      }
+
+      if (buyCardBtn) {
+        buyCardBtn.addEventListener('click', async () => {
+          buyCardBtn.disabled = true;
+          const originalHtml = buyCardBtn.innerHTML;
+          buyCardBtn.textContent = 'Открываем оплату…';
+          buyError.style.display = 'none';
+
+          try {
+            const res = await fetch('/api/create-order', { method: 'POST' });
+            const data = await res.json();
+            if (!res.ok || !data.order_id) throw new Error(data.error || 'unknown error');
+
+            localStorage.setItem('pulse_order_id', data.order_id);
+            window.Paddle.Checkout.open({
+              items: [{ priceId: PADDLE_PRICE_ID, quantity: 1 }],
+              customData: { order_id: data.order_id },
+              settings: { successUrl: `${location.origin}/success.html?order_id=${data.order_id}` },
+            });
+          } catch (err) {
+            showError('Не удалось начать оплату картой. Попробуйте ещё раз или напишите в Telegram.');
+          } finally {
+            buyCardBtn.disabled = false;
+            buyCardBtn.innerHTML = originalHtml;
+          }
+        });
+      }
+
+      if (buyCryptoBtn) {
+        buyCryptoBtn.addEventListener('click', async () => {
+          buyCryptoBtn.disabled = true;
+          const originalHtml = buyCryptoBtn.innerHTML;
+          buyCryptoBtn.textContent = 'Создаём счёт…';
+          buyError.style.display = 'none';
+
+          try {
+            const res = await fetch('/api/create-invoice', { method: 'POST' });
+            const data = await res.json();
+            if (!res.ok || !data.pay_url) throw new Error(data.error || 'unknown error');
+
+            localStorage.setItem('pulse_order_id', data.order_id);
+            window.location.href = data.pay_url;
+          } catch (err) {
+            buyCryptoBtn.disabled = false;
+            buyCryptoBtn.innerHTML = originalHtml;
+            showError('Не удалось начать оплату криптой. Попробуйте ещё раз или напишите в Telegram.');
+          }
+        });
+      }
+    })();
+
+  </script>
+
+  <!-- ============ v1.2.9 mockup controller ============ -->
+  <script>
+  (function(){
+   var root=document.getElementById('demo');
+   if(!root)return;
+   var navs=root.querySelectorAll('.dm-navi'),panels=root.querySelectorAll('.dm-panel');
+   navs.forEach(function(n){n.addEventListener('click',function(){
+    var i=+n.dataset.tab;
+    navs.forEach(function(x){x.classList.remove('dm-on')});
+    panels.forEach(function(p){p.classList.remove('dm-on')});
+    n.classList.add('dm-on');panels[i].classList.add('dm-on');
+   });});
+
+   root.querySelectorAll('.dm-tog').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('dm-on')})});
+   var chips=root.querySelectorAll('.dm-chip');
+   chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('dm-on')});c.classList.add('dm-on')})});
+
+   // Быстрая очистка → gauge jumps into the healthy zone
+   var garc=root.querySelector('#dm-garc'),gnum=root.querySelector('#dm-gnum'),glbl=root.querySelector('#dm-glbl'),cleaned=false;
+   function clean(){
+    if(cleaned)return;cleaned=true;
+    if(garc){garc.setAttribute('stroke','var(--green)');garc.setAttribute('stroke-dashoffset','26');}
+    if(gnum)gnum.textContent='94%';
+    if(glbl){glbl.textContent='Отлично';glbl.classList.add('dm-good');}
+    var f=root.querySelector('#dm-freed'),d=root.querySelector('#dm-dpc');
+    if(f)f.innerHTML='3.1<span>ГБ</span>';
+    if(d)d.innerHTML='39<span>мкс</span>';
+   }
+   [root.querySelector('#dm-clean'),root.querySelector('.dm-qa .dm-btn')].forEach(function(b){if(b)b.addEventListener('click',clean)});
+
+   var srch=root.querySelector('#dm-psearch'),rows=root.querySelectorAll('#dm-ptable tbody tr');
+   if(srch)srch.addEventListener('input',function(){
+    var q=srch.value.toLowerCase();
+    rows.forEach(function(r){r.style.display=r.cells[0].textContent.toLowerCase().indexOf(q)>-1?'':'none'});
+   });
+
+   var exlist=root.querySelector('#dm-exuser'),exin=root.querySelector('#dm-exinput'),exadd=root.querySelector('#dm-exadd');
+   function bindRm(b){b.addEventListener('click',function(){b.closest('.dm-exitem').remove()})}
+   root.querySelectorAll('.dm-exrm').forEach(bindRm);
+   function addEx(){
+    var v=(exin.value||'').trim();if(!v)return;
+    var d=document.createElement('div');d.className='dm-exitem';
+    d.innerHTML='<svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b></b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button>';
+    d.querySelector('b').textContent=v;
+    bindRm(d.querySelector('.dm-exrm'));exlist.appendChild(d);exin.value='';
+   }
+   if(exadd)exadd.addEventListener('click',addEx);
+   if(exin)exin.addEventListener('keydown',function(e){if(e.key==='Enter')addEx()});
+
+   var b1=root.querySelector('#dm-runopt'),b2=root.querySelector('#dm-runopt2'),
+       prog=root.querySelector('#dm-prog'),term=root.querySelector('#dm-term'),
+       freed=root.querySelector('#dm-freed'),dpc=root.querySelector('#dm-dpc'),running=false,done=false;
+   var steps=['Создание точки восстановления… ОК','Отключение телеметрии (DiagTrack)… ОК','Настройка сетевых задержек (TCP Nodelay)… ОК','Сжатие неактивного ОЗУ… ОК','Готово: 200+ твиков'];
+   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+   function finish(){if(freed)freed.innerHTML='2.4<span>ГБ</span>';if(dpc)dpc.innerHTML='38<span>мкс</span>';running=false;done=true}
+   function run(){
+    if(running)return;running=true;
+    term.classList.add('dm-show');term.textContent='';prog.style.width='0%';
+    if(reduce){term.textContent=steps.join('\n');prog.style.width='100%';finish();return;}
+    var i=0;
+    (function next(){
+     if(i>=steps.length){finish();return;}
+     term.textContent+=(i?'\n':'')+steps[i];
+     prog.style.width=Math.round((i+1)/steps.length*100)+'%';
+     i++;setTimeout(next,650);
+    })();
+   }
+   if(b1)b1.addEventListener('click',run);
+   if(b2)b2.addEventListener('click',run);
+
+   if(dpc)setInterval(function(){
+    if(running||done||cleaned)return;
+    dpc.innerHTML=(140+Math.floor(Math.random()*10))+'<span>мкс</span>';
+   },2200);
+  })();
+  </script>
+
+  <!-- ============ #demo window: local independent profile tint ============ -->
+  <script>
+  (function(){
+    var win = document.querySelector('#demo .dm-win');
+    if(!win) return;
+    var profs = win.querySelectorAll('.dm-prof');
+    if(!profs || !profs.length) return;
+    var PALETTE = [
+      { a:'34,224,107',  b:'18,184,147'  },
+      { a:'34,211,238',  b:'59,130,246'  },
+      { a:'255,106,26',  b:'255,61,87'   }
+    ];
+    function tint(i){
+      var p = PALETTE[i] || PALETTE[1];
+      win.style.setProperty('--accent-rgb', p.a);
+      win.style.setProperty('--accent-2-rgb', p.b);
+      win.style.setProperty('--profile-rgb', p.a);
+      win.style.setProperty('--grad-brand','linear-gradient(120deg,rgb('+p.a+'),rgb('+p.b+'))');
+      for(var j=0;j<profs.length;j++){ profs[j].classList.toggle('dm-on', j===i); }
+    }
+    for(var k=0;k<profs.length;k++){
+      (function(idx){ profs[idx].addEventListener('click', function(){ tint(idx); }); })(k);
+    }
+    tint(1);
+  })();
+  </script>
+</body>
+</html>
