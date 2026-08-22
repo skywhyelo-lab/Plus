@@ -1985,6 +1985,23 @@
     }
     .rf-txt span { display: block; font-size: 12.5px; color: var(--text-dark); line-height: 1.5; }
 
+    .remote-dl {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .remote-dl-meta {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--text-dark);
+      letter-spacing: 0.02em;
+    }
+
     .remote-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
     .remote-specs span {
       display: inline-flex; align-items: center; gap: 7px;
@@ -4079,6 +4096,18 @@
           <span>Связь по домашней сети</span>
           <span>Без облака и сторонних серверов</span>
         </div>
+
+        <div class="remote-dl">
+          <a class="btn btn-primary" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/PulseRemote.apk" download="PulseRemote.apk">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Скачать Pulse Remote (.APK)
+          </a>
+          <span class="remote-dl-meta"><span id="specsSizeRemote">24 МБ</span> · Android 8.0+</span>
+        </div>
       </div>
 
       <div class="remote-stage">
@@ -4898,6 +4927,15 @@
           }
           const liteHash = document.getElementById('hashLite');
           if (liteHash && liteAsset.digest) liteHash.textContent = String(liteAsset.digest).replace(/^sha256:/, '');
+        }
+
+        // Pulse Remote (Android) — тот же приём: размер подтягивается из релиза, руками
+        // ничего не правим.
+        const remoteAsset = assets.find(a => a.name === 'PulseRemote.apk');
+        if (remoteAsset && remoteAsset.size) {
+          const remoteMB = (remoteAsset.size / (1024 * 1024)).toFixed(0);
+          const remoteEl = document.getElementById('specsSizeRemote');
+          if (remoteEl) remoteEl.textContent = `${remoteMB} МБ`;
         }
 
         if (!asset || !asset.updated_at) return;
