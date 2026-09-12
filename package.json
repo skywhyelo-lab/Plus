@@ -1,5 +1,11 @@
 {
   "name": "pulse-website",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "dev": "node tools/serve.mjs",
+    "check": "node tools/check.mjs"
+  },
+  "engines": { "node": ">=20" }
 }
