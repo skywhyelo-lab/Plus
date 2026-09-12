@@ -1,49 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru" data-profile="gaming">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pulse: настройка Windows для игр. Стабильный фреймтайм и низкий пинг</title>
-  <meta name="description" content="Pulse: утилита для снижения задержек, очистки оперативной памяти и оптимизации Windows под игровые задачи. Точка восстановления перед изменениями, белый список процессов, открытый лог твиков. Лицензия по ключу.">
-  <link rel="canonical" href="https://pulsepc.vercel.app/">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%2322d3ee'/%3E%3Cpath d='M2 12h4l3-8 4 16 3-8h6' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Pulse">
-  <meta property="og:title" content="Pulse: чистая Windows, стабильный FPS">
-  <meta property="og:description" content="Убирает микрофризы, срезает задержки и высвобождает ОЗУ, пока вы играете. 200+ твиков в один клик, полный откат, ноль фонового процесса.">
-  <meta property="og:image" content="https://pulsepc.vercel.app/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:locale" content="ru_RU">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pulse: чистая Windows, стабильный FPS">
-  <meta name="twitter:description" content="Убирает микрофризы, срезает задержки и высвобождает ОЗУ, пока вы играете. 200+ твиков в один клик, полный откат.">
-  <meta name="twitter:image" content="https://pulsepc.vercel.app/og-image.png">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Pulse",
-    "operatingSystem": "Windows 10, Windows 11",
-    "applicationCategory": "UtilitiesApplication",
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "description": "Лицензионный ключ, оплата автоматически на сайте или через Telegram"
-    },
-    "softwareVersion": "1.2.9"
-  }
-  </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Exo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
+:root {
       /* ---- Cyan→Blue DUOTONE brand system (cyan leads on gaming default; blue is the second stop) ---- */
       --accent-rgb: 34, 211, 238;          /* #22D3EE — cyan lead (gaming default), matches app UI */
       --accent-2-rgb: 59, 130, 246;        /* #3B82F6 — blue, the gradient's far stop */
@@ -123,7 +78,7 @@
     :root[data-profile="standard"] { --ar: 34;  --ag: 224; --ab: 107; --a2r: 18;  --a2g: 184; --a2b: 147; }
     :root[data-profile="gaming"]   { --ar: 34;  --ag: 211; --ab: 238; --a2r: 59;  --a2g: 130; --a2b: 246; }
     :root[data-profile="maximum"]  { --ar: 255; --ag: 106; --ab: 26;  --a2r: 255; --a2g: 61;  --a2b: 87;  }
-    @media (prefers-reduced-motion: never-match) {
+    @media (prefers-reduced-motion: reduce) {
       :root { transition: none; }
     }
 
@@ -179,7 +134,7 @@
 
     nav, .hero-in, section, .band, footer { position: relative; z-index: 2; }
 
-    @media (prefers-reduced-motion: never-match) {
+    @media (prefers-reduced-motion: reduce) {
       .hero::after, .badge .dot, h1 span, .games-track {
         animation: none !important;
       }
@@ -216,7 +171,7 @@
       box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px -20px rgba(0, 0, 0, 0.9);
       transition: var(--transition);
     }
-    
+
     .nav-in {
       display: flex;
       align-items: center;
@@ -1029,7 +984,7 @@
       font-family: var(--font-sans); /* Prevents monospace line-height centering shift */
       color: #fff;
     }
-    
+
     #dashGaugeArc {
       transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -1700,69 +1655,110 @@
       padding-top: 16px;
     }
 
-    /* ============ VS TABLE ============ */
+    /* ============ СРАВНЕНИЕ ============ */
     .vs {
       background: var(--bg);
     }
 
-    .vs-container {
-      overflow-x: auto;
+    .cmp {
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       background: var(--bg-panel);
+      overflow: hidden;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 700px;
-    }
-
-    th, td {
-      padding: 16px 20px;
-      text-align: center;
-      font-size: 14.5px;
+    .cmp-row {
+      display: grid;
+      grid-template-columns: 1.7fr 0.85fr 0.85fr 0.85fr;
+      align-items: center;
       border-bottom: 1px solid var(--border);
     }
 
-    th {
-      font-weight: 600;
-      color: #fff;
+    .cmp-row:last-child { border-bottom: 0; }
+
+    .cmp-head {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .cmp-head > * {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    .cmp-head .cmp-us { color: rgb(var(--accent-rgb)); }
+
+    .cmp-row > * {
+      padding: 15px 18px;
       font-size: 14px;
-      background: rgba(255, 255, 255, 0.01);
     }
 
-    td:first-child, th:first-child {
-      text-align: left;
+    .cmp-what {
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .cmp-val {
+      color: var(--text-dark);
+      text-align: center;
+    }
+
+    /* Колонка Pulse читается как основная: своя подложка на всю высоту таблицы
+       и обычный светлый текст вместо приглушённого. */
+    .cmp-us {
+      background: rgba(var(--accent-rgb), 0.055);
+      box-shadow: inset 1px 0 0 rgba(var(--accent-rgb), 0.16), inset -1px 0 0 rgba(var(--accent-rgb), 0.16);
+      color: var(--text);
       font-weight: 600;
-      color: var(--text-muted);
-      width: 40%;
+      text-align: center;
     }
 
-    .col-target {
-      background: rgba(var(--accent-rgb), 0.05);
-      border-left: 1px solid rgba(var(--accent-rgb), 0.18);
-      border-right: 1px solid rgba(var(--accent-rgb), 0.18);
-      font-weight: 600;
-    }
+    .cmp-head .cmp-us { box-shadow: inset 1px 0 0 rgba(var(--accent-rgb), 0.16), inset -1px 0 0 rgba(var(--accent-rgb), 0.16), inset 0 2px 0 rgb(var(--accent-rgb)); }
 
-    th.col-target {
-      color: rgb(var(--accent-rgb));
-      background: rgba(var(--accent-rgb), 0.09);
-      border-top: 2px solid rgb(var(--accent-rgb));
-    }
+    .cmp-no { color: #4a5160; }
 
-    tr:last-child .col-target {
-      border-bottom: 1px solid rgba(var(--accent-rgb), 0.18);
-    }
+    @media (max-width: 760px) {
+      /* На телефоне четыре колонки не помещаются: каждая строка становится карточкой,
+         где под названием идут три подписи с ответами. */
+      .cmp-row {
+        grid-template-columns: 1fr;
+        padding: 4px 0 10px;
+      }
 
-    tr:last-child td {
-      border-bottom: none;
-    }
+      .cmp-head { display: none; }
 
-    .icon-check { color: var(--green); font-weight: 700; }
-    .icon-cross { color: var(--text-dark); }
-    .icon-partial { color: var(--amber); }
+      .cmp-what { padding-bottom: 8px; }
+
+      .cmp-row > .cmp-val,
+      .cmp-row > .cmp-us {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        text-align: left;
+        padding: 7px 18px;
+        font-size: 13.5px;
+        background: none;
+        box-shadow: none;
+      }
+
+      .cmp-row > .cmp-val::before,
+      .cmp-row > .cmp-us::before {
+        content: attr(data-col);
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-dark);
+        font-weight: 400;
+      }
+
+      .cmp-row > .cmp-us { color: rgb(var(--accent-rgb)); }
+    }
 
     /* ============ SAFETY PRINCIPLES ============ */
     .safety {
@@ -1944,6 +1940,23 @@
       margin-bottom: 3px; letter-spacing: -0.1px;
     }
     .rf-txt span { display: block; font-size: 12.5px; color: var(--text-dark); line-height: 1.5; }
+
+    .remote-dl {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .remote-dl-meta {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--text-dark);
+      letter-spacing: 0.02em;
+    }
 
     .remote-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
     .remote-specs span {
@@ -2235,10 +2248,116 @@
       flex-wrap: wrap;
     }
 
+    .key-contact-note {
+      font-size: 12.5px;
+      color: var(--text-dark);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
     .dl-buttons {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
+    }
+
+    /* ---- Две редакции: Pulse и Pulse Lite ---- */
+    .ed-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 4px;
+    }
+
+    .ed-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .ed-card:hover { border-color: var(--border-hover); }
+
+    .ed-card.ed-main {
+      border-color: rgba(var(--accent-rgb), 0.35);
+      background: linear-gradient(160deg, rgba(var(--accent-rgb), 0.07), transparent 60%), var(--bg-2);
+    }
+
+    .ed-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .ed-name {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .ed-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dark);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+
+    .ed-card.ed-main .ed-tag {
+      color: rgb(var(--accent-rgb));
+      border-color: rgba(var(--accent-rgb), 0.4);
+    }
+
+    .ed-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .ed-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .ed-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.45;
+    }
+
+    .ed-list svg { flex: none; margin-top: 2px; }
+    .ed-list li.no { color: var(--text-dark); }
+
+    .ed-card .btn { margin-top: auto; justify-content: center; }
+
+    .ed-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dark);
+      letter-spacing: 0.03em;
+    }
+
+    @media (max-width: 720px) {
+      .ed-grid { grid-template-columns: 1fr; }
     }
 
     .dl-side {
@@ -2346,18 +2465,6 @@
     }
 
     /* ============ RESPONSIVE LAYOUTS ============ */
-    /* Webkit scrollbar for comparison table horizontal scroll */
-    .vs-container::-webkit-scrollbar {
-      height: 5px;
-    }
-    .vs-container::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.01);
-    }
-    .vs-container::-webkit-scrollbar-thumb {
-      background: var(--border-hover);
-      border-radius: 10px;
-    }
-
     @media (max-width: 1024px) {
       .demo-in {
         grid-template-columns: 1fr;
@@ -2415,7 +2522,7 @@
       .nav-links {
         display: none;
       }
-      
+
       /* Shrink padding inside cards on tablet/mobile to save space */
       .feat-card, .safe-card, .rev-card, .dl-main, .dl-side {
         padding: 20px;
@@ -2609,9 +2716,7 @@
       .chart-bar-val {
         font-size: 15px !important;
       }
-      .vs-container table {
-        min-width: 580px !important;
-      }
+/* (мобильный оверрайд старой таблицы удалён вместе с ней) */
     }
 
     @media (max-width: 480px) {
@@ -2647,14 +2752,6 @@
       .hero {
         padding: 100px 0 40px !important;
       }
-      th, td {
-        padding: 8px 10px !important;
-        font-size: 11.5px !important;
-      }
-      .vs-container {
-        border-radius: 8px !important;
-      }
-      
       /* Make download/cta buttons full width on small phones */
       .dl-buttons .btn, .hero-cta .btn {
         width: 100% !important;
@@ -2679,7 +2776,7 @@
       overflow: hidden;
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background 0.25s ease, box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .feat-card:hover, .safe-card:hover, .rev-card:hover {
       transform: translateY(-5px);
       border-color: rgba(var(--accent-rgb), 0.35) !important;
@@ -2750,7 +2847,7 @@
     }
 
     /* ---- prefers-reduced-motion: freeze all the assembly, show final state ---- */
-    @media (prefers-reduced-motion: never-match) {
+    @media (prefers-reduced-motion: reduce) {
       [data-hero], .hero-stage[data-hero="7"], .reveal { opacity: 1 !important; transform: none !important; }
       .hero::after, .stage-glow, .games-track, .badge .dot, .hero-badge .dot, h1 span { animation: none !important; }
       .app-window { transform: none !important; }
@@ -2901,7 +2998,7 @@
      .dm-main{padding:12px}
      .dm-profiles{gap:5px}
     }
-    @media(prefers-reduced-motion:never-match){.dm-pulsebtn::before{animation:none}.dm-panel{animation:none}}
+    @media(prefers-reduced-motion:reduce){.dm-pulsebtn::before{animation:none}.dm-panel{animation:none}}
 
     /* ===== #demo window fixes (scoped) ===== */
     .dm-section .dm-win{
@@ -3038,7 +3135,7 @@
     .hm-k { letter-spacing: 0.03em; text-transform: uppercase; font-size: 10.5px; }
 
     /* Respect reduced-motion for every signature effect above */
-    @media (prefers-reduced-motion: never-match) {
+    @media (prefers-reduced-motion: reduce) {
       .nav-links a::after { transition: none; }
       .feat-card, .safe-card, .rev-card, .feat-icon { transition: none; }
       .feat-card:hover, .safe-card:hover, .rev-card:hover { transform: none; }
@@ -3112,7 +3209,7 @@
     }
     @keyframes aw-sheen { 0% { left: -60%; } 45%, 100% { left: 130%; } }
 
-    @media (prefers-reduced-motion: never-match) {
+    @media (prefers-reduced-motion: reduce) {
       .app-window { animation: none; }
       .app-window::after, .aw-spark polyline:last-of-type,
       .aw-titlebar::after { animation: none; }
@@ -3167,7 +3264,7 @@
     .hash-info:hover { border-color: var(--border-hover); }
     .req-list li { transition: color 0.25s ease; }
 
-    @media (prefers-reduced-motion: never-match) {
+    @media (prefers-reduced-motion: reduce) {
       .aw-gauge-fill { transition: none; }
       .godrays::before, .godrays::after { animation: none !important; }
     }
@@ -3298,7 +3395,7 @@
       letter-spacing: 0.02em;
     }
 
-    @media (prefers-reduced-motion: never-match) {
+    @media (prefers-reduced-motion: reduce) {
       .cpu-socket, .cpu-substrate, .cpu-pins, .cpu-die, .cpu-ihs, .cpu-glow,
       .cpu-brand, .cpu-model, .cpu-led { transition: none !important; opacity: 1 !important; transform: none !important; }
       .cpu-led, .cpu-ihs::after { animation: none !important; }
@@ -3325,1727 +3422,5 @@
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
     }
-  </style>
-</head>
-<body>
 
-  <!-- ============ NAVIGATION ============ -->
-  <nav>
-    <div class="wrap nav-in">
-      <a class="logo" href="#top">
-        <span class="logo-mark">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 12h4l3-8 4 16 3-8h6"/>
-          </svg>
-        </span>
-        Pulse
-      </a>
-      <div class="nav-links">
-        <a href="#features">Как это работает</a>
-        <a href="#results">Результаты</a>
-        <a href="#remote">Remote</a>
-        <a href="#vs">Сравнение</a>
-        <a href="#safety">Безопасность</a>
-        <a href="#faq">FAQ</a>
-      </div>
-      <a class="btn btn-primary btn-sm" href="#download">Получить <span class="hide-mobile">ключ</span></a>
-    </div>
-  </nav>
-
-  <!-- ============ HERO SECTION ============ -->
-  <header class="hero" id="top">
-    <canvas id="heroCanvas"></canvas>
-    <div class="godrays" aria-hidden="true"></div>
-    <div class="wrap hero-in">
-
-      <!-- LEFT: the thesis -->
-      <div class="hero-copy">
-        <h1 data-hero="2">Чистая Windows.<br><span>Стабильный FPS.</span></h1>
-        <p class="sub" data-hero="3">Pulse убирает микрофризы, срезает задержки и высвобождает оперативную память, пока вы играете. Один клик, полный откат, ноль фонового процесса.</p>
-        <div class="hero-cta" data-hero="4">
-          <a class="btn btn-primary btn-lg magnetic" href="#download">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Скачать Pulse
-          </a>
-          <a class="btn btn-ghost btn-lg" href="#demo">Смотреть в действии</a>
-        </div>
-        <div class="hero-note" id="heroNote" data-hero="5"><span class="hn-tag">Версия 1.2.6</span><span class="hn-tag">Windows 10 / 11</span><span class="hn-tag">Платная лицензия</span><span class="hn-tag">Активация по ключу</span></div>
-
-        <div class="profile-switch" data-hero="6" role="tablist" aria-label="Профиль оптимизации">
-          <span class="ps-label">Профиль</span>
-          <div class="profile-pills">
-            <span class="ps-thumb" aria-hidden="true"></span>
-            <button class="profile-pill" data-profile="standard" role="tab"><span class="pp-dot"></span>Стандарт</button>
-            <button class="profile-pill active" data-profile="gaming" role="tab" aria-selected="true"><span class="pp-dot"></span>Игровой</button>
-            <button class="profile-pill" data-profile="maximum" role="tab"><span class="pp-dot"></span>Максимум</button>
-          </div>
-        </div>
-
-        <div class="hero-metrics" data-hero="6">
-          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="70" data-prefix="−">−70</span><span>%</span></div><div class="hm-k">задержка</div></div>
-          <div class="hm-sep"></div>
-          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="44" data-prefix="+">+44</span><span>%</span></div><div class="hm-k">1% low FPS</div></div>
-          <div class="hm-sep"></div>
-          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="200">200</span><span>+</span></div><div class="hm-k">твиков в один клик</div></div>
-        </div>
-      </div>
-
-      <!-- RIGHT: the product, floating with depth -->
-      <div class="hero-stage" data-hero="7">
-        <div class="app-window" id="heroWindow">
-          <div class="aw-titlebar">
-            <div class="aw-brand">
-              <span class="aw-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></span>
-              <span class="aw-name">Pulse <em>v1.3.3</em></span>
-            </div>
-            <div class="aw-profiles" aria-hidden="true">
-              <span class="awp" title="Стандарт"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-              <span class="awp active" title="Игровой"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg></span>
-              <span class="awp" title="Максимум"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
-            </div>
-            <div class="aw-win"><span></span><span></span><span class="x"></span></div>
-          </div>
-          <div class="aw-body">
-            <div class="aw-side">
-              <div class="aws active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/></svg><span>Процессы</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Исключения</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>История</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64A9 9 0 1 1 5.64 6.64"/><line x1="12" y1="2" x2="12" y2="12"/></svg><span>Автозапуск</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><span>Сеть</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>Прочее</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><span>Оптимизация</span></div>
-              <div class="aws aws-pinned"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Профиль</span></div>
-            </div>
-            <div class="aw-main" data-tilt-layer>
-              <div class="aw-row">
-                <div class="aw-card aw-perf">
-                  <div class="aw-card-t">Использование памяти</div>
-                  <div class="aw-gauge">
-                    <svg viewBox="0 0 80 80">
-                      <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="6"/>
-                      <circle class="aw-gauge-fill" cx="40" cy="40" r="33" fill="none" stroke="url(#awg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="207" stroke-dashoffset="72" transform="rotate(-90 40 40)"/>
-                      <defs><linearGradient id="awg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgb(var(--profile-rgb))"/><stop offset="1" stop-color="rgb(var(--accent-2-rgb))"/></linearGradient></defs>
-                    </svg>
-                    <div class="aw-gauge-v"><span class="hm-n" data-target="65">65</span><small>%</small></div>
-                  </div>
-                  <button class="aw-clean">Быстрая очистка</button>
-                </div>
-                <div class="aw-card aw-proc">
-                  <div class="aw-card-t">Активные процессы</div>
-                  <div class="awp-row"><span class="awp-n"><i style="background:#ef4444"></i>chrome.exe</span><span class="awp-m">3.1 GB</span></div>
-                  <div class="awp-row"><span class="awp-n"><i style="background:#6366f1"></i>Discord.exe</span><span class="awp-m">930 MB</span></div>
-                  <div class="awp-row"><span class="awp-n"><i style="background:#22c55e"></i>steam.exe</span><span class="awp-m">898 MB</span></div>
-                  <div class="awp-row"><span class="awp-n"><i style="background:#3b82f6"></i>Pulse.exe</span><span class="awp-m">214 MB</span></div>
-                </div>
-              </div>
-              <div class="aw-card aw-chart">
-                <div class="aw-card-t">Мониторинг системы <span class="aw-legend"><i style="background:var(--accent)"></i>CPU <i style="background:var(--green)"></i>RAM <i style="background:var(--accent-cyan)"></i>Диск</span></div>
-                <svg class="aw-spark" viewBox="0 0 320 70" preserveAspectRatio="none">
-                  <polyline fill="none" stroke="var(--green)" stroke-width="1.6" opacity=".65" points="0,50 40,44 80,46 120,30 160,34 200,20 240,26 280,14 320,18"/>
-                  <polyline fill="none" stroke="var(--accent-cyan)" stroke-width="1.6" opacity=".5" points="0,58 40,56 80,52 120,54 160,40 200,46 240,42 280,48 320,44"/>
-                  <polyline fill="none" stroke="var(--accent)" stroke-width="2.2" points="0,40 40,38 80,42 120,22 160,36 200,12 240,30 280,16 320,24"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- games marquee: quiet trust strip under the hero -->
-    <div class="games-row wrap">
-      <div class="games-label">Проверено в</div>
-      <div class="games-marquee">
-        <div class="games-track">
-          <span class="gchip">CS2</span><span class="gchip">VALORANT</span><span class="gchip">PUBG</span><span class="gchip">RUST</span><span class="gchip">DOTA 2</span><span class="gchip">APEX LEGENDS</span><span class="gchip">WARZONE</span><span class="gchip">FORTNITE</span>
-          <span class="gchip">CS2</span><span class="gchip">VALORANT</span><span class="gchip">PUBG</span><span class="gchip">RUST</span><span class="gchip">DOTA 2</span><span class="gchip">APEX LEGENDS</span><span class="gchip">WARZONE</span><span class="gchip">FORTNITE</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ============ INTERACTIVE DEMO (THE APP MOCKUP v1.2.9) ============ -->
-  <section class="dm-section" id="demo">
-   <div class="dm-grid">
-    <!-- LEFT INFO -->
-    <div class="dm-info">
-     <p class="dm-eyebrow">Панель управления</p>
-     <h2 class="dm-h2">Интерактивный макет Pulse</h2>
-     <p class="dm-lead">Это не картинка, а настоящее окно приложения прямо в браузере. Переключайте вкладки, ищите процессы, добавляйте исключения и запустите оптимизацию, чтобы увидеть, как Pulse работает вживую.</p>
-     <div class="dm-tele">
-      <div class="dm-telecard">
-       <p class="dm-tele-lbl">Задержка</p>
-       <div class="dm-tele-val" id="dm-dpc">142<span>мкс</span></div>
-      </div>
-      <div class="dm-telecard">
-       <p class="dm-tele-lbl">Освобождено ОЗУ</p>
-       <div class="dm-tele-val dm-tele-good" id="dm-freed">0.0<span>ГБ</span></div>
-      </div>
-     </div>
-    </div>
-
-    <!-- WINDOW -->
-    <div class="dm-win">
-     <div class="dm-titlebar">
-      <div class="dm-brand">
-       <div class="dm-logo"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div>
-       <b>Pulse</b><span class="dm-ver">v1.3.3</span>
-      </div>
-      <div class="dm-profiles">
-       <button class="dm-prof" title="Стандарт"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></button>
-       <button class="dm-prof dm-on" title="Игровой"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg></button>
-       <button class="dm-prof" title="Максимум"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></button>
-      </div>
-      <div class="dm-dots"><span class="dm-dot"></span><span class="dm-dot"></span><span class="dm-dot dm-close"></span></div>
-     </div>
-
-     <div class="dm-body">
-      <div class="dm-side">
-       <button class="dm-navi dm-on" data-tab="0"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Обзор</span></button>
-       <button class="dm-navi" data-tab="1"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Процессы</span></button>
-       <button class="dm-navi" data-tab="2"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Исключения</span></button>
-       <button class="dm-navi" data-tab="3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>История</span></button>
-       <button class="dm-navi" data-tab="4"><svg viewBox="0 0 24 24"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg><span>Автозапуск</span></button>
-       <button class="dm-navi" data-tab="5"><svg viewBox="0 0 24 24"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><span>Сеть</span></button>
-       <button class="dm-navi" data-tab="6"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>Прочее</span></button>
-       <button class="dm-navi" data-tab="7"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>Оптимизация</span></button>
-       <button class="dm-navi dm-navi-pinned" data-tab="8"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Профиль</span></button>
-      </div>
-
-      <div class="dm-main">
-       <!-- 0 OVERVIEW -->
-       <div class="dm-panel dm-on">
-        <div class="dm-cols">
-         <div class="dm-card">
-          <p class="dm-ctitle">Использование памяти</p>
-          <div class="dm-gauge">
-           <div class="dm-gwrap">
-            <svg width="120" height="120" viewBox="0 0 120 120">
-             <circle cx="60" cy="60" r="52" stroke="rgba(150,170,255,.1)" stroke-width="10" fill="none"/>
-             <circle id="dm-garc" cx="60" cy="60" r="52" stroke="var(--red)" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="114" transform="rotate(-90 60 60)"/>
-            </svg>
-            <div class="dm-gval"><div class="dm-gnum" id="dm-gnum">65%</div><div class="dm-glbl" id="dm-glbl">Плохо</div></div>
-           </div>
-           <button class="dm-btn dm-btn-p" id="dm-clean">Быстрая очистка</button>
-          </div>
-         </div>
-         <div class="dm-card">
-          <p class="dm-ctitle">Активные процессы</p>
-          <div class="dm-plist">
-           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent)"></span><span class="dm-pname">chrome.exe</span><span class="dm-pmem">3.1 ГБ</span></div>
-           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent-2)"></span><span class="dm-pname">Discord.exe</span><span class="dm-pmem">930 МБ</span></div>
-           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent-cyan)"></span><span class="dm-pname">steam.exe</span><span class="dm-pmem">898 МБ</span></div>
-           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--green)"></span><span class="dm-pname">Pulse.exe</span><span class="dm-tag">Системный</span><span class="dm-pmem">214 МБ</span></div>
-          </div>
-         </div>
-        </div>
-        <div class="dm-row2">
-         <div class="dm-card dm-card-mon">
-          <p class="dm-ctitle">Мониторинг системы</p>
-          <div class="dm-legend">
-           <span class="dm-leg"><i style="background:var(--accent)"></i>CPU</span>
-           <span class="dm-leg"><i style="background:var(--green)"></i>RAM</span>
-           <span class="dm-leg"><i style="background:var(--accent-cyan)"></i>Диск</span>
-           <span class="dm-leg"><i style="background:var(--red)"></i>Сеть</span>
-          </div>
-          <svg class="dm-chart" viewBox="0 0 400 110" preserveAspectRatio="none">
-           <polyline fill="none" stroke="var(--accent)" stroke-width="2" points="0,80 40,60 80,72 120,40 160,55 200,30 240,48 280,25 320,44 360,20 400,38"/>
-           <polyline fill="none" stroke="var(--green)" stroke-width="2" points="0,50 40,55 80,48 120,58 160,45 200,52 240,44 280,50 320,42 360,48 400,40"/>
-           <polyline fill="none" stroke="var(--accent-cyan)" stroke-width="2" points="0,95 40,92 80,96 120,88 160,94 200,90 240,95 280,89 320,93 360,90 400,94"/>
-           <polyline fill="none" stroke="var(--red)" stroke-width="1.5" opacity=".7" points="0,104 40,103 80,104 120,102 160,104 200,103 240,104 280,103 320,104 360,103 400,104"/>
-          </svg>
-          <div class="dm-tiles">
-           <div class="dm-tile"><p class="dm-tlbl">CPU</p><div class="dm-tval">13%</div><div class="dm-tsub">Темп 58°C</div></div>
-           <div class="dm-tile"><p class="dm-tlbl">RAM</p><div class="dm-tval">65%</div><div class="dm-tsub">10.4 / 16 ГБ</div></div>
-           <div class="dm-tile"><p class="dm-tlbl">Диск</p><div class="dm-tval">6%</div><div class="dm-tsub">NVMe SSD</div></div>
-           <div class="dm-tile"><p class="dm-tlbl">Сеть</p><div class="dm-tval">0.0</div><div class="dm-tsub">Mbps</div></div>
-          </div>
-         </div>
-        </div>
-       </div>
-
-       <!-- 1 PROCESSES -->
-       <div class="dm-panel">
-        <div class="dm-toolbar">
-         <input class="dm-input" id="dm-psearch" placeholder="Поиск процесса…">
-         <button class="dm-btn">Обновить список</button>
-        </div>
-        <div class="dm-tablewrap">
-         <table class="dm-table" id="dm-ptable">
-          <thead><tr><th>Процесс</th><th>PID</th><th>Память</th><th>Категория</th><th>Действия</th></tr></thead>
-          <tbody>
-           <tr><td>chrome.exe (23)</td><td class="dm-mono">4128</td><td class="dm-mono">2.8 ГБ</td><td>Браузер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>Discord.exe (8)</td><td class="dm-mono">7712</td><td class="dm-mono">840 МБ</td><td>Приложение</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>EpicGamesLauncher.exe</td><td class="dm-mono">6204</td><td class="dm-mono">610 МБ</td><td>Лаунчер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>steam.exe</td><td class="dm-mono">3300</td><td class="dm-mono">512 МБ</td><td>Лаунчер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>Spotify.exe</td><td class="dm-mono">5180</td><td class="dm-mono">430 МБ</td><td>Музыка</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>RiotClientServices.exe</td><td class="dm-mono">8844</td><td class="dm-mono">388 МБ</td><td>Игры</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>Telegram.exe</td><td class="dm-mono">2960</td><td class="dm-mono">295 МБ</td><td>Приложение</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
-           <tr><td>svchost.exe (34)</td><td class="dm-mono">1204</td><td class="dm-mono">640 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">Защищён</button></div></td></tr>
-           <tr><td>explorer.exe</td><td class="dm-mono">4472</td><td class="dm-mono">320 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">Защищён</button></div></td></tr>
-           <tr><td>Pulse.exe</td><td class="dm-mono">9048</td><td class="dm-mono">214 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">В исключениях</button></div></td></tr>
-          </tbody>
-         </table>
-        </div>
-       </div>
-
-       <!-- 2 EXCEPTIONS -->
-       <div class="dm-panel">
-        <div class="dm-cols">
-         <div class="dm-card">
-          <p class="dm-ctitle">Ваши исключения</p>
-          <div class="dm-toolbar">
-           <input class="dm-input" id="dm-exinput" placeholder="имя процесса, например game.exe">
-           <button class="dm-btn dm-btn-p" id="dm-exadd">Добавить</button>
-          </div>
-          <div class="dm-exlist" id="dm-exuser">
-           <div class="dm-exitem"><svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b>Discord.exe</b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button></div>
-           <div class="dm-exitem"><svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b>obs64.exe</b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button></div>
-          </div>
-         </div>
-         <div class="dm-card">
-          <p class="dm-ctitle">Системные зависимости <span class="dm-count">· 20</span></p>
-          <p class="dm-tsub" style="margin:-6px 0 10px">Зашиты в Pulse, менять нельзя</p>
-          <div class="dm-exlist">
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>audiodg.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>conhost.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>csrss.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>dwm.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>explorer.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>fontdrvhost.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>lsass.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>MsMpEng.exe</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>registry</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>SecurityHealthService.exe</b></div>
-          </div>
-         </div>
-        </div>
-       </div>
-
-       <!-- 3 HISTORY (real app: chronological cleanup-report log, no chart) -->
-       <div class="dm-panel">
-        <div class="dm-card">
-         <p class="dm-ctitle">Хронология оптимизаций вашей системы</p>
-         <div class="dm-exlist">
-          <div class="dm-exitem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>21.08 06:18</b><span class="dm-pmem" style="margin-left:auto">ОЗУ 17% → 11%, освобождено 1.0 ГБ</span></div>
-          <div class="dm-exitem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>20.08 21:04</b><span class="dm-pmem" style="margin-left:auto">ОЗУ 22% → 13%, освобождено 1.4 ГБ</span></div>
-          <div class="dm-exitem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>19.08 09:47</b><span class="dm-pmem" style="margin-left:auto">ОЗУ 19% → 12%, освобождено 1.1 ГБ</span></div>
-         </div>
-        </div>
-        <div class="dm-row2">
-         <div class="dm-card">
-          <div class="dm-empty">
-           <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
-           <b>История очисток пуста</b>
-           <span>Запустите «Чистку системы» на главном экране, чтобы здесь сохранился отчёт</span>
-          </div>
-         </div>
-        </div>
-       </div>
-
-       <!-- 4 STARTUP -->
-       <div class="dm-panel">
-        <div class="dm-togrow"><div><b>Запускать Pulse вместе с Windows</b><span>Автостарт в свёрнутом виде</span></div><button class="dm-tog dm-on"></button></div>
-        <div class="dm-togrow"><div><b>Профиль по игре</b><span>Автопереключение при запуске игры</span></div><button class="dm-tog"></button></div>
-        <div class="dm-chips">
-         <button class="dm-chip dm-on">Все</button>
-         <button class="dm-chip">Ключи реестра</button>
-         <button class="dm-chip">Файлы</button>
-         <button class="dm-chip">Задачи</button>
-         <button class="dm-chip">Службы</button>
-        </div>
-        <div class="dm-startitem"><div><b>Discord</b><span>C:\Users\User\AppData\Local\Discord\Update.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
-        <div class="dm-startitem"><div><b>Steam</b><span>C:\Program Files (x86)\Steam\steam.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
-        <div class="dm-startitem"><div><b>Epic Games Launcher</b><span>C:\Program Files (x86)\Epic Games\Launcher\Portal\Binaries\Win64\EpicGamesLauncher.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
-        <div class="dm-startitem"><div><b>NVIDIA GeForce Experience</b><span>C:\Program Files\NVIDIA Corporation\NVIDIA GeForce Experience\NVIDIA GeForce Experience.exe</span></div><button class="dm-btn dm-btn-xs dm-btn-g">Удалить</button></div>
-       </div>
-
-       <!-- 5 NETWORK -->
-       <div class="dm-panel">
-        <div class="dm-cols">
-         <div class="dm-card">
-          <p class="dm-ctitle">Прошлые тесты</p>
-          <div class="dm-exlist">
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><b>Франкфурт</b></div>
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><b>Амстердам</b></div>
-          </div>
-         </div>
-         <div class="dm-card">
-          <p class="dm-ctitle">Пинг до серверов CS2, скорость через Cloudflare</p>
-          <div class="dm-net-server">
-           <span>Амстердам</span><b id="dm-net-ping">43 мс</b>
-          </div>
-          <button class="dm-btn dm-btn-p dm-net-start" id="dm-net-start">
-           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-           Начать тест
-          </button>
-          <div class="dm-net-res">
-           <div class="dm-tile"><p class="dm-tlbl">Приём</p><div class="dm-tval" id="dm-net-down">—</div><div class="dm-tsub">Мбит/с</div></div>
-           <div class="dm-tile"><p class="dm-tlbl">Отправка</p><div class="dm-tval" id="dm-net-up">—</div><div class="dm-tsub">Мбит/с</div></div>
-          </div>
-         </div>
-        </div>
-       </div>
-
-       <!-- 6 MISC (Pulse Lab — matches the real app's tool grid) -->
-       <div class="dm-panel">
-        <p class="dm-ctitle">Диагностика системы</p>
-        <div class="dm-toolgrid">
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div><div><b>Диагностика задержек</b><span>DPC/ISR, таймер, ввод и виновники микрофризов во время игры</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div><b>Стресс-тест</b><span>Нагрузка CPU и GPU</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="12" rx="2"/><path d="M8 17v3M16 17v3M8 9v4M12 9v4M16 9v4"/></svg></div><div><b>Проверка памяти</b><span>Поиск ошибок ОЗУ</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 12h.01M10 12h6"/></svg></div><div><b>Здоровье диска</b><span>S.M.A.R.T. и NVMe</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/><path d="M12 7v4M12 11 6 17M12 11l6 6"/></svg></div><div><b>USB и прерывания</b><span>Маршрут и привязка CPU</span></div></div>
-        </div>
-        <p class="dm-ctitle" style="margin-top:18px">Игровые инструменты и оптимизация</p>
-        <div class="dm-toolgrid">
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><b>Pulse Sentinel</b><span>Приоритеты и процессы</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg></div><div><b>Game Mode X</b><span>Игровой профиль и турбо</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M4 6h6M4 12h10M4 18h4"/><circle cx="14" cy="6" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg></div><div><b>CS2 Config Lab</b><span>Бинды, графика и autoexec</span></div></div>
-         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div><div><b>Калькулятор сенсы</b><span>Перенос cm/360° между играми</span></div></div>
-        </div>
-       </div>
-
-       <!-- 7 OPTIMIZE -->
-       <div class="dm-panel">
-        <div class="dm-opt">
-         <button class="dm-pulsebtn" id="dm-runopt"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></button>
-         <h4>Оптимизация</h4>
-         <p>Автоматическая оптимизация системы в один клик</p>
-         <button class="dm-btn dm-btn-p" id="dm-runopt2">Оптимизация</button>
-         <div class="dm-progwrap"><div class="dm-prog" id="dm-prog"></div></div>
-         <pre class="dm-term" id="dm-term"></pre>
-        </div>
-       </div>
-
-       <!-- 8 PROFILE -->
-       <div class="dm-panel">
-        <div class="dm-cols">
-         <div class="dm-card">
-          <p class="dm-ctitle">Лицензия</p>
-          <div class="dm-key-row">
-           <span class="dm-key-lbl">Базовая лицензия</span>
-           <code class="dm-key-val" id="dm-key-val">····-····-····-····</code>
-           <button class="dm-btn dm-btn-xs">Копировать</button>
-          </div>
-          <p class="dm-ctitle" style="margin-top:16px">Статистика</p>
-          <div class="dm-tiles">
-           <div class="dm-tile"><p class="dm-tlbl">Чисток</p><div class="dm-tval">78</div></div>
-           <div class="dm-tile"><p class="dm-tlbl">Подряд</p><div class="dm-tval">21</div><div class="dm-tsub">дней</div></div>
-          </div>
-          <div class="dm-tiles" style="margin-top:8px">
-           <div class="dm-tile"><p class="dm-tlbl">Освобождено</p><div class="dm-tval">231.6 ГБ</div></div>
-           <div class="dm-tile"><p class="dm-tlbl">Закрыто проц.</p><div class="dm-tval">443</div></div>
-          </div>
-         </div>
-         <div class="dm-card">
-          <p class="dm-ctitle">Патч-ноуты</p>
-          <div class="dm-exlist">
-           <div class="dm-exitem"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><b>Pulse v1.3.3: что нового</b></div>
-          </div>
-          <p class="dm-lead" style="margin-top:10px">Доработали дизайн, обновили историю очисток и добавили вкладку теста скорости интернета.</p>
-         </div>
-        </div>
-       </div>
-
-      </div>
-     </div>
-    </div>
-   </div>
-  </section>
-
-  <!-- ============ FEATURES SECTION ============ -->
-  <section class="features" id="features">
-    <div class="wrap">
-      <div class="sec-head center">
-        <div class="eyebrow">Архитектура утилиты</div>
-        <h2>Как Pulse оптимизирует систему</h2>
-        <p>200+ конкретных изменений в службах, реестре и сети Windows, всё видно в логе.</p>
-      </div>
-
-      <!-- Assembly visual: three drifting layers (system / network / game) that
-           snap together into one stack under Pulse's control on hover/scroll-into-view. -->
-      <div class="assembly" tabindex="0" role="img" aria-label="Процессор собирается из частей: подложка, контакты, кристалл и теплораспределитель. Pulse настраивает систему на уровне железа">
-        <div class="cpu-stage">
-          <div class="cpu-glow"></div>
-          <div class="cpu-socket"></div>
-          <div class="cpu-substrate"></div>
-          <div class="cpu-pins"></div>
-          <div class="cpu-die"></div>
-          <div class="cpu-ihs">
-            <span class="cpu-brand">PULSE</span>
-            <span class="cpu-model">System Optimized</span>
-            <span class="cpu-led"></span>
-          </div>
-        </div>
-        <p class="assembly-caption">Тонкая настройка на уровне системы</p>
-      </div>
-
-      <div class="feat-grid">
-        <div class="feat-card reveal">
-          <div class="feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="7" width="18" height="9.5" rx="1.6"/>
-              <path d="M8 11h2M14 11h2"/>
-              <path d="M7 16.5v3.5M11 16.5v3.5M15 16.5v3.5M19 16.5v3.5"/>
-            </svg>
-          </div>
-          <h3>Освобождение ОЗУ</h3>
-          <p>Часть фоновых процессов (браузеры, лаунчеры, службы обновлений) Pulse закрывает, у остальных обрезает используемую память через EmptyWorkingSet, не выгружая их из системы. Игре при этом выставляется повышенный приоритет процесса. На системе с 16 ГБ после очистки в простое остаётся занятым около 1.5 ГБ.</p>
-        </div>
-
-        <div class="feat-card reveal">
-          <div class="feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 7h9"/><circle cx="17" cy="7" r="2.5"/>
-              <path d="M4 12h4"/><circle cx="12" cy="12" r="2.5"/><path d="M16 12h4"/>
-              <path d="M4 17h11"/><circle cx="19" cy="17" r="2.5"/>
-            </svg>
-          </div>
-          <h3>Отключение служб и телеметрии</h3>
-          <p>Выключает службу телеметрии Windows (DiagTrack), отчёты об ошибках (WerSvc), индексацию поиска (WSearch) и кэширование SysMain/Superfetch, плюс десятки фоновых задач планировщика (диагностика, синхронизация, проверки лицензий). Каждый шаг это отдельная строка в логе, можно откатить точечно.</p>
-        </div>
-
-        <div class="feat-card reveal">
-          <div class="feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 14c3-5 6.5-5 10 0s6.5 4 10-1"/>
-              <circle cx="2" cy="14" r="1.5"/>
-              <path d="M18 4v6M15 7l3 3 3-3"/>
-            </svg>
-          </div>
-          <h3>Настройка сети</h3>
-          <p>Через netsh отключает RSC, TCP-эвристики, timestamps и ECN, переключает congestion provider на CTCP. В реестре сетевого адаптера выключает энергосбережение (EEE, Green Ethernet) и офлоады, которые добавляют случайные микро-задержки пакетам.</p>
-        </div>
-
-        <div class="feat-card reveal">
-          <div class="feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="13.5" r="7.5"/>
-              <path d="M9.5 2.5h5"/><path d="M19 6.5l1.6-1.6"/>
-              <path d="M8 13.5h2l1.5-3 2 6 1.5-3h2"/>
-            </svg>
-          </div>
-          <h3>Приоритет CPU и таймер</h3>
-          <p>Ставит Win32PrioritySeparation в режим короткого кванта времени: приоритет у приложения на переднем плане, а не у фона. Восстанавливает разрешение системного таймера (GlobalTimerResolutionRequests), от которого зависит стабильность фреймтайма.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ BAND ============ -->
-  <div class="band">
-    <div class="wrap band-grid">
-      <div class="band-card">
-        <div class="num">200<span class="u">+</span></div>
-        <div class="lbl">Твик операционной системы</div>
-      </div>
-      <div class="band-card">
-        <div class="num"><span class="count" data-target="30">0</span><span class="u">+</span></div>
-        <div class="lbl">Системных процессов под защитой</div>
-      </div>
-      <div class="band-card">
-        <div class="num"><span class="count" data-target="0">0</span><span class="u">%</span></div>
-        <div class="lbl">Нагрузки: утилита закрывается полностью</div>
-      </div>
-      <div class="band-card">
-        <div class="num"><span class="count" data-target="99.3" data-decimals="1">0</span><span class="u">МБ</span></div>
-        <div class="lbl">Размер исполняемого файла</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ RESULTS SECTION ============ -->
-  <section class="results" id="results">
-    <div class="wrap results-in">
-      <div class="results-chart reveal" id="barsBlock">
-        <div class="chart-bar-row">
-          <div class="chart-bar-head">
-            <span class="chart-bar-name">Средний FPS в CS2 (Без Pulse)</span>
-            <span class="chart-bar-val">312 <span class="unit">FPS</span></span>
-          </div>
-          <div class="chart-bar-track">
-            <div class="chart-bar-fill before" data-w="55%"></div>
-          </div>
-        </div>
-
-        <div class="chart-bar-row">
-          <div class="chart-bar-head">
-            <span class="chart-bar-name">Средний FPS в CS2 (С примененным Pulse)</span>
-            <span class="chart-bar-val" style="color:var(--accent)">450 <span class="unit" style="color:var(--accent)">FPS</span><span class="chart-delta">+44%</span></span>
-          </div>
-          <div class="chart-bar-track">
-            <div class="chart-bar-fill after" data-w="80%"></div>
-          </div>
-        </div>
-
-        <div class="chart-bar-row" style="margin-top: 36px;">
-          <div class="chart-bar-head">
-            <span class="chart-bar-name">Показатель 1% Low: редкие события (без Pulse)</span>
-            <span class="chart-bar-val">138 <span class="unit">FPS</span></span>
-          </div>
-          <div class="chart-bar-track">
-            <div class="chart-bar-fill before" data-w="28%"></div>
-          </div>
-        </div>
-
-        <div class="chart-bar-row">
-          <div class="chart-bar-head">
-            <span class="chart-bar-name">Показатель 1% Low: стабильность (с Pulse)</span>
-            <span class="chart-bar-val" style="color:var(--accent)">200 <span class="unit" style="color:var(--accent)">FPS</span><span class="chart-delta">+45%</span></span>
-          </div>
-          <div class="chart-bar-track">
-            <div class="chart-bar-fill after" data-w="44%"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="results-text reveal">
-        <div class="eyebrow">Замеры производительности</div>
-        <h3>Реальное влияние на стабильность кадра</h3>
-        <p>Игроки часто смотрят только на средний FPS, но комфорт игры определяют просадки в экшн-сценах (показатель 1% low). За счет отключения системных прерываний, задержка снижается со 150 до 45 микросекунд. Как результат, пропадают микрофризы и дергания при перестрелках.</p>
-        <p style="margin-top:-8px;"><strong style="color:#fff;">450 FPS avg / 200 FPS 1% low: потолок результата</strong>, достижимый только при грамотной ручной настройке системы поверх Pulse (проверено автором лично). Из коробки прирост более умеренный и зависит от вашего железа и фона.</p>
-        <div class="system-specs">
-          Конфигурация тестового стенда: AMD Ryzen 5 5600 · GeForce GTX 1660 · 16 GB DDR4 RAM · Чистая Windows 10 (22H2).
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ VS TABLE SECTION ============ -->
-  <!-- ============ PULSE REMOTE (MOBILE COMPANION) ============ -->
-  <section class="remote-app" id="remote">
-    <div class="wrap remote-grid">
-
-      <div class="remote-copy">
-        <div class="eyebrow">Мобильное приложение</div>
-        <h2>Pulse Remote: телефон как пульт от ПК</h2>
-        <p class="sub">Приложение для Android в пару к Pulse. Смотрите нагрузку компьютера, чистите память и выключайте его, не вставая из-за стола и даже из другой комнаты.</p>
-
-        <ul class="remote-feats">
-          <li>
-            <span class="rf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></span>
-            <span class="rf-txt"><b>Нагрузка в реальном времени</b><span>Процессор, память, диск и сеть, значения обновляются раз в секунду</span></span>
-          </li>
-          <li>
-            <span class="rf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
-            <span class="rf-txt"><b>Очистка с телефона</b><span>Те же три профиля, что и в программе: Стандарт, Игровой, Максимум</span></span>
-          </li>
-          <li>
-            <span class="rf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
-            <span class="rf-txt"><b>Диспетчер задач</b><span>Топ процессов по памяти, любой закрывается одним тапом</span></span>
-          </li>
-          <li>
-            <span class="rf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></span>
-            <span class="rf-txt"><b>Питание</b><span>Сон, перезагрузка и выключение ПК, с отменой, если передумали</span></span>
-          </li>
-          <li>
-            <span class="rf-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></span>
-            <span class="rf-txt"><b>Виджет на рабочий стол</b><span>Загрузка ПК прямо на экране телефона, заходить в приложение не нужно</span></span>
-          </li>
-        </ul>
-
-        <div class="remote-specs">
-          <span>Android</span>
-          <span>Связь по домашней сети</span>
-          <span>Без облака и сторонних серверов</span>
-        </div>
-      </div>
-
-      <div class="remote-stage">
-       <div class="remote-device">
-        <div class="remote-phone">
-          <div class="rp-notch"></div>
-          <div class="rp-status">
-            <span>09:41</span>
-            <span class="rp-live"><span class="rp-dot"></span>ПК НА СВЯЗИ</span>
-          </div>
-          <div class="rp-tabs"><span class="active">Главная</span><span>Инструменты</span></div>
-
-          <div class="rp-card">
-            <div class="rp-ring">
-              <svg viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7"/>
-                <circle cx="50" cy="50" r="42" fill="none" stroke="url(#rpGrad)" stroke-width="7" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="174" transform="rotate(-90 50 50)"/>
-                <defs><linearGradient id="rpGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgb(var(--accent-rgb))"/><stop offset="100%" stop-color="rgb(var(--accent-2-rgb))"/></linearGradient></defs>
-              </svg>
-              <div class="rp-ring-txt"><b>34<i>%</i></b><span>память ПК</span></div>
-            </div>
-            <div class="rp-bars">
-              <div>
-                <div class="rp-bar-h"><span>Процессор</span><b>12%</b></div>
-                <div class="rp-track"><div class="rp-fill" style="width:12%"></div></div>
-              </div>
-              <div>
-                <div class="rp-bar-h"><span>Диск</span><b>3%</b></div>
-                <div class="rp-track"><div class="rp-fill" style="width:3%"></div></div>
-              </div>
-              <div>
-                <div class="rp-bar-h"><span>Сеть</span><b>1%</b></div>
-                <div class="rp-track"><div class="rp-fill" style="width:1%"></div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="rp-lbl">Режим очистки</div>
-          <div class="rp-profiles">
-            <span>Стандарт</span><span class="active">Игровой</span><span>Максимум</span>
-          </div>
-          <div class="rp-cta">Очистить систему</div>
-        </div>
-
-        <div class="remote-widget">
-          <div class="rw-top">
-            <span class="rw-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#05070e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></span>
-            <b>Pulse</b><em>сейчас</em>
-          </div>
-          <div class="rw-rows">
-            <div class="rw-row"><span>ОЗУ</span><div class="rp-track"><div class="rp-fill" style="width:34%"></div></div><b>34%</b></div>
-            <div class="rw-row"><span>ЦП</span><div class="rp-track"><div class="rp-fill" style="width:12%"></div></div><b>12%</b></div>
-            <div class="rw-row"><span>Диск</span><div class="rp-track"><div class="rp-fill" style="width:3%"></div></div><b>3%</b></div>
-          </div>
-        </div>
-        <div class="remote-widget-tag">виджет на рабочем столе</div>
-       </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="vs" id="vs">
-    <div class="wrap">
-      <div class="sec-head center">
-        <div class="eyebrow">Сравнение решений</div>
-        <h2>Отличия Pulse от стандартного софта</h2>
-      </div>
-
-      <div class="vs-container reveal">
-        <table>
-          <thead>
-            <tr>
-              <th>Функционал</th>
-              <th class="col-target">Pulse</th>
-              <th>Очистители диска</th>
-              <th>Платные бустеры</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Отключение служб, телеметрии и тюнинг сети/таймера CPU</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Частично</td>
-            </tr>
-            <tr>
-              <td>Принудительная остановка фоновых задач</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
-            </tr>
-            <tr>
-              <td>Белый список критических процессов ОС</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (30+)</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-            </tr>
-            <tr>
-              <td>Автоматический бэкап реестра</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Иногда</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Редко</td>
-            </tr>
-            <tr>
-              <td>Прозрачный лог изменений</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (лог)</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-            </tr>
-            <tr>
-              <td>Отсутствие фонового процесса в трее</td>
-              <td class="col-target"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3" style="vertical-align: middle; margin-right: 6px;"><polyline points="20 6 9 17 4 12"/></svg> Да (0% ОЗУ)</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Нет</td>
-            </tr>
-            <tr>
-              <td>Модель оплаты</td>
-              <td class="col-target" style="color:var(--green); font-weight:700;">Разовый ключ, без подписки</td>
-              <td><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Бесплатно, с рекламой</td>
-              <td>Подписка от $12/мес</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SAFETY PRINCIPLES SECTION ============ -->
-  <section class="safety" id="safety">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="eyebrow">Безопасность системы</div>
-        <h2>Принципы защиты от системных сбоев</h2>
-        <p>Многие твикеры ломают службы Windows и приводят к «синему экрану». Pulse спроектирован с упором на отказоустойчивость.</p>
-      </div>
-
-      <div class="safety-grid">
-        <div class="safe-card reveal">
-          <div class="safe-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="4" y="10.5" width="16" height="10.5" rx="2"/>
-              <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
-              <path d="M12 14.5v2.5"/>
-            </svg>
-          </div>
-          <h3>Аппаратное ядро под защитой</h3>
-          <p>В коде жёстко зафиксирован список из 20 процессов Windows (dwm.exe, explorer.exe, lsass.exe и другие), которые утилита не трогает ни на одном профиле, включая «Максимум».</p>
-        </div>
-
-        <div class="safe-card reveal">
-          <div class="safe-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-              <path d="M17 21v-8H7v8"/><path d="M8 3v4h6"/>
-            </svg>
-          </div>
-          <h3>Создание резервной копии</h3>
-          <p>Перед каждым изменением системного реестра Pulse принудительно инициирует создание системной точки восстановления (System Restore Point). Любые изменения можно отменить в один клик.</p>
-        </div>
-
-        <div class="safe-card reveal">
-          <div class="safe-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="16" rx="2"/>
-              <path d="m7 9 2.5 2.5L7 14"/><path d="M12.5 14.5h4.5"/>
-            </svg>
-          </div>
-          <h3>Техническая прозрачность</h3>
-          <p>Pulse не использует скрытые бинарные скрипты. Все твики применяются через стандартные ветки реестра. В конце работы утилита сохраняет читаемый текстовый лог всех измененных ключей.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ REVIEWS SECTION ============ -->
-  <section class="reviews" id="reviews">
-    <div class="wrap">
-      <div class="sec-head center">
-        <div class="eyebrow">Обратная связь</div>
-        <h2>Отзывы с профильных ресурсов</h2>
-      </div>
-
-      <div class="reviews-grid">
-        <div class="rev-card reveal">
-          <div class="rev-head">
-            <div class="rev-stars">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            </div>
-          </div>
-          <p class="rev-text">«Играю в кс почти каждый день, 4-5 часов минимум. Раньше периодически дёргало прямо в раунде вроде и пекарня не топовая, но и не должно так тротлить. Погонял с Pulse недели две дёргания пропали, мышка ведёт себя четко. Не супергерой, но раздражитель убрал полностью, для меня этого хватило.»</p>
-          <div class="rev-user">
-            <span class="name">AimLab</span>
-            <span class="specs">Ryzen 5 5600 · GTX 1660 · CS2</span>
-          </div>
-        </div>
-
-        <div class="rev-card reveal">
-          <div class="rev-head">
-            <div class="rev-stars">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            </div>
-          </div>
-          <p class="rev-text">«Один твикер в прошлом году убил мне драйвер звука, с тех пор к такому софту отношусь с подозрением. Тут перед стартом сам сделал точку восстановления я вообще ничего руками не трогал, это подкупило. После чистки автозагрузки хром с стимом перестали жрать всё в фоне, комп стал отзывчивее в целом, не только в игре.»</p>
-          <div class="rev-user">
-            <span class="name">Enrique!</span>
-            <span class="specs">i5-12400F · GTX 1660 Ti · CS2</span>
-          </div>
-        </div>
-
-        <div class="rev-card reveal">
-          <div class="rev-head">
-            <div class="rev-stars">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            </div>
-          </div>
-          <p class="rev-text">«RX 580 и Ryzen 5 3600 железо не самое новое, апгрейд не в этом году точно, так что трясусь над каждым кадром. Раньше в перестрелках тайминг рвался, списывал на возраст видеокарты. Оказалось часть проблемы была в фоновых службах после Pulse стало ровнее, хотя чуда никакого не жду с таким железом. Свои деньги отбило, буду брать ключ и на следующий комп.»</p>
-          <div class="rev-user">
-            <span class="name">Anxiety</span>
-            <span class="specs">Ryzen 5 3600 · RX 580 · CS2</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FAQ SECTION ============ -->
-  <section class="faq" id="faq">
-    <div class="wrap">
-      <div class="sec-head center">
-        <div class="eyebrow">FAQ</div>
-        <h2>Ответы на частые вопросы</h2>
-      </div>
-
-      <div class="faq-container">
-        <details>
-          <summary>Требуются ли права администратора?</summary>
-          <div class="answer">Да. Изменение сетевых параметров, приоритизация ввода-вывода и управление службами Windows происходят на системном уровне через реестр и требуют прав локального администратора.</div>
-        </details>
-        <details>
-          <summary>Могут ли забанить в играх (VAC, Faceit Anti-Cheat)?</summary>
-          <div class="answer">Нет. Pulse работает исключительно с конфигурацией операционной системы и стандартным API Windows. Утилита не внедряется в память запущенных процессов, не изменяет файлы игр и не нарушает правила античитов.</div>
-        </details>
-        <details>
-          <summary>Как вернуть стандартные настройки системы?</summary>
-          <div class="answer">При первом запуске Pulse делает полную резервную копию изменяемых веток реестра. Для возврата к исходному состоянию достаточно открыть Pulse и нажать кнопку «Восстановить настройки» во вкладке резервных копий.</div>
-        </details>
-        <details>
-          <summary>Влияет ли утилита на работу систем безопасности Windows?</summary>
-          <div class="answer">Да. В рамках оптимизации Pulse отключает встроенный защитник (Windows Defender), так как его фоновое сканирование заметно нагружает диск и процессор во время игры. Перед отключением создаётся точка восстановления, чтобы при необходимости можно было откатить изменение.</div>
-        </details>
-        <details>
-          <summary>Почему антивирус может ругаться на .exe?</summary>
-          <div class="answer">Pulse правит реестр и управляет службами без установщика, а такое поведение эвристики иногда помечают как подозрительное: это ложное срабатывание. Файл не подписан дорогим EV-сертификатом, отсюда и предупреждение SmartScreen. Сверьте SHA-256 сборки со значением в блоке загрузки ниже; при желании проверьте файл на VirusTotal перед запуском.</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ DOWNLOAD SECTION ============ -->
-  <section class="download" id="download">
-    <div class="wrap dl-grid">
-      <div class="dl-main">
-        <div class="eyebrow">Дистрибутив</div>
-        <h2>Скачать Pulse</h2>
-        <p>Повысьте стабильность фреймтайма и освободите оперативную память одной кнопкой. Портативная сборка, готовая к запуску. Активация по лицензионному ключу.</p>
-        <div class="dl-buttons">
-          <a class="btn btn-primary" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/Pulse.exe" download="Pulse.exe">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Скачать Pulse (.EXE)
-          </a>
-        </div>
-
-        <div class="key-contact">
-          <div class="key-contact-lbl">Лицензия 5€ (≈200₴). Ключ выдаётся автоматически сразу после оплаты:</div>
-          <div class="key-contact-buttons">
-            <button class="btn btn-primary btn-sm" id="buyCryptoBtn" type="button">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3Z"/><path d="M2 10h20"/></svg>
-              Купить криптой
-            </button>
-            <a class="btn btn-ghost btn-sm" href="https://t.me/Pulse_buy" target="_blank" rel="noopener">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-              Telegram · Pulse
-            </a>
-          </div>
-          <div class="key-contact-note" id="buyError" style="display:none; color:#ef4444; font-size:12.5px; margin-top:8px;"></div>
-        </div>
-      </div>
-
-      <div class="dl-side">
-        <div>
-          <h3>Характеристики сборки</h3>
-          <ul class="req-list">
-            <li><span class="lbl">ОС</span><span class="val">Windows 10 / 11 64-bit</span></li>
-            <li><span class="lbl">Размер</span><span class="val" id="specsSize">99.3 МБ</span></li>
-            <li><span class="lbl">Инсталлятор</span><span class="val">Не требуется (Portable)</span></li>
-            <li><span class="lbl">Лицензия</span><span class="val">Платная, по ключу</span></li>
-            <li><span class="lbl">Активация</span><span class="val">Telegram</span></li>
-            <li id="lastUpdateRow" style="display:none;"><span class="lbl">Обновлено</span><span class="val" id="specsUpdated">…</span></li>
-          </ul>
-        </div>
-        <div class="hash-info">
-          <div class="hash-lbl">SHA-256 Контрольная сумма</div>
-          <div class="hash-val">d6c85f4533146dc58e01b7e4b2efeacb5970d25dc578243596ebdebdefdfe3b2</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FOOTER ============ -->
-  <footer>
-    <div class="wrap foot">
-      <a class="logo" href="#top" style="font-size: 16px;">
-        <span class="logo-mark" style="width: 24px; height: 24px; border-radius: 6px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" style="width: 13px; height: 13px;">
-            <path d="M2 12h4l3-8 4 16 3-8h6"/>
-          </svg>
-        </span>
-        Pulse
-      </a>
-      <div class="foot-links">
-        <a href="#features">Оптимизация</a>
-        <a href="#results">Результаты</a>
-        <a href="#remote">Remote</a>
-        <a href="#safety">Безопасность</a>
-        <a href="#download">Скачать</a>
-        <a href="privacy.html">Конфиденциальность</a>
-        <a href="eula.html">Лицензионное соглашение</a>
-      </div>
-      <div class="copyright">© 2026 Pulse Utility. Активация по лицензионному ключу, только для личного использования.</div>
-    </div>
-  </footer>
-
-  <!-- ============ JAVASCRIPT ============ -->
-  <!-- Lenis moved here from <head> — it was a synchronous <script src> to a third-party
-       CDN blocking first paint of the ENTIRE page before ANY body markup rendered.
-       By the time the parser reaches it, all visible content above is already painted,
-       so the fetch no longer delays anything the user sees. -->
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script>
-    const reducedMotion = false; /* анимации всегда включены, не зависят от системной настройки */
-    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 640;
-    // "Ведро": слабый CPU (<=4 логических ядер) или мало памяти (<=4ГБ, если браузер это раскрывает).
-    // На таких устройствах отключаем самые дорогие эффекты (Lenis, созвездия частиц, тяжёлый blur) вместо
-    // урезания их интенсивности — половинчатые меры всё равно лагали на реальном слабом железе.
-    const isLowPower = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
-                        (navigator.deviceMemory && navigator.deviceMemory <= 4);
-
-    // Add is-mobile class to body dynamically if mobile
-    if (isMobileDevice) {
-      document.body.classList.add('is-mobile');
-    }
-    if (isLowPower) {
-      document.documentElement.classList.add('low-power');
-    }
-
-    // ---- Inertial ("ice-smooth") scroll via Lenis ----
-    // Skipped on reduced-motion (respects the OS setting) and on touch/mobile
-    // (native momentum scroll already feels right there, and Lenis mainly
-    // targets wheel input). Falls back silently if the CDN script failed.
-    let lenis = null;
-    if (!reducedMotion && !isMobileDevice && !isLowPower && window.Lenis) {
-      lenis = new Lenis({
-        duration: 0.45,        // was 0.7 — user reported scroll felt sluggish/icy; shorter glide reacts faster to wheel input
-        easing: (t) => 1 - Math.pow(1 - t, 2.2), // slightly sharper ease-out — settles quicker, still not abrupt
-        smoothWheel: true,
-        wheelMultiplier: 1.1,  // wheel input carries a bit more weight, so it doesn't feel like it's fighting the mouse
-      });
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-    }
-
-    /* ---------- BRAND ACCENT (blue, mirrors the app chrome) — read by the hero canvas ---------- */
-    window.pulseAccentRGB = '34, 211, 238';
-
-    /* ---------- HERO: entrance choreography + 3D mouse-tilt + magnetic CTAs ---------- */
-    (function() {
-      // Trigger the staggered entrance once the DOM is ready
-      const hero = document.querySelector('.hero');
-      requestAnimationFrame(() => document.body.classList.add('hero-loaded'));
-
-      const canHover = window.matchMedia('(hover: hover)').matches;
-      const stage = document.querySelector('.hero-stage');
-      const win = document.getElementById('heroWindow');
-      const floats = document.querySelectorAll('[data-tilt-float]');
-
-      // 3D tilt of the app window following the pointer (desktop only, respects reduced-motion)
-      if (hero && stage && win && canHover && !reducedMotion) {
-        let tx = 0, ty = 0, raf = null;
-        const apply = () => {
-          win.style.transform = `rotateY(${tx}deg) rotateX(${ty}deg)`;
-          floats.forEach((f, i) => {
-            const depth = (i + 1) * 6;
-            f.style.transform = `translate3d(${tx * depth * 0.4}px, ${ty * -depth * 0.4}px, 0)`;
-          });
-          raf = null;
-        };
-        hero.addEventListener('pointermove', (e) => {
-          const r = hero.getBoundingClientRect();
-          const px = (e.clientX - r.left) / r.width - 0.5;
-          const py = (e.clientY - r.top) / r.height - 0.5;
-          tx = px * 10;
-          ty = -py * 7;
-          if (!raf) raf = requestAnimationFrame(apply);
-        }, { passive: true });
-        hero.addEventListener('pointerleave', () => {
-          tx = 0; ty = 0;
-          if (!raf) raf = requestAnimationFrame(apply);
-        });
-      }
-
-      // Magnetic pull on primary CTAs — throttled via rAF (was firing a forced
-      // layout read + style write on every raw pointermove, causing visible jank).
-      if (canHover && !reducedMotion && !isLowPower) {
-        document.querySelectorAll('.magnetic').forEach(btn => {
-          let mx = 0, my = 0, raf = null;
-          const apply = () => {
-            btn.style.transform = `translate(${mx}px, ${my}px)`;
-            raf = null;
-          };
-          btn.addEventListener('pointermove', (e) => {
-            const r = btn.getBoundingClientRect();
-            mx = (e.clientX - r.left - r.width / 2) * 0.25;
-            my = (e.clientY - r.top - r.height / 2) * 0.35;
-            if (!raf) raf = requestAnimationFrame(apply);
-          }, { passive: true });
-          btn.addEventListener('pointerleave', () => {
-            mx = 0; my = 0;
-            if (!raf) raf = requestAnimationFrame(apply);
-          });
-        });
-      }
-
-      // Profile switcher — retints the hero (glow, canvas, app-window) like the real app
-      const profileRGB = { standard: '34, 224, 107', gaming: '34, 211, 238', maximum: '255, 106, 26' };
-      const profileIdx = { standard: 0, gaming: 1, maximum: 2 };
-      const pills = document.querySelectorAll('.profile-pill');
-      const pillsTrack = document.querySelector('.profile-pills');
-      const psThumb = document.querySelector('.ps-thumb');
-      const awProfileIcons = document.querySelectorAll('.aw-profiles .awp');
-
-      function moveThumb(pill) {
-        if (!psThumb || !pillsTrack || !pill) return;
-        const trackRect = pillsTrack.getBoundingClientRect();
-        const pillRect = pill.getBoundingClientRect();
-        psThumb.style.left = (pillRect.left - trackRect.left) + 'px';
-        psThumb.style.width = pillRect.width + 'px';
-      }
-
-      function selectProfile(p, { animateThumb = true } = {}) {
-        document.documentElement.setAttribute('data-profile', p);
-        window.pulseAccentRGB = profileRGB[p] || profileRGB.standard;
-        pills.forEach(x => { x.classList.remove('active'); x.removeAttribute('aria-selected'); });
-        const targetPill = document.querySelector(`.profile-pill[data-profile="${p}"]`);
-        if (targetPill) {
-          targetPill.classList.add('active');
-          targetPill.setAttribute('aria-selected', 'true');
-          if (!animateThumb) psThumb && (psThumb.style.transition = 'none');
-          moveThumb(targetPill);
-          if (!animateThumb) requestAnimationFrame(() => { psThumb && (psThumb.style.transition = ''); });
-        }
-        // Mirror the selection on the app-window's top toggle — always re-synced, never left stale
-        awProfileIcons.forEach((ic, i) => ic.classList.toggle('active', i === profileIdx[p]));
-        // Broadcast so any other mockup on the page (e.g. the #demo panel below) stays in sync too
-        window.dispatchEvent(new CustomEvent('pulse-profile-change', { detail: { profile: p, idx: profileIdx[p] } }));
-      }
-      // Exposed so other mockups can drive the hero's own switcher (two-way sync)
-      window.pulseSelectProfile = selectProfile;
-
-      pills.forEach(pill => {
-        pill.addEventListener('click', () => selectProfile(pill.dataset.profile));
-      });
-
-      // Initial sync: pill, thumb and the app-window icon must always agree on load
-      const initialPill = document.querySelector('.profile-pill.active') || pills[0];
-      if (initialPill) selectProfile(initialPill.dataset.profile, { animateThumb: false });
-      window.addEventListener('resize', () => {
-        const active = document.querySelector('.profile-pill.active');
-        if (active) moveThumb(active);
-      });
-    })();
-
-    /* ---------- HERO CANVAS BACKGROUND (SUBTLE ECG WAVE + PARTICLES) ---------- */
-    (function() {
-      const canvas = document.getElementById('heroCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const dpr = Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 1.5);
-      let width, height;
-
-      // 1. Declare and initialize data arrays first (avoids TDZ reference errors on initial resize)
-      const particles = [];
-      const particleCount = isLowPower ? 10 : (isMobileDevice ? 14 : 38);
-      // The O(n²) constellation-line pass (~700 pair checks at 38 particles) is the
-      // single costliest part of this loop — skip it entirely on weak hardware.
-      let drawConstellation = !isLowPower;
-      // Adaptive downgrade: some visitors pass the hardwareConcurrency/deviceMemory
-      // check but their PC is loaded with other stuff (background apps, weak GPU,
-      // many tabs) and still drops frames. Measure real frame time and cut the
-      // expensive parts if the page is actually struggling, not just guessing upfront.
-      let perfLastT = 0, perfBadFrames = 0, perfDowngraded = false;
-      function perfWatch(now) {
-        if (perfLastT) {
-          const dt = now - perfLastT;
-          perfBadFrames = dt > 33 ? perfBadFrames + 1 : Math.max(0, perfBadFrames - 2);
-          if (!perfDowngraded && perfBadFrames > 45) {
-            perfDowngraded = true;
-            drawConstellation = false;
-            if (particles.length > 12) particles.length = 12;
-          }
-        }
-        perfLastT = now;
-      }
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random(),
-          y: Math.random(),
-          r: Math.random() * 1.6 + 0.5, 
-          speedY: Math.random() * 0.0003 + 0.0001,
-          alpha: Math.random() * 0.32 + 0.06 
-        });
-      }
-
-      // Track mouse position
-      let mouse = { x: -1000, y: -1000, active: false };
-      if (!isMobileDevice) {
-        window.addEventListener('mousemove', (e) => {
-          const rect = canvas.getBoundingClientRect();
-          mouse.x = (e.clientX - rect.left) * dpr;
-          mouse.y = (e.clientY - rect.top) * dpr;
-          mouse.active = true;
-        });
-        window.addEventListener('mouseleave', () => {
-          mouse.active = false;
-        });
-      }
-
-      // ECG waveform — a real PQRST heartbeat (P wave · QRS complex · T wave).
-      // Negative = upward on canvas. One normalized beat, scaled per-beat below.
-      let wave = null;   // ring buffer of sample heights, one slot per screen column
-      let head = 0;      // write-head column index — sweeps left→right like a monitor pen
-      const PQRST = [0, 0, -3, -5, -6, -4, -1, 0, 0, 5, -34, 14, -3, 0, 0, -5, -9, -11, -9, -5, -1, 0, 0, 0];
-      let beatQueue = [];
-      let restBeats = 12;
-
-      function getNextWaveHeight() {
-        if (beatQueue.length > 0) return beatQueue.shift();
-        if (restBeats > 0) {
-          restBeats--;
-          return (Math.random() - 0.5) * 1.1; // isoelectric baseline shimmer between beats
-        }
-        // Queue the next beat with a randomized height and R-R interval → every beat differs
-        let amp = 0.55 + Math.random() * 0.85;           // 0.55–1.40× → clearly varying beat size
-        if (Math.random() < 0.12) amp += 0.35;           // occasional taller beat
-        beatQueue = PQRST.map(v => v * amp);
-        restBeats = 70 + Math.floor(Math.random() * 90); // long calm gap between beats
-        return beatQueue.shift();
-      }
-
-      // 2. Define sizing functions
-      function resize() {
-        const rect = canvas.getBoundingClientRect();
-        width = canvas.width = (rect.width || canvas.offsetWidth) * dpr;
-        height = canvas.height = (rect.height || canvas.offsetHeight) * dpr;
-        if (reducedMotion && width > 0 && height > 0) {
-          draw(); 
-        }
-      }
-
-      // 3. Define rendering loop
-      function draw() {
-        if (!width || !height) {
-          resize();
-          if (!width || !height) {
-            if (!reducedMotion) requestAnimationFrame(draw);
-            return;
-          }
-        }
-        perfWatch(performance.now());
-        ctx.clearRect(0, 0, width, height);
-
-        // (cursor glow trail removed — it was drawn on the canvas and clipped at the hero edge)
-
-        // Draw particles
-        for (const p of particles) {
-          p.y -= p.speedY;
-          if (p.y < -0.01) {
-            p.y = 1.01;
-            p.x = Math.random();
-          }
-          
-          let px = p.x * width;
-          let py = p.y * height;
-
-          // Gentle mouse repulsion force
-          if (mouse.active && !reducedMotion) {
-            const dx = px - mouse.x;
-            const dy = py - mouse.y;
-            const dist = Math.hypot(dx, dy);
-            if (dist < 90 * dpr) {
-              const force = (90 * dpr - dist) / (90 * dpr);
-              p.x += (dx / dist) * force * 0.006;
-              p.x = Math.max(0.001, Math.min(0.999, p.x));
-            }
-          }
-
-          ctx.globalAlpha = p.alpha;
-          ctx.fillStyle = 'rgb(' + (window.pulseAccentRGB || '34, 211, 238') + ')';
-          ctx.beginPath();
-          ctx.arc(p.x * width, p.y * height, p.r * dpr, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        // Draw dynamic constellation connection lines between close particles
-        if (!reducedMotion && drawConstellation) {
-          ctx.strokeStyle = 'rgba(' + (window.pulseAccentRGB || '34, 211, 238') + ', 0.18)';
-          ctx.lineWidth = 0.75 * dpr;
-          const maxD = 105 * dpr;
-          const maxD2 = maxD * maxD;
-          for (let i = 0; i < particles.length; i++) {
-            const pix = particles[i].x * width, piy = particles[i].y * height;
-            for (let j = i + 1; j < particles.length; j++) {
-              const dx = pix - particles[j].x * width;
-              if (dx > maxD || dx < -maxD) continue;      // cheap reject before the sqrt path
-              const dy = piy - particles[j].y * height;
-              const dist2 = dx * dx + dy * dy;
-              if (dist2 < maxD2) {
-                ctx.globalAlpha = (1 - Math.sqrt(dist2) / maxD) * 0.22;
-                ctx.beginPath();
-                ctx.moveTo(pix, piy);
-                ctx.lineTo(particles[j].x * width, particles[j].y * height);
-                ctx.stroke();
-              }
-            }
-          }
-        }
-
-        // ECG monitor sweep — a pen head writes left→right, erasing a gap ahead of itself
-        ctx.globalAlpha = 1;
-        const step = 3 * dpr;
-        const cols = Math.max(2, Math.ceil(width / step) + 1);
-
-        if (!wave || wave.length !== cols) {
-          wave = new Array(cols).fill(null);
-          head = 0;
-        }
-
-        if (!reducedMotion) {
-          // write one new sample at the head, then blank a small window just ahead of it
-          wave[head] = getNextWaveHeight();
-          const gap = Math.max(2, Math.round(16 * dpr / step));
-          for (let g = 1; g <= gap; g++) wave[(head + g) % cols] = null;
-          head = (head + 1) % cols;
-        }
-
-        const accent = window.pulseAccentRGB || '34, 211, 238';
-        const baseline = height * 0.56;
-        const ampY = 2.7 * dpr;
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = 'rgba(' + accent + ', 0.15)';
-        ctx.lineWidth = 1.4 * dpr;
-        ctx.beginPath();
-        let penDown = false;
-        for (let i = 0; i < cols; i++) {
-          const v = wave[i];
-          if (v === null || v === undefined) { penDown = false; continue; }
-          const x = i * step;
-          const y = baseline + v * ampY;
-          if (!penDown) { ctx.moveTo(x, y); penDown = true; }
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-
-        // glowing pen head at the last written column
-        const hi = (head - 1 + cols) % cols;
-        const hv = wave[hi];
-        if (hv !== null && hv !== undefined) {
-          const hx = hi * step;
-          const hy = baseline + hv * ampY;
-          ctx.shadowBlur = 8 * dpr;
-          ctx.fillStyle = 'rgba(' + accent + ', 0.55)';
-          ctx.beginPath();
-          ctx.arc(hx, hy, 1.8 * dpr, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.shadowBlur = 0;
-
-        if (!reducedMotion && running) requestAnimationFrame(draw);
-      }
-
-      // 4. Initialize size, bind events, and start rendering loop only after full scope setup
-      // Pause the loop when the hero is off-screen or the tab is hidden — no wasted frames.
-      let running = false;
-      let heroVisible = true;
-      function setRunning(on) {
-        if (on && !running && !reducedMotion) { running = true; requestAnimationFrame(draw); }
-        else if (!on) { running = false; }
-      }
-      function updateRunning() {
-        setRunning(heroVisible && !document.hidden);
-      }
-      const heroEl = document.querySelector('.hero');
-      if (heroEl && 'IntersectionObserver' in window) {
-        new IntersectionObserver((entries) => {
-          heroVisible = entries[0].isIntersecting;
-          updateRunning();
-        }, { threshold: 0 }).observe(heroEl);
-      }
-      document.addEventListener('visibilitychange', updateRunning);
-
-      resize();
-      window.addEventListener('resize', resize);
-      window.addEventListener('load', resize);
-      updateRunning();
-    })();
-
-    /* ---------- RESULTS PROGRESS BARS ANIMATION ---------- */
-    const resultsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          document.querySelectorAll('.chart-bar-fill').forEach(fill => {
-            fill.style.width = fill.dataset.w;
-          });
-          resultsObserver.disconnect();
-        }
-      });
-    }, { threshold: 0.2 });
-
-    const barsBlock = document.getElementById('barsBlock');
-    if (barsBlock) resultsObserver.observe(barsBlock);
-
-
-
-    /* ---------- GITHUB RELEASE CHECKER (last update date for Pulse.exe) ---------- */
-    async function checkPulseUpdates() {
-      try {
-        const res = await fetch('https://api.github.com/repos/skywhyelo-lab/Plus/releases/latest');
-        if (!res.ok) return;
-        const release = await res.json();
-        const asset = release.assets && release.assets.find(a => a.name === 'Pulse.exe');
-        if (!asset || !asset.updated_at) return;
-
-        const d = new Date(asset.updated_at);
-        const day = String(d.getDate()).padStart(2, '0');
-        const month = String(d.getMonth() + 1).padStart(2, '0');
-        const year = d.getFullYear();
-        const formatted = `${day}.${month}.${year}`;
-        const version = (release.tag_name || '').replace(/^v/i, '');
-
-        const heroNote = document.getElementById('heroNote');
-        if (heroNote) {
-          const versionText = version ? `<span class="hn-tag">Версия ${version}</span>` : '';
-          heroNote.innerHTML = `${versionText}<span class="hn-tag">Windows 10 / 11</span><span class="hn-tag">Платная лицензия</span><span class="hn-tag hn-date">Обновлено ${formatted}</span>`;
-        }
-
-        const updatedRow = document.getElementById('lastUpdateRow');
-        const specsUpdated = document.getElementById('specsUpdated');
-        if (updatedRow && specsUpdated) {
-          specsUpdated.textContent = formatted;
-          updatedRow.style.display = '';
-        }
-
-        if (asset.size) {
-          const sizeMB = (asset.size / (1024 * 1024)).toFixed(1);
-          const specsSize = document.getElementById('specsSize');
-          if (specsSize) specsSize.textContent = `${sizeMB} МБ`;
-          const bandCountFile = document.querySelector('.band-card .count[data-target="99.3"]');
-          if (bandCountFile) {
-            bandCountFile.dataset.target = sizeMB;
-            if (bandCountFile.textContent !== '0') bandCountFile.textContent = sizeMB;
-          }
-        }
-      } catch (e) {
-        console.error('Ошибка при получении обновлений с GitHub:', e);
-      }
-    }
-    window.addEventListener('DOMContentLoaded', checkPulseUpdates);
-
-    /* (cursor-spotlight JS removed — effect deleted; native cursor only) */
-
-    /* ---------- REVEAL ON SCROLL ---------- */
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-active');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
-
-    document.querySelectorAll('.reveal').forEach(el => {
-      revealObserver.observe(el);
-    });
-
-    /* ---------- DYNAMIC NUMBER COUNTERS ON SCROLL ---------- */
-    const countersObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const counter = entry.target;
-          const target = parseFloat(counter.dataset.target);
-          const decimals = parseInt(counter.dataset.decimals || '0');
-          const prefix = counter.dataset.prefix || ''; // e.g. "−" / "+" for hero metrics
-          const duration = 1200; // ms
-          const startTime = performance.now();
-
-          function update(currentTime) {
-            const progress = Math.min((currentTime - startTime) / duration, 1);
-            // Ease out quad
-            const easeProgress = progress * (2 - progress);
-            const value = easeProgress * target;
-
-            counter.textContent = prefix + value.toFixed(decimals);
-
-            if (progress < 1) {
-              requestAnimationFrame(update);
-            } else {
-              counter.textContent = prefix + target.toFixed(decimals);
-            }
-          }
-          requestAnimationFrame(update);
-          countersObserver.unobserve(counter);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.band-card .count').forEach(counter => {
-      countersObserver.observe(counter);
-    });
-    // Hero metrics + gauge value count-up (above the fold → fires on mount).
-    // Skip under reduced-motion so the markup's final values stay put.
-    if (!reducedMotion) {
-      document.querySelectorAll('.hm-n').forEach(counter => countersObserver.observe(counter));
-    }
-
-    // CPU assembly: play once it scrolls into view on ALL devices (hover just
-    // replays it on desktop). Toggling on isIntersecting lets it re-assemble
-    // each time it re-enters the viewport.
-    const assemblyEl = document.querySelector('.assembly');
-    if (assemblyEl) {
-      const assemblyObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          assemblyEl.classList.toggle('assembly-active', entry.isIntersecting);
-        });
-      }, { threshold: 0.4 });
-      assemblyObserver.observe(assemblyEl);
-    }
-
-    /* ---------- BUY BUTTONS (Paddle card checkout + CryptoCloud/Trybit) ---------- */
-    (function() {
-      const buyCardBtn = document.getElementById('buyCardBtn');
-      const buyCryptoBtn = document.getElementById('buyCryptoBtn');
-      const buyError = document.getElementById('buyError');
-      if (!buyCardBtn && !buyCryptoBtn) return;
-
-      const PADDLE_CLIENT_TOKEN = 'live_aec6742e15aae2bef4c8e482107';
-      const PADDLE_PRICE_ID = 'pri_01kxswmzkn326by5m08x7dxayk';
-      if (window.Paddle) {
-        window.Paddle.Setup({ token: PADDLE_CLIENT_TOKEN });
-      }
-
-      function showError(msg) {
-        buyError.textContent = msg;
-        buyError.style.display = 'block';
-      }
-
-      if (buyCardBtn) {
-        buyCardBtn.addEventListener('click', async () => {
-          buyCardBtn.disabled = true;
-          const originalHtml = buyCardBtn.innerHTML;
-          buyCardBtn.textContent = 'Открываем оплату…';
-          buyError.style.display = 'none';
-
-          try {
-            const res = await fetch('/api/create-order', { method: 'POST' });
-            const data = await res.json();
-            if (!res.ok || !data.order_id) throw new Error(data.error || 'unknown error');
-
-            localStorage.setItem('pulse_order_id', data.order_id);
-            window.Paddle.Checkout.open({
-              items: [{ priceId: PADDLE_PRICE_ID, quantity: 1 }],
-              customData: { order_id: data.order_id },
-              settings: { successUrl: `${location.origin}/success.html?order_id=${data.order_id}` },
-            });
-          } catch (err) {
-            showError('Не удалось начать оплату картой. Попробуйте ещё раз или напишите в Telegram.');
-          } finally {
-            buyCardBtn.disabled = false;
-            buyCardBtn.innerHTML = originalHtml;
-          }
-        });
-      }
-
-      if (buyCryptoBtn) {
-        buyCryptoBtn.addEventListener('click', async () => {
-          buyCryptoBtn.disabled = true;
-          const originalHtml = buyCryptoBtn.innerHTML;
-          buyCryptoBtn.textContent = 'Создаём счёт…';
-          buyError.style.display = 'none';
-
-          try {
-            const res = await fetch('/api/create-invoice', { method: 'POST' });
-            const data = await res.json();
-            if (!res.ok || !data.pay_url) throw new Error(data.error || 'unknown error');
-
-            localStorage.setItem('pulse_order_id', data.order_id);
-            window.location.href = data.pay_url;
-          } catch (err) {
-            buyCryptoBtn.disabled = false;
-            buyCryptoBtn.innerHTML = originalHtml;
-            showError('Не удалось начать оплату криптой. Попробуйте ещё раз или напишите в Telegram.');
-          }
-        });
-      }
-    })();
-
-  </script>
-
-  <!-- ============ v1.2.9 mockup controller ============ -->
-  <script>
-  (function(){
-   var root=document.getElementById('demo');
-   if(!root)return;
-   var navs=root.querySelectorAll('.dm-navi'),panels=root.querySelectorAll('.dm-panel');
-   navs.forEach(function(n){n.addEventListener('click',function(){
-    var i=+n.dataset.tab;
-    navs.forEach(function(x){x.classList.remove('dm-on')});
-    panels.forEach(function(p){p.classList.remove('dm-on')});
-    n.classList.add('dm-on');panels[i].classList.add('dm-on');
-   });});
-
-   root.querySelectorAll('.dm-tog').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('dm-on')})});
-   var chips=root.querySelectorAll('.dm-chip');
-   chips.forEach(function(c){c.addEventListener('click',function(){chips.forEach(function(x){x.classList.remove('dm-on')});c.classList.add('dm-on')})});
-
-   // Network test tab: fake a realistic-looking measurement on click
-   var netBtn=root.querySelector('#dm-net-start'),netPing=root.querySelector('#dm-net-ping'),
-       netDown=root.querySelector('#dm-net-down'),netUp=root.querySelector('#dm-net-up'),netRunning=false;
-   if(netBtn)netBtn.addEventListener('click',function(){
-    if(netRunning)return;netRunning=true;
-    netBtn.textContent='Тестирование…';
-    setTimeout(function(){
-     if(netPing)netPing.textContent=(38+Math.floor(Math.random()*10))+' мс';
-     if(netDown)netDown.textContent=(180+Math.floor(Math.random()*60));
-     if(netUp)netUp.textContent=(35+Math.floor(Math.random()*15));
-     netBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>Начать тест';
-     netRunning=false;
-    },1100);
-   });
-
-   // Profile tab: a fresh-looking random key each page load (not the same string for every visitor),
-   // same alphabet as the real KeyGenerator — excludes 0/O/1/I to avoid look-alike characters.
-   var keyEl=root.querySelector('#dm-key-val');
-   if(keyEl){
-    var ALPHA='23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
-    function randKey(){
-     var groups=[];
-     for(var g=0;g<4;g++){
-      var s='';
-      for(var c=0;c<4;c++) s+=ALPHA[Math.floor(Math.random()*ALPHA.length)];
-      groups.push(s);
-     }
-     return groups.join('-');
-    }
-    keyEl.textContent=randKey();
-   }
-
-   var copyBtn=root.querySelector('.dm-key-val')?.nextElementSibling;
-   if(copyBtn)copyBtn.addEventListener('click',function(){
-    copyBtn.textContent='Скопировано';
-    setTimeout(function(){copyBtn.textContent='Копировать';},1400);
-   });
-
-   // Быстрая очистка → gauge jumps into the healthy zone
-   var garc=root.querySelector('#dm-garc'),gnum=root.querySelector('#dm-gnum'),glbl=root.querySelector('#dm-glbl'),cleaned=false;
-   function clean(){
-    if(cleaned)return;cleaned=true;
-    if(garc){garc.setAttribute('stroke','var(--green)');garc.setAttribute('stroke-dashoffset','26');}
-    if(gnum)gnum.textContent='94%';
-    if(glbl){glbl.textContent='Отлично';glbl.classList.add('dm-good');}
-    var f=root.querySelector('#dm-freed'),d=root.querySelector('#dm-dpc');
-    if(f)f.innerHTML='3.1<span>ГБ</span>';
-    if(d)d.innerHTML='39<span>мкс</span>';
-   }
-   [root.querySelector('#dm-clean'),root.querySelector('.dm-qa .dm-btn')].forEach(function(b){if(b)b.addEventListener('click',clean)});
-
-   var srch=root.querySelector('#dm-psearch'),rows=root.querySelectorAll('#dm-ptable tbody tr');
-   if(srch)srch.addEventListener('input',function(){
-    var q=srch.value.toLowerCase();
-    rows.forEach(function(r){r.style.display=r.cells[0].textContent.toLowerCase().indexOf(q)>-1?'':'none'});
-   });
-
-   var exlist=root.querySelector('#dm-exuser'),exin=root.querySelector('#dm-exinput'),exadd=root.querySelector('#dm-exadd');
-   function bindRm(b){b.addEventListener('click',function(){b.closest('.dm-exitem').remove()})}
-   root.querySelectorAll('.dm-exrm').forEach(bindRm);
-   function addEx(){
-    var v=(exin.value||'').trim();if(!v)return;
-    var d=document.createElement('div');d.className='dm-exitem';
-    d.innerHTML='<svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b></b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button>';
-    d.querySelector('b').textContent=v;
-    bindRm(d.querySelector('.dm-exrm'));exlist.appendChild(d);exin.value='';
-   }
-   if(exadd)exadd.addEventListener('click',addEx);
-   if(exin)exin.addEventListener('keydown',function(e){if(e.key==='Enter')addEx()});
-
-   var b1=root.querySelector('#dm-runopt'),b2=root.querySelector('#dm-runopt2'),
-       prog=root.querySelector('#dm-prog'),term=root.querySelector('#dm-term'),
-       freed=root.querySelector('#dm-freed'),dpc=root.querySelector('#dm-dpc'),running=false,done=false;
-   var steps=['Создание точки восстановления… ОК','Отключение телеметрии (DiagTrack)… ОК','Настройка сетевых задержек (TCP Nodelay)… ОК','Сжатие неактивного ОЗУ… ОК','Готово: 200+ твиков'];
-   var reduce=false; /* анимации всегда включены */
-   function finish(){if(freed)freed.innerHTML='2.4<span>ГБ</span>';if(dpc)dpc.innerHTML='38<span>мкс</span>';running=false;done=true}
-   function run(){
-    if(running)return;running=true;
-    term.classList.add('dm-show');term.textContent='';prog.style.width='0%';
-    if(reduce){term.textContent=steps.join('\n');prog.style.width='100%';finish();return;}
-    var i=0;
-    (function next(){
-     if(i>=steps.length){finish();return;}
-     term.textContent+=(i?'\n':'')+steps[i];
-     prog.style.width=Math.round((i+1)/steps.length*100)+'%';
-     i++;setTimeout(next,650);
-    })();
-   }
-   if(b1)b1.addEventListener('click',run);
-   if(b2)b2.addEventListener('click',run);
-
-   if(dpc)setInterval(function(){
-    if(running||done||cleaned)return;
-    dpc.innerHTML=(140+Math.floor(Math.random()*10))+'<span>мкс</span>';
-   },2200);
-  })();
-  </script>
-
-  <!-- ============ #demo window: profile tint, synced with the hero switcher ============ -->
-  <script>
-  (function(){
-    var win = document.querySelector('#demo .dm-win');
-    if(!win) return;
-    var profs = win.querySelectorAll('.dm-prof');
-    if(!profs || !profs.length) return;
-    var NAMES = ['standard', 'gaming', 'maximum'];
-    var PALETTE = [
-      { a:'34,224,107',  b:'18,184,147'  },
-      { a:'34,211,238',  b:'59,130,246'  },
-      { a:'255,106,26',  b:'255,61,87'   }
-    ];
-    function tint(i){
-      var p = PALETTE[i] || PALETTE[1];
-      win.style.setProperty('--accent-rgb', p.a);
-      win.style.setProperty('--accent-2-rgb', p.b);
-      win.style.setProperty('--profile-rgb', p.a);
-      win.style.setProperty('--grad-brand','linear-gradient(120deg,rgb('+p.a+'),rgb('+p.b+'))');
-      for(var j=0;j<profs.length;j++){ profs[j].classList.toggle('dm-on', j===i); }
-    }
-    // Clicking a profile icon here drives the hero's own switcher — one source of truth,
-    // so the pill up top, its own app-window and this demo can never disagree again.
-    for(var k=0;k<profs.length;k++){
-      (function(idx){
-        profs[idx].addEventListener('click', function(){
-          if (window.pulseSelectProfile) window.pulseSelectProfile(NAMES[idx]);
-          else tint(idx);
-        });
-      })(k);
-    }
-    window.addEventListener('pulse-profile-change', function(e){
-      tint(e.detail.idx);
-    });
-    // Initial paint: match whatever profile is already active (hero default or saved state),
-    // not a hardcoded guess.
-    var current = document.documentElement.getAttribute('data-profile') || 'gaming';
-    tint(NAMES.indexOf(current) >= 0 ? NAMES.indexOf(current) : 1);
-  })();
-  </script>
-</body>
-</html>
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }

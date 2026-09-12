@@ -1,0 +1,290 @@
+<section class="dm-section" id="demo">
+   <div class="dm-grid">
+    <!-- LEFT INFO -->
+    <div class="dm-info">
+     <p class="dm-eyebrow">Панель управления</p>
+     <h2 class="dm-h2">Попробуйте Pulse прямо здесь</h2>
+     <p class="dm-lead">Выберите вкладку и попробуйте очистку, поиск процессов или оптимизацию. Это демо: настройки вашего ПК не изменятся.</p>
+     <div class="dm-tele">
+      <div class="dm-telecard">
+       <p class="dm-tele-lbl">Задержка</p>
+       <div class="dm-tele-val" id="dm-dpc">142<span>мкс</span></div>
+      </div>
+      <div class="dm-telecard">
+       <p class="dm-tele-lbl">Освобождено ОЗУ</p>
+       <div class="dm-tele-val dm-tele-good" id="dm-freed">0.0<span>ГБ</span></div>
+      </div>
+     </div>
+    </div>
+
+    <!-- WINDOW -->
+    <div class="dm-win">
+     <div class="dm-titlebar">
+      <div class="dm-brand">
+       <div class="dm-logo"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div>
+       <b>Pulse</b><span class="dm-ver">v1.3.3</span>
+      </div>
+      <div class="dm-profiles">
+       <button class="dm-prof" title="Стандарт"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></button>
+       <button class="dm-prof dm-on" title="Игровой"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg></button>
+       <button class="dm-prof" title="Максимум"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></button>
+      </div>
+      <div class="dm-dots"><span class="dm-dot"></span><span class="dm-dot"></span><span class="dm-dot dm-close"></span></div>
+     </div>
+
+     <div class="dm-body">
+      <div class="dm-side">
+       <button class="dm-navi dm-on" data-tab="0"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Обзор</span></button>
+       <button class="dm-navi" data-tab="1"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span>Процессы</span></button>
+       <button class="dm-navi" data-tab="2"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Исключения</span></button>
+       <button class="dm-navi" data-tab="3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>История</span></button>
+       <button class="dm-navi" data-tab="4"><svg viewBox="0 0 24 24"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg><span>Автозапуск</span></button>
+       <button class="dm-navi" data-tab="5"><svg viewBox="0 0 24 24"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><span>Сеть</span></button>
+       <button class="dm-navi" data-tab="6"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>Прочее</span></button>
+       <button class="dm-navi" data-tab="7"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>Оптимизация</span></button>
+       <button class="dm-navi dm-navi-pinned" data-tab="8"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Профиль</span></button>
+      </div>
+
+      <div class="dm-main">
+       <!-- 0 OVERVIEW -->
+       <div class="dm-panel dm-on">
+        <div class="dm-cols">
+         <div class="dm-card">
+          <p class="dm-ctitle">Использование памяти</p>
+          <div class="dm-gauge">
+           <div class="dm-gwrap">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+             <circle cx="60" cy="60" r="52" stroke="rgba(150,170,255,.1)" stroke-width="10" fill="none"/>
+             <circle id="dm-garc" cx="60" cy="60" r="52" stroke="var(--red)" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="114" transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="dm-gval"><div class="dm-gnum" id="dm-gnum">65%</div><div class="dm-glbl" id="dm-glbl">Плохо</div></div>
+           </div>
+           <button class="dm-btn dm-btn-p" id="dm-clean">Быстрая очистка</button>
+          </div>
+         </div>
+         <div class="dm-card">
+          <p class="dm-ctitle">Активные процессы</p>
+          <div class="dm-plist">
+           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent)"></span><span class="dm-pname">chrome.exe</span><span class="dm-pmem">3.1 ГБ</span></div>
+           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent-2)"></span><span class="dm-pname">Discord.exe</span><span class="dm-pmem">930 МБ</span></div>
+           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--accent-cyan)"></span><span class="dm-pname">steam.exe</span><span class="dm-pmem">898 МБ</span></div>
+           <div class="dm-pitem"><span class="dm-pdot" style="background:var(--green)"></span><span class="dm-pname">Pulse.exe</span><span class="dm-tag">Системный</span><span class="dm-pmem">214 МБ</span></div>
+          </div>
+         </div>
+        </div>
+        <div class="dm-row2">
+         <div class="dm-card dm-card-mon">
+          <p class="dm-ctitle">Мониторинг системы</p>
+          <div class="dm-legend">
+           <span class="dm-leg"><i style="background:var(--accent)"></i>CPU</span>
+           <span class="dm-leg"><i style="background:var(--green)"></i>RAM</span>
+           <span class="dm-leg"><i style="background:var(--accent-cyan)"></i>Диск</span>
+           <span class="dm-leg"><i style="background:var(--red)"></i>Сеть</span>
+          </div>
+          <svg class="dm-chart" viewBox="0 0 400 110" preserveAspectRatio="none">
+           <polyline fill="none" stroke="var(--accent)" stroke-width="2" points="0,80 40,60 80,72 120,40 160,55 200,30 240,48 280,25 320,44 360,20 400,38"/>
+           <polyline fill="none" stroke="var(--green)" stroke-width="2" points="0,50 40,55 80,48 120,58 160,45 200,52 240,44 280,50 320,42 360,48 400,40"/>
+           <polyline fill="none" stroke="var(--accent-cyan)" stroke-width="2" points="0,95 40,92 80,96 120,88 160,94 200,90 240,95 280,89 320,93 360,90 400,94"/>
+           <polyline fill="none" stroke="var(--red)" stroke-width="1.5" opacity=".7" points="0,104 40,103 80,104 120,102 160,104 200,103 240,104 280,103 320,104 360,103 400,104"/>
+          </svg>
+          <div class="dm-tiles">
+           <div class="dm-tile"><p class="dm-tlbl">CPU</p><div class="dm-tval">13%</div><div class="dm-tsub">Темп 58°C</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">RAM</p><div class="dm-tval">65%</div><div class="dm-tsub">10.4 / 16 ГБ</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">Диск</p><div class="dm-tval">6%</div><div class="dm-tsub">NVMe SSD</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">Сеть</p><div class="dm-tval">0.0</div><div class="dm-tsub">Mbps</div></div>
+          </div>
+         </div>
+        </div>
+       </div>
+
+       <!-- 1 PROCESSES -->
+       <div class="dm-panel">
+        <div class="dm-toolbar">
+         <input class="dm-input" id="dm-psearch" placeholder="Поиск процесса…">
+         <button class="dm-btn">Обновить список</button>
+        </div>
+        <div class="dm-tablewrap">
+         <table class="dm-table" id="dm-ptable">
+          <thead><tr><th>Процесс</th><th>PID</th><th>Память</th><th>Категория</th><th>Действия</th></tr></thead>
+          <tbody>
+           <tr><td>chrome.exe (23)</td><td class="dm-mono">4128</td><td class="dm-mono">2.8 ГБ</td><td>Браузер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>Discord.exe (8)</td><td class="dm-mono">7712</td><td class="dm-mono">840 МБ</td><td>Приложение</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>EpicGamesLauncher.exe</td><td class="dm-mono">6204</td><td class="dm-mono">610 МБ</td><td>Лаунчер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>steam.exe</td><td class="dm-mono">3300</td><td class="dm-mono">512 МБ</td><td>Лаунчер</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>Spotify.exe</td><td class="dm-mono">5180</td><td class="dm-mono">430 МБ</td><td>Музыка</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>RiotClientServices.exe</td><td class="dm-mono">8844</td><td class="dm-mono">388 МБ</td><td>Игры</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>Telegram.exe</td><td class="dm-mono">2960</td><td class="dm-mono">295 МБ</td><td>Приложение</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs">В список</button></div></td></tr>
+           <tr><td>svchost.exe (34)</td><td class="dm-mono">1204</td><td class="dm-mono">640 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">Защищён</button></div></td></tr>
+           <tr><td>explorer.exe</td><td class="dm-mono">4472</td><td class="dm-mono">320 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">Защищён</button></div></td></tr>
+           <tr><td>Pulse.exe</td><td class="dm-mono">9048</td><td class="dm-mono">214 МБ</td><td>Система</td><td><div class="dm-tacts"><button class="dm-btn dm-btn-xs dm-btn-g">В исключениях</button></div></td></tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+
+       <!-- 2 EXCEPTIONS -->
+       <div class="dm-panel">
+        <div class="dm-cols">
+         <div class="dm-card">
+          <p class="dm-ctitle">Ваши исключения</p>
+          <div class="dm-toolbar">
+           <input class="dm-input" id="dm-exinput" placeholder="имя процесса, например game.exe">
+           <button class="dm-btn dm-btn-p" id="dm-exadd">Добавить</button>
+          </div>
+          <div class="dm-exlist" id="dm-exuser">
+           <div class="dm-exitem"><svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b>Discord.exe</b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button></div>
+           <div class="dm-exitem"><svg class="dm-star" viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z"/></svg><b>obs64.exe</b><button class="dm-btn dm-btn-xs dm-btn-g dm-exrm">Убрать</button></div>
+          </div>
+         </div>
+         <div class="dm-card">
+          <p class="dm-ctitle">Системные зависимости <span class="dm-count">· 20</span></p>
+          <p class="dm-tsub" style="margin:-6px 0 10px">Зашиты в Pulse, менять нельзя</p>
+          <div class="dm-exlist">
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>audiodg.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>conhost.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>csrss.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>dwm.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>explorer.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>fontdrvhost.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>lsass.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>MsMpEng.exe</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>registry</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>SecurityHealthService.exe</b></div>
+          </div>
+         </div>
+        </div>
+       </div>
+
+       <!-- 3 HISTORY (real app: chronological cleanup-report log, no chart) -->
+       <div class="dm-panel">
+        <div class="dm-card">
+         <p class="dm-ctitle">Хронология оптимизаций вашей системы</p>
+         <div class="dm-exlist">
+          <div class="dm-exitem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>21.08 06:18</b><span class="dm-pmem" style="margin-left:auto">ОЗУ 17% → 11%, освобождено 1.0 ГБ</span></div>
+          <div class="dm-exitem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>20.08 21:04</b><span class="dm-pmem" style="margin-left:auto">ОЗУ 22% → 13%, освобождено 1.4 ГБ</span></div>
+          <div class="dm-exitem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>19.08 09:47</b><span class="dm-pmem" style="margin-left:auto">ОЗУ 19% → 12%, освобождено 1.1 ГБ</span></div>
+         </div>
+        </div>
+        <div class="dm-row2">
+         <div class="dm-card">
+          <div class="dm-empty">
+           <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>
+           <b>История очисток пуста</b>
+           <span>Запустите «Чистку системы» на главном экране, чтобы здесь сохранился отчёт</span>
+          </div>
+         </div>
+        </div>
+       </div>
+
+       <!-- 4 STARTUP -->
+       <div class="dm-panel">
+        <div class="dm-togrow"><div><b>Запускать Pulse вместе с Windows</b><span>Автостарт в свёрнутом виде</span></div><button class="dm-tog dm-on"></button></div>
+        <div class="dm-togrow"><div><b>Профиль по игре</b><span>Автопереключение при запуске игры</span></div><button class="dm-tog"></button></div>
+        <div class="dm-chips">
+         <button class="dm-chip dm-on">Все</button>
+         <button class="dm-chip">Ключи реестра</button>
+         <button class="dm-chip">Файлы</button>
+         <button class="dm-chip">Задачи</button>
+         <button class="dm-chip">Службы</button>
+        </div>
+        <div class="dm-startitem"><div><b>Discord</b><span>C:\Users\User\AppData\Local\Discord\Update.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
+        <div class="dm-startitem"><div><b>Steam</b><span>C:\Program Files (x86)\Steam\steam.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
+        <div class="dm-startitem"><div><b>Epic Games Launcher</b><span>C:\Program Files (x86)\Epic Games\Launcher\Portal\Binaries\Win64\EpicGamesLauncher.exe</span></div><button class="dm-btn dm-btn-xs">Отключить</button></div>
+        <div class="dm-startitem"><div><b>NVIDIA GeForce Experience</b><span>C:\Program Files\NVIDIA Corporation\NVIDIA GeForce Experience\NVIDIA GeForce Experience.exe</span></div><button class="dm-btn dm-btn-xs dm-btn-g">Удалить</button></div>
+       </div>
+
+       <!-- 5 NETWORK -->
+       <div class="dm-panel">
+        <div class="dm-cols">
+         <div class="dm-card">
+          <p class="dm-ctitle">Прошлые тесты</p>
+          <div class="dm-exlist">
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><b>Франкфурт</b></div>
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><b>Амстердам</b></div>
+          </div>
+         </div>
+         <div class="dm-card">
+          <p class="dm-ctitle">Пинг до серверов CS2, скорость через Cloudflare</p>
+          <div class="dm-net-server">
+           <span>Амстердам</span><b id="dm-net-ping">43 мс</b>
+          </div>
+          <button class="dm-btn dm-btn-p dm-net-start" id="dm-net-start">
+           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+           Начать тест
+          </button>
+          <div class="dm-net-res">
+           <div class="dm-tile"><p class="dm-tlbl">Приём</p><div class="dm-tval" id="dm-net-down">0.0</div><div class="dm-tsub">Мбит/с</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">Отправка</p><div class="dm-tval" id="dm-net-up">0.0</div><div class="dm-tsub">Мбит/с</div></div>
+          </div>
+         </div>
+        </div>
+       </div>
+
+       <!-- 6 MISC (Pulse Lab — matches the real app's tool grid) -->
+       <div class="dm-panel">
+        <p class="dm-ctitle">Диагностика системы</p>
+        <div class="dm-toolgrid">
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div><div><b>Диагностика задержек</b><span>DPC/ISR, таймер, ввод и виновники микрофризов во время игры</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div><b>Стресс-тест</b><span>Нагрузка CPU и GPU</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="12" rx="2"/><path d="M8 17v3M16 17v3M8 9v4M12 9v4M16 9v4"/></svg></div><div><b>Проверка памяти</b><span>Поиск ошибок ОЗУ</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 12h.01M10 12h6"/></svg></div><div><b>Здоровье диска</b><span>S.M.A.R.T. и NVMe</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/><path d="M12 7v4M12 11 6 17M12 11l6 6"/></svg></div><div><b>USB и прерывания</b><span>Маршрут и привязка CPU</span></div></div>
+        </div>
+        <p class="dm-ctitle" style="margin-top:18px">Игровые инструменты и оптимизация</p>
+        <div class="dm-toolgrid">
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><b>Pulse Sentinel</b><span>Приоритеты и процессы</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg></div><div><b>Game Mode X</b><span>Игровой профиль и турбо</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M4 6h6M4 12h10M4 18h4"/><circle cx="14" cy="6" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg></div><div><b>CS2 Config Lab</b><span>Бинды, графика и autoexec</span></div></div>
+         <div class="dm-tool"><div class="dm-tico"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div><div><b>Калькулятор сенсы</b><span>Перенос cm/360° между играми</span></div></div>
+        </div>
+       </div>
+
+       <!-- 7 OPTIMIZE -->
+       <div class="dm-panel">
+        <div class="dm-opt">
+         <button class="dm-pulsebtn" id="dm-runopt"><svg viewBox="0 0 24 24"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></button>
+         <h4>Оптимизация</h4>
+         <p>Автоматическая оптимизация системы в один клик</p>
+         <button class="dm-btn dm-btn-p" id="dm-runopt2">Оптимизация</button>
+         <div class="dm-progwrap"><div class="dm-prog" id="dm-prog"></div></div>
+         <pre class="dm-term" id="dm-term"></pre>
+        </div>
+       </div>
+
+       <!-- 8 PROFILE -->
+       <div class="dm-panel">
+        <div class="dm-cols">
+         <div class="dm-card">
+          <p class="dm-ctitle">Лицензия</p>
+          <div class="dm-key-row">
+           <span class="dm-key-lbl">Базовая лицензия</span>
+           <code class="dm-key-val" id="dm-key-val">····-····-····-····</code>
+           <button class="dm-btn dm-btn-xs">Копировать</button>
+          </div>
+          <p class="dm-ctitle" style="margin-top:16px">Статистика</p>
+          <div class="dm-tiles">
+           <div class="dm-tile"><p class="dm-tlbl">Чисток</p><div class="dm-tval">78</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">Подряд</p><div class="dm-tval">21</div><div class="dm-tsub">дней</div></div>
+          </div>
+          <div class="dm-tiles" style="margin-top:8px">
+           <div class="dm-tile"><p class="dm-tlbl">Освобождено</p><div class="dm-tval">231.6 ГБ</div></div>
+           <div class="dm-tile"><p class="dm-tlbl">Закрыто проц.</p><div class="dm-tval">443</div></div>
+          </div>
+         </div>
+         <div class="dm-card">
+          <p class="dm-ctitle">Патч-ноуты</p>
+          <div class="dm-exlist">
+           <div class="dm-exitem"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><b>Pulse v1.3.3: что нового</b></div>
+          </div>
+          <p class="dm-lead" style="margin-top:10px">Доработали дизайн, обновили историю очисток и добавили вкладку теста скорости интернета.</p>
+         </div>
+        </div>
+       </div>
+
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <!-- ============ FEATURES SECTION ============ -->

@@ -1,0 +1,118 @@
+<header class="hero" id="top">
+    <canvas id="heroCanvas"></canvas>
+    <div class="godrays" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+
+      <!-- LEFT: the thesis -->
+      <div class="hero-copy">
+        <h1 data-hero="2">Чистая Windows.<br><span>Стабильный FPS.</span></h1>
+        <p class="sub" data-hero="3">Настройте Windows для игр, освободите память и возьмите фоновые процессы под контроль. Все инструменты — в одном приложении.</p>
+        <div class="hero-cta" data-hero="4">
+          <a class="btn btn-primary btn-lg magnetic" href="#download">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Скачать Pulse
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#demo">Смотреть в действии</a>
+        </div>
+        <p class="hero-price">5 € · разовый ключ · Pulse и Lite включены</p>
+        <div class="hero-note" id="heroNote" data-hero="5"><span class="hn-tag">Версия 1.3.3</span><span class="hn-tag">Windows 10 / 11</span><span class="hn-tag">Платная лицензия</span><span class="hn-tag">Активация по ключу</span></div>
+
+        <div class="profile-switch" data-hero="6" role="tablist" aria-label="Профиль оптимизации">
+          <span class="ps-label">Профиль</span>
+          <div class="profile-pills">
+            <span class="ps-thumb" aria-hidden="true"></span>
+            <button class="profile-pill" data-profile="standard" role="tab"><span class="pp-dot"></span>Стандарт</button>
+            <button class="profile-pill active" data-profile="gaming" role="tab" aria-selected="true"><span class="pp-dot"></span>Игровой</button>
+            <button class="profile-pill" data-profile="maximum" role="tab"><span class="pp-dot"></span>Максимум</button>
+          </div>
+        </div>
+
+        <div class="hero-metrics" data-hero="6">
+          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="70" data-prefix="−">−70</span><span>%</span></div><div class="hm-k">задержка</div></div>
+          <div class="hm-sep"></div>
+          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="44" data-prefix="+">+44</span><span>%</span></div><div class="hm-k">1% low FPS</div></div>
+          <div class="hm-sep"></div>
+          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="200">200</span><span>+</span></div><div class="hm-k">твиков в один клик</div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: the product, floating with depth -->
+      <div class="hero-stage" data-hero="7">
+        <div class="app-window" id="heroWindow">
+          <div class="aw-titlebar">
+            <div class="aw-brand">
+              <span class="aw-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></span>
+              <span class="aw-name">Pulse <em>v1.3.3</em></span>
+            </div>
+            <div class="aw-profiles" aria-hidden="true">
+              <span class="awp" title="Стандарт"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <span class="awp active" title="Игровой"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg></span>
+              <span class="awp" title="Максимум"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
+            </div>
+            <div class="aw-win"><span></span><span></span><span class="x"></span></div>
+          </div>
+          <div class="aw-body">
+            <div class="aw-side">
+              <div class="aws active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/></svg><span>Процессы</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Исключения</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>История</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64A9 9 0 1 1 5.64 6.64"/><line x1="12" y1="2" x2="12" y2="12"/></svg><span>Автозапуск</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><span>Сеть</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>Прочее</span></div>
+              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><span>Оптимизация</span></div>
+              <div class="aws aws-pinned"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Профиль</span></div>
+            </div>
+            <div class="aw-main" data-tilt-layer>
+              <div class="aw-row">
+                <div class="aw-card aw-perf">
+                  <div class="aw-card-t">Использование памяти</div>
+                  <div class="aw-gauge">
+                    <svg viewBox="0 0 80 80">
+                      <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="6"/>
+                      <circle class="aw-gauge-fill" cx="40" cy="40" r="33" fill="none" stroke="url(#awg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="207" stroke-dashoffset="72" transform="rotate(-90 40 40)"/>
+                      <defs><linearGradient id="awg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgb(var(--profile-rgb))"/><stop offset="1" stop-color="rgb(var(--accent-2-rgb))"/></linearGradient></defs>
+                    </svg>
+                    <div class="aw-gauge-v"><span class="hm-n" data-target="65">65</span><small>%</small></div>
+                  </div>
+                  <button class="aw-clean">Быстрая очистка</button>
+                </div>
+                <div class="aw-card aw-proc">
+                  <div class="aw-card-t">Активные процессы</div>
+                  <div class="awp-row"><span class="awp-n"><i style="background:#ef4444"></i>chrome.exe</span><span class="awp-m">3.1 GB</span></div>
+                  <div class="awp-row"><span class="awp-n"><i style="background:#6366f1"></i>Discord.exe</span><span class="awp-m">930 MB</span></div>
+                  <div class="awp-row"><span class="awp-n"><i style="background:#22c55e"></i>steam.exe</span><span class="awp-m">898 MB</span></div>
+                  <div class="awp-row"><span class="awp-n"><i style="background:#3b82f6"></i>Pulse.exe</span><span class="awp-m">214 MB</span></div>
+                </div>
+              </div>
+              <div class="aw-card aw-chart">
+                <div class="aw-card-t">Мониторинг системы <span class="aw-legend"><i style="background:var(--accent)"></i>CPU <i style="background:var(--green)"></i>RAM <i style="background:var(--accent-cyan)"></i>Диск</span></div>
+                <svg class="aw-spark" viewBox="0 0 320 70" preserveAspectRatio="none">
+                  <polyline fill="none" stroke="var(--green)" stroke-width="1.6" opacity=".65" points="0,50 40,44 80,46 120,30 160,34 200,20 240,26 280,14 320,18"/>
+                  <polyline fill="none" stroke="var(--accent-cyan)" stroke-width="1.6" opacity=".5" points="0,58 40,56 80,52 120,54 160,40 200,46 240,42 280,48 320,44"/>
+                  <polyline fill="none" stroke="var(--accent)" stroke-width="2.2" points="0,40 40,38 80,42 120,22 160,36 200,12 240,30 280,16 320,24"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- games marquee: quiet trust strip under the hero -->
+    <div class="games-row wrap">
+      <div class="games-label">Проверено в</div>
+      <div class="games-marquee">
+        <div class="games-track">
+          <span class="gchip">CS2</span><span class="gchip">VALORANT</span><span class="gchip">PUBG</span><span class="gchip">RUST</span><span class="gchip">DOTA 2</span><span class="gchip">APEX LEGENDS</span><span class="gchip">WARZONE</span><span class="gchip">FORTNITE</span>
+          <span class="gchip">CS2</span><span class="gchip">VALORANT</span><span class="gchip">PUBG</span><span class="gchip">RUST</span><span class="gchip">DOTA 2</span><span class="gchip">APEX LEGENDS</span><span class="gchip">WARZONE</span><span class="gchip">FORTNITE</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ INTERACTIVE DEMO (THE APP MOCKUP v1.2.9) ============ -->
