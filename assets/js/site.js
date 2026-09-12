@@ -1,4 +1,4 @@
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reducedMotion = false; // Keep Pulse motion enabled on every device.
     const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 640;
     // "Ведро": слабый CPU (<=4 логических ядер) или мало памяти (<=4ГБ, если браузер это раскрывает).
     // На таких устройствах отключаем самые дорогие эффекты (Lenis, созвездия частиц, тяжёлый blur) вместо
@@ -178,9 +178,9 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
         particles.push({
           x: Math.random(),
           y: Math.random(),
-          r: Math.random() * 1.6 + 0.5,
+          r: Math.random() * 1.6 + 0.5, 
           speedY: Math.random() * 0.0003 + 0.0001,
-          alpha: Math.random() * 0.32 + 0.06
+          alpha: Math.random() * 0.32 + 0.06 
         });
       }
 
@@ -226,7 +226,7 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
         width = canvas.width = (rect.width || canvas.offsetWidth) * dpr;
         height = canvas.height = (rect.height || canvas.offsetHeight) * dpr;
         if (reducedMotion && width > 0 && height > 0) {
-          draw();
+          draw(); 
         }
       }
 
@@ -251,7 +251,7 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
             p.y = 1.01;
             p.x = Math.random();
           }
-
+          
           let px = p.x * width;
           let py = p.y * height;
 

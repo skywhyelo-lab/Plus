@@ -78,7 +78,7 @@
     :root[data-profile="standard"] { --ar: 34;  --ag: 224; --ab: 107; --a2r: 18;  --a2g: 184; --a2b: 147; }
     :root[data-profile="gaming"]   { --ar: 34;  --ag: 211; --ab: 238; --a2r: 59;  --a2g: 130; --a2b: 246; }
     :root[data-profile="maximum"]  { --ar: 255; --ag: 106; --ab: 26;  --a2r: 255; --a2g: 61;  --a2b: 87;  }
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       :root { transition: none; }
     }
 
@@ -134,7 +134,7 @@
 
     nav, .hero-in, section, .band, footer { position: relative; z-index: 2; }
 
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       .hero::after, .badge .dot, h1 span, .games-track {
         animation: none !important;
       }
@@ -171,7 +171,7 @@
       box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px -20px rgba(0, 0, 0, 0.9);
       transition: var(--transition);
     }
-
+    
     .nav-in {
       display: flex;
       align-items: center;
@@ -984,7 +984,7 @@
       font-family: var(--font-sans); /* Prevents monospace line-height centering shift */
       color: #fff;
     }
-
+    
     #dashGaugeArc {
       transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -2522,7 +2522,7 @@
       .nav-links {
         display: none;
       }
-
+      
       /* Shrink padding inside cards on tablet/mobile to save space */
       .feat-card, .safe-card, .rev-card, .dl-main, .dl-side {
         padding: 20px;
@@ -2776,7 +2776,7 @@
       overflow: hidden;
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background 0.25s ease, box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
+    
     .feat-card:hover, .safe-card:hover, .rev-card:hover {
       transform: translateY(-5px);
       border-color: rgba(var(--accent-rgb), 0.35) !important;
@@ -2847,7 +2847,7 @@
     }
 
     /* ---- prefers-reduced-motion: freeze all the assembly, show final state ---- */
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       [data-hero], .hero-stage[data-hero="7"], .reveal { opacity: 1 !important; transform: none !important; }
       .hero::after, .stage-glow, .games-track, .badge .dot, .hero-badge .dot, h1 span { animation: none !important; }
       .app-window { transform: none !important; }
@@ -2998,7 +2998,7 @@
      .dm-main{padding:12px}
      .dm-profiles{gap:5px}
     }
-    @media(prefers-reduced-motion:reduce){.dm-pulsebtn::before{animation:none}.dm-panel{animation:none}}
+    @media(prefers-reduced-motion:never-match){.dm-pulsebtn::before{animation:none}.dm-panel{animation:none}}
 
     /* ===== #demo window fixes (scoped) ===== */
     .dm-section .dm-win{
@@ -3135,7 +3135,7 @@
     .hm-k { letter-spacing: 0.03em; text-transform: uppercase; font-size: 10.5px; }
 
     /* Respect reduced-motion for every signature effect above */
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       .nav-links a::after { transition: none; }
       .feat-card, .safe-card, .rev-card, .feat-icon { transition: none; }
       .feat-card:hover, .safe-card:hover, .rev-card:hover { transform: none; }
@@ -3209,7 +3209,7 @@
     }
     @keyframes aw-sheen { 0% { left: -60%; } 45%, 100% { left: 130%; } }
 
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       .app-window { animation: none; }
       .app-window::after, .aw-spark polyline:last-of-type,
       .aw-titlebar::after { animation: none; }
@@ -3264,7 +3264,7 @@
     .hash-info:hover { border-color: var(--border-hover); }
     .req-list li { transition: color 0.25s ease; }
 
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       .aw-gauge-fill { transition: none; }
       .godrays::before, .godrays::after { animation: none !important; }
     }
@@ -3395,7 +3395,7 @@
       letter-spacing: 0.02em;
     }
 
-    @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: never-match) {
       .cpu-socket, .cpu-substrate, .cpu-pins, .cpu-die, .cpu-ihs, .cpu-glow,
       .cpu-brand, .cpu-model, .cpu-led { transition: none !important; opacity: 1 !important; transform: none !important; }
       .cpu-led, .cpu-ihs::after { animation: none !important; }
@@ -3422,5 +3422,5 @@
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
     }
-
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+  
+@media (prefers-reduced-motion: never-match) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }

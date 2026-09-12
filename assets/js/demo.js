@@ -88,7 +88,7 @@
        prog=root.querySelector('#dm-prog'),term=root.querySelector('#dm-term'),
        freed=root.querySelector('#dm-freed'),dpc=root.querySelector('#dm-dpc'),running=false,done=false;
    var steps=['Создание точки восстановления… ОК','Отключение телеметрии (DiagTrack)… ОК','Настройка сетевых задержек (TCP Nodelay)… ОК','Сжатие неактивного ОЗУ… ОК','Готово: 200+ твиков'];
-   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   var reduce=false;
    function finish(){if(freed)freed.innerHTML='2.4<span>ГБ</span>';if(dpc)dpc.innerHTML='38<span>мкс</span>';running=false;done=true}
    function run(){
     if(running)return;running=true;
@@ -110,7 +110,7 @@
     dpc.innerHTML=(140+Math.floor(Math.random()*10))+'<span>мкс</span>';
    },2200);
   })();
-
+  
 
   (function(){
     var win = document.querySelector('#demo .dm-win');
