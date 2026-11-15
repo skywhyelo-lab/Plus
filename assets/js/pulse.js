@@ -68,21 +68,8 @@
     radios[i].focus();
   });
 
-  /* ---------- первый экран: наклон окна при прокрутке ---------- */
-  const heroStage = $('heroStage');
-  let ticking = false;
-  const tilt = () => {
-    ticking = false;
-    if (!heroStage || reduce) return;
-    const r = heroStage.getBoundingClientRect();
-    const k = Math.max(0, Math.min(1, (r.top - innerHeight * .18) / (innerHeight * .55)));
-    heroStage.style.setProperty('--tilt', k.toFixed(3));
-  };
   const top = $('top');
-  const onScroll = () => {
-    if (top) top.classList.toggle('scrolled', scrollY > 12);
-    if (!ticking) { ticking = true; requestAnimationFrame(tilt); }
-  };
+  const onScroll = () => { if (top) top.classList.toggle('scrolled', scrollY > 12); };
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
@@ -155,7 +142,7 @@
     cleaned = false;
     procRows.forEach((li, i) => { li.classList.remove('gone'); const gb = +memCells[i].dataset.mem; memCells[i].textContent = memText(gb); });
     $('lastTitle').textContent = 'Ещё не чистили';
-    $('lastSub').textContent = 'Запустите очистку — здесь появится, сколько освободилось';
+    $('lastSub').textContent = 'Запустите очистку, и здесь появится, сколько освободилось';
     if (mem !== 87) setMem(87);
   }
   function showToast(text) {
@@ -196,10 +183,11 @@
   const tabs = [...document.querySelectorAll('.tab')];
   const winTour = $('winTour');
   const tourStage = $('tourStage');
-  const DUR = 9000;
+  const DUR = 7000;
   let tabIdx = 0, auto = true, timer = null;
   const pageHooks = {};
 
+  const tourCount = $('tourCount');
   const PAGES = ['lab', 'opt', 'check', 'cs2', 'irq'];
   function showPage(key, byUser) {
     PAGES.forEach(k => {
@@ -212,6 +200,9 @@
     tabIdx = ti;
     tabs.forEach((t, k) => { const on = k === ti; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; t.classList.remove('run'); });
     if (winTour) winTour.dataset.active = key === 'opt' ? '6' : '5';
+    if (tourCount) tourCount.textContent = (ti + 1) + ' / ' + tabs.length;
+    const strip = tabs[ti] && tabs[ti].parentElement;
+    if (strip && strip.scrollWidth > strip.clientWidth) strip.scrollTo({ left: tabs[ti].offsetLeft - 16, behavior: 'smooth' });
     if (pageHooks[key]) pageHooks[key]();
     if (byUser) { auto = false; clearTimeout(timer); } else schedule();
   }
@@ -220,7 +211,7 @@
   const labToast = $('labToast');
   document.querySelectorAll('[data-toast]').forEach(el => el.addEventListener('click', () => {
     if (!labToast) return;
-    labToast.textContent = 'Этот экран — в самом Pulse. Здесь работают «Проверка ПК», «Мышь и прерывания» и CS2';
+    labToast.textContent = 'Этот экран откроется в самом Pulse. Здесь работают «Проверка ПК», «Мышь и прерывания» и CS2';
     labToast.classList.add('show');
     clearTimeout(labToast.t);
     labToast.t = setTimeout(() => labToast.classList.remove('show'), 2600);
@@ -245,6 +236,11 @@
       tabs[j].focus();
     });
   });
+  // стрелки листают и не выключают автопереключение
+  const step = d => { openTab((tabIdx + d + tabs.length) % tabs.length, false); };
+  const tp = $('tourPrev'), tn = $('tourNext');
+  if (tp) tp.addEventListener('click', () => step(-1));
+  if (tn) tn.addEventListener('click', () => step(1));
   // клик внутри окна — человек разбирается сам, автопереключение больше не мешает
   if (winTour) winTour.addEventListener('pointerdown', () => { auto = false; clearTimeout(timer); tabs.forEach(t => t.classList.remove('run')); });
   watch(tourStage, vis => {
@@ -339,7 +335,7 @@
     score.style.setProperty('--p', .91);
     countTo(scoreNum, 91, 1000);
     $('scoreWord').textContent = 'Отлично';
-    $('scoreSub').textContent = 'Осталась 1 проблема — диск, её исправить кнопкой нельзя.';
+    $('scoreSub').textContent = 'Осталась 1 проблема: диск. Её кнопкой не исправить.';
     $('chipWarn').innerHTML = '<i></i>Можно лучше: 1';
     $('chipGood').innerHTML = '<i></i>В порядке: 21';
     const fa = $('fixAll');

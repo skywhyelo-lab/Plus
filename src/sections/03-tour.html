@@ -1,6 +1,6 @@
     <section class="tour" id="tour">
       <div class="wrap tour-head">
-        <h2 class="reveal">Главное</h2>
+        <h2 class="reveal">Pulse изнутри</h2>
         <div class="tabs reveal" role="tablist" aria-label="Экраны Pulse">
           <button type="button" class="tab" role="tab" id="tab-lab" aria-controls="pane-lab" aria-selected="true" data-nav="5"><span>Pulse Lab</span><i></i></button>
           <button type="button" class="tab" role="tab" id="tab-opt" aria-controls="pane-opt" aria-selected="false" tabindex="-1" data-nav="6"><span>Оптимизация</span><i></i></button>
@@ -10,13 +10,14 @@
       </div>
 
       <div class="wrap captions">
-        <div class="cap" id="cap-lab"><h3>Все инструменты в&nbsp;одном месте</h3><p>Проверка ПК, задержки, стресс-тест, драйвер NVIDIA, экран, мышь, CS2. Откройте карточку прямо в&nbsp;окне&nbsp;— «Проверка ПК», «Мышь и&nbsp;прерывания» и&nbsp;«CS2 Config Lab» работают.</p></div>
-        <div class="cap" id="cap-opt" hidden><h3>57 настроек Windows за&nbsp;один запуск</h3><p>Службы, сеть, диск, питание процессора. FACEIT и&nbsp;обновления продолжают работать. «Максимум» добавляет ещё 10&nbsp;— для тех, кому античит не&nbsp;нужен.</p></div>
-        <div class="cap" id="cap-check" hidden><h3>24 проверки и&nbsp;оценка из&nbsp;100</h3><p>Монитор, память, видеокарта, диск, Windows, CS2 и&nbsp;сеть. Pulse показывает, что мешает, и&nbsp;исправляет одной кнопкой&nbsp;— если вы её нажмёте.</p></div>
+        <div class="cap" id="cap-lab"><h3>Pulse Lab: проверки и&nbsp;настройки ПК</h3><p>Задержки, стресс-тест, драйвер NVIDIA, экран, мышь, CS2. «Проверка ПК», «Мышь и&nbsp;прерывания» и&nbsp;«CS2 Config Lab» открываются прямо в&nbsp;этом окне.</p></div>
+        <div class="cap" id="cap-opt" hidden><h3>57 настроек Windows за&nbsp;один запуск</h3><p>Службы, сеть, диск, питание процессора. FACEIT и&nbsp;обновления продолжают работать. «Максимум» добавляет ещё 10 для тех, кому античит не&nbsp;нужен.</p></div>
+        <div class="cap" id="cap-check" hidden><h3>24 проверки и&nbsp;оценка из&nbsp;100</h3><p>Монитор, память, видеокарта, диск, Windows, CS2 и&nbsp;сеть. Pulse показывает, что мешает, и&nbsp;исправляет одной кнопкой, только если вы её нажмёте.</p></div>
         <div class="cap" id="cap-cs2" hidden><h3>Конфиг про-игрока за&nbsp;пару кликов</h3><p>Бинды, сенса, прицел и&nbsp;графика CS2 обычными словами, без консоли. Готовые конфиги s1mple, ZywOo, NiKo и&nbsp;других. Свой конфиг сохраняется копией.</p></div>
-        <div class="cap" id="cap-irq" hidden><h3>Мышь и&nbsp;видеокарта на&nbsp;своих ядрах</h3><p>Pulse подбирает для мыши и&nbsp;видеокарты отдельные ядра процессора, чтобы они не&nbsp;делили их с&nbsp;игрой. Режим MSI и&nbsp;сон USB&nbsp;— там&nbsp;же.</p></div>
+        <div class="cap" id="cap-irq" hidden><h3>Мышь и&nbsp;видеокарта на&nbsp;своих ядрах</h3><p>Pulse подбирает для мыши и&nbsp;видеокарты отдельные ядра процессора, чтобы они не&nbsp;делили их с&nbsp;игрой. Режим MSI и&nbsp;сон USB там&nbsp;же.</p></div>
       </div>
 
+      <div class="tour-box">
       <div class="stage reveal" id="tourStage">
         <div class="win" id="winTour" data-active="5" role="group" aria-label="Pulse: Pulse Lab, оптимизация, проверка ПК, CS2, прерывания">
           <aside class="w-side" aria-hidden="true">
@@ -42,12 +43,12 @@
 
           <!-- Pulse Lab -->
           <div class="w-body page lab" role="tabpanel" id="pane-lab" aria-labelledby="tab-lab">
-            <div class="ph"><div><h5>Pulse Lab</h5><p>Проверить компьютер и&nbsp;настроить его под игру</p></div></div>
-            <h6 class="eye lab-eye"><svg class="ai"><use href="#a-pulse"/></svg>Проверить компьютер</h6>
+            <div class="ph"><div><p class="h5">Pulse Lab</p><p>Проверить компьютер и&nbsp;настроить его под игру</p></div></div>
+            <p class="eye lab-eye"><svg class="ai"><use href="#a-pulse"/></svg>Проверить компьютер</p>
             <button type="button" class="lab-card lab-big" data-go="check">
               <span class="tile big"><svg class="ai"><use href="#a-check-circle"/></svg></span>
               <b class="lb-t">Проверка ПК</b><small class="lb-s" id="checkedAt">Проверено сегодня в&nbsp;18:42</small>
-              <span class="lb-d">Найдём, что отнимает FPS: монитор, память, видеокарта, Windows, CS2 и&nbsp;сеть&nbsp;— и&nbsp;исправим в&nbsp;один клик.</span>
+              <span class="lb-d">Найдём, что отнимает FPS: монитор, память, видеокарта, Windows, CS2 и&nbsp;сеть, и&nbsp;исправим в&nbsp;один клик.</span>
               <span class="lb-btn">Проверить снова<svg class="ic"><use href="#i-back"/></svg></span>
               <span class="lb-ring" style="--p:.86"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="g-track"/><circle cx="60" cy="60" r="52" class="g-val" pathLength="100"/></svg><b>86</b><small>из 100</small></span>
               <i class="lb-ok">Хорошо</i>
@@ -57,7 +58,7 @@
             <button type="button" class="lab-card s2" data-toast><span class="tile sm lc t-red"><svg class="ai"><use href="#a-fire"/></svg></span><b>Стресс-тест</b><small>Нагрузка CPU и&nbsp;видеокарты</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
             <button type="button" class="lab-card s3" data-toast><span class="tile sm lc t-green"><svg class="ai"><use href="#a-ram"/></svg></span><b>Проверка памяти</b><small>Ищет ошибки в&nbsp;ОЗУ</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
             <button type="button" class="lab-card s4" data-toast><span class="tile sm lc t-yellow"><svg class="ai"><use href="#a-disk"/></svg></span><b>Здоровье диска</b><small>Износ, температура, очистка</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
-            <h6 class="eye lab-eye e2"><svg class="ai"><use href="#a-gamepad"/></svg>Настроить под игру</h6>
+            <p class="eye lab-eye e2"><svg class="ai"><use href="#a-gamepad"/></svg>Настроить под игру</p>
             <button type="button" class="lab-card lr1 c1" data-toast><span class="tile sm lc t-purple"><svg class="ai"><use href="#a-gamepad"/></svg></span><b>Профили игр</b><small>Приоритет и&nbsp;ядра для каждой</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
             <button type="button" class="lab-card lr1 c2" data-toast><span class="tile sm lc t-green"><svg class="ai"><use href="#a-shield-task"/></svg></span><b>Pulse Sentinel</b><small>Следит за&nbsp;процессами в&nbsp;фоне</small><span class="chip chip-good lc-badge"><i></i>Работает</span><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
             <button type="button" class="lab-card lr1 c3" data-toast><span class="tile sm lc t-green"><svg class="ai"><use href="#a-gpu-card"/></svg></span><b>Драйвер NVIDIA</b><small>Стоит последний</small><span class="chip chip-mute lc-badge">Свежий</span><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
@@ -70,7 +71,7 @@
 
           <!-- Оптимизация -->
           <div class="w-body page opt" role="tabpanel" id="pane-opt" aria-labelledby="tab-opt" hidden>
-            <div class="ph"><div><h5>Оптимизация</h5><p>Диск, сеть, службы и&nbsp;параметры Windows&nbsp;— одним запуском</p></div>
+            <div class="ph"><div><p class="h5">Оптимизация</p><p>Диск, сеть, службы и&nbsp;параметры Windows одним запуском</p></div>
               <span class="w-sq" aria-hidden="true"><svg class="ai"><use href="#a-clock"/></svg></span><span class="w-ghost" aria-hidden="true"><svg class="ic"><use href="#i-wrench"/></svg>Решение проблем</span></div>
             <div class="bokeh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
             <div class="orb-wrap" id="orb">
@@ -94,36 +95,36 @@
 
           <!-- Проверка ПК -->
           <div class="w-body page chk" role="tabpanel" id="pane-check" aria-labelledby="tab-check" hidden>
-            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><h5>Проверка ПК</h5><p>Находит то, что отнимает FPS и&nbsp;стабильность, и&nbsp;исправляет. Ничего не&nbsp;меняется без вашей кнопки.</p></div>
+            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><p class="h5">Проверка ПК</p><p>Находит то, что отнимает FPS и&nbsp;стабильность, и&nbsp;исправляет. Ничего не&nbsp;меняется без вашей кнопки.</p></div>
               <span class="w-ghost" aria-hidden="true"><svg class="ai"><use href="#a-refresh"/></svg>Проверить снова</span></div>
             <div class="w-card chk-sum">
               <div class="score" id="score" style="--p:.86"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="g-track"/><circle cx="60" cy="60" r="52" class="g-val" pathLength="100"/></svg><b id="scoreNum">86</b><small>из 100</small></div>
-              <div class="sum-t"><b id="scoreWord">Хорошо</b><p id="scoreSub">Найдено 2 проблемы&nbsp;— 1 можно исправить прямо здесь.</p>
+              <div class="sum-t"><b id="scoreWord">Хорошо</b><p id="scoreSub">Найдено 2 проблемы, 1 можно исправить прямо здесь.</p>
                 <span class="chip chip-warn" id="chipWarn"><i></i>Можно лучше: 2</span> <span class="chip chip-good" id="chipGood"><i></i>В порядке: 20</span></div>
               <button type="button" class="w-btn big" id="fixAll"><svg class="ic"><use href="#i-wrench"/></svg><span>Исправить всё (1)</span></button>
             </div>
             <div class="w-card chk-list">
               <div class="filt"><span class="on">Требуют внимания (4)</span><span>Все проверки (24)</span></div>
-              <h6 class="grp warn">Можно лучше</h6>
+              <p class="grp warn">Можно лучше</p>
               <div class="row"><span class="tile warn"><svg class="ai"><use href="#a-disk"/></svg></span><div><b>Диск NVMe 500 ГБ требует внимания</b><small>Есть первые признаки износа (75%). Пока работает, но копия важного не&nbsp;помешает.</small></div><span class="w-ghost">Подробнее</span></div>
-              <div class="row" id="rowUsb"><span class="tile warn"><svg class="ai"><use href="#a-mouse"/></svg></span><div><b>USB мыши может засыпать</b><small>Windows экономит энергию на&nbsp;порту мыши&nbsp;— изредка это даёт задержку первого движения.</small></div><span class="w-ghost act" id="usbAct">Отключить сон</span></div>
-              <h6 class="grp">Советы</h6>
-              <div class="row"><span class="tile"><svg class="ai"><use href="#a-cpu"/></svg></span><div><b>chrome.exe грузит процессор на&nbsp;17&nbsp;%</b><small>Программа работает в&nbsp;фоне и&nbsp;отнимает процессор у&nbsp;игры. Если она сейчас не&nbsp;нужна&nbsp;— завершите.</small></div><span class="w-ghost">Завершить chrome.exe</span></div>
+              <div class="row" id="rowUsb"><span class="tile warn"><svg class="ai"><use href="#a-mouse"/></svg></span><div><b>USB мыши может засыпать</b><small>Windows экономит энергию на&nbsp;порту мыши, изредка это даёт задержку первого движения.</small></div><span class="w-ghost act" id="usbAct">Отключить сон</span></div>
+              <p class="grp">Советы</p>
+              <div class="row"><span class="tile"><svg class="ai"><use href="#a-cpu"/></svg></span><div><b>chrome.exe грузит процессор на&nbsp;17&nbsp;%</b><small>Программа работает в&nbsp;фоне и&nbsp;отнимает процессор у&nbsp;игры. Если она сейчас не&nbsp;нужна, завершите.</small></div><span class="w-ghost">Завершить chrome.exe</span></div>
               <div class="row"><span class="tile"><svg class="ai"><use href="#a-ram"/></svg></span><div><b>Память занята на&nbsp;78&nbsp;%</b><small>Свободно 3,5 ГБ. Перед игрой можно освободить.</small></div><span class="w-ghost">Быстрая очистка</span></div>
             </div>
           </div>
 
           <!-- CS2 Config Lab -->
           <div class="w-body page cs2" role="tabpanel" id="pane-cs2" aria-labelledby="tab-lab" hidden>
-            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><h5>CS2 Config Lab</h5><p>Настройте игру под себя или возьмите конфиг про-игрока</p></div>
+            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><p class="h5">CS2 Config Lab</p><p>Настройте игру под себя или возьмите конфиг про-игрока</p></div>
               <span class="w-sq" aria-hidden="true"><svg class="ai"><use href="#a-refresh"/></svg></span></div>
-            <h6 class="eye">Моя игра</h6>
+            <p class="eye">Моя игра</p>
             <div class="cs-grid">
               <div class="w-card cs-card"><span class="tile big t-cyan"><svg class="ic"><use href="#i-keyboard"/></svg></span><svg class="ai chev"><use href="#a-chevron-right"/></svg><b>Бинды</b><small>44 клавиши назначено</small></div>
               <div class="w-card cs-card"><span class="tile big"><svg class="ai"><use href="#a-settings"/></svg></span><svg class="ai chev"><use href="#a-chevron-right"/></svg><b>Параметры</b><small>Сенса 1.6 · прицел 4</small></div>
               <div class="w-card cs-card"><span class="tile big t-purple"><svg class="ai"><use href="#a-desktop-line"/></svg></span><svg class="ai chev"><use href="#a-chevron-right"/></svg><b>Графика</b><small>Полноэкранный · 1280×960</small></div>
             </div>
-            <h6 class="eye">Конфиги</h6>
+            <p class="eye">Конфиги</p>
             <div class="cs-row">
               <div class="w-card cs-wide"><span class="tile big"><svg class="ic"><use href="#i-term"/></svg></span><div><b>Autoexec и&nbsp;копии</b><small>6 команд · 2 копии</small></div><svg class="ai chev"><use href="#a-chevron-right"/></svg></div>
               <div class="w-card cs-pro"><small class="kick">CS2 / PRO CONFIG</small><b>Конфиги игроков</b><small>Прицел, сенса и&nbsp;бинды s1mple, ZywOo, NiKo и&nbsp;других</small>
@@ -133,14 +134,14 @@
 
           <!-- Прерывания -->
           <div class="w-body page irq" role="tabpanel" id="pane-irq" aria-labelledby="tab-irq" hidden>
-            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><h5>Прерывания</h5><p>Привязка прерываний GPU и&nbsp;USB к&nbsp;потокам процессора</p></div></div>
+            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><p class="h5">Прерывания</p><p>Привязка прерываний GPU и&nbsp;USB к&nbsp;потокам процессора</p></div></div>
             <div class="irq-l">
-              <div class="w-card irq-top"><div><b>Маршрутизация прерываний</b><small>Свои ядра, режим MSI и&nbsp;высокий приоритет для видеокарты и&nbsp;мыши&nbsp;— одной кнопкой.</small></div><span class="tg-l">Фиксировать</span><span class="tg on"></span><button type="button" class="w-btn" id="irqAll">Настроить всё</button></div>
+              <div class="w-card irq-top"><div><b>Маршрутизация прерываний</b><small>Свои ядра, режим MSI и&nbsp;высокий приоритет для видеокарты и&nbsp;мыши одной кнопкой.</small></div><span class="tg-l">Фиксировать</span><span class="tg on"></span><button type="button" class="w-btn" id="irqAll">Настроить всё</button></div>
               <div class="w-card irq-dev">
                 <b class="ttl">Устройства</b>
                 <div class="devs">
                   <div class="dev on" id="devGpu"><b>Видеокарта</b><span>NVIDIA GeForce RTX 4060</span><small><em class="pl">Ядро <span id="gpuCore">Windows</span></em><em class="chip-s">MSI</em></small></div>
-                  <div class="dev"><b>Мышь · USB</b><span>Расширяемый хост-контроллер USB 3.10</span><small><em class="chip-s">8</em><em class="chip-s">MSI</em><em class="pl">Высокий</em></small><i>Отдельное ядро&nbsp;— не&nbsp;мешает игре</i></div>
+                  <div class="dev"><b>Мышь · USB</b><span>Расширяемый хост-контроллер USB 3.10</span><small><em class="chip-s">8</em><em class="chip-s">MSI</em><em class="pl">Высокий</em></small><i>Отдельное ядро, не&nbsp;мешает игре</i></div>
                 </div>
                 <div class="usb"><div><b>Энергосбережение USB мыши</b><small>Отключено</small></div><span class="w-ghost dim">Отключить</span><span class="w-ghost">Вернуть</span></div>
               </div>
@@ -155,6 +156,12 @@
               <ul class="bars" id="bars"></ul>
             </div>
           </div>
+        </div>
+      </div>
+        <div class="tour-arrows">
+          <button type="button" class="t-arrow t-prev" id="tourPrev" aria-label="Предыдущий экран"><svg class="ai" aria-hidden="true"><use href="#a-chevron-right"/></svg></button>
+          <span class="t-count" id="tourCount" aria-hidden="true">1 / 4</span>
+          <button type="button" class="t-arrow t-next" id="tourNext" aria-label="Следующий экран"><svg class="ai" aria-hidden="true"><use href="#a-chevron-right"/></svg></button>
         </div>
       </div>
     </section>

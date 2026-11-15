@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pulse — оптимизатор Windows для игр</title>
+  <title>Pulse: оптимизатор Windows для игр</title>
   <meta name="description" content="Pulse закрывает лишнее в фоне, настраивает Windows под игры и находит, что отнимает FPS. Проверка ПК, CS2 Config Lab, прерывания, автозапуск. Всё можно вернуть как было.">
   <meta name="theme-color" content="#05090e">
   <link rel="canonical" href="https://pulsepc.vercel.app/">
@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://pulsepc.vercel.app/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pulse">
-  <meta property="og:title" content="Pulse — оптимизатор Windows для игр">
+  <meta property="og:title" content="Pulse: оптимизатор Windows для игр">
   <meta property="og:description" content="Закрывает лишнее в фоне, настраивает Windows и находит, что отнимает FPS.">
   <meta property="og:image" content="https://pulsepc.vercel.app/assets/images/pulse-preview-20261115.png">
   <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
   <meta property="og:image:alt" content="Окно Pulse: раздел Pulse Lab">
   <meta property="og:locale" content="ru_RU">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pulse — оптимизатор Windows для игр">
+  <meta name="twitter:title" content="Pulse: оптимизатор Windows для игр">
   <meta name="twitter:description" content="Закрывает лишнее в фоне, настраивает Windows и находит, что отнимает FPS.">
   <meta name="twitter:image" content="https://pulsepc.vercel.app/assets/images/pulse-preview-20261115.png">
 
@@ -113,10 +113,6 @@
 
   <header class="top" id="top">
     <div class="wrap top-in">
-      <a class="brand" href="#hero" aria-label="Pulse, в начало страницы">
-        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" class="mark-bg"/><path class="mark-line" d="M5 16.5h5l2.8-6.5 4.6 13 3.2-9 1.6 2.5H27"/></svg>
-        <span>Pulse</span>
-      </a>
       <nav class="nav" aria-label="Разделы">
         <a href="#tour">Возможности</a>
         <a href="#more">Инструменты</a>
@@ -129,14 +125,9 @@
 
   <main>
     <section class="hero" id="hero">
-      <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-      <svg class="ecg" viewBox="0 0 1600 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <path class="ecg-base" d="M0 80 H170 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H570 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H970 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1370 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1600"/>
-        <path class="ecg-run" d="M0 80 H170 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H570 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H970 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1370 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1600" pathLength="1000"/>
-      </svg>
       <div class="wrap hero-copy">
-        <h1 class="rise">Windows, которая не&nbsp;мешает играть</h1>
-        <p class="lead rise">Pulse закрывает лишнее в&nbsp;фоне, настраивает систему и&nbsp;находит, что отнимает FPS. Всё, что он меняет, можно вернуть.</p>
+        <h1 class="rise">Windows, которая помогает побеждать</h1>
+        <p class="lead rise">Pulse: оптимизатор Windows для&nbsp;игр</p>
         <div class="cta rise">
           <a class="btn btn-main" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/Pulse.exe">
             <svg class="ic" aria-hidden="true"><use href="#i-down"/></svg>Скачать для Windows
@@ -146,12 +137,6 @@
       </div>
 
       <div class="hero-stage rise">
-        <div class="modes" role="radiogroup" aria-label="Режим очистки">
-          <button type="button" class="mode" role="radio" aria-checked="true" data-mode="standard"><svg class="ai" aria-hidden="true"><use href="#a-shield"/></svg>Стандартный</button>
-          <button type="button" class="mode" role="radio" aria-checked="false" data-mode="game" tabindex="-1"><svg class="ai" aria-hidden="true"><use href="#a-gamepad"/></svg>Игровой</button>
-          <button type="button" class="mode" role="radio" aria-checked="false" data-mode="max" tabindex="-1"><svg class="ai" aria-hidden="true"><use href="#a-fire"/></svg>Максимум</button>
-        </div>
-        <p class="mode-note" id="modeNote" aria-live="polite">Освобождает память. Программы не&nbsp;закрывает.</p>
 
         <div class="stage" id="heroStage">
           <div class="win" id="winHero" data-active="0" role="group" aria-label="Pulse, экран «Обзор». Кнопка «Быстрая очистка» работает">
@@ -178,7 +163,7 @@
 
             <div class="w-body dash">
               <div class="w-card d-mem">
-                <h4>Использование памяти</h4>
+                <p class="h4">Использование памяти</p>
                 <div class="gauge" id="gauge" style="--p:.87">
                   <svg viewBox="0 0 120 120" aria-hidden="true">
                     <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="s1"/><stop offset="1" class="s2"/></linearGradient></defs>
@@ -191,13 +176,13 @@
                 <div class="d-last">
                   <span class="tile"><svg class="ai"><use href="#a-speed"/></svg></span>
                   <b id="lastTitle">Ещё не&nbsp;чистили</b>
-                  <p id="lastSub">Запустите очистку&nbsp;— здесь появится, сколько освободилось</p>
+                  <p id="lastSub">Запустите очистку, и&nbsp;здесь появится, сколько освободилось</p>
                   <button type="button" class="w-btn" id="cleanBtn">Быстрая очистка</button>
                 </div>
               </div>
 
               <div class="w-card d-mon">
-                <h4>Мониторинг системы</h4>
+                <p class="h4">Мониторинг системы</p>
                 <ul class="legend" aria-hidden="true"><li class="c-cpu">CPU</li><li class="c-ram">RAM</li><li class="c-disk">Диск</li><li class="c-net">Сеть</li></ul>
                 <div class="chart" aria-hidden="true">
                   <span class="yl" style="top:0">100%</span><span class="yl" style="top:25%">75%</span><span class="yl" style="top:50%">50%</span><span class="yl" style="top:75%">25%</span><span class="yl" style="top:100%">0%</span>
@@ -216,7 +201,7 @@
               </div>
 
               <div class="w-card d-proc">
-                <h4>Активные процессы</h4>
+                <p class="h4">Активные процессы</p>
                 <ul class="procs" id="procs">
                   <li data-close="game max"><span>chrome.exe (28)</span><em>6,2%</em><em data-mem="3.1">3,1 GB</em><i class="st-on">Активен</i></li>
                   <li data-close=""><span>cs2.exe</span><em>24,8%</em><em data-mem="2.6">2,6 GB</em><i class="st-game">Игра</i></li>
@@ -227,13 +212,13 @@
               </div>
 
               <div class="w-card d-quick">
-                <h4>Быстрые действия</h4>
+                <p class="h4">Быстрые действия</p>
                 <div class="qrow"><span class="tile sm"><svg class="ai"><use href="#a-broom"/></svg></span><b>Очистка системы</b><small>Закрыть процессы и&nbsp;освободить память</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></div>
                 <div class="qrow"><span class="tile sm"><svg class="ai"><use href="#a-settings"/></svg></span><b>Управление списком</b><small>Настройка листа</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></div>
               </div>
 
               <div class="w-card d-hw">
-                <h4>Аппаратная информация</h4>
+                <p class="h4">Аппаратная информация</p>
                 <dl>
                   <div><dt>Процессор</dt><dd>AMD Ryzen 5 7600 6-Core Processor</dd></div>
                   <div><dt>Видеокарта</dt><dd>NVIDIA GeForce RTX 4060</dd></div>
@@ -246,13 +231,20 @@
             </div>
           </div>
         </div>
-        <p class="stage-hint">Это не&nbsp;картинка&nbsp;— нажмите «Быстрая очистка» или&nbsp;смените режим.</p>
+        <div class="mode-bar">
+          <div class="modes" role="radiogroup" aria-label="Режим очистки">
+            <button type="button" class="mode" role="radio" aria-checked="true" data-mode="standard"><svg class="ai" aria-hidden="true"><use href="#a-shield"/></svg>Стандартный</button>
+            <button type="button" class="mode" role="radio" aria-checked="false" data-mode="game" tabindex="-1"><svg class="ai" aria-hidden="true"><use href="#a-gamepad"/></svg>Игровой</button>
+            <button type="button" class="mode" role="radio" aria-checked="false" data-mode="max" tabindex="-1"><svg class="ai" aria-hidden="true"><use href="#a-fire"/></svg>Максимум</button>
+          </div>
+          <p class="mode-note" id="modeNote" aria-live="polite">Освобождает память. Программы не&nbsp;закрывает.</p>
+        </div>
       </div>
     </section>
 
     <section class="tour" id="tour">
       <div class="wrap tour-head">
-        <h2 class="reveal">Главное</h2>
+        <h2 class="reveal">Pulse изнутри</h2>
         <div class="tabs reveal" role="tablist" aria-label="Экраны Pulse">
           <button type="button" class="tab" role="tab" id="tab-lab" aria-controls="pane-lab" aria-selected="true" data-nav="5"><span>Pulse Lab</span><i></i></button>
           <button type="button" class="tab" role="tab" id="tab-opt" aria-controls="pane-opt" aria-selected="false" tabindex="-1" data-nav="6"><span>Оптимизация</span><i></i></button>
@@ -262,13 +254,14 @@
       </div>
 
       <div class="wrap captions">
-        <div class="cap" id="cap-lab"><h3>Все инструменты в&nbsp;одном месте</h3><p>Проверка ПК, задержки, стресс-тест, драйвер NVIDIA, экран, мышь, CS2. Откройте карточку прямо в&nbsp;окне&nbsp;— «Проверка ПК», «Мышь и&nbsp;прерывания» и&nbsp;«CS2 Config Lab» работают.</p></div>
-        <div class="cap" id="cap-opt" hidden><h3>57 настроек Windows за&nbsp;один запуск</h3><p>Службы, сеть, диск, питание процессора. FACEIT и&nbsp;обновления продолжают работать. «Максимум» добавляет ещё 10&nbsp;— для тех, кому античит не&nbsp;нужен.</p></div>
-        <div class="cap" id="cap-check" hidden><h3>24 проверки и&nbsp;оценка из&nbsp;100</h3><p>Монитор, память, видеокарта, диск, Windows, CS2 и&nbsp;сеть. Pulse показывает, что мешает, и&nbsp;исправляет одной кнопкой&nbsp;— если вы её нажмёте.</p></div>
+        <div class="cap" id="cap-lab"><h3>Pulse Lab: проверки и&nbsp;настройки ПК</h3><p>Задержки, стресс-тест, драйвер NVIDIA, экран, мышь, CS2. «Проверка ПК», «Мышь и&nbsp;прерывания» и&nbsp;«CS2 Config Lab» открываются прямо в&nbsp;этом окне.</p></div>
+        <div class="cap" id="cap-opt" hidden><h3>57 настроек Windows за&nbsp;один запуск</h3><p>Службы, сеть, диск, питание процессора. FACEIT и&nbsp;обновления продолжают работать. «Максимум» добавляет ещё 10 для тех, кому античит не&nbsp;нужен.</p></div>
+        <div class="cap" id="cap-check" hidden><h3>24 проверки и&nbsp;оценка из&nbsp;100</h3><p>Монитор, память, видеокарта, диск, Windows, CS2 и&nbsp;сеть. Pulse показывает, что мешает, и&nbsp;исправляет одной кнопкой, только если вы её нажмёте.</p></div>
         <div class="cap" id="cap-cs2" hidden><h3>Конфиг про-игрока за&nbsp;пару кликов</h3><p>Бинды, сенса, прицел и&nbsp;графика CS2 обычными словами, без консоли. Готовые конфиги s1mple, ZywOo, NiKo и&nbsp;других. Свой конфиг сохраняется копией.</p></div>
-        <div class="cap" id="cap-irq" hidden><h3>Мышь и&nbsp;видеокарта на&nbsp;своих ядрах</h3><p>Pulse подбирает для мыши и&nbsp;видеокарты отдельные ядра процессора, чтобы они не&nbsp;делили их с&nbsp;игрой. Режим MSI и&nbsp;сон USB&nbsp;— там&nbsp;же.</p></div>
+        <div class="cap" id="cap-irq" hidden><h3>Мышь и&nbsp;видеокарта на&nbsp;своих ядрах</h3><p>Pulse подбирает для мыши и&nbsp;видеокарты отдельные ядра процессора, чтобы они не&nbsp;делили их с&nbsp;игрой. Режим MSI и&nbsp;сон USB там&nbsp;же.</p></div>
       </div>
 
+      <div class="tour-box">
       <div class="stage reveal" id="tourStage">
         <div class="win" id="winTour" data-active="5" role="group" aria-label="Pulse: Pulse Lab, оптимизация, проверка ПК, CS2, прерывания">
           <aside class="w-side" aria-hidden="true">
@@ -294,12 +287,12 @@
 
           <!-- Pulse Lab -->
           <div class="w-body page lab" role="tabpanel" id="pane-lab" aria-labelledby="tab-lab">
-            <div class="ph"><div><h5>Pulse Lab</h5><p>Проверить компьютер и&nbsp;настроить его под игру</p></div></div>
-            <h6 class="eye lab-eye"><svg class="ai"><use href="#a-pulse"/></svg>Проверить компьютер</h6>
+            <div class="ph"><div><p class="h5">Pulse Lab</p><p>Проверить компьютер и&nbsp;настроить его под игру</p></div></div>
+            <p class="eye lab-eye"><svg class="ai"><use href="#a-pulse"/></svg>Проверить компьютер</p>
             <button type="button" class="lab-card lab-big" data-go="check">
               <span class="tile big"><svg class="ai"><use href="#a-check-circle"/></svg></span>
               <b class="lb-t">Проверка ПК</b><small class="lb-s" id="checkedAt">Проверено сегодня в&nbsp;18:42</small>
-              <span class="lb-d">Найдём, что отнимает FPS: монитор, память, видеокарта, Windows, CS2 и&nbsp;сеть&nbsp;— и&nbsp;исправим в&nbsp;один клик.</span>
+              <span class="lb-d">Найдём, что отнимает FPS: монитор, память, видеокарта, Windows, CS2 и&nbsp;сеть, и&nbsp;исправим в&nbsp;один клик.</span>
               <span class="lb-btn">Проверить снова<svg class="ic"><use href="#i-back"/></svg></span>
               <span class="lb-ring" style="--p:.86"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="g-track"/><circle cx="60" cy="60" r="52" class="g-val" pathLength="100"/></svg><b>86</b><small>из 100</small></span>
               <i class="lb-ok">Хорошо</i>
@@ -309,7 +302,7 @@
             <button type="button" class="lab-card s2" data-toast><span class="tile sm lc t-red"><svg class="ai"><use href="#a-fire"/></svg></span><b>Стресс-тест</b><small>Нагрузка CPU и&nbsp;видеокарты</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
             <button type="button" class="lab-card s3" data-toast><span class="tile sm lc t-green"><svg class="ai"><use href="#a-ram"/></svg></span><b>Проверка памяти</b><small>Ищет ошибки в&nbsp;ОЗУ</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
             <button type="button" class="lab-card s4" data-toast><span class="tile sm lc t-yellow"><svg class="ai"><use href="#a-disk"/></svg></span><b>Здоровье диска</b><small>Износ, температура, очистка</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
-            <h6 class="eye lab-eye e2"><svg class="ai"><use href="#a-gamepad"/></svg>Настроить под игру</h6>
+            <p class="eye lab-eye e2"><svg class="ai"><use href="#a-gamepad"/></svg>Настроить под игру</p>
             <button type="button" class="lab-card lr1 c1" data-toast><span class="tile sm lc t-purple"><svg class="ai"><use href="#a-gamepad"/></svg></span><b>Профили игр</b><small>Приоритет и&nbsp;ядра для каждой</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
             <button type="button" class="lab-card lr1 c2" data-toast><span class="tile sm lc t-green"><svg class="ai"><use href="#a-shield-task"/></svg></span><b>Pulse Sentinel</b><small>Следит за&nbsp;процессами в&nbsp;фоне</small><span class="chip chip-good lc-badge"><i></i>Работает</span><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
             <button type="button" class="lab-card lr1 c3" data-toast><span class="tile sm lc t-green"><svg class="ai"><use href="#a-gpu-card"/></svg></span><b>Драйвер NVIDIA</b><small>Стоит последний</small><span class="chip chip-mute lc-badge">Свежий</span><svg class="ai chev"><use href="#a-chevron-right"/></svg></button>
@@ -322,7 +315,7 @@
 
           <!-- Оптимизация -->
           <div class="w-body page opt" role="tabpanel" id="pane-opt" aria-labelledby="tab-opt" hidden>
-            <div class="ph"><div><h5>Оптимизация</h5><p>Диск, сеть, службы и&nbsp;параметры Windows&nbsp;— одним запуском</p></div>
+            <div class="ph"><div><p class="h5">Оптимизация</p><p>Диск, сеть, службы и&nbsp;параметры Windows одним запуском</p></div>
               <span class="w-sq" aria-hidden="true"><svg class="ai"><use href="#a-clock"/></svg></span><span class="w-ghost" aria-hidden="true"><svg class="ic"><use href="#i-wrench"/></svg>Решение проблем</span></div>
             <div class="bokeh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
             <div class="orb-wrap" id="orb">
@@ -346,36 +339,36 @@
 
           <!-- Проверка ПК -->
           <div class="w-body page chk" role="tabpanel" id="pane-check" aria-labelledby="tab-check" hidden>
-            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><h5>Проверка ПК</h5><p>Находит то, что отнимает FPS и&nbsp;стабильность, и&nbsp;исправляет. Ничего не&nbsp;меняется без вашей кнопки.</p></div>
+            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><p class="h5">Проверка ПК</p><p>Находит то, что отнимает FPS и&nbsp;стабильность, и&nbsp;исправляет. Ничего не&nbsp;меняется без вашей кнопки.</p></div>
               <span class="w-ghost" aria-hidden="true"><svg class="ai"><use href="#a-refresh"/></svg>Проверить снова</span></div>
             <div class="w-card chk-sum">
               <div class="score" id="score" style="--p:.86"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="g-track"/><circle cx="60" cy="60" r="52" class="g-val" pathLength="100"/></svg><b id="scoreNum">86</b><small>из 100</small></div>
-              <div class="sum-t"><b id="scoreWord">Хорошо</b><p id="scoreSub">Найдено 2 проблемы&nbsp;— 1 можно исправить прямо здесь.</p>
+              <div class="sum-t"><b id="scoreWord">Хорошо</b><p id="scoreSub">Найдено 2 проблемы, 1 можно исправить прямо здесь.</p>
                 <span class="chip chip-warn" id="chipWarn"><i></i>Можно лучше: 2</span> <span class="chip chip-good" id="chipGood"><i></i>В порядке: 20</span></div>
               <button type="button" class="w-btn big" id="fixAll"><svg class="ic"><use href="#i-wrench"/></svg><span>Исправить всё (1)</span></button>
             </div>
             <div class="w-card chk-list">
               <div class="filt"><span class="on">Требуют внимания (4)</span><span>Все проверки (24)</span></div>
-              <h6 class="grp warn">Можно лучше</h6>
+              <p class="grp warn">Можно лучше</p>
               <div class="row"><span class="tile warn"><svg class="ai"><use href="#a-disk"/></svg></span><div><b>Диск NVMe 500 ГБ требует внимания</b><small>Есть первые признаки износа (75%). Пока работает, но копия важного не&nbsp;помешает.</small></div><span class="w-ghost">Подробнее</span></div>
-              <div class="row" id="rowUsb"><span class="tile warn"><svg class="ai"><use href="#a-mouse"/></svg></span><div><b>USB мыши может засыпать</b><small>Windows экономит энергию на&nbsp;порту мыши&nbsp;— изредка это даёт задержку первого движения.</small></div><span class="w-ghost act" id="usbAct">Отключить сон</span></div>
-              <h6 class="grp">Советы</h6>
-              <div class="row"><span class="tile"><svg class="ai"><use href="#a-cpu"/></svg></span><div><b>chrome.exe грузит процессор на&nbsp;17&nbsp;%</b><small>Программа работает в&nbsp;фоне и&nbsp;отнимает процессор у&nbsp;игры. Если она сейчас не&nbsp;нужна&nbsp;— завершите.</small></div><span class="w-ghost">Завершить chrome.exe</span></div>
+              <div class="row" id="rowUsb"><span class="tile warn"><svg class="ai"><use href="#a-mouse"/></svg></span><div><b>USB мыши может засыпать</b><small>Windows экономит энергию на&nbsp;порту мыши, изредка это даёт задержку первого движения.</small></div><span class="w-ghost act" id="usbAct">Отключить сон</span></div>
+              <p class="grp">Советы</p>
+              <div class="row"><span class="tile"><svg class="ai"><use href="#a-cpu"/></svg></span><div><b>chrome.exe грузит процессор на&nbsp;17&nbsp;%</b><small>Программа работает в&nbsp;фоне и&nbsp;отнимает процессор у&nbsp;игры. Если она сейчас не&nbsp;нужна, завершите.</small></div><span class="w-ghost">Завершить chrome.exe</span></div>
               <div class="row"><span class="tile"><svg class="ai"><use href="#a-ram"/></svg></span><div><b>Память занята на&nbsp;78&nbsp;%</b><small>Свободно 3,5 ГБ. Перед игрой можно освободить.</small></div><span class="w-ghost">Быстрая очистка</span></div>
             </div>
           </div>
 
           <!-- CS2 Config Lab -->
           <div class="w-body page cs2" role="tabpanel" id="pane-cs2" aria-labelledby="tab-lab" hidden>
-            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><h5>CS2 Config Lab</h5><p>Настройте игру под себя или возьмите конфиг про-игрока</p></div>
+            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><p class="h5">CS2 Config Lab</p><p>Настройте игру под себя или возьмите конфиг про-игрока</p></div>
               <span class="w-sq" aria-hidden="true"><svg class="ai"><use href="#a-refresh"/></svg></span></div>
-            <h6 class="eye">Моя игра</h6>
+            <p class="eye">Моя игра</p>
             <div class="cs-grid">
               <div class="w-card cs-card"><span class="tile big t-cyan"><svg class="ic"><use href="#i-keyboard"/></svg></span><svg class="ai chev"><use href="#a-chevron-right"/></svg><b>Бинды</b><small>44 клавиши назначено</small></div>
               <div class="w-card cs-card"><span class="tile big"><svg class="ai"><use href="#a-settings"/></svg></span><svg class="ai chev"><use href="#a-chevron-right"/></svg><b>Параметры</b><small>Сенса 1.6 · прицел 4</small></div>
               <div class="w-card cs-card"><span class="tile big t-purple"><svg class="ai"><use href="#a-desktop-line"/></svg></span><svg class="ai chev"><use href="#a-chevron-right"/></svg><b>Графика</b><small>Полноэкранный · 1280×960</small></div>
             </div>
-            <h6 class="eye">Конфиги</h6>
+            <p class="eye">Конфиги</p>
             <div class="cs-row">
               <div class="w-card cs-wide"><span class="tile big"><svg class="ic"><use href="#i-term"/></svg></span><div><b>Autoexec и&nbsp;копии</b><small>6 команд · 2 копии</small></div><svg class="ai chev"><use href="#a-chevron-right"/></svg></div>
               <div class="w-card cs-pro"><small class="kick">CS2 / PRO CONFIG</small><b>Конфиги игроков</b><small>Прицел, сенса и&nbsp;бинды s1mple, ZywOo, NiKo и&nbsp;других</small>
@@ -385,14 +378,14 @@
 
           <!-- Прерывания -->
           <div class="w-body page irq" role="tabpanel" id="pane-irq" aria-labelledby="tab-irq" hidden>
-            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><h5>Прерывания</h5><p>Привязка прерываний GPU и&nbsp;USB к&nbsp;потокам процессора</p></div></div>
+            <div class="ph"><button type="button" class="w-back" data-go="lab"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>Инструменты</button><div><p class="h5">Прерывания</p><p>Привязка прерываний GPU и&nbsp;USB к&nbsp;потокам процессора</p></div></div>
             <div class="irq-l">
-              <div class="w-card irq-top"><div><b>Маршрутизация прерываний</b><small>Свои ядра, режим MSI и&nbsp;высокий приоритет для видеокарты и&nbsp;мыши&nbsp;— одной кнопкой.</small></div><span class="tg-l">Фиксировать</span><span class="tg on"></span><button type="button" class="w-btn" id="irqAll">Настроить всё</button></div>
+              <div class="w-card irq-top"><div><b>Маршрутизация прерываний</b><small>Свои ядра, режим MSI и&nbsp;высокий приоритет для видеокарты и&nbsp;мыши одной кнопкой.</small></div><span class="tg-l">Фиксировать</span><span class="tg on"></span><button type="button" class="w-btn" id="irqAll">Настроить всё</button></div>
               <div class="w-card irq-dev">
                 <b class="ttl">Устройства</b>
                 <div class="devs">
                   <div class="dev on" id="devGpu"><b>Видеокарта</b><span>NVIDIA GeForce RTX 4060</span><small><em class="pl">Ядро <span id="gpuCore">Windows</span></em><em class="chip-s">MSI</em></small></div>
-                  <div class="dev"><b>Мышь · USB</b><span>Расширяемый хост-контроллер USB 3.10</span><small><em class="chip-s">8</em><em class="chip-s">MSI</em><em class="pl">Высокий</em></small><i>Отдельное ядро&nbsp;— не&nbsp;мешает игре</i></div>
+                  <div class="dev"><b>Мышь · USB</b><span>Расширяемый хост-контроллер USB 3.10</span><small><em class="chip-s">8</em><em class="chip-s">MSI</em><em class="pl">Высокий</em></small><i>Отдельное ядро, не&nbsp;мешает игре</i></div>
                 </div>
                 <div class="usb"><div><b>Энергосбережение USB мыши</b><small>Отключено</small></div><span class="w-ghost dim">Отключить</span><span class="w-ghost">Вернуть</span></div>
               </div>
@@ -409,25 +402,28 @@
           </div>
         </div>
       </div>
+        <div class="tour-arrows">
+          <button type="button" class="t-arrow t-prev" id="tourPrev" aria-label="Предыдущий экран"><svg class="ai" aria-hidden="true"><use href="#a-chevron-right"/></svg></button>
+          <span class="t-count" id="tourCount" aria-hidden="true">1 / 4</span>
+          <button type="button" class="t-arrow t-next" id="tourNext" aria-label="Следующий экран"><svg class="ai" aria-hidden="true"><use href="#a-chevron-right"/></svg></button>
+        </div>
+      </div>
     </section>
 
     <section class="more" id="more">
-      <div class="wrap">
+      <div class="wrap more-in">
         <h2 class="reveal">Ещё в&nbsp;Pulse</h2>
-        <ul class="tools">
-          <li class="tool reveal" style="--t:#34d399"><span class="tt"><svg class="ai"><use href="#a-shield-task"/></svg></span><b>Pulse Sentinel</b><small>Держит фон в&nbsp;узде, даже когда Pulse закрыт</small></li>
-          <li class="tool reveal" style="--t:#a78bfa"><span class="tt"><svg class="ai"><use href="#a-power"/></svg></span><b>Автозапуск</b><small>Сколько секунд стоит загрузка Windows и&nbsp;кто её тормозит</small></li>
-          <li class="tool reveal" style="--t:#22d3ee"><span class="tt"><svg class="ai"><use href="#a-globe-outline"/></svg></span><b>Сеть</b><small>Пинг до&nbsp;серверов CS2 и&nbsp;скорость канала</small></li>
-          <li class="tool reveal" style="--t:#3b82f6"><span class="tt"><svg class="ai"><use href="#a-desktop-line"/></svg></span><b>Экран</b><small>Разрешение и&nbsp;герцовка. Погас экран&nbsp;— Pulse вернёт прежний режим сам</small></li>
-          <li class="tool reveal" style="--t:#34d399"><span class="tt"><svg class="ai"><use href="#a-gpu-card"/></svg></span><b>Драйвер NVIDIA</b><small>Свежий официальный драйвер без NVIDIA App и&nbsp;телеметрии</small></li>
-          <li class="tool reveal" style="--t:#2dd4bf"><span class="tt"><svg class="ai"><use href="#a-speed"/></svg></span><b>Задержки и&nbsp;фризы</b><small>Находит, кто мешает во&nbsp;время игры</small></li>
-          <li class="tool reveal" style="--t:#a78bfa"><span class="tt"><svg class="ai"><use href="#a-app-cog"/></svg></span><b>Профили игр</b><small>Приоритет и&nbsp;ядра для каждой игры</small></li>
-          <li class="tool reveal" style="--t:#2dd4bf"><span class="tt"><svg class="ai"><use href="#a-mouse"/></svg></span><b>Сенса между играми</b><small>Одна и&nbsp;та&nbsp;же рука в&nbsp;любой игре</small></li>
-          <li class="tool reveal" style="--t:#fbbf24"><span class="tt"><svg class="ai"><use href="#a-disk"/></svg></span><b>Здоровье диска</b><small>Износ, температура, очистка</small></li>
-          <li class="tool reveal" style="--t:#34d399"><span class="tt"><svg class="ai"><use href="#a-ram"/></svg></span><b>Проверка памяти</b><small>Ищет ошибки в&nbsp;оперативной памяти</small></li>
-          <li class="tool reveal" style="--t:#f87171"><span class="tt"><svg class="ai"><use href="#a-fire"/></svg></span><b>Стресс-тест</b><small>Нагрузка процессора и&nbsp;видеокарты</small></li>
-          <li class="tool reveal" style="--t:#fbbf24"><span class="tt"><svg class="ic"><use href="#i-wrench"/></svg></span><b>Решение проблем</b><small>Выбираете, что сломалось,&nbsp;— Pulse чинит</small></li>
-        </ul>
+        <dl class="extras reveal">
+          <div><dt>Автозапуск</dt><dd>Сколько секунд стоит загрузка Windows и&nbsp;кто её тормозит</dd></div>
+          <div><dt>Процессы и&nbsp;исключения</dt><dd>Что занимает память и&nbsp;что не&nbsp;закрывать при очистке</dd></div>
+          <div><dt>Сеть</dt><dd>Пинг до&nbsp;серверов CS2 и&nbsp;скорость канала</dd></div>
+          <div><dt>Решение проблем</dt><dd>Выбираете, что сломалось, и&nbsp;Pulse чинит</dd></div>
+          <div class="ex-remote" id="remote">
+            <dt>Pulse Remote</dt>
+            <dd>Телефон как пульт: нагрузка ПК, очистка, сон и&nbsp;выключение. Android, по&nbsp;домашней сети, без облака.</dd>
+            <a class="btn btn-ghost btn-sm" href="https://github.com/skywhyelo-lab/Plus/releases/download/1.3.3/PulseRemote.apk"><svg class="ic" aria-hidden="true"><use href="#i-down"/></svg>Скачать APK</a>
+          </div>
+        </dl>
       </div>
     </section>
 
@@ -435,7 +431,7 @@
       <div class="wrap trust-in">
         <div class="trust-text reveal">
           <h2>Всё можно вернуть</h2>
-          <p>Перед каждой настройкой Pulse записывает, как было. Вернуть можно всё сразу или по&nbsp;одной&nbsp;— попробуйте в&nbsp;журнале.</p>
+          <p>Перед каждой настройкой Pulse записывает, как было. Вернуть можно всё сразу или по&nbsp;одной. Попробуйте в&nbsp;журнале.</p>
           <ul class="ticks">
             <li><b>Ничего без вашей кнопки.</b> Проверка ПК только показывает.</li>
             <li><b>FACEIT работает.</b> Обычная оптимизация не&nbsp;трогает античиты и&nbsp;обновления. Перед «Максимумом» Pulse покажет, что перестанет работать.</li>
@@ -455,25 +451,13 @@
       </div>
     </section>
 
-    <section class="remote" id="remote">
-      <div class="wrap remote-in reveal">
-        <div>
-          <h2>Pulse Remote</h2>
-          <p>Телефон как пульт: нагрузка ПК, очистка, сон и&nbsp;выключение. Android, по&nbsp;домашней сети, без облака.</p>
-        </div>
-        <a class="btn btn-ghost" href="https://github.com/skywhyelo-lab/Plus/releases/download/1.3.3/PulseRemote.apk">
-          <svg class="ic" aria-hidden="true"><use href="#i-down"/></svg>Скачать APK
-        </a>
-      </div>
-    </section>
-
     <section class="download" id="download">
       <div class="wrap">
         <h2 class="reveal">Скачать Pulse</h2>
         <div class="buy reveal">
           <div class="buy-main">
             <p class="price"><span class="price-num">5&nbsp;€</span><span class="price-per">один раз, без подписки</span></p>
-            <p class="buy-text">Ключ привязывается к&nbsp;компьютеру. Купить&nbsp;— в&nbsp;Telegram, там&nbsp;же помогут с&nbsp;активацией.</p>
+            <p class="buy-text">Ключ привязывается к&nbsp;компьютеру. Купить можно в&nbsp;Telegram, там&nbsp;же помогут с&nbsp;активацией.</p>
             <div class="cta">
               <a class="btn btn-main" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/Pulse.exe">
                 <svg class="ic" aria-hidden="true"><use href="#i-down"/></svg>Скачать Pulse.exe
@@ -501,15 +485,15 @@
         <div class="qa reveal">
           <details>
             <summary>Как купить и&nbsp;активировать?</summary>
-            <p>Напишите в&nbsp;Telegram <a href="https://t.me/Pulse_buy" target="_blank" rel="noopener">@Pulse_buy</a>. Ключ вводится в&nbsp;Pulse и&nbsp;привязывается к&nbsp;компьютеру. При запуске нужен интернет&nbsp;— ключ проверяется онлайн.</p>
+            <p>Напишите в&nbsp;Telegram <a href="https://t.me/Pulse_buy" target="_blank" rel="noopener">@Pulse_buy</a>. Ключ вводится в&nbsp;Pulse и&nbsp;привязывается к&nbsp;компьютеру. При запуске нужен интернет: ключ проверяется онлайн.</p>
           </details>
           <details>
             <summary>Не забанят в&nbsp;игре?</summary>
-            <p>Pulse не&nbsp;внедряется в&nbsp;игры и&nbsp;не&nbsp;читает их память&nbsp;— он меняет настройки Windows. С&nbsp;обычной оптимизацией FACEIT работает. «Максимум» отключает защиту, без которой FACEIT не&nbsp;запустится, и&nbsp;Pulse предупреждает об&nbsp;этом заранее.</p>
+            <p>Pulse не&nbsp;внедряется в&nbsp;игры и&nbsp;не&nbsp;читает их память, он меняет настройки Windows. С&nbsp;обычной оптимизацией FACEIT работает. «Максимум» отключает защиту, без которой FACEIT не&nbsp;запустится, и&nbsp;Pulse предупреждает об&nbsp;этом заранее.</p>
           </details>
           <details>
             <summary>Как вернуть всё назад?</summary>
-            <p>В&nbsp;«Оптимизации»&nbsp;— «Вернуть как было». Там&nbsp;же журнал: можно откатить одну настройку, не&nbsp;трогая остальные.</p>
+            <p>В&nbsp;«Оптимизации» есть кнопка «Вернуть как было». Там&nbsp;же журнал: можно откатить одну настройку, не&nbsp;трогая остальные.</p>
           </details>
           <details>
             <summary>Зачем права администратора?</summary>
@@ -517,7 +501,7 @@
           </details>
           <details>
             <summary>Подойдёт ли мой компьютер?</summary>
-            <p>Нужна Windows 10 или 11, 64&nbsp;бит. Работает с&nbsp;любым железом; установка драйвера и&nbsp;свои разрешения экрана&nbsp;— только для видеокарт NVIDIA.</p>
+            <p>Нужна Windows 10 или 11, 64&nbsp;бит. Работает с&nbsp;любым железом; установка драйвера и&nbsp;свои разрешения экрана работают только для видеокарт NVIDIA.</p>
           </details>
           <details>
             <summary>Можно вернуть деньги?</summary>

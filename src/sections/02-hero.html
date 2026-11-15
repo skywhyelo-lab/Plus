@@ -1,13 +1,8 @@
   <main>
     <section class="hero" id="hero">
-      <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-      <svg class="ecg" viewBox="0 0 1600 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <path class="ecg-base" d="M0 80 H170 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H570 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H970 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1370 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1600"/>
-        <path class="ecg-run" d="M0 80 H170 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H570 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H970 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1370 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1600" pathLength="1000"/>
-      </svg>
       <div class="wrap hero-copy">
-        <h1 class="rise">Windows, которая не&nbsp;мешает играть</h1>
-        <p class="lead rise">Pulse закрывает лишнее в&nbsp;фоне, настраивает систему и&nbsp;находит, что отнимает FPS. Всё, что он меняет, можно вернуть.</p>
+        <h1 class="rise">Windows, которая помогает побеждать</h1>
+        <p class="lead rise">Pulse: оптимизатор Windows для&nbsp;игр</p>
         <div class="cta rise">
           <a class="btn btn-main" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/Pulse.exe">
             <svg class="ic" aria-hidden="true"><use href="#i-down"/></svg>Скачать для Windows
@@ -17,12 +12,6 @@
       </div>
 
       <div class="hero-stage rise">
-        <div class="modes" role="radiogroup" aria-label="Режим очистки">
-          <button type="button" class="mode" role="radio" aria-checked="true" data-mode="standard"><svg class="ai" aria-hidden="true"><use href="#a-shield"/></svg>Стандартный</button>
-          <button type="button" class="mode" role="radio" aria-checked="false" data-mode="game" tabindex="-1"><svg class="ai" aria-hidden="true"><use href="#a-gamepad"/></svg>Игровой</button>
-          <button type="button" class="mode" role="radio" aria-checked="false" data-mode="max" tabindex="-1"><svg class="ai" aria-hidden="true"><use href="#a-fire"/></svg>Максимум</button>
-        </div>
-        <p class="mode-note" id="modeNote" aria-live="polite">Освобождает память. Программы не&nbsp;закрывает.</p>
 
         <div class="stage" id="heroStage">
           <div class="win" id="winHero" data-active="0" role="group" aria-label="Pulse, экран «Обзор». Кнопка «Быстрая очистка» работает">
@@ -49,7 +38,7 @@
 
             <div class="w-body dash">
               <div class="w-card d-mem">
-                <h4>Использование памяти</h4>
+                <p class="h4">Использование памяти</p>
                 <div class="gauge" id="gauge" style="--p:.87">
                   <svg viewBox="0 0 120 120" aria-hidden="true">
                     <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="s1"/><stop offset="1" class="s2"/></linearGradient></defs>
@@ -62,13 +51,13 @@
                 <div class="d-last">
                   <span class="tile"><svg class="ai"><use href="#a-speed"/></svg></span>
                   <b id="lastTitle">Ещё не&nbsp;чистили</b>
-                  <p id="lastSub">Запустите очистку&nbsp;— здесь появится, сколько освободилось</p>
+                  <p id="lastSub">Запустите очистку, и&nbsp;здесь появится, сколько освободилось</p>
                   <button type="button" class="w-btn" id="cleanBtn">Быстрая очистка</button>
                 </div>
               </div>
 
               <div class="w-card d-mon">
-                <h4>Мониторинг системы</h4>
+                <p class="h4">Мониторинг системы</p>
                 <ul class="legend" aria-hidden="true"><li class="c-cpu">CPU</li><li class="c-ram">RAM</li><li class="c-disk">Диск</li><li class="c-net">Сеть</li></ul>
                 <div class="chart" aria-hidden="true">
                   <span class="yl" style="top:0">100%</span><span class="yl" style="top:25%">75%</span><span class="yl" style="top:50%">50%</span><span class="yl" style="top:75%">25%</span><span class="yl" style="top:100%">0%</span>
@@ -87,7 +76,7 @@
               </div>
 
               <div class="w-card d-proc">
-                <h4>Активные процессы</h4>
+                <p class="h4">Активные процессы</p>
                 <ul class="procs" id="procs">
                   <li data-close="game max"><span>chrome.exe (28)</span><em>6,2%</em><em data-mem="3.1">3,1 GB</em><i class="st-on">Активен</i></li>
                   <li data-close=""><span>cs2.exe</span><em>24,8%</em><em data-mem="2.6">2,6 GB</em><i class="st-game">Игра</i></li>
@@ -98,13 +87,13 @@
               </div>
 
               <div class="w-card d-quick">
-                <h4>Быстрые действия</h4>
+                <p class="h4">Быстрые действия</p>
                 <div class="qrow"><span class="tile sm"><svg class="ai"><use href="#a-broom"/></svg></span><b>Очистка системы</b><small>Закрыть процессы и&nbsp;освободить память</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></div>
                 <div class="qrow"><span class="tile sm"><svg class="ai"><use href="#a-settings"/></svg></span><b>Управление списком</b><small>Настройка листа</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></div>
               </div>
 
               <div class="w-card d-hw">
-                <h4>Аппаратная информация</h4>
+                <p class="h4">Аппаратная информация</p>
                 <dl>
                   <div><dt>Процессор</dt><dd>AMD Ryzen 5 7600 6-Core Processor</dd></div>
                   <div><dt>Видеокарта</dt><dd>NVIDIA GeForce RTX 4060</dd></div>
@@ -117,6 +106,13 @@
             </div>
           </div>
         </div>
-        <p class="stage-hint">Это не&nbsp;картинка&nbsp;— нажмите «Быстрая очистка» или&nbsp;смените режим.</p>
+        <div class="mode-bar">
+          <div class="modes" role="radiogroup" aria-label="Режим очистки">
+            <button type="button" class="mode" role="radio" aria-checked="true" data-mode="standard"><svg class="ai" aria-hidden="true"><use href="#a-shield"/></svg>Стандартный</button>
+            <button type="button" class="mode" role="radio" aria-checked="false" data-mode="game" tabindex="-1"><svg class="ai" aria-hidden="true"><use href="#a-gamepad"/></svg>Игровой</button>
+            <button type="button" class="mode" role="radio" aria-checked="false" data-mode="max" tabindex="-1"><svg class="ai" aria-hidden="true"><use href="#a-fire"/></svg>Максимум</button>
+          </div>
+          <p class="mode-note" id="modeNote" aria-live="polite">Освобождает память. Программы не&nbsp;закрывает.</p>
+        </div>
       </div>
     </section>
