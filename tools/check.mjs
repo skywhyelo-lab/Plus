@@ -24,7 +24,7 @@ for (const file of await readdir(path.join(root,'assets/js'))) {
   assert.equal(result.status,0,result.stderr);
 }
 for (const file of ['eula.html','refund.html']) assert((await readFile(path.join(root,file),'utf8')).includes('14 дней'));
-const image=await readFile(path.join(root,'assets/images/pulse-preview-20260912.png'));
+const image=await readFile(path.join(root,'assets/images/pulse-preview-20261115.png'));
 assert.equal(image.readUInt32BE(16),1200);
 assert.equal(image.readUInt32BE(20),630);
 console.log('PASS: local links, anchors, duplicate IDs, JS syntax, no checkout, refund consistency, OG dimensions');

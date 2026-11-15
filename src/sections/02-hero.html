@@ -1,118 +1,122 @@
-<header class="hero" id="top">
-    <canvas id="heroCanvas"></canvas>
-    <div class="godrays" aria-hidden="true"></div>
-    <div class="wrap hero-in">
-
-      <!-- LEFT: the thesis -->
-      <div class="hero-copy">
-        <h1 data-hero="2">Чистая Windows.<br><span>Стабильный FPS.</span></h1>
-        <p class="sub" data-hero="3">Настройте Windows для игр, освободите память и возьмите фоновые процессы под контроль. Все инструменты — в одном приложении.</p>
-        <div class="hero-cta" data-hero="4">
-          <a class="btn btn-primary btn-lg magnetic" href="#download">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Скачать Pulse
+  <main>
+    <section class="hero" id="hero">
+      <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+      <svg class="ecg" viewBox="0 0 1600 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path class="ecg-base" d="M0 80 H170 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H570 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H970 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1370 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1600"/>
+        <path class="ecg-run" d="M0 80 H170 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H570 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H970 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1370 l9 -7 8 7 h16 l11 -58 14 96 9 -50 8 12 h10 H1600" pathLength="1000"/>
+      </svg>
+      <div class="wrap hero-copy">
+        <h1 class="rise">Windows, которая не&nbsp;мешает играть</h1>
+        <p class="lead rise">Pulse закрывает лишнее в&nbsp;фоне, настраивает систему и&nbsp;находит, что отнимает FPS. Всё, что он меняет, можно вернуть.</p>
+        <div class="cta rise">
+          <a class="btn btn-main" href="https://github.com/skywhyelo-lab/Plus/releases/latest/download/Pulse.exe">
+            <svg class="ic" aria-hidden="true"><use href="#i-down"/></svg>Скачать для Windows
           </a>
-          <a class="btn btn-ghost btn-lg" href="#demo">Смотреть в действии</a>
-        </div>
-        <p class="hero-price">5 € · разовый ключ · Pulse и Lite включены</p>
-        <div class="hero-note" id="heroNote" data-hero="5"><span class="hn-tag">Версия 1.3.3</span><span class="hn-tag">Windows 10 / 11</span><span class="hn-tag">Платная лицензия</span><span class="hn-tag">Активация по ключу</span></div>
-
-        <div class="profile-switch" data-hero="6" role="tablist" aria-label="Профиль оптимизации">
-          <span class="ps-label">Профиль</span>
-          <div class="profile-pills">
-            <span class="ps-thumb" aria-hidden="true"></span>
-            <button class="profile-pill" data-profile="standard" role="tab"><span class="pp-dot"></span>Стандарт</button>
-            <button class="profile-pill active" data-profile="gaming" role="tab" aria-selected="true"><span class="pp-dot"></span>Игровой</button>
-            <button class="profile-pill" data-profile="maximum" role="tab"><span class="pp-dot"></span>Максимум</button>
-          </div>
-        </div>
-
-        <div class="hero-metrics" data-hero="6">
-          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="70" data-prefix="−">−70</span><span>%</span></div><div class="hm-k">задержка</div></div>
-          <div class="hm-sep"></div>
-          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="44" data-prefix="+">+44</span><span>%</span></div><div class="hm-k">1% low FPS</div></div>
-          <div class="hm-sep"></div>
-          <div class="hm"><div class="hm-v"><span class="hm-n" data-target="200">200</span><span>+</span></div><div class="hm-k">твиков в один клик</div></div>
+          <a class="btn btn-ghost" href="https://t.me/Pulse_buy" target="_blank" rel="noopener">Купить ключ · 5&nbsp;€</a>
         </div>
       </div>
 
-      <!-- RIGHT: the product, floating with depth -->
-      <div class="hero-stage" data-hero="7">
-        <div class="app-window" id="heroWindow">
-          <div class="aw-titlebar">
-            <div class="aw-brand">
-              <span class="aw-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></span>
-              <span class="aw-name">Pulse <em>v1.3.3</em></span>
+      <div class="hero-stage rise">
+        <div class="modes" role="radiogroup" aria-label="Режим очистки">
+          <button type="button" class="mode" role="radio" aria-checked="true" data-mode="standard"><svg class="ai" aria-hidden="true"><use href="#a-shield"/></svg>Стандартный</button>
+          <button type="button" class="mode" role="radio" aria-checked="false" data-mode="game" tabindex="-1"><svg class="ai" aria-hidden="true"><use href="#a-gamepad"/></svg>Игровой</button>
+          <button type="button" class="mode" role="radio" aria-checked="false" data-mode="max" tabindex="-1"><svg class="ai" aria-hidden="true"><use href="#a-fire"/></svg>Максимум</button>
+        </div>
+        <p class="mode-note" id="modeNote" aria-live="polite">Освобождает память. Программы не&nbsp;закрывает.</p>
+
+        <div class="stage" id="heroStage">
+          <div class="win" id="winHero" data-active="0" role="group" aria-label="Pulse, экран «Обзор». Кнопка «Быстрая очистка» работает">
+            <aside class="w-side" aria-hidden="true">
+              <span class="w-logo"><svg class="ai"><use href="#a-pulse"/></svg></span>
+              <span class="w-nav"><svg class="ai"><use href="#a-dashboard"/></svg></span>
+              <span class="w-nav"><svg class="ai"><use href="#a-processes"/></svg></span>
+              <span class="w-nav"><svg class="ai"><use href="#a-shield"/></svg></span>
+              <span class="w-nav"><svg class="ai"><use href="#a-power"/></svg></span>
+              <span class="w-nav"><svg class="ai sm"><use href="#a-globe-solid"/></svg></span>
+              <span class="w-nav"><svg class="ai"><use href="#a-more"/></svg></span>
+              <span class="w-nav"><svg class="ai"><use href="#a-optimization-dial"/></svg></span>
+              <span class="w-me"><svg class="ai"><use href="#a-person"/></svg></span>
+            </aside>
+            <div class="w-top">
+              <div class="w-pill">
+                <button type="button" class="w-pb" data-mode="standard" aria-label="Режим «Стандартный»"><svg class="ai"><use href="#a-shield"/></svg></button>
+                <button type="button" class="w-pb" data-mode="game" aria-label="Режим «Игровой»"><svg class="ai"><use href="#a-gamepad"/></svg></button>
+                <button type="button" class="w-pb" data-mode="max" aria-label="Режим «Максимум»"><svg class="ai"><use href="#a-fire"/></svg></button>
+              </div>
+              <span class="w-guide" aria-hidden="true"><svg class="ic"><use href="#i-help"/></svg>GUIDE</span>
+              <span class="w-ctl" aria-hidden="true"><svg class="ai"><use href="#a-minimize"/></svg><svg class="ai"><use href="#a-dismiss"/></svg></span>
             </div>
-            <div class="aw-profiles" aria-hidden="true">
-              <span class="awp" title="Стандарт"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-              <span class="awp active" title="Игровой"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="6"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg></span>
-              <span class="awp" title="Максимум"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
-            </div>
-            <div class="aw-win"><span></span><span></span><span class="x"></span></div>
-          </div>
-          <div class="aw-body">
-            <div class="aw-side">
-              <div class="aws active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Обзор</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/></svg><span>Процессы</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Исключения</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>История</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64A9 9 0 1 1 5.64 6.64"/><line x1="12" y1="2" x2="12" y2="12"/></svg><span>Автозапуск</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 19.5h.01"/></svg><span>Сеть</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>Прочее</span></div>
-              <div class="aws"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><span>Оптимизация</span></div>
-              <div class="aws aws-pinned"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Профиль</span></div>
-            </div>
-            <div class="aw-main" data-tilt-layer>
-              <div class="aw-row">
-                <div class="aw-card aw-perf">
-                  <div class="aw-card-t">Использование памяти</div>
-                  <div class="aw-gauge">
-                    <svg viewBox="0 0 80 80">
-                      <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="6"/>
-                      <circle class="aw-gauge-fill" cx="40" cy="40" r="33" fill="none" stroke="url(#awg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="207" stroke-dashoffset="72" transform="rotate(-90 40 40)"/>
-                      <defs><linearGradient id="awg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="rgb(var(--profile-rgb))"/><stop offset="1" stop-color="rgb(var(--accent-2-rgb))"/></linearGradient></defs>
-                    </svg>
-                    <div class="aw-gauge-v"><span class="hm-n" data-target="65">65</span><small>%</small></div>
-                  </div>
-                  <button class="aw-clean">Быстрая очистка</button>
+
+            <div class="w-body dash">
+              <div class="w-card d-mem">
+                <h4>Использование памяти</h4>
+                <div class="gauge" id="gauge" style="--p:.87">
+                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                    <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="s1"/><stop offset="1" class="s2"/></linearGradient></defs>
+                    <circle cx="60" cy="60" r="50" class="g-track"/>
+                    <circle cx="60" cy="60" r="50" class="g-val" pathLength="100"/>
+                  </svg>
+                  <b class="g-num"><span id="memPct">87</span>%</b>
+                  <span class="chip chip-crit g-chip" id="memChip">Ужасно</span>
                 </div>
-                <div class="aw-card aw-proc">
-                  <div class="aw-card-t">Активные процессы</div>
-                  <div class="awp-row"><span class="awp-n"><i style="background:#ef4444"></i>chrome.exe</span><span class="awp-m">3.1 GB</span></div>
-                  <div class="awp-row"><span class="awp-n"><i style="background:#6366f1"></i>Discord.exe</span><span class="awp-m">930 MB</span></div>
-                  <div class="awp-row"><span class="awp-n"><i style="background:#22c55e"></i>steam.exe</span><span class="awp-m">898 MB</span></div>
-                  <div class="awp-row"><span class="awp-n"><i style="background:#3b82f6"></i>Pulse.exe</span><span class="awp-m">214 MB</span></div>
+                <div class="d-last">
+                  <span class="tile"><svg class="ai"><use href="#a-speed"/></svg></span>
+                  <b id="lastTitle">Ещё не&nbsp;чистили</b>
+                  <p id="lastSub">Запустите очистку&nbsp;— здесь появится, сколько освободилось</p>
+                  <button type="button" class="w-btn" id="cleanBtn">Быстрая очистка</button>
                 </div>
               </div>
-              <div class="aw-card aw-chart">
-                <div class="aw-card-t">Мониторинг системы <span class="aw-legend"><i style="background:var(--accent)"></i>CPU <i style="background:var(--green)"></i>RAM <i style="background:var(--accent-cyan)"></i>Диск</span></div>
-                <svg class="aw-spark" viewBox="0 0 320 70" preserveAspectRatio="none">
-                  <polyline fill="none" stroke="var(--green)" stroke-width="1.6" opacity=".65" points="0,50 40,44 80,46 120,30 160,34 200,20 240,26 280,14 320,18"/>
-                  <polyline fill="none" stroke="var(--accent-cyan)" stroke-width="1.6" opacity=".5" points="0,58 40,56 80,52 120,54 160,40 200,46 240,42 280,48 320,44"/>
-                  <polyline fill="none" stroke="var(--accent)" stroke-width="2.2" points="0,40 40,38 80,42 120,22 160,36 200,12 240,30 280,16 320,24"/>
-                </svg>
+
+              <div class="w-card d-mon">
+                <h4>Мониторинг системы</h4>
+                <ul class="legend" aria-hidden="true"><li class="c-cpu">CPU</li><li class="c-ram">RAM</li><li class="c-disk">Диск</li><li class="c-net">Сеть</li></ul>
+                <div class="chart" aria-hidden="true">
+                  <span class="yl" style="top:0">100%</span><span class="yl" style="top:25%">75%</span><span class="yl" style="top:50%">50%</span><span class="yl" style="top:75%">25%</span><span class="yl" style="top:100%">0%</span>
+                  <svg id="chart" viewBox="0 0 600 140" preserveAspectRatio="none">
+                    <g class="grid"><line x1="0" x2="600" y1="35" y2="35"/><line x1="0" x2="600" y1="70" y2="70"/><line x1="0" x2="600" y1="105" y2="105"/></g>
+                    <path class="ln c-net"/><path class="ln c-ram"/><path class="ln c-disk"/><path class="ln c-cpu"/>
+                  </svg>
+                  <div class="xl"><span>-50с</span><span>-37с</span><span>-25с</span><span>-12с</span><span>Сейчас</span></div>
+                </div>
+                <div class="stats">
+                  <div class="stat"><span class="st c-cpu"><svg class="ai"><use href="#a-cpu"/></svg></span><small>CPU</small><b id="stCpu">23%</b><i>Темп.: 54°</i></div>
+                  <div class="stat"><span class="st c-ram"><svg class="ai"><use href="#a-ram"/></svg></span><small>RAM</small><b id="stRam">87%</b><i>Использовано</i></div>
+                  <div class="stat"><span class="st c-disk"><svg class="ai"><use href="#a-disk"/></svg></span><small>Диск</small><b id="stDisk">4%</b><i>Активность</i></div>
+                  <div class="stat"><span class="st c-net"><svg class="ai"><use href="#a-wifi"/></svg></span><small>Сеть</small><b id="stNet">12,4 Mbps</b><i>Подключено</i></div>
+                </div>
               </div>
+
+              <div class="w-card d-proc">
+                <h4>Активные процессы</h4>
+                <ul class="procs" id="procs">
+                  <li data-close="game max"><span>chrome.exe (28)</span><em>6,2%</em><em data-mem="3.1">3,1 GB</em><i class="st-on">Активен</i></li>
+                  <li data-close=""><span>cs2.exe</span><em>24,8%</em><em data-mem="2.6">2,6 GB</em><i class="st-game">Игра</i></li>
+                  <li data-close="max"><span>Discord.exe (6)</span><em>1,9%</em><em data-mem="1.2">1,2 GB</em><i class="st-on">Активен</i></li>
+                  <li data-close="game max"><span>Spotify.exe (5)</span><em>0,8%</em><em data-mem="0.64">640 MB</em><i class="st-on">Активен</i></li>
+                </ul>
+                <span class="w-link">Показать все процессы<svg class="ai"><use href="#a-chevron-right"/></svg></span>
+              </div>
+
+              <div class="w-card d-quick">
+                <h4>Быстрые действия</h4>
+                <div class="qrow"><span class="tile sm"><svg class="ai"><use href="#a-broom"/></svg></span><b>Очистка системы</b><small>Закрыть процессы и&nbsp;освободить память</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></div>
+                <div class="qrow"><span class="tile sm"><svg class="ai"><use href="#a-settings"/></svg></span><b>Управление списком</b><small>Настройка листа</small><svg class="ai chev"><use href="#a-chevron-right"/></svg></div>
+              </div>
+
+              <div class="w-card d-hw">
+                <h4>Аппаратная информация</h4>
+                <dl>
+                  <div><dt>Процессор</dt><dd>AMD Ryzen 5 7600 6-Core Processor</dd></div>
+                  <div><dt>Видеокарта</dt><dd>NVIDIA GeForce RTX 4060</dd></div>
+                  <div><dt>Оперативная память</dt><dd>16 GB RAM</dd></div>
+                  <div><dt>Материнская плата</dt><dd>MSI B650M GAMING PLUS WIFI</dd></div>
+                </dl>
+                <span class="w-link">Подробнее о&nbsp;системе<svg class="ai"><use href="#a-chevron-right"/></svg></span>
+              </div>
+              <div class="toast" id="toast" role="status"></div>
             </div>
           </div>
         </div>
+        <p class="stage-hint">Это не&nbsp;картинка&nbsp;— нажмите «Быстрая очистка» или&nbsp;смените режим.</p>
       </div>
-    </div>
-
-    <!-- games marquee: quiet trust strip under the hero -->
-    <div class="games-row wrap">
-      <div class="games-label">Проверено в</div>
-      <div class="games-marquee">
-        <div class="games-track">
-          <span class="gchip">CS2</span><span class="gchip">VALORANT</span><span class="gchip">PUBG</span><span class="gchip">RUST</span><span class="gchip">DOTA 2</span><span class="gchip">APEX LEGENDS</span><span class="gchip">WARZONE</span><span class="gchip">FORTNITE</span>
-          <span class="gchip">CS2</span><span class="gchip">VALORANT</span><span class="gchip">PUBG</span><span class="gchip">RUST</span><span class="gchip">DOTA 2</span><span class="gchip">APEX LEGENDS</span><span class="gchip">WARZONE</span><span class="gchip">FORTNITE</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ============ INTERACTIVE DEMO (THE APP MOCKUP v1.2.9) ============ -->
+    </section>
